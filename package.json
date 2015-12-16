@@ -2,9 +2,15 @@
   "name": "daat-hamakom",
   "version": "0.0.1",
   "description": "Da'at Hamakom Maps",
-  "main": "main.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node server.js",
+    "dist": "webpack --config ./webpack.config.js --progress --colors",
+    "postinstall": "npm run dist",
+    "repl": "babel-node"
+  },
   "engines": {
-    "node": "5.1.1"
+    "node": "5.x"
   },
   "dependencies": {
     "babel-cli": "^6.3.17",
@@ -29,10 +35,6 @@
   },
   "devDependencies": {
     "webpack-dev-server": "^1.14.0"
-  },
-  "scripts": {
-    "postinstall": "webpack --config ./webpack.config.js --progress --colors",
-    "start": "babel-node server.js"
   },
   "repository": {
     "type": "git",

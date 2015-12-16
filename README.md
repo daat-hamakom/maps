@@ -2,13 +2,9 @@
 
 ## Dev
 
-Make sure you have a modern version of Node + NPM installed. You'll also need a global installation of `webpack-dev-server`:
+Make sure you have a modern version of Node + NPM installed (5.x and 3.x, respectively.)
 
-```bash
-$ npm install -g webpack-dev-server
-```
-
-After you have all of that setup, just install the NPM dependencies and run the dev server:
+After that, just install the NPM dependencies and run the dev server:
 
 ```bash
 $ npm install

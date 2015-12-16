@@ -1,5 +1,24 @@
 @import 'bourbon';
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: $helvetica;
+    div.map {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #eee;
+    }
+    div.timeline {
+        position: absolute;
+        bottom: 0;
+        height: 100px;
+        width: 100%;
+        background-color: #ddd;
+    }
 }

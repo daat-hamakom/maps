@@ -1,20 +1,12 @@
 module.exports = {
-    entry: './main.js',
+    entry: './index.js',
     output: {
-        path: './',
-        filename: 'index.js',
-    },
-    devServer: {
-        inline: true,
-        port: 3333
+        path: __dirname,
+        filename: 'bundle.js',
     },
     module: {
         loaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel'
-            }
+            { test: /\.js$/, exclude: /node_modules/, loader: 'babel' }
         ]
     }
 }

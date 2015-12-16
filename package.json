@@ -1,7 +1,7 @@
 {
-  "name": "maps",
-  "version": "1.0.0",
-  "description": "",
+  "name": "daat-hamakom",
+  "version": "0.0.1",
+  "description": "Da'at Hamakom Maps",
   "main": "main.js",
   "dependencies": {
     "babel-core": "^6.2.1",
@@ -21,7 +21,7 @@
     "type": "git",
     "url": "git+https://github.com/daat-hamakom/maps.git"
   },
-  "author": "",
+  "author": "Yuval Adam",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/daat-hamakom/maps/issues"

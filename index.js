@@ -5,7 +5,6 @@ import { Router, Route } from 'react-router'
 import About from './src/components/about'
 import App from './src/components/app'
 
-import './style.scss'
 
 ReactDOM.render((
   <Router>

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
 
+import appconf from '../../config/client';
+
 // Need to directly script-load instead of proper import since GL JS doesn't support webpack
 // https://github.com/mapbox/mapbox-gl-js/issues/1649
 require('script!mapbox-gl/dist/mapbox-gl.js');
@@ -36,7 +38,7 @@ class Map extends React.Component {
 
     render() {
         const view = { style: 'mapbox://styles/mapbox/light-v8', center: [35, 31], zoom: 7, container: 'map' }
-        return <GLMap view={view} token=token/>
+        return <GLMap view={view} token={appconf.token.map}/>
     }
 }
 

@@ -11,6 +11,12 @@ $ npm install
 $ npm start
 ```
 
+After adding some new JS code, make sure to run ESLint to ensure code style consistency:
+
+```bash
+$ npm run lint
+```
+
 ### Extras
 
 You might want to have [react-devtools](https://facebook.github.io/react/blog/2015/09/02/new-react-developer-tools.html) installed in your browser.

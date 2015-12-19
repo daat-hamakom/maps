@@ -6,6 +6,7 @@ import Timeline from './timeline'
 
 import '../styles/app.scss'
 
+
 class App extends React.Component {
     render() {
         return <div>

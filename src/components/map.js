@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 // Need to directly script-load instead of proper import since GL JS doesn't support webpack
 // https://github.com/mapbox/mapbox-gl-js/issues/1649
-require('script!mapbox-gl/dist/mapbox-gl-dev.js');
+require('script!mapbox-gl/dist/mapbox-gl.js');
 
 
 class GLMap extends React.Component {

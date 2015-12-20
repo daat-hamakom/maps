@@ -7,6 +7,7 @@
 
 body {
     font-family: $helvetica;
+    overflow: hidden;
     div#map {
         position: absolute;
         top: 0;
@@ -16,8 +17,13 @@ body {
     div#timeline {
         position: absolute;
         bottom: 0;
-        height: 100px;
+        height: 200px;
         width: 100%;
         background-color: #ddd;
+        .example .sparkline {
+            fill: none;
+            stroke: steelblue;
+            stroke-width: 1.5px;
+        }
     }
 }

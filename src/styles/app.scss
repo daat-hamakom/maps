@@ -26,4 +26,11 @@ body {
             stroke-width: 1.5px;
         }
     }
+    button {
+        position: fixed;
+    }
+    div#counter {
+        position: fixed;
+        margin-left: 100px;
+    }
 }

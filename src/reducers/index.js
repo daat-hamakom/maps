@@ -1,7 +1,8 @@
-import { ADD_MARKER } from '../actions'
+import { ADD_MARKER, INC_COUNTER } from '../actions'
 
 const initialState = {
-  markers: []
+  markers: [],
+  counter: 0
 }
 
 function mapApp(state = initialState, action) {
@@ -14,6 +15,10 @@ function mapApp(state = initialState, action) {
             coords: action.coords
           }
         ]
+      })
+    case INC_COUNTER:
+      return Object.assign({}, state, {
+        counter: state.counter + 1
       })
     default:
       return state

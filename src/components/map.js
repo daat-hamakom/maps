@@ -22,6 +22,10 @@ class GLMap extends React.Component {
     this.map = new mapboxgl.Map(this.props.view)
   }
 
+  componentDidUpdate() {
+    console.log(this.props.markers)
+  }
+
   componentWillUnmount () {
     this.map.remove()
   }

@@ -25,13 +25,16 @@ body {
             stroke: rgb(53, 108, 190);
             stroke-width: 2;
             shape-rendering: crispEdges;
+            &.minor {
+                stroke-width: 1;
+            }
         }
         .tick line {
             color: rgb(53, 108, 190);
         }
         .tick text {
             fill: rgba(53, 108, 190, 1);
-            stroke: rgba(53, 108, 190, 0.5);
+            stroke: rgba(53, 108, 190, 0.6);
         }
     }
 }

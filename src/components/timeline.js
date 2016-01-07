@@ -28,15 +28,26 @@ class D3Timeline extends React.Component {
     const xAxis = d3.svg.axis()
         .scale(x)
         .orient('bottom')
+        .ticks(d3.time.years, 5)
         .tickSize(height)
 
-    el.append('g')
+    const xAxisG = el.append('g')
         .attr('class', 'x axis')
         .call(xAxis)
-      .selectAll('.tick text')
+
+    xAxisG.selectAll('.tick text')
         .style('text-anchor', 'start')
         .attr('x', 6)
         .attr('y', 6)
+
+    xAxisG.selectAll("line").data(x.ticks(150), function(d) { return d; })
+        .enter()
+        .append("line")
+        .attr("class", "minor")
+        .attr("y1", 22)
+        .attr("y2", height)
+        .attr("x1", x)
+        .attr("x2", x)
 
     return el.node().toReact()
   }

@@ -19,11 +19,19 @@ body {
         bottom: 0;
         height: 200px;
         width: 100%;
-        background-color: #ddd;
+        background-color: black;
         .axis path, .axis line {
             fill: none;
-            stroke: #000;
+            stroke: rgb(53, 108, 190);
+            stroke-width: 2;
             shape-rendering: crispEdges;
+        }
+        .tick line {
+            color: rgb(53, 108, 190);
+        }
+        .tick text {
+            fill: rgba(53, 108, 190, 1);
+            stroke: rgba(53, 108, 190, 0.5);
         }
     }
 }

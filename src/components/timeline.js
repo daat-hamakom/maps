@@ -20,14 +20,23 @@ class D3Timeline extends React.Component {
       .attr(this.props)
       .attr('data', null)
 
-    var x = d3.time.scale()
+    const x = d3.time.scale()
         .domain([new Date(1950, 1, 1), new Date(2000, 1, 1)])
         .nice(d3.time.year)
         .range([0, width]);
 
-    el.append("g")
-        .attr("class", "x axis")
-        .call(d3.svg.axis().scale(x).orient("bottom"));
+    const xAxis = d3.svg.axis()
+        .scale(x)
+        .orient('bottom')
+        .tickSize(height)
+
+    el.append('g')
+        .attr('class', 'x axis')
+        .call(xAxis)
+      .selectAll('.tick text')
+        .style('text-anchor', 'start')
+        .attr('x', 6)
+        .attr('y', 6)
 
     return el.node().toReact()
   }

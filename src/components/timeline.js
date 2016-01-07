@@ -2,7 +2,7 @@ import d3 from 'd3'
 import React from 'react'
 import ReactFauxDOM from 'react-faux-dom'
 
-class Sparkline extends React.Component {
+class D3Timeline extends React.Component {
   static propTypes = {
     width: React.PropTypes.number,
     height: React.PropTypes.number,
@@ -20,26 +20,14 @@ class Sparkline extends React.Component {
       .attr(this.props)
       .attr('data', null)
 
-    const x = d3.scale.linear()
-      .range([0, width])
-      .domain(d3.extent(data, (d, i) => i))
+    var x = d3.time.scale()
+        .domain([new Date(1950, 1, 1), new Date(2000, 1, 1)])
+        .nice(d3.time.year)
+        .range([0, width]);
 
-    const y = d3.scale.linear()
-      .range([height, 0])
-      .domain(d3.extent(data, (d) => d))
-
-    const line = d3.svg.line()
-      .x((d, i) => x(i))
-      .y((d) => y(d))
-      .interpolate(interpolation)
-
-    el.append('path')
-      .datum(data)
-      .attr({
-        key: 'sparkline',
-        className: 'sparkline',
-        d: line
-      })
+    el.append("g")
+        .attr("class", "x axis")
+        .call(d3.svg.axis().scale(x).orient("bottom"));
 
     return el.node().toReact()
   }
@@ -50,12 +38,11 @@ class Timeline extends React.Component {
     const data = [85, 66, 71, 10, 5, 16, 71, 1, 16, 24, 54, 85, 37, 36, 43, 67, 63, 23, 96, 53, 25]
 
     return <div id='timeline'>
-      <Sparkline
+      <D3Timeline
         className='example'
         width={document.body.offsetWidth}
         height={200}
-        data={data}
-      />
+        data={data} />
     </div>
   }
 }

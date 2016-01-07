@@ -20,10 +20,10 @@ body {
         height: 200px;
         width: 100%;
         background-color: #ddd;
-        .example .sparkline {
+        .axis path, .axis line {
             fill: none;
-            stroke: steelblue;
-            stroke-width: 1.5px;
+            stroke: #000;
+            shape-rendering: crispEdges;
         }
     }
 }

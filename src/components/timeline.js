@@ -7,10 +7,6 @@ class D3Timeline extends React.Component {
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     data: React.PropTypes.array,
-    interpolation: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.function
-    ])
   }
 
   render () {
@@ -49,13 +45,27 @@ class D3Timeline extends React.Component {
         .attr("x1", x)
         .attr("x2", x)
 
+    el.selectAll('rect').data(data).enter()
+        .append('rect')
+        .attr('class', 'rect')
+        .attr('x', function (d,i) { return x(new Date(d[0], 1, 1)) })
+        .attr('width', function (d,i) { return x(new Date(d[1], 1, 1)) - x(new Date(d[0], 1, 1)) })
+        .attr('y', function (d,i) { return 40+(i*10) })
+        .attr('height', function (d,i) { return 5 })
+
     return el.node().toReact()
   }
 }
 
 class Timeline extends React.Component {
   render () {
-    const data = [85, 66, 71, 10, 5, 16, 71, 1, 16, 24, 54, 85, 37, 36, 43, 67, 63, 23, 96, 53, 25]
+    const data = [
+      [1961, 1969],
+      [1964, 1967],
+      [1971, 1999],
+      [1955, 1972],
+      [1984, 1996]
+    ]
 
     return <div id='timeline'>
       <D3Timeline

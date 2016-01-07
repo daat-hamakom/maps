@@ -34,7 +34,7 @@ class GLMap extends React.Component {
 
 class Map extends React.Component {
   render () {
-    const view = { style: 'mapbox://styles/mapbox/light-v8', center: [35, 31], zoom: 7, container: 'map' }
+    const view = { style: 'mapbox://styles/mapbox/light-v8', center: [35, 31], zoom: 3, container: 'map' }
     return <GLMap view={view} token={appconf.token.map}/>
   }
 }

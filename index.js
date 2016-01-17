@@ -1,14 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, Route } from 'react-router'
+import createLogger from 'redux-logger'
+import thunkMiddleware from 'redux-thunk'
 
 import About from './src/components/about'
 import App from './src/components/app'
-import mapApp from './src/reducers'
+import { fetchEvents } from './src/actions'
+import rootReducer from './src/reducers'
 
-let store = createStore(mapApp)
+const loggerMiddleware = createLogger()
+
+const createStoreWithMiddleware = applyMiddleware(
+  thunkMiddleware,
+  loggerMiddleware
+)(createStore)
+
+const store = createStoreWithMiddleware(rootReducer)
 
 ReactDOM.render((
   <Provider store={store}>
@@ -18,3 +28,7 @@ ReactDOM.render((
     </Router>
   </Provider>
 ), document.getElementById('root'))
+
+store.dispatch(fetchEvents()).then(() =>
+  console.log(store.getState())
+)

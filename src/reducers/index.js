@@ -1,14 +1,7 @@
 import { combineReducers } from 'redux'
 import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS } from '../actions'
 
-const initialState = {
-  events: {
-    fetching: false,
-    items: []
-  }
-}
-
-function events(state = initialState, action) {
+function events(state = { fetching: false, items: [] }, action) {
   switch (action.type) {
     case REQUEST_EVENTS:
       return Object.assign({}, state, { fetching: true })

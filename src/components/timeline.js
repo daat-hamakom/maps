@@ -5,6 +5,7 @@ import ReactFauxDOM from 'react-faux-dom'
 class YearAxis extends React.Component {
 
   static propTypes = {
+    x: React.PropTypes.func,
     width: React.PropTypes.number,
     height: React.PropTypes.number
   }
@@ -53,7 +54,7 @@ class YearAxis extends React.Component {
 class MarkerData extends React.Component {
   static propTypes = {
     x: React.PropTypes.func,
-    data: React.PropTypes.array,
+    data: React.PropTypes.array
   }
 
   render () {

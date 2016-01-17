@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import Map from './map'
 import Timeline from './timeline'
@@ -14,4 +15,10 @@ class App extends React.Component {
   }
 }
 
-export default App
+function select(state) {
+  return {
+    events: state.events
+  }
+}
+
+export default connect(select)(App)

@@ -13,13 +13,58 @@ class GLMap extends React.Component {
   // https://github.com/twelch/react-mapbox-gl-seed/blob/4d78eb0/src/components/GLMap.js
 
   static propTypes = {
-    view: React.PropTypes.object,  // default map view
-    token: React.PropTypes.string  // mapbox auth token
+    view: React.PropTypes.object,
+    token: React.PropTypes.string,
+    events: React.PropTypes.object
   };
 
   componentDidMount () {
     mapboxgl.accessToken = this.props.token
     this.map = new mapboxgl.Map(this.props.view)
+  }
+
+  componentDidUpdate () {
+    if (!this.props.events.fetching) {
+      const markers = {
+        'type': 'FeatureCollection',
+        'features': this.props.events.items.map((ev, index) => {
+          return {
+            'type': 'Feature',
+            'properties': {
+              'description': ev.title,
+              'marker-symbol': 'default_marker'
+            },
+            'geometry': {
+              'type': 'Point',
+              'coordinates': ev.place.position.split(',').map((x) => {
+                return +x
+              }).reverse()
+            }
+          }
+        })
+      }
+
+      // this.map.on('style.load', () => {
+        this.map.addSource('markers', {
+          'type': 'geojson',
+          'data': markers
+        })
+
+        this.map.addLayer({
+          'id': 'markers',
+          // 'interactive': 'true',
+          'type': 'symbol',
+          'source': 'markers',
+          'layout': {
+            // 'text-field': '{description}',
+            'icon-image': '{marker-symbol}'
+          }
+        })
+      // })
+
+      window.mymap = this.map
+
+    }
   }
 
   componentWillUnmount () {
@@ -35,7 +80,7 @@ class GLMap extends React.Component {
 class Map extends React.Component {
   render () {
     const view = { style: 'mapbox://styles/mapbox/light-v8', center: [35, 31], zoom: 3, container: 'map' }
-    return <GLMap view={view} token={appconf.token.map}/>
+    return <GLMap view={view} token={appconf.token.map} events={this.props.events}/>
   }
 }
 

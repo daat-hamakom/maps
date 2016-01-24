@@ -10,16 +10,13 @@ import '../styles/app.scss'
 class App extends React.Component {
 
   componentDidMount () {
-    const { dispatch } = this.props
-
-    dispatch(fetchEvents()).then(() =>
-      console.log(store.getState())
-    )
+    const { dispatch, events } = this.props
+    dispatch(fetchEvents())
   }
 
   render () {
     return <div>
-      <Map/>
+      <Map events={this.props.events}/>
       <Timeline/>
     </div>
   }

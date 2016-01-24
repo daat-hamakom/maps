@@ -57,9 +57,6 @@ class GLMap extends React.Component {
           'icon-image': '{marker-symbol}'
         }
       })
-
-      window.mymap = this.map
-
     }
   }
 

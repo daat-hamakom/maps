@@ -15,7 +15,7 @@ class GLMap extends React.Component {
   static propTypes = {
     view: React.PropTypes.object,  // default map view
     token: React.PropTypes.string  // mapbox auth token
-  }
+  };
 
   componentDidMount () {
     mapboxgl.accessToken = this.props.token

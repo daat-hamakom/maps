@@ -8,7 +8,7 @@ class YearAxis extends React.Component {
     x: React.PropTypes.func,
     width: React.PropTypes.number,
     height: React.PropTypes.number
-  }
+  };
 
   constructor (props) {
     super(props)
@@ -55,7 +55,7 @@ class MarkerData extends React.Component {
   static propTypes = {
     x: React.PropTypes.func,
     data: React.PropTypes.array
-  }
+  };
 
   render () {
     return <g ref='markerData' className='markers'>
@@ -79,7 +79,7 @@ class D3Timeline extends React.Component {
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     data: React.PropTypes.array,
-  }
+  };
 
   constructor (props) {
     super(props)

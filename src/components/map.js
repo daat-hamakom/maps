@@ -44,23 +44,19 @@ class GLMap extends React.Component {
         })
       }
 
-      // this.map.on('style.load', () => {
-        this.map.addSource('markers', {
-          'type': 'geojson',
-          'data': markers
-        })
+      this.map.addSource('markers', {
+        'type': 'geojson',
+        'data': markers
+      })
 
-        this.map.addLayer({
-          'id': 'markers',
-          // 'interactive': 'true',
-          'type': 'symbol',
-          'source': 'markers',
-          'layout': {
-            // 'text-field': '{description}',
-            'icon-image': '{marker-symbol}'
-          }
-        })
-      // })
+      this.map.addLayer({
+        'id': 'markers',
+        'type': 'symbol',
+        'source': 'markers',
+        'layout': {
+          'icon-image': '{marker-symbol}'
+        }
+      })
 
       window.mymap = this.map
 

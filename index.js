@@ -28,7 +28,3 @@ ReactDOM.render((
     </Router>
   </Provider>
 ), document.getElementById('root'))
-
-store.dispatch(fetchEvents()).then(() =>
-  console.log(store.getState())
-)

@@ -22,7 +22,7 @@ function timeline(state = { startDate: start_date, endDate: end_date }, action) 
     case ZOOM_TIMELINE:
       const new_start = new Date(state.startDate.getTime() + 20000000000)
       const new_end = new Date(state.endDate.getTime() - 20000000000)
-      return Object.assign({}, state, { start_date: new_start, end_date: new_end })
+      return Object.assign({}, state, { startDate: new_start, endDate: new_end })
     default:
       return state
   }

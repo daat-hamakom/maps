@@ -88,10 +88,6 @@ class D3Timeline extends React.Component {
 
   constructor (props) {
     super(props)
-
-    this.sd = this.props.startDate
-    this.ed = this.props.endDate
-
     this.x = d3.time.scale()
       .domain([this.props.startDate, this.props.endDate])
       .nice(d3.time.year)
@@ -101,6 +97,13 @@ class D3Timeline extends React.Component {
   onWheelHandler = (e) => {
     this.props.onZoom()
   };
+
+  componentDidUpdate () {
+    this.x = d3.time.scale()
+      .domain([this.props.startDate, this.props.endDate])
+      .nice(d3.time.year)
+      .range([0, this.props.width])
+  }
 
   render () {
     return <svg width={this.props.width} height={this.props.height} onWheel={this.onWheelHandler}>
@@ -120,12 +123,11 @@ class Timeline extends React.Component {
       [1984, 1996, 4]
     ]
 
-    const start_date = new Date(1950, 1, 1)
-    const end_date = new Date(2000, 1, 1)
+    const { startDate, endDate } = this.props.timeline
 
     return <div id='timeline'>
       <D3Timeline width={document.body.offsetWidth} height={200} data={data}
-        startDate={start_date} endDate={end_date} onZoom={this.props.onZoom} />
+        startDate={startDate} endDate={endDate} onZoom={this.props.onZoom} />
     </div>
   }
 }

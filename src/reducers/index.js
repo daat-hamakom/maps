@@ -20,8 +20,19 @@ const end_date = new Date(2000, 1, 1)
 function timeline(state = { startDate: start_date, endDate: end_date }, action) {
   switch (action.type) {
     case ZOOM_TIMELINE:
-      const new_start = new Date(state.startDate.getTime() + (20000000000 * action.factor))
-      const new_end = new Date(state.endDate.getTime() - (20000000000 * action.factor))
+      const zoom_factor = 1.1
+      var new_start = 0
+      var new_end = 0
+      if (action.factor == -1) {
+        new_start = new Date(state.startDate.getTime() * zoom_factor)
+        var delta = new_start.getTime() - state.startDate.getTime();
+        new_end = new Date(state.endDate.getTime() - delta)
+      }
+      else {
+        new_start = new Date(state.startDate.getTime() / zoom_factor)
+        var delta = state.startDate.getTime() - new_start.getTime();
+        new_end = new Date(state.endDate.getTime() + delta)
+      }
       return Object.assign({}, state, { startDate: new_start, endDate: new_end })
     default:
       return state

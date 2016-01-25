@@ -18,10 +18,7 @@ class App extends React.Component {
     const { dispatch } = this.props
     return <div>
       <Map events={this.props.events} />
-      <Timeline timeline={this.props.timeline} onZoom={ev => {
-          dispatch(zoomTimeline())
-        }
-      } />
+      <Timeline timeline={this.props.timeline} onZoom={ev => { dispatch(zoomTimeline()) }} />
     </div>
   }
 }

@@ -30,6 +30,11 @@ class YearAxis extends React.Component {
   }
 
   renderAxis () {
+    this.xAxis = d3.svg.axis()
+      .scale(this.props.x)
+      .orient('bottom')
+      .ticks(d3.time.years, 5)
+      .tickSize(this.props.height)
 
     const yearAxisG = d3.select(this.refs.yearAxis).call(this.xAxis)
 
@@ -38,14 +43,14 @@ class YearAxis extends React.Component {
         .attr('x', 6)
         .attr('y', 6)
 
-    yearAxisG.selectAll('line').data(this.props.x.ticks(150), function(d) { return d; })
-        .enter()
-        .append('line')
-        .attr('class', 'minor')
-        .attr('y1', 22)
-        .attr('y2', this.props.height)
-        .attr('x1', this.props.x)
-        .attr('x2', this.props.x)
+    // yearAxisG.selectAll('line').data(this.props.x.ticks(150), function(d) { return d; })
+    //     .enter()
+    //     .append('line')
+    //     .attr('class', 'minor')
+    //     .attr('y1', 22)
+    //     .attr('y2', this.props.height)
+    //     .attr('x1', this.props.x)
+    //     .attr('x2', this.props.x)
   }
 
   render () {

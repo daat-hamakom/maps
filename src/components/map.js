@@ -36,9 +36,7 @@ class GLMap extends React.Component {
             },
             'geometry': {
               'type': 'Point',
-              'coordinates': ev.place.position.split(',').map((x) => {
-                return +x
-              }).reverse()
+              'coordinates': ev.place.position.split(',').map(x => +x).reverse()
             }
           }
         })

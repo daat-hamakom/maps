@@ -21,10 +21,11 @@ class GLMap extends React.Component {
   componentDidMount () {
     mapboxgl.accessToken = this.props.token
     this.map = new mapboxgl.Map(this.props.view)
+    this.markers = false
   }
 
   componentDidUpdate () {
-    if (!this.props.events.fetching) {
+    if (!this.props.events.fetching && !this.markers) {
       const markers = {
         'type': 'FeatureCollection',
         'features': this.props.events.items.map((ev, index) => {
@@ -61,6 +62,8 @@ class GLMap extends React.Component {
           'text-size': 12
         }
       })
+
+      this.markers = true
     }
   }
 

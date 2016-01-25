@@ -44,15 +44,21 @@ class GLMap extends React.Component {
 
       this.map.addSource('markers', {
         'type': 'geojson',
-        'data': markers
+        'data': markers,
+        'cluster': false
       })
 
       this.map.addLayer({
         'id': 'markers',
         'type': 'symbol',
         'source': 'markers',
+        'interactive': true,
         'layout': {
-          'icon-image': '{marker-symbol}'
+          'icon-image': '{marker-symbol}',
+          'text-field': '{point_count}'
+        },
+        'paint': {
+          'text-size': 12
         }
       })
     }

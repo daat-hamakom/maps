@@ -33,7 +33,6 @@ class YearAxis extends React.Component {
     this.xAxis = d3.svg.axis()
       .scale(this.props.x)
       .orient('bottom')
-      .ticks(d3.time.years, 5)
       .tickSize(this.props.height)
 
     const yearAxisG = d3.select(this.refs.yearAxis).call(this.xAxis)

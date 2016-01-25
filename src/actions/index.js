@@ -34,6 +34,6 @@ export function fetchEvents() {
   }
 }
 
-export function zoomTimeline() {
-  return { type: ZOOM_TIMELINE }
+export function zoomTimeline(factor) {
+  return { type: ZOOM_TIMELINE, factor: factor }
 }

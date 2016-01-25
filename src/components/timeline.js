@@ -99,7 +99,8 @@ class D3Timeline extends React.Component {
   }
 
   onWheelHandler = (e) => {
-    this.props.onZoom()
+    const factor = e.deltaY == Math.abs(e.deltaY) ? -1 : 1
+    this.props.onZoom(factor)
   };
 
   componentDidUpdate () {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import Map from './map'
 import Timeline from './timeline'
-import { fetchEvents, zoomTimeline } from '../actions'
+import { fetchEvents, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline } from '../actions'
 
 import '../styles/app.scss'
 
@@ -18,7 +18,11 @@ class App extends React.Component {
     const { dispatch } = this.props
     return <div>
       <Map events={this.props.events} />
-      <Timeline timeline={this.props.timeline} onZoom={factor => { dispatch(zoomTimeline(factor)) }} />
+      <Timeline timeline={this.props.timeline}
+        onZoom={factor => { dispatch(zoomTimeline(factor)) }}
+        dragStart={pos => { dispatch(startDragTimeline(pos)) }}
+        drag={pos => { dispatch(onDragTimeline(pos)) }}
+        dragEnd={() => { dispatch(endDragTimeline()) }} />
     </div>
   }
 }

@@ -6,6 +6,10 @@ export const REQUEST_EVENTS_SUCCESS = 'REQUEST_EVENTS_SUCCESS'
 
 export const ZOOM_TIMELINE = 'ZOOM_TIMELINE'
 
+export const START_DRAG_TIMELINE = 'START_DRAG_TIMELINE'
+export const ON_DRAG_TIMELINE = 'ON_DRAG_TIMELINE'
+export const END_DRAG_TIMELINE = 'END_DRAG_TIMELINE'
+
 export function requestEvents() {
   return { type: REQUEST_EVENTS }
 }
@@ -36,4 +40,16 @@ export function fetchEvents() {
 
 export function zoomTimeline(factor) {
   return { type: ZOOM_TIMELINE, factor: factor }
+}
+
+export function startDragTimeline(position) {
+  return { type: START_DRAG_TIMELINE, position: position }
+}
+
+export function onDragTimeline(position) {
+  return { type: ON_DRAG_TIMELINE, position: position }
+}
+
+export function endDragTimeline() {
+  return { type: END_DRAG_TIMELINE }
 }

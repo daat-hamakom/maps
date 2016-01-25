@@ -103,6 +103,20 @@ class D3Timeline extends React.Component {
     this.props.onZoom(factor)
   };
 
+  startDragHandler = (e) => {
+    this.props.dragStart(e.clientX)
+  };
+
+  onDragHandler = (e) => {
+    if (this.props.dragging) {
+      this.props.drag(e.clientX)
+    }
+  };
+
+  endDragHandler = (e) => {
+    this.props.dragEnd()
+  };
+
   componentDidUpdate () {
     this.x = d3.time.scale()
       .domain([this.props.startDate, this.props.endDate])
@@ -111,7 +125,11 @@ class D3Timeline extends React.Component {
   }
 
   render () {
-    return <svg width={this.props.width} height={this.props.height} onWheel={this.onWheelHandler}>
+    return <svg width={this.props.width} height={this.props.height}
+      onWheel={this.onWheelHandler}
+      onMouseDown={this.startDragHandler}
+      onMouseUp={this.endDragHandler}
+      onMouseMove={this.onDragHandler}>
       <YearAxis x={this.x} width={this.props.width} height={this.props.height} />
       <MarkerData x={this.x} data={this.props.data} />
     </svg>
@@ -128,11 +146,15 @@ class Timeline extends React.Component {
       [1984, 1996, 4]
     ]
 
-    const { startDate, endDate } = this.props.timeline
+    const { startDate, endDate, dragging } = this.props.timeline
 
     return <div id='timeline'>
       <D3Timeline width={document.body.offsetWidth} height={200} data={data}
-        startDate={startDate} endDate={endDate} onZoom={this.props.onZoom} />
+        startDate={startDate} endDate={endDate} dragging={dragging}
+        onZoom={this.props.onZoom}
+        dragStart={this.props.dragStart}
+        drag={this.props.drag}
+        dragEnd={this.props.dragEnd} />
     </div>
   }
 }

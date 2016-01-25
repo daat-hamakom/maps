@@ -2,6 +2,8 @@ import d3 from 'd3'
 import React from 'react'
 import ReactFauxDOM from 'react-faux-dom'
 
+import { zoomTimeline } from '../actions'
+
 class YearAxis extends React.Component {
 
   static propTypes = {
@@ -79,18 +81,29 @@ class D3Timeline extends React.Component {
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     data: React.PropTypes.array,
+    startDate: React.PropTypes.object,
+    endDate: React.PropTypes.object,
+    onZoom: React.PropTypes.func
   };
 
   constructor (props) {
     super(props)
+
+    this.sd = this.props.startDate
+    this.ed = this.props.endDate
+
     this.x = d3.time.scale()
-      .domain([new Date(1950, 1, 1), new Date(2000, 1, 1)])
+      .domain([this.props.startDate, this.props.endDate])
       .nice(d3.time.year)
       .range([0, this.props.width])
   }
 
+  onWheelHandler = (e) => {
+    this.props.onZoom()
+  };
+
   render () {
-    return <svg width={this.props.width} height={this.props.height}>
+    return <svg width={this.props.width} height={this.props.height} onWheel={this.onWheelHandler}>
       <YearAxis x={this.x} width={this.props.width} height={this.props.height} />
       <MarkerData x={this.x} data={this.props.data} />
     </svg>
@@ -107,8 +120,12 @@ class Timeline extends React.Component {
       [1984, 1996, 4]
     ]
 
+    const start_date = new Date(1950, 1, 1)
+    const end_date = new Date(2000, 1, 1)
+
     return <div id='timeline'>
-      <D3Timeline width={document.body.offsetWidth} height={200} data={data} />
+      <D3Timeline width={document.body.offsetWidth} height={200} data={data}
+        startDate={start_date} endDate={end_date} onZoom={this.props.onZoom} />
     </div>
   }
 }

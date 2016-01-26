@@ -1,4 +1,5 @@
 import d3 from 'd3'
+import moment from 'moment'
 import React from 'react'
 import ReactFauxDOM from 'react-faux-dom'
 
@@ -66,12 +67,14 @@ class MarkerData extends React.Component {
   render () {
     return <g ref='markerData' className='markers'>
       {this.props.data.map((d) => {
+        var ds = d.start_date.replace('-00', '-01').replace('-00', '-01').replace('0000', '2000')
+        var sd = moment(ds, 'YYYY-MM-DD')
         const markerProps = {
-          x: this.props.x(new Date(d[0], 1, 1)),
-          width: this.props.x(new Date(d[1], 1, 1)) - this.props.x(new Date(d[0], 1, 1)),
-          y: 40+(d[2]*10),
+          x: this.props.x(sd.toDate()),
+          width: 10, //this.props.x(sd.add(1, 'M').toDate()) - this.props.x(sd.toDate()),
+          y: 40+(d.id%10)*10,
           height: 5,
-          key: d[2],
+          key: d.id,
           className: 'marker'
         }
         return <rect {...markerProps}></rect>
@@ -146,19 +149,9 @@ class D3Timeline extends React.Component {
 
 class Timeline extends React.Component {
   render () {
-    const data = [
-      [1961, 1969, 0],
-      [1964, 1967, 1],
-      [1971, 1999, 2],
-      [1955, 1972, 3],
-      [1984, 1996, 4]
-    ]
-
     const { startDate, endDate } = this.props.timeline
-
-
     return <div id='timeline'>
-      <D3Timeline width={document.body.offsetWidth} height={200} data={data}
+      <D3Timeline width={document.body.offsetWidth} height={200} data={this.props.events.items}
         startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
         onZoom={this.props.onZoom}
         dragStart={this.props.dragStart}

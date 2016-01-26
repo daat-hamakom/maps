@@ -16,8 +16,8 @@ function events(state = { fetching: false, items: [] }, action) {
 }
 
 const timelineState = {
-  startDate: new Date(1950, 1, 1),
-  endDate: new Date(2000, 1, 1),
+  startDate: new Date(1500, 1, 1),
+  endDate: new Date(2050, 1, 1),
   drag: {
     active: false,
     sd: 0,

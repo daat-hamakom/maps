@@ -104,12 +104,12 @@ class D3Timeline extends React.Component {
   };
 
   startDragHandler = (e) => {
-    this.props.dragStart(e.clientX)
+    this.props.dragStart(this.x.invert(e.clientX).getTime(), e.clientX, this.props.width)
   };
 
   onDragHandler = (e) => {
     if (this.props.dragging) {
-      this.props.drag(e.clientX)
+      this.props.drag(this.x.invert(e.clientX).getTime(), e.clientX)
     }
   };
 
@@ -146,11 +146,12 @@ class Timeline extends React.Component {
       [1984, 1996, 4]
     ]
 
-    const { startDate, endDate, dragging } = this.props.timeline
+    const { startDate, endDate } = this.props.timeline
+
 
     return <div id='timeline'>
       <D3Timeline width={document.body.offsetWidth} height={200} data={data}
-        startDate={startDate} endDate={endDate} dragging={dragging}
+        startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
         onZoom={this.props.onZoom}
         dragStart={this.props.dragStart}
         drag={this.props.drag}

@@ -20,8 +20,8 @@ class App extends React.Component {
       <Map events={this.props.events} />
       <Timeline timeline={this.props.timeline}
         onZoom={factor => { dispatch(zoomTimeline(factor)) }}
-        dragStart={pos => { dispatch(startDragTimeline(pos)) }}
-        drag={pos => { dispatch(onDragTimeline(pos)) }}
+        dragStart={(d, x, w) => { dispatch(startDragTimeline(d, x, w)) }}
+        drag={(d, x) => { dispatch(onDragTimeline(d, x)) }}
         dragEnd={() => { dispatch(endDragTimeline()) }} />
     </div>
   }

@@ -15,10 +15,20 @@ function events(state = { fetching: false, items: [] }, action) {
   }
 }
 
-const start_date = new Date(1950, 1, 1)
-const end_date = new Date(2000, 1, 1)
+const timelineState = {
+  startDate: new Date(1950, 1, 1),
+  endDate: new Date(2000, 1, 1),
+  drag: {
+    active: false,
+    sd: 0,
+    ed: 0,
+    date: 0,
+    x: 0,
+    xc: 0
+  }
+}
 
-function timeline(state = { startDate: start_date, endDate: end_date, dragging: false, dragPosition: 0 }, action) {
+function timeline(state = timelineState, action) {
   switch (action.type) {
     case ZOOM_TIMELINE:
       const zoom_factor = 1.1
@@ -36,11 +46,32 @@ function timeline(state = { startDate: start_date, endDate: end_date, dragging: 
       }
       return Object.assign({}, state, { startDate: new_start, endDate: new_end })
     case START_DRAG_TIMELINE:
-      return Object.assign({}, state, { dragging: true, dragPosition: action.position })
+      return Object.assign({}, state, { drag: {
+        active: true,
+        sd: state.startDate.getTime(),
+        ed: state.endDate.getTime(),
+        date: action.date,
+        x: action.x,
+        xc: action.x,
+        width: action.width
+      }})
     case ON_DRAG_TIMELINE:
-      return Object.assign({}, state, { dragPosition: action.position })
+      const delta = (state.drag.ed - state.drag.sd) * (
+        (state.drag.x - action.xc) / state.drag.width)
+
+      var ns = new Date(state.drag.sd - delta)
+      var ne = new Date(state.drag.ed - delta)
+      return Object.assign({}, state, { startDate: ns, endDate: ne, drag: {
+        active: true,
+        sd: state.drag.sd,
+        ed: state.drag.ed,
+        date: state.drag.date,
+        x: state.drag.x,
+        xc: action.x,
+        width: state.drag.width
+      } })
     case END_DRAG_TIMELINE:
-      return Object.assign({}, state, { dragging: false })
+      return Object.assign({}, state, { drag: { active: false, date: 0, x: 0, xc: 0, width: 0 }})
     default:
       return state
   }

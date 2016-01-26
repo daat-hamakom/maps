@@ -42,12 +42,12 @@ export function zoomTimeline(factor) {
   return { type: ZOOM_TIMELINE, factor: factor }
 }
 
-export function startDragTimeline(date, x, width) {
-  return { type: START_DRAG_TIMELINE, date: date, x: x, width: width }
+export function startDragTimeline(x, width) {
+  return { type: START_DRAG_TIMELINE, x: x, width: width }
 }
 
-export function onDragTimeline(date, x) {
-  return { type: ON_DRAG_TIMELINE, date: date, x: x }
+export function onDragTimeline(x) {
+  return { type: ON_DRAG_TIMELINE, x: x }
 }
 
 export function endDragTimeline() {

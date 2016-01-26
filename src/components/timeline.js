@@ -104,12 +104,12 @@ class D3Timeline extends React.Component {
   };
 
   startDragHandler = (e) => {
-    this.props.dragStart(this.x.invert(e.clientX).getTime(), e.clientX, this.props.width)
+    this.props.dragStart(e.clientX, this.props.width)
   };
 
   onDragHandler = (e) => {
     if (this.props.dragging) {
-      this.props.drag(this.x.invert(e.clientX).getTime(), e.clientX)
+      this.props.drag(e.clientX)
     }
   };
 

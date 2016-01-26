@@ -22,7 +22,6 @@ const timelineState = {
     active: false,
     sd: 0,
     ed: 0,
-    date: 0,
     x: 0,
     xc: 0
   }
@@ -50,28 +49,26 @@ function timeline(state = timelineState, action) {
         active: true,
         sd: state.startDate.getTime(),
         ed: state.endDate.getTime(),
-        date: action.date,
         x: action.x,
         xc: action.x,
         width: action.width
       }})
     case ON_DRAG_TIMELINE:
       const delta = (state.drag.ed - state.drag.sd) * (
-        (state.drag.x - action.xc) / state.drag.width)
-
-      var ns = new Date(state.drag.sd - delta)
-      var ne = new Date(state.drag.ed - delta)
+        (state.drag.x - action.x) / state.drag.width)
+      console.log(delta)
+      var ns = new Date(state.drag.sd + delta)
+      var ne = new Date(state.drag.ed + delta)
       return Object.assign({}, state, { startDate: ns, endDate: ne, drag: {
         active: true,
         sd: state.drag.sd,
         ed: state.drag.ed,
-        date: state.drag.date,
         x: state.drag.x,
         xc: action.x,
         width: state.drag.width
       } })
     case END_DRAG_TIMELINE:
-      return Object.assign({}, state, { drag: { active: false, date: 0, x: 0, xc: 0, width: 0 }})
+      return Object.assign({}, state, { drag: { active: false, x: 0, xc: 0, width: 0 }})
     default:
       return state
   }

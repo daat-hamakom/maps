@@ -56,7 +56,6 @@ function timeline(state = timelineState, action) {
     case ON_DRAG_TIMELINE:
       const delta = (state.drag.ed - state.drag.sd) * (
         (state.drag.x - action.x) / state.drag.width)
-      console.log(delta)
       var ns = new Date(state.drag.sd + delta)
       var ne = new Date(state.drag.ed + delta)
       return Object.assign({}, state, { startDate: ns, endDate: ne, drag: {

@@ -101,20 +101,28 @@ class D3Timeline extends React.Component {
   onWheelHandler = (e) => {
     const factor = e.deltaY == Math.abs(e.deltaY) ? -1 : 1
     this.props.onZoom(factor)
+    e.preventDefault()
+    e.stopPropagation()
   };
 
   startDragHandler = (e) => {
     this.props.dragStart(e.clientX, this.props.width)
+    e.preventDefault()
+    e.stopPropagation()
   };
 
   onDragHandler = (e) => {
     if (this.props.dragging) {
       this.props.drag(e.clientX)
     }
+    e.preventDefault()
+    e.stopPropagation()
   };
 
   endDragHandler = (e) => {
     this.props.dragEnd()
+    e.preventDefault()
+    e.stopPropagation()
   };
 
   componentDidUpdate () {

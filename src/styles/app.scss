@@ -42,4 +42,15 @@ body {
             stroke: rgba(209, 209, 209, 0.7);
         }
     }
+    div#sidepane {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: #e1e1e1;
+        width: 350px;
+        bottom: 200px;
+        &.closed {
+            display: none;
+        }
+    }
 }

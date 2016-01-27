@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Map from './map'
+import Sidepane from './sidepane'
 import Timeline from './timeline'
 import { fetchEvents, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline } from '../actions'
 
@@ -23,6 +24,7 @@ class App extends React.Component {
         dragStart={(x, w) => { dispatch(startDragTimeline(x, w)) }}
         drag={(x) => { dispatch(onDragTimeline(x)) }}
         dragEnd={() => { dispatch(endDragTimeline()) }} />
+      <Sidepane sidepane={this.props.sidepane}/>
     </div>
   }
 }
@@ -30,7 +32,8 @@ class App extends React.Component {
 function select(state) {
   return {
     events: state.events,
-    timeline: state.timeline
+    timeline: state.timeline,
+    sidepane: state.sidepane
   }
 }
 

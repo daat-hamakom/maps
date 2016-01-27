@@ -10,6 +10,9 @@ export const START_DRAG_TIMELINE = 'START_DRAG_TIMELINE'
 export const ON_DRAG_TIMELINE = 'ON_DRAG_TIMELINE'
 export const END_DRAG_TIMELINE = 'END_DRAG_TIMELINE'
 
+export const OPEN_SIDEPANE = 'OPEN_SIDEPANE'
+export const CLOSE_SIDEPANE = 'CLOSE_SIDEPANE'
+
 export function requestEvents() {
   return { type: REQUEST_EVENTS }
 }
@@ -52,4 +55,12 @@ export function onDragTimeline(x) {
 
 export function endDragTimeline() {
   return { type: END_DRAG_TIMELINE }
+}
+
+export function openSidepane() {
+  return { type: OPEN_SIDEPANE }
+}
+
+export function closeSidepane() {
+  return { type: CLOSE_SIDEPANE }
 }

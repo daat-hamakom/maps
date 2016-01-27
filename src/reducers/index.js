@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS,
-  ZOOM_TIMELINE, START_DRAG_TIMELINE, ON_DRAG_TIMELINE, END_DRAG_TIMELINE } from '../actions'
+  ZOOM_TIMELINE, START_DRAG_TIMELINE, ON_DRAG_TIMELINE, END_DRAG_TIMELINE,
+  OPEN_SIDEPANE, CLOSE_SIDEPANE } from '../actions'
 
 function events(state = { fetching: false, items: [] }, action) {
   switch (action.type) {
@@ -78,9 +79,21 @@ function timeline(state = timelineState, action) {
   }
 }
 
+function sidepane(state = { open: 'closed' }, action) {
+  switch (action.type) {
+    case OPEN_SIDEPANE:
+      return Object.assign({}, state, { open: 'open' })
+    case CLOSE_SIDEPANE:
+      return Object.assign({}, state, { open: 'closed' })
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   events,
-  timeline
+  timeline,
+  sidepane
 })
 
 export default rootReducer

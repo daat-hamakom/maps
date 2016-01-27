@@ -20,10 +20,10 @@ body {
         bottom: 0;
         height: 200px;
         width: 100%;
-        background-color: black;
+        background-color: white;
         .axis path, .axis line {
             fill: none;
-            stroke: rgb(53, 108, 190);
+            stroke: #a2b3b7;
             stroke-width: 2;
             shape-rendering: crispEdges;
             &.minor {
@@ -31,15 +31,15 @@ body {
             }
         }
         .tick line {
-            color: rgb(53, 108, 190);
+            color: #a2b3b7;
         }
         .tick text {
-            fill: rgba(53, 108, 190, 1);
-            stroke: rgba(53, 108, 190, 0.6);
+            fill: rgba(162, 179, 183, 1);
+            stroke: rgba(162, 179, 183, 0.6);
         }
         rect.marker, circle.marker {
-            fill: rgba(70, 224, 181, 0.7);
-            stroke: rgba(70, 224, 181, 0.7);
+            fill: rgba(209, 209, 209, 0.7);
+            stroke: rgba(209, 209, 209, 0.7);
         }
     }
 }

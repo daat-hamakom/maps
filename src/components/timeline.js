@@ -69,15 +69,29 @@ class MarkerData extends React.Component {
       {this.props.data.map((d) => {
         var ds = d.start_date.replace('-00', '-01').replace('-00', '-01').replace('0000', '2000')
         var sd = moment(ds, 'YYYY-MM-DD')
-        const markerProps = {
-          x: this.props.x(sd.toDate()),
-          width: 10, //this.props.x(sd.add(1, 'M').toDate()) - this.props.x(sd.toDate()),
-          y: 40+(d.id%10)*10,
-          height: 5,
-          key: d.id,
-          className: 'marker'
+        if (d.end_date != "") {
+          var eds = d.end_date.replace('-00', '-01').replace('-00', '-01')
+          var ed = moment(ds, 'YYYY-MM-DD')
+          const markerProps = {
+            x: this.props.x(sd.toDate()),
+            width: this.props.x(ed.toDate()) - this.props.x(sd.toDate()),
+            y: 40+(d.id%10)*10,
+            height: 5,
+            key: d.id,
+            className: 'marker'
+          }
+          return <rect {...markerProps}></rect>
         }
-        return <rect {...markerProps}></rect>
+        else {
+          const markerProps = {
+            cx: this.props.x(sd.toDate()),
+            r: 2,
+            cy: 40+(d.id%10)*10,
+            key: d.id,
+            className: 'marker'
+          }
+          return <circle {...markerProps}></circle>
+        }
       })}
     </g>
   }

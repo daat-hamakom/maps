@@ -11,8 +11,9 @@ body {
     div#map {
         position: absolute;
         top: 0;
-        height: 100%;
-        width: 100%;
+        left: 0;
+        right: 0;
+        bottom: 200px;
     }
     div#timeline {
         position: absolute;

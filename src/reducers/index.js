@@ -43,7 +43,13 @@ function timeline(state = timelineState, action) {
         var delta = state.startDate.getTime() - new_start.getTime();
         new_end = new Date(state.endDate.getTime() + delta)
       }
-      return Object.assign({}, state, { startDate: new_start, endDate: new_end })
+      console.log(new_start, new_start.getTime(), new_end, new_end.getTime())
+      if (new_end > new_start) {
+        return Object.assign({}, state, { startDate: new_start, endDate: new_end })
+      }
+      else {
+        return state
+      }
     case START_DRAG_TIMELINE:
       return Object.assign({}, state, { drag: {
         active: true,

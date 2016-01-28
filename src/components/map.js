@@ -33,6 +33,7 @@ class GLMap extends React.Component {
             'type': 'Feature',
             'properties': {
               'description': ev.title,
+              'evid': ev.id,
               'marker-symbol': 'default_marker'
             },
             'geometry': {
@@ -63,6 +64,20 @@ class GLMap extends React.Component {
         }
       })
 
+      this.map.on('click', (e) => {
+        this.map.featuresAt(e.point, {
+          layer: 'markers', radius: 10, includeGeometry: true
+        }, (err, features) => {
+          if (err || !features.length)
+            return;
+
+          var feature = features[0];
+          this.props.openEventSidepane(this.props.events.items.find(
+            (ev) => ev.id == feature.properties.evid)
+          )
+        });
+      })
+
       this.markers = true
     }
   }
@@ -80,7 +95,8 @@ class GLMap extends React.Component {
 class Map extends React.Component {
   render () {
     const view = { style: 'mapbox://styles/mapbox/light-v8', center: [35, 31], zoom: 3, container: 'map' }
-    return <GLMap view={view} token={appconf.token.map} events={this.props.events}/>
+    return <GLMap view={view} token={appconf.token.map} events={this.props.events}
+      openEventSidepane={this.props.openEventSidepane} />
   }
 }
 

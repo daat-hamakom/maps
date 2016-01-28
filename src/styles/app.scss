@@ -43,29 +43,44 @@ body {
         }
     }
     div#sidepane {
-        position: absolute;
-        top: 0;
-        right: 0;
-        background: #e1e1e1;
-        width: 300px;
-        bottom: 200px;
-        padding: 25px;
-        &.closed {
-            display: none;
+        div#sidepaneButton {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            line-height: 42px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.9em;
         }
-        span.close {
-            float: right;
-        }
-        span.date {
-            // float: right;
-        }
-        hr {
-            display: block;
-            height: 5px;
-            border: 0;
-            border-top: 5px solid #19d1e7;
-            margin: 1em 0;
-            padding: 0;
+        div#eventpane {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #e1e1e1;
+            width: 300px;
+            bottom: 200px;
+            padding: 25px;
+            &.closed {
+                display: none;
+            }
+            span.close {
+                float: right;
+            }
+            span.date {
+                // float: right;
+            }
+            hr {
+                display: block;
+                height: 5px;
+                border: 0;
+                border-top: 5px solid #19d1e7;
+                margin: 1em 0;
+                padding: 0;
+            }
         }
     }
 }

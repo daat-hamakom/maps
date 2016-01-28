@@ -31,22 +31,28 @@ const timelineState = {
 function timeline(state = timelineState, action) {
   switch (action.type) {
     case ZOOM_TIMELINE:
-      const zoom_factor = 1.1
+      const zoom_factor = 1.01
       var new_start = 0
       var new_end = 0
+      const st = Math.abs(state.startDate.getTime())
+      const et = state.endDate.getTime()
+      console.log(st, et)
+
       if (action.factor == -1) {
-        new_start = new Date(state.startDate.getTime() * zoom_factor)
-        var delta = new_start.getTime() - state.startDate.getTime();
-        new_end = new Date(state.endDate.getTime() - delta)
+        new_start = new Date(Math.sign(st) * Math.pow(st, zoom_factor))
+        var delta = new_start.getTime() - st;
+        new_end = new Date(et - delta)
       }
       else {
-        new_start = new Date(state.startDate.getTime() / zoom_factor)
-        var delta = state.startDate.getTime() - new_start.getTime();
-        new_end = new Date(state.endDate.getTime() + delta)
+        new_start = new Date(Math.sign(st) * Math.pow(st, 1/zoom_factor))
+        var delta = st - new_start.getTime();
+        new_end = new Date(et + delta)
       }
+
       if (new_end > new_start) {
         return Object.assign({}, state, { startDate: new_start, endDate: new_end })
       }
+
       else {
         return state
       }

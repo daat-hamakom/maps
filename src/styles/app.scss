@@ -47,10 +47,25 @@ body {
         top: 0;
         right: 0;
         background: #e1e1e1;
-        width: 350px;
+        width: 300px;
         bottom: 200px;
+        padding: 25px;
         &.closed {
             display: none;
+        }
+        span.close {
+            float: right;
+        }
+        span.date {
+            // float: right;
+        }
+        hr {
+            display: block;
+            height: 5px;
+            border: 0;
+            border-top: 5px solid #19d1e7;
+            margin: 1em 0;
+            padding: 0;
         }
     }
 }

@@ -30,7 +30,8 @@ class App extends React.Component {
         dragEnd={() => { dispatch(endDragTimeline()) }} />
 
       <Sidepane sidepane={this.props.sidepane}
-        closeSidepane={() => { dispatch(closeSidepane()) }}/>
+        closeSidepane={() => { dispatch(closeSidepane()) }}
+        openEventsSidepane={() => { dispatch(openEventSidepane(this.props.events.items)) }}/>
 
     </div>
   }

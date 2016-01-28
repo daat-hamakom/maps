@@ -2,7 +2,7 @@ import React from 'react'
 
 class SidepaneButton extends React.Component {
   render () {
-    return <div id='sidepaneButton'>
+    return <div id='sidepaneButton' onClick={this.props.openEventsSidepane}>
       +
     </div>
   }
@@ -41,7 +41,7 @@ class Sidepane extends React.Component {
   render () {
     const evs = this.props.sidepane.events
     return <div id='sidepane' className={this.props.sidepane.open}>
-      <SidepaneButton />
+      <SidepaneButton openEventsSidepane={this.props.openEventsSidepane} />
       {evs.length == 1
         ? <EventPane  sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
         : <EventsPane sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />

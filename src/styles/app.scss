@@ -64,6 +64,7 @@ body {
             width: 300px;
             bottom: 200px;
             padding: 25px;
+            overflow: scroll;
             &.closed {
                 display: none;
             }

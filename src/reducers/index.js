@@ -85,12 +85,12 @@ function timeline(state = timelineState, action) {
   }
 }
 
-function sidepane(state = { open: 'closed', ev: {} }, action) {
+function sidepane(state = { open: 'closed', events: [] }, action) {
   switch (action.type) {
     case OPEN_EVENT_SIDEPANE:
-      return Object.assign({}, state, { open: 'open', ev: action.ev })
+      return Object.assign({}, state, { open: 'open', events: action.events })
     case CLOSE_SIDEPANE:
-      return Object.assign({}, state, { open: 'closed', ev: {} })
+      return Object.assign({}, state, { open: 'closed', events: [] })
     default:
       return state
   }

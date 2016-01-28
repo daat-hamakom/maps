@@ -57,8 +57,8 @@ export function endDragTimeline() {
   return { type: END_DRAG_TIMELINE }
 }
 
-export function openEventSidepane(ev) {
-  return { type: OPEN_EVENT_SIDEPANE, ev: ev }
+export function openEventSidepane(events) {
+  return { type: OPEN_EVENT_SIDEPANE, events: events }
 }
 
 export function closeSidepane() {

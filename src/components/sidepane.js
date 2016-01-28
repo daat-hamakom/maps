@@ -10,7 +10,7 @@ class SidepaneButton extends React.Component {
 
 class EventPane extends React.Component {
   render () {
-    const ev = this.props.sidepane.ev
+    const ev = this.props.sidepane.events[0]
     return <div id='eventpane' className={this.props.sidepane.open}>
       <span className='close' onClick={this.props.closeSidepane}>X</span>
       <h2 className='title'>{ev.title}</h2>
@@ -22,13 +22,26 @@ class EventPane extends React.Component {
   }
 }
 
+class EventsPane extends React.Component {
+  render () {
+    const evs = this.props.sidepane.events
+    return <div id='eventpane' className={this.props.sidepane.open}>
+      <span className='close' onClick={this.props.closeSidepane}>X</span>
+      {evs.map((e) => <div>{e.title}</div>)}
+    </div>
+  }
+}
+
 class Sidepane extends React.Component {
 
   render () {
-    const ev = this.props.sidepane.ev
+    const evs = this.props.sidepane.events
     return <div id='sidepane' className={this.props.sidepane.open}>
       <SidepaneButton />
-      <EventPane sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
+      {evs.length == 1
+        ? <EventPane sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
+        : <EventsPane sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
+      }
     </div>
   }
 

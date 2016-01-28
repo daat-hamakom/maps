@@ -71,10 +71,11 @@ class GLMap extends React.Component {
           if (err || !features.length)
             return;
 
-          var feature = features[0];
-          this.props.openEventSidepane(this.props.events.items.find(
-            (ev) => ev.id == feature.properties.evid)
-          )
+          const featureIds = features.map((e) => e.properties.evid)
+          this.props.openEventSidepane(this.props.events.items.filter(
+            (ev) => featureIds.includes(ev.id)
+          ))
+
         });
       })
 

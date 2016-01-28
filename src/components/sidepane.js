@@ -25,9 +25,13 @@ class EventPane extends React.Component {
 class EventsPane extends React.Component {
   render () {
     const evs = this.props.sidepane.events
-    return <div id='eventpane' className={this.props.sidepane.open}>
+    return <div id='eventspane' className={this.props.sidepane.open}>
       <span className='close' onClick={this.props.closeSidepane}>X</span>
-      {evs.map((e) => <div>{e.title}</div>)}
+      {evs.map((e) => <div key={'list-event-' + e.id} className='event'>
+        <h3>{e.title}</h3>
+        <span className='date'>{e.start_date}</span>
+        <hr/>
+      </div>)}
     </div>
   }
 }
@@ -39,7 +43,7 @@ class Sidepane extends React.Component {
     return <div id='sidepane' className={this.props.sidepane.open}>
       <SidepaneButton />
       {evs.length == 1
-        ? <EventPane sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
+        ? <EventPane  sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
         : <EventsPane sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
       }
     </div>

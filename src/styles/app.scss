@@ -72,8 +72,9 @@ body {
             span.close {
                 float: right;
             }
-            span.date {
-                // float: right;
+            div.start-date, div.end-date {
+                font-size: 0.7em;
+                color: #414141;
             }
             hr {
                 display: block;

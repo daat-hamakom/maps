@@ -97,9 +97,11 @@ class MarkerData extends React.Component {
           y: 40+(d.id%10)*10,
           height: 5,
           key: d.id,
-          className: 'marker'
+          className: 'marker',
         }
-        return <rect {...markerProps}></rect>
+        return <rect {...markerProps} onClick={(e) => {
+          this.props.openEventSidepane([d])
+        }}></rect>
       })}
     </g>
   }
@@ -164,7 +166,7 @@ class D3Timeline extends React.Component {
       onMouseUp={this.endDragHandler}
       onMouseMove={this.onDragHandler}>
       <YearAxis x={this.x} width={this.props.width} height={this.props.height} />
-      <MarkerData x={this.x} data={this.props.data} />
+      <MarkerData x={this.x} data={this.props.data} openEventSidepane={this.props.openEventSidepane} />
     </svg>
   }
 }
@@ -178,7 +180,8 @@ class Timeline extends React.Component {
         onZoom={this.props.onZoom}
         dragStart={this.props.dragStart}
         drag={this.props.drag}
-        dragEnd={this.props.dragEnd} />
+        dragEnd={this.props.dragEnd}
+        openEventSidepane={this.props.openEventSidepane} />
     </div>
   }
 }

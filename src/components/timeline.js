@@ -64,34 +64,42 @@ class MarkerData extends React.Component {
     data: React.PropTypes.array
   };
 
+  _cleanDates (start, end) {
+    // take start date and optional end date, both accept 00 ranges
+    // and return a proper start to end normalized date
+    var ds = start.replace('-00', '-01').replace('-00', '-01').replace('0000', '2000')
+    var de = end
+
+    var sd = moment(ds, 'YYYY-MM-DD')
+    var ed = moment()
+
+    if (de != '') {
+      if (!de.contains('-00')) {
+        ed = moment(de, 'YYYY-MM-DD')
+      } else {
+        ed = moment(de.replace('-00-', '-12-').replace('-00', '-28'), 'YYYY-MM-DD')  // fugly 28 for now
+      }
+    }
+    else {
+      ed = moment(ds, 'YYYY-MM-DD').add(1, 'day')
+    }
+
+    return { sd: sd, ed: ed }
+  }
+
   render () {
     return <g ref='markerData' className='markers'>
       {this.props.data.map((d) => {
-        var ds = d.start_date.replace('-00', '-01').replace('-00', '-01').replace('0000', '2000')
-        var sd = moment(ds, 'YYYY-MM-DD')
-        if (d.end_date != "") {
-          var eds = d.end_date.replace('-00', '-01').replace('-00', '-01')
-          var ed = moment(ds, 'YYYY-MM-DD')
-          const markerProps = {
-            x: this.props.x(sd.toDate()),
-            width: this.props.x(ed.toDate()) - this.props.x(sd.toDate()),
-            y: 40+(d.id%10)*10,
-            height: 5,
-            key: d.id,
-            className: 'marker'
-          }
-          return <rect {...markerProps}></rect>
+        let {sd, ed} = this._cleanDates(d.start_date, d.end_date)
+        const markerProps = {
+          x: this.props.x(sd.toDate()),
+          width: this.props.x(ed.toDate()) - this.props.x(sd.toDate()),
+          y: 40+(d.id%10)*10,
+          height: 5,
+          key: d.id,
+          className: 'marker'
         }
-        else {
-          const markerProps = {
-            cx: this.props.x(sd.toDate()),
-            r: 2,
-            cy: 40+(d.id%10)*10,
-            key: d.id,
-            className: 'marker'
-          }
-          return <circle {...markerProps}></circle>
-        }
+        return <rect {...markerProps}></rect>
       })}
     </g>
   }

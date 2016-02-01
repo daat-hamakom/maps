@@ -74,7 +74,7 @@ class MarkerData extends React.Component {
     var ed = moment()
 
     if (de != '') {
-      if (!de.contains('-00')) {
+      if (!de.includes('-00')) {
         ed = moment(de, 'YYYY-MM-DD')
       } else {
         ed = moment(de.replace('-00-', '-12-').replace('-00', '-28'), 'YYYY-MM-DD')  // fugly 28 for now

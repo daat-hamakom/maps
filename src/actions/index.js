@@ -13,6 +13,9 @@ export const END_DRAG_TIMELINE = 'END_DRAG_TIMELINE'
 export const OPEN_EVENT_SIDEPANE = 'OPEN_EVENT_SIDEPANE'
 export const CLOSE_SIDEPANE = 'CLOSE_SIDEPANE'
 
+export const HOVER_ENTER_EVENT = 'HOVER_ENTER_EVENT'
+export const HOVER_EXIT_EVENT = 'HOVER_EXIT_EVENT'
+
 export function requestEvents() {
   return { type: REQUEST_EVENTS }
 }
@@ -63,4 +66,12 @@ export function openEventSidepane(events) {
 
 export function closeSidepane() {
   return { type: CLOSE_SIDEPANE }
+}
+
+export function hoverEnterEvent(ev) {
+  return { type: HOVER_ENTER_EVENT, ev: ev }
+}
+
+export function hoverExitEvent() {
+  return { type: HOVER_EXIT_EVENT }
 }

@@ -38,6 +38,10 @@ body {
         rect.marker, circle.marker {
             fill: rgba(209, 209, 209, 0.7);
             stroke: rgba(209, 209, 209, 0.7);
+            &.active {
+                fill: rgba(20, 209, 20, 0.7);
+                stroke: rgba(20, 209, 20, 0.7);
+            }
         }
     }
     div#sidepane {

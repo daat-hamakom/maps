@@ -5,7 +5,8 @@ import Map from './map'
 import Sidepane from './sidepane'
 import Timeline from './timeline'
 import { fetchEvents, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline,
-  openEventSidepane, closeSidepane } from '../actions'
+  openEventSidepane, closeSidepane,
+  hoverEnterEvent, hoverExitEvent } from '../actions'
 
 import '../styles/app.scss'
 
@@ -28,7 +29,9 @@ class App extends React.Component {
         dragStart={(x, w) => { dispatch(startDragTimeline(x, w)) }}
         drag={(x) => { dispatch(onDragTimeline(x)) }}
         dragEnd={() => { dispatch(endDragTimeline()) }}
-        openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }} />
+        openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }}
+        hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev)) }}
+        hoverExitEvent={() => { dispatch(hoverExitEvent()) }} />
 
       <Sidepane sidepane={this.props.sidepane}
         closeSidepane={() => { dispatch(closeSidepane()) }}

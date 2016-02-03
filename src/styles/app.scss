@@ -24,11 +24,8 @@ body {
         .axis path, .axis line {
             fill: none;
             stroke: #a2b3b7;
-            stroke-width: 2;
+            stroke-width: 1;
             shape-rendering: crispEdges;
-            &.minor {
-                stroke-width: 1;
-            }
         }
         .tick line {
             color: #a2b3b7;
@@ -36,6 +33,7 @@ body {
         .tick text {
             fill: rgba(162, 179, 183, 1);
             stroke: rgba(162, 179, 183, 0.6);
+            font-size: 0.8em;
         }
         rect.marker, circle.marker {
             fill: rgba(209, 209, 209, 0.7);

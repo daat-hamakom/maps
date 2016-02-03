@@ -25,7 +25,7 @@ class App extends React.Component {
         openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }} />
 
       <Timeline events={this.props.events} timeline={this.props.timeline}
-        onZoom={factor => { dispatch(zoomTimeline(factor)) }}
+        onZoom={(b, e) => { dispatch(zoomTimeline(b, e)) }}
         dragStart={(x, w) => { dispatch(startDragTimeline(x, w)) }}
         drag={(x) => { dispatch(onDragTimeline(x)) }}
         dragEnd={() => { dispatch(endDragTimeline()) }}

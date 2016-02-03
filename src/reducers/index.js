@@ -33,25 +33,7 @@ const timelineState = {
 function timeline(state = timelineState, action) {
   switch (action.type) {
     case ZOOM_TIMELINE:
-      const zoom_factor = 1.1
-      var new_start = 0
-      var new_end = 0
-      if (action.factor == -1) {
-        new_start = new Date(state.startDate.getTime() * zoom_factor)
-        var delta = new_start.getTime() - state.startDate.getTime();
-        new_end = new Date(state.endDate.getTime() - delta)
-      }
-      else {
-        new_start = new Date(state.startDate.getTime() / zoom_factor)
-        var delta = state.startDate.getTime() - new_start.getTime();
-        new_end = new Date(state.endDate.getTime() + delta)
-      }
-      if (new_end > new_start) {
-        return Object.assign({}, state, { startDate: new_start, endDate: new_end })
-      }
-      else {
-        return state
-      }
+      return Object.assign({}, state, { startDate: action.begin, endDate: action.end })
     case START_DRAG_TIMELINE:
       return Object.assign({}, state, { drag: {
         active: true,

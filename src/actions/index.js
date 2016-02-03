@@ -44,8 +44,8 @@ export function fetchEvents() {
   }
 }
 
-export function zoomTimeline(factor) {
-  return { type: ZOOM_TIMELINE, factor: factor }
+export function zoomTimeline(begin, end) {
+  return { type: ZOOM_TIMELINE, begin: begin, end: end}
 }
 
 export function startDragTimeline(x, width) {

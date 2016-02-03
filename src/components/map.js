@@ -25,8 +25,11 @@ class GLMap extends React.Component {
   }
 
   componentDidUpdate () {
-    if (!this.props.events.fetching && !this.markers) {
-      const markers = {
+    if (!this.props.events.fetching && !this.markers && this.props.events.items.length > 0) {
+
+      this.markers = true
+
+      const markerData = {
         'type': 'FeatureCollection',
         'features': this.props.events.items.map((ev, index) => {
           return {
@@ -44,23 +47,21 @@ class GLMap extends React.Component {
         })
       }
 
-      this.map.addSource('markers', {
-        'type': 'geojson',
-        'data': markers,
+      var sourceObj = new mapboxgl.GeoJSONSource({
+        'data': markerData,
         'cluster': false
       })
+
+      this.map.addSource('eventMarkers', sourceObj)
 
       this.map.addLayer({
         'id': 'markers',
         'type': 'symbol',
-        'source': 'markers',
+        'source': 'eventMarkers',
         'interactive': true,
         'layout': {
           'icon-image': '{marker-symbol}',
-          'text-field': '{point_count}'
-        },
-        'paint': {
-          'text-size': 12
+          'icon-allow-overlap': true
         }
       })
 
@@ -78,8 +79,6 @@ class GLMap extends React.Component {
 
         });
       })
-
-      this.markers = true
     }
   }
 

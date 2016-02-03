@@ -27,7 +27,7 @@
     "d3": "^3.5.12",
     "express": "^4.13.3",
     "history": "^1.13.1",
-    "mapbox-gl": "^0.12.4",
+    "mapbox-gl": "^0.13.1",
     "moment": "^2.11.1",
     "node-bourbon": "^4.2.3",
     "node-sass": "^3.4.2",

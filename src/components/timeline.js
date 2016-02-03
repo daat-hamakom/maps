@@ -140,12 +140,12 @@ class D3Timeline extends React.Component {
     var newStart = 0, newEnd = 0
 
     if (zoomIn) {
-      newStart = new Date(cs + (cs * factor * Math.sign(cs)))
-      newEnd = new Date(ce - (ce * factor * Math.sign(ce)))
+      newStart = new Date(cs + (cs * factor * Math.sign(cs) * pos))
+      newEnd = new Date(ce - (ce * factor * Math.sign(ce) * (1-pos)))
     }
     else {
-      newStart = new Date(cs - (cs * factor * Math.sign(cs)))
-      newEnd = new Date(ce + (ce * factor * Math.sign(ce)))
+      newStart = new Date(cs - (cs * factor * Math.sign(cs) * pos))
+      newEnd = new Date(ce + (ce * factor * Math.sign(ce) * (1-pos)))
     }
 
     if (newEnd > newStart) {

@@ -132,24 +132,24 @@ class D3Timeline extends React.Component {
   onWheelHandler = (e) => {
     const zoomIn = e.deltaY != Math.abs(e.deltaY)
     const pos = e.clientX / this.props.width
-    const factor = 0.1
+    const factor = this.props.width / 10
 
-    const cs = this.props.startDate.getTime()
-    const ce = this.props.endDate.getTime()
+    const cs = this.props.startDate
+    const ce = this.props.endDate
 
-    var newStart = 0, newEnd = 0
+    var ns = 0, ne = 0
 
     if (zoomIn) {
-      newStart = new Date(cs + (cs * factor * Math.sign(cs) * pos))
-      newEnd = new Date(ce - (ce * factor * Math.sign(ce) * (1-pos)))
+      ns = this.x.invert(0 + (factor * pos))
+      ne = this.x.invert(this.props.width - (factor * (1-pos)))
     }
     else {
-      newStart = new Date(cs - (cs * factor * Math.sign(cs) * pos))
-      newEnd = new Date(ce + (ce * factor * Math.sign(ce) * (1-pos)))
+      ns = this.x.invert(0 - (factor * pos))
+      ne = this.x.invert(this.props.width + (factor * (1-pos)))
     }
 
-    if (newEnd > newStart) {
-      this.props.onZoom(newStart, newEnd)
+    if (ne > ns) {
+      this.props.onZoom(ns, ne)
     }
 
     e.preventDefault()

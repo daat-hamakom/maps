@@ -18,6 +18,12 @@ class GLMap extends React.Component {
     events: React.PropTypes.object
   };
 
+  componentWillMount () {
+    this.setState({
+      rectzoom : false
+    })
+  }
+
   componentDidMount () {
     mapboxgl.accessToken = this.props.token
     this.map = new mapboxgl.Map(this.props.view)
@@ -87,7 +93,19 @@ class GLMap extends React.Component {
   }
 
   render () {
-    return <div id='map'></div>
+    return <div id='map' className={this.state.rectzoom ? 'rectzoom' : 'norectzoom'} onKeyDown={(e) => {
+      if (e.key = 'Shift') {
+        this.setState({
+          rectzoom: true
+        })
+      }
+    }} onKeyUp={(e) => {
+      if (e.key = 'Shift') {
+        this.setState({
+          rectzoom: false
+        })
+      }
+    }}></div>
   }
 
 }

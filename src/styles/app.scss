@@ -14,6 +14,9 @@ body {
         left: 0;
         right: 0;
         bottom: 200px;
+        &.rectzoom {
+            cursor: crosshair;
+        }
     }
     div#timeline {
         position: absolute;

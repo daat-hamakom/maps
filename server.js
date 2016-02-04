@@ -33,7 +33,7 @@ else {
   var config = require('./webpack.config');
   var WebpackDevServer = require('webpack-dev-server');
 
-  new WebpackDevServer(webpack(config)).listen(port, 'localhost', function (err, res) {
+  new WebpackDevServer(webpack(config)).listen(port, '0.0.0.0', function (err, res) {
     if (err) {
       console.log(err)
     }

@@ -94,17 +94,9 @@ class GLMap extends React.Component {
 
   render () {
     return <div id='map' className={this.state.rectzoom ? 'rectzoom' : 'norectzoom'} onKeyDown={(e) => {
-      if (e.key = 'Shift') {
-        this.setState({
-          rectzoom: true
-        })
-      }
+      if (e.key = 'Shift') this.setState({ rectzoom: true })
     }} onKeyUp={(e) => {
-      if (e.key = 'Shift') {
-        this.setState({
-          rectzoom: false
-        })
-      }
+      if (e.key = 'Shift') this.setState({ rectzoom: false })
     }}></div>
   }
 

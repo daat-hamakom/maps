@@ -43,7 +43,7 @@ class GLMap extends React.Component {
             'properties': {
               'description': ev.title,
               'evid': ev.id,
-              'marker-symbol': 'default_marker'
+              'marker-symbol': ev.id
             },
             'geometry': {
               'type': 'Point',
@@ -104,7 +104,13 @@ class GLMap extends React.Component {
 
 class Map extends React.Component {
   render () {
-    const view = { style: 'mapbox://styles/mapbox/light-v8', center: [35, 31], zoom: 3, container: 'map' }
+    const view = {
+      style: 'mapbox://styles/mapbox/light-v8',
+      sprite: 'https://daat-hamakom-data.herokuapp.com/sprites',
+      center: [35, 31],
+      zoom: 3,
+      container: 'map'
+    }
     return <GLMap view={view} token={appconf.token.map} events={this.props.events}
       openEventSidepane={this.props.openEventSidepane} />
   }

@@ -71,6 +71,33 @@ class GLMap extends React.Component {
         }
       })
 
+      this.popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+      })
+      this.hovering = false
+
+      this.map.on('mousemove', (e) => {
+        this.map.featuresAt(e.point, {layer: 'markers', radius: 10, includeGeometry: true}, (err, features) => {
+          if (err || !features.length) {
+            if (this.hovering) {
+              this.popup.remove()
+              this.props.hoverExitEvent()
+              this.hovering = false
+            }
+            return
+          }
+
+          if (!this.hovering) {
+            this.hovering = true
+            this.popup.setLngLat(features[0].geometry.coordinates)
+              .setHTML(features[0].properties.description)
+              .addTo(this.map)
+            this.props.hoverEnterEvent(features[0].properties.evid)
+          }
+        })
+      })
+
       this.map.on('click', (e) => {
         this.map.featuresAt(e.point, {
           layer: 'markers', radius: 10, includeGeometry: true
@@ -83,7 +110,7 @@ class GLMap extends React.Component {
             (ev) => featureIds.includes(ev.id)
           ))
 
-        });
+        })
       })
     }
   }
@@ -106,7 +133,9 @@ class Map extends React.Component {
   render () {
     const view = { style: 'mapbox://styles/mapbox/light-v8', center: [35, 31], zoom: 3, container: 'map' }
     return <GLMap view={view} token={appconf.token.map} events={this.props.events}
-      openEventSidepane={this.props.openEventSidepane} />
+      openEventSidepane={this.props.openEventSidepane}
+      hoverEnterEvent={this.props.hoverEnterEvent}
+      hoverExitEvent={this.props.hoverExitEvent} />
   }
 }
 

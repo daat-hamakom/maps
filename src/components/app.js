@@ -22,7 +22,9 @@ class App extends React.Component {
     return <div>
 
       <Map events={this.props.events}
-        openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }} />
+        openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }}
+        hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev)) }}
+        hoverExitEvent={() => { dispatch(hoverExitEvent()) }} />
 
       <Timeline events={this.props.events} timeline={this.props.timeline}
         onZoom={(b, e) => { dispatch(zoomTimeline(b, e)) }}
@@ -35,7 +37,7 @@ class App extends React.Component {
 
       <Sidepane sidepane={this.props.sidepane}
         closeSidepane={() => { dispatch(closeSidepane()) }}
-        openEventsSidepane={() => { dispatch(openEventSidepane(this.props.events.items)) }}/>
+        openEventsSidepane={() => { dispatch(openEventSidepane(this.props.events.items)) }} />
 
     </div>
   }

@@ -97,7 +97,7 @@ class MarkerData extends React.Component {
           y: 40+(d.id%10)*10,
           height: 5,
           key: d.id,
-          className: this.props.timeline.hover == d.id ? 'marker active' : 'marker inactive',
+          className: this.props.app.hover == d.id ? 'marker active' : 'marker inactive',
         }
         return <rect {...markerProps} onClick={(e) => {
           this.props.openEventSidepane([d])
@@ -185,7 +185,7 @@ class D3Timeline extends React.Component {
       onMouseUp={this.endDragHandler}
       onMouseMove={this.onDragHandler}>
       <YearAxis x={this.x} width={this.props.width} height={this.props.height} />
-      <MarkerData x={this.x} data={this.props.data} timeline={this.props.timeline} openEventSidepane={this.props.openEventSidepane}
+      <MarkerData x={this.x} data={this.props.data} app={this.props.app} timeline={this.props.timeline} openEventSidepane={this.props.openEventSidepane}
         hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent} />
     </svg>
   }
@@ -195,7 +195,8 @@ class Timeline extends React.Component {
   render () {
     const { startDate, endDate } = this.props.timeline
     return <div id='timeline'>
-      <D3Timeline width={document.body.offsetWidth} height={200} data={this.props.events.items} timeline={this.props.timeline}
+      <D3Timeline width={document.body.offsetWidth} height={200} data={this.props.events.items}
+        app={this.props.app} timeline={this.props.timeline}
         startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
         onZoom={this.props.onZoom}
         dragStart={this.props.dragStart}

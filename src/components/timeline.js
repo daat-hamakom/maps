@@ -64,25 +64,34 @@ class MarkerData extends React.Component {
     data: React.PropTypes.array
   };
 
-  _cleanDates (start, end) {
+  _cleanDates (ds, de) {
     // take start date and optional end date, both accept 00 ranges
     // and return a proper start to end normalized date
-    var ds = start.replace('-00', '-01').replace('-00', '-01').replace('0000', '2000')
-    var de = end
 
-    var sd = moment(ds, 'YYYY-MM-DD')
-    var ed = moment()
+    var sd = ''
+    var ed = ''
 
     if (de != '') {
-      if (!de.includes('-00')) {
-        ed = moment(de, 'YYYY-MM-DD')
-      } else {
-        ed = moment(de.replace('-00-', '-12-').replace('-00', '-28'), 'YYYY-MM-DD')  // fugly 28 for now
-      }
+      de = de.replace('-00-', '-12-').replace('-00', '-28').replace('0000', '2000')
     }
     else {
-      ed = moment(ds, 'YYYY-MM-DD').add(1, 'day')
+      if (ds.includes('-00-')) {
+        de = ds.replace('-00-', '-12-').replace('-00', '-31')
+      }
+      else {
+        if (ds.includes('-00')) {
+          de = ds.replace('-00', '-28')
+        }
+        else {
+          ed = moment(ds, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD')
+        }
+      }
     }
+
+    ds = ds.replace('-00-', '-01-').replace('-00', '-01').replace('0000', '2000')
+
+    var sd = moment(ds, 'YYYY-MM-DD')
+    var ed = moment(de, 'YYYY-MM-DD')
 
     return { sd: sd, ed: ed }
   }

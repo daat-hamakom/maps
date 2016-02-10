@@ -138,11 +138,8 @@ class D3Timeline extends React.Component {
       .range([0, this.props.width])
   }
 
-  onWheelHandler = (e) => {
-    const direction = e.deltaY != Math.abs(e.deltaY) ? 1 : -1
-    const pos = e.clientX / this.props.width
+  handleZoom = (direction, pos) => {
     const factor = this.props.width / 10
-
     const cs = this.props.startDate
     const ce = this.props.endDate
 
@@ -155,6 +152,23 @@ class D3Timeline extends React.Component {
     if (ne > ns) {
       this.props.onZoom(ns, ne)
     }
+  };
+
+  onWheelHandler = (e) => {
+    const direction = e.deltaY != Math.abs(e.deltaY) ? 1 : -1
+    const pos = e.clientX / this.props.width
+
+    this.handleZoom(direction, pos)
+
+    e.preventDefault()
+    e.stopPropagation()
+  };
+
+  onDblClickHandler = (e) => {
+    const direction = 1 //e.deltaY != Math.abs(e.deltaY) ? 1 : -1
+    const pos = e.clientX / this.props.width
+
+    this.handleZoom(direction, pos)
 
     e.preventDefault()
     e.stopPropagation()
@@ -190,6 +204,7 @@ class D3Timeline extends React.Component {
   render () {
     return <svg width={this.props.width} height={this.props.height}
       onWheel={this.onWheelHandler}
+      onDoubleClick={this.onWheelHandler}
       onMouseDown={this.startDragHandler}
       onMouseUp={this.endDragHandler}
       onMouseMove={this.onDragHandler}>

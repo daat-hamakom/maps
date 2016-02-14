@@ -26,19 +26,6 @@ class App extends React.Component {
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev)) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }} />
 
-      <Timeline events={this.props.events} app={this.props.app} timeline={this.props.timeline}
-        onZoom={(b, e) => { dispatch(zoomTimeline(b, e)) }}
-        dragStart={(x, w) => { dispatch(startDragTimeline(x, w)) }}
-        drag={(x) => { dispatch(onDragTimeline(x)) }}
-        dragEnd={() => { dispatch(endDragTimeline()) }}
-        openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }}
-        hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev)) }}
-        hoverExitEvent={() => { dispatch(hoverExitEvent()) }} />
-
-      <Sidepane sidepane={this.props.sidepane}
-        closeSidepane={() => { dispatch(closeSidepane()) }}
-        openEventsSidepane={() => { dispatch(openEventSidepane(this.props.events.items)) }} />
-
     </div>
   }
 }

@@ -180,11 +180,11 @@ class D3Timeline extends React.Component {
     e.stopPropagation()
   };
 
-  componentDidUpdate () {
+  componentWillReceiveProps (props) {
     this.x = d3.time.scale()
-      .domain([this.props.startDate, this.props.endDate])
+      .domain([props.startDate, props.endDate])
       .nice(d3.time.year)
-      .range([0, this.props.width])
+      .range([0, props.width])
   }
 
   render () {

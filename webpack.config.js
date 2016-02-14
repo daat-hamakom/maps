@@ -1,16 +1,31 @@
 var bourbon = require('node-bourbon').includePaths
+var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
     entry: './index.js',
     output: {
-        path: __dirname,
-        filename: 'static/js/bundle.js',
+        path: path.resolve(__dirname, 'static/js'),
+        filename: 'bundle.js',
     },
     module: {
         loaders: [
             { test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
-            { test: /\.scss$/, loader: 'style!css!sass?includePaths[]=' + bourbon }
+            { test: /\.scss$/, loader: 'style!css!sass?includePaths[]=' + bourbon },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
+            },
+            {
+                test: /\.js$/,
+                include: path.resolve(__dirname, 'node_modules/react-map-gl/node_modules/mapbox-gl/js/render/shaders.js'),
+                loader: 'transform/cacheable?brfs'
+            },
+            {
+                test: /\.js$/,
+                include: path.resolve(__dirname, 'node_modules/webworkify/index.js'),
+                loader: 'worker'
+            }
         ]
     },
     plugins: [

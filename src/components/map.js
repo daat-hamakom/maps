@@ -21,7 +21,7 @@ class Map extends React.Component {
         startDragLngLat: null,
         isDragging: null
       },
-      mapStyle: mapStyle
+      mapStyle: 'mapbox://styles/mapbox/light-v8'
     }
   }
 

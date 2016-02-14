@@ -7,12 +7,20 @@ const app = express()
 
 const production = (process.env['NODE_ENV'] === 'production')
 const static_path = path.join(process.cwd(), 'static')
-
+const js_path = path.join(static_path, 'js')
 
 app.use(compress())
 app.disable('x-powered-by')
 
 app.use('/static', express.static(static_path))
+
+app.get('/*.js', function (req, res) {
+  res.sendFile(req.params[0] + '.js', { root: js_path }, function (err) {
+    if (err) {
+      res.status(err.status).end()
+    }
+  })
+})
 
 app.get('/', function (req, res) {
   res.sendFile('index.html', { root: process.cwd() })
@@ -37,6 +45,6 @@ else {
     if (err) {
       console.log(err)
     }
-    console.log(`✅  Server running on port ${port}`)
+    console.log(`✅  Dev server running on port ${port}`)
   })
 }

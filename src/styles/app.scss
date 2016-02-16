@@ -14,8 +14,18 @@ body {
         left: 0;
         right: 0;
         bottom: 200px;
+        width: 100%;
         &.rectzoom {
             cursor: crosshair;
+        }
+        div.mapboxgl-popup {
+            font-size: 0.6em;
+            width: 20px;
+            height: 20px;
+            background-color: #19d1e7;
+            border-radius: 50%;
+            line-height: 20px;
+            text-align: center;
         }
     }
     div#timeline {

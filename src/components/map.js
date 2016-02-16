@@ -73,12 +73,13 @@ class GLMap extends React.Component {
 
       this.popup = new mapboxgl.Popup({
         closeButton: false,
-        closeOnClick: false
+        closeOnClick: false,
+        anchor: 'bottom'
       })
       this.hovering = false
 
       this.map.on('mousemove', (e) => {
-        this.map.featuresAt(e.point, {layer: 'markers', radius: 10, includeGeometry: true}, (err, features) => {
+        this.map.featuresAt(e.point, {layer: 'markers', radius: 20, includeGeometry: true}, (err, features) => {
           if (err || !features.length) {
             if (this.hovering) {
               this.popup.remove()
@@ -91,7 +92,7 @@ class GLMap extends React.Component {
           if (!this.hovering) {
             this.hovering = true
             this.popup.setLngLat(features[0].geometry.coordinates)
-              .setHTML(features[0].properties.description)
+              .setHTML('<div class="marker-popup"></div>')
               .addTo(this.map)
             this.props.hoverEnterEvent(features[0].properties.evid)
           }

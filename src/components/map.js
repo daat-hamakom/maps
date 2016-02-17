@@ -43,6 +43,7 @@ class GLMap extends React.Component {
             'properties': {
               'description': ev.title,
               'evid': ev.id,
+              'icon': ev.icon,
               'marker-symbol': 'default-marker'
             },
             'geometry': {
@@ -92,7 +93,11 @@ class GLMap extends React.Component {
           if (!this.hovering) {
             this.hovering = true
             this.popup.setLngLat(features[0].geometry.coordinates)
-              .setHTML('<div class="marker-popup"></div>')
+              .setHTML('<div class="marker-popup">' +
+                '<div class="icon"><img src="' + features[0].properties.icon + '"></div>' +
+                '<div class="connector"></div>' +
+                '<div class="dot"></div>' +
+                '</div>')
               .addTo(this.map)
             this.props.hoverEnterEvent(features[0].properties.evid)
           }

@@ -19,11 +19,33 @@ body {
             cursor: crosshair;
         }
         div.mapboxgl-popup {
-            width: 9px;
-            height: 9px;
-            background-color: #19d1e7;
-            border-radius: 50%;
-            margin-top: -26px;
+            width: 60px;
+            height: 90px;
+            margin-top: -82px;
+            margin-left: 3px;
+            div.icon {
+                height: 52px;
+                width: 52px;
+                background-color: #19d1e7;
+                border-radius: 50%;
+                padding-left: 2px;
+                padding-top: 2px;
+                img {
+                    height: 50px;
+                    width: 50px;
+                    border-radius: 50%;
+                }
+            }
+            div.connector {
+
+            }
+            div.dot {
+                width: 9px;
+                height: 9px;
+                margin-left: 22px;
+                background-color: #19d1e7;
+                border-radius: 50%;
+            }
         }
     }
     div#timeline {

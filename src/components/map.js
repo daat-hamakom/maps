@@ -74,12 +74,12 @@ class GLMap extends React.Component {
       this.popup = new mapboxgl.Popup({
         closeButton: false,
         closeOnClick: false,
-        anchor: 'bottom'
+        anchor: 'top'
       })
       this.hovering = false
 
       this.map.on('mousemove', (e) => {
-        this.map.featuresAt(e.point, {layer: 'markers', radius: 20, includeGeometry: true}, (err, features) => {
+        this.map.featuresAt(e.point, {layer: 'markers', radius: 7, includeGeometry: true}, (err, features) => {
           if (err || !features.length) {
             if (this.hovering) {
               this.popup.remove()

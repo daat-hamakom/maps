@@ -19,13 +19,11 @@ body {
             cursor: crosshair;
         }
         div.mapboxgl-popup {
-            font-size: 0.6em;
-            width: 20px;
-            height: 20px;
+            width: 9px;
+            height: 9px;
             background-color: #19d1e7;
             border-radius: 50%;
-            line-height: 20px;
-            text-align: center;
+            margin-top: -26px;
         }
     }
     div#timeline {

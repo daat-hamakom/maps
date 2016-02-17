@@ -20,8 +20,8 @@ body {
         }
         div.mapboxgl-popup {
             width: 60px;
-            height: 90px;
-            margin-top: -82px;
+            height: 100px;
+            margin-top: -91px;
             margin-left: 3px;
             div.icon {
                 height: 52px;
@@ -37,7 +37,11 @@ body {
                 }
             }
             div.connector {
-
+                width: 1px;
+                background-color: #19d1e7;
+                height: 10px;
+                margin-top: 0px;
+                margin-left: 26px;
             }
             div.dot {
                 width: 9px;

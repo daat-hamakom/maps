@@ -100,21 +100,27 @@ class MarkerData extends React.Component {
     return <g ref='markerData' className='markers'>
       {this.props.data.map((d) => {
         let {sd, ed} = this._cleanDates(d.start_date, d.end_date)
-        const markerProps = {
-          x: this.props.x(sd.toDate()),
-          width: this.props.x(ed.toDate()) - this.props.x(sd.toDate()),
-          y: 40+(d.id%10)*10,
-          height: 5,
-          key: d.id,
-          className: this.props.app.hover == d.id ? 'marker active' : 'marker inactive',
-        }
-        return <rect {...markerProps} onClick={(e) => {
+
+        const x = this.props.x(sd.toDate())
+        const y = 40+(d.id%10)*10
+        const width = this.props.x(ed.toDate()) - this.props.x(sd.toDate())
+        const height = 3
+        const r = height + 1
+        const className = this.props.app.hover == d.id ? 'marker active' : 'marker inactive'
+
+        const rectProps = { x: x, width: width, y: y, height: height, rx: 2, ry: 2, className: className }
+        const circleProps = { cx: x + width / 2, cy: y + (r / 2), r: r, className: className }
+
+        return <g key={d.id} onClick={(e) => {
           this.props.openEventSidepane([d])
         }} onMouseEnter={(e) => {
           this.props.hoverEnterEvent(d.id)
         }} onMouseLeave={(e) => {
           this.props.hoverExitEvent()
-        }}></rect>
+        }}>
+          <circle {...circleProps}></circle>
+          <rect {...rectProps}></rect>
+        </g>
       })}
     </g>
   }

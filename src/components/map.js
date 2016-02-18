@@ -99,6 +99,15 @@ class GLMap extends React.Component {
                 '<div class="dot"></div>' +
                 '</div>')
               .addTo(this.map)
+
+            // fugly hack to grab the click on the popup
+            this.popup._content.onclick = (_e) => {
+              const featureIds = features.map((e) => e.properties.evid)
+              this.props.openEventSidepane(this.props.events.items.filter(
+                (ev) => featureIds.includes(ev.id)
+              ))
+            }
+
             this.props.hoverEnterEvent(features[0].properties.evid)
           }
         })

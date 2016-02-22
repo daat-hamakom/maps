@@ -1,6 +1,7 @@
 import d3 from 'd3'
 import moment from 'moment'
 import React from 'react'
+import ReactDOM from 'react-dom'
 import ReactFauxDOM from 'react-faux-dom'
 
 import { zoomTimeline } from '../actions'
@@ -128,6 +129,66 @@ class MarkerData extends React.Component {
   }
 }
 
+class HoverAnnotation extends React.Component {
+  _cleanDates (ds, de) {
+    // take start date and optional end date, both accept 00 ranges
+    // and return a proper start to end normalized date
+
+    var sd = ''
+    var ed = ''
+
+    if (de != '') {
+      ed = de.replace('-00-', '-12-').replace('-00', '-28').replace('0000', '2000')
+    }
+    else {
+      if (ds.includes('-00-')) {
+        ed = ds.replace('-00-', '-12-').replace('-00', '-31')
+      }
+      else {
+        if (ds.includes('-00')) {
+          ed = ds.replace('-00', '-28')
+        }
+        else {
+          ed = moment(ds, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD')
+        }
+      }
+    }
+
+    ds = ds.replace('-00-', '-01-').replace('-00', '-01').replace('0000', '2000')
+
+    var sd = moment(ds, 'YYYY-MM-DD')
+    var ed = moment(ed, 'YYYY-MM-DD')
+
+    return { sd: sd, ed: ed }
+  }
+
+  componentDidUpdate () {
+    this.el = ReactDOM.findDOMNode(this)
+  }
+
+  render () {
+    const ev = this.props.data.find(
+      (e) => this.props.app.hover == e.id
+    )
+
+    let left = 0;
+    if (ev) {
+      const {sd, ed} = this._cleanDates(ev.start_date, ev.end_date)
+      const width = this.props.x(ed.toDate()) - this.props.x(sd.toDate())
+      left = this.props.x(sd.toDate()) + width / 2
+    }
+
+    if (this.el) {
+      console.log(this.el.offsetWidth)
+    }
+
+    const className = this.props.app.hover ? 'annotation' : 'annotation inactive'
+    return <div className={className} style={{left: left + 'px'}}>
+      <span className='text'>{ ev ? ev.title: 'Hello' }</span>
+    </div>
+  }
+}
+
 class D3Timeline extends React.Component {
   static propTypes = {
     width: React.PropTypes.number,
@@ -196,24 +257,18 @@ class D3Timeline extends React.Component {
   }
 
   render () {
-    return <svg width={this.props.width} height={this.props.height}
-      onWheel={this.onWheelHandler}
-      onMouseDown={this.startDragHandler}
-      onMouseUp={this.endDragHandler}
-      onMouseMove={this.onDragHandler}>
-      <YearAxis x={this.x} width={this.props.width} height={this.props.height} />
-      <MarkerData x={this.x} data={this.props.data} app={this.props.app} timeline={this.props.timeline} openEventSidepane={this.props.openEventSidepane}
-        hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent} />
-    </svg>
-  }
-}
-
-class HoverAnnotation extends React.Component {
-  render () {
-    const ev = this.props.data.find(
-      (e) => this.props.app.hover == e.id
-    )
-    return <div className='annotation' style=''>{ ev ? ev.title: 'Hello' }</div>
+    return <div>
+      <svg width={this.props.width} height={this.props.height}
+        onWheel={this.onWheelHandler}
+        onMouseDown={this.startDragHandler}
+        onMouseUp={this.endDragHandler}
+        onMouseMove={this.onDragHandler}>
+        <YearAxis x={this.x} width={this.props.width} height={this.props.height} />
+        <MarkerData x={this.x} data={this.props.data} app={this.props.app} timeline={this.props.timeline} openEventSidepane={this.props.openEventSidepane}
+          hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent} />
+      </svg>
+      <HoverAnnotation data={this.props.data} app={this.props.app} x={this.x} />
+    </div>
   }
 }
 
@@ -231,7 +286,6 @@ class Timeline extends React.Component {
         openEventSidepane={this.props.openEventSidepane}
         hoverEnterEvent={this.props.hoverEnterEvent}
         hoverExitEvent={this.props.hoverExitEvent} />
-      <HoverAnnotation data={this.props.events.items} app={this.props.app} />
     </div>
   }
 }

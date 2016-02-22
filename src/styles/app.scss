@@ -91,7 +91,13 @@ body {
             position: absolute;
             top: -20px;
             line-height: 20px;
-            background-color: rgba(20, 209, 20, 0.7);
+            span.text {
+                margin-left: -50%;
+                background-color: rgba(20, 209, 20, 0.7);
+            }
+            &.inactive {
+                display: none;
+            }
         }
     }
     div#sidepane {

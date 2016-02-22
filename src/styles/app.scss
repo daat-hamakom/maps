@@ -58,6 +58,7 @@ body {
         height: 200px;
         width: 100%;
         background-color: white;
+        box-shadow: 0px -3px 8px rgba(0, 0, 0, 0.2);
         .axis path, .axis line {
             fill: none;
             stroke: #a2b3b7;
@@ -121,7 +122,7 @@ body {
             position: absolute;
             top: 0;
             right: 0;
-            background: #e1e1e1;
+            background: #ffffff;
             width: 300px;
             bottom: 200px;
             padding: 25px;

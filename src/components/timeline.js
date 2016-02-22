@@ -6,6 +6,38 @@ import ReactFauxDOM from 'react-faux-dom'
 
 import { zoomTimeline } from '../actions'
 
+function _cleanDates (ds, de) {
+  // take start date and optional end date, both accept 00 ranges
+  // and return a proper start to end normalized date
+
+  var sd = ''
+  var ed = ''
+
+  if (de != '') {
+    ed = de.replace('-00-', '-12-').replace('-00', '-28').replace('0000', '2000')
+  }
+  else {
+    if (ds.includes('-00-')) {
+      ed = ds.replace('-00-', '-12-').replace('-00', '-31')
+    }
+    else {
+      if (ds.includes('-00')) {
+        ed = ds.replace('-00', '-28')
+      }
+      else {
+        ed = moment(ds, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD')
+      }
+    }
+  }
+
+  ds = ds.replace('-00-', '-01-').replace('-00', '-01').replace('0000', '2000')
+
+  var sd = moment(ds, 'YYYY-MM-DD')
+  var ed = moment(ed, 'YYYY-MM-DD')
+
+  return { sd: sd, ed: ed }
+}
+
 class YearAxis extends React.Component {
 
   static propTypes = {
@@ -65,42 +97,10 @@ class MarkerData extends React.Component {
     data: React.PropTypes.array
   };
 
-  _cleanDates (ds, de) {
-    // take start date and optional end date, both accept 00 ranges
-    // and return a proper start to end normalized date
-
-    var sd = ''
-    var ed = ''
-
-    if (de != '') {
-      ed = de.replace('-00-', '-12-').replace('-00', '-28').replace('0000', '2000')
-    }
-    else {
-      if (ds.includes('-00-')) {
-        ed = ds.replace('-00-', '-12-').replace('-00', '-31')
-      }
-      else {
-        if (ds.includes('-00')) {
-          ed = ds.replace('-00', '-28')
-        }
-        else {
-          ed = moment(ds, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD')
-        }
-      }
-    }
-
-    ds = ds.replace('-00-', '-01-').replace('-00', '-01').replace('0000', '2000')
-
-    var sd = moment(ds, 'YYYY-MM-DD')
-    var ed = moment(ed, 'YYYY-MM-DD')
-
-    return { sd: sd, ed: ed }
-  }
-
   render () {
     return <g ref='markerData' className='markers'>
       {this.props.data.map((d) => {
-        let {sd, ed} = this._cleanDates(d.start_date, d.end_date)
+        let {sd, ed} = _cleanDates(d.start_date, d.end_date)
 
         const x = this.props.x(sd.toDate())
         const y = 40+(d.id%10)*10
@@ -130,37 +130,6 @@ class MarkerData extends React.Component {
 }
 
 class HoverAnnotation extends React.Component {
-  _cleanDates (ds, de) {
-    // take start date and optional end date, both accept 00 ranges
-    // and return a proper start to end normalized date
-
-    var sd = ''
-    var ed = ''
-
-    if (de != '') {
-      ed = de.replace('-00-', '-12-').replace('-00', '-28').replace('0000', '2000')
-    }
-    else {
-      if (ds.includes('-00-')) {
-        ed = ds.replace('-00-', '-12-').replace('-00', '-31')
-      }
-      else {
-        if (ds.includes('-00')) {
-          ed = ds.replace('-00', '-28')
-        }
-        else {
-          ed = moment(ds, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD')
-        }
-      }
-    }
-
-    ds = ds.replace('-00-', '-01-').replace('-00', '-01').replace('0000', '2000')
-
-    var sd = moment(ds, 'YYYY-MM-DD')
-    var ed = moment(ed, 'YYYY-MM-DD')
-
-    return { sd: sd, ed: ed }
-  }
 
   render () {
     const ev = this.props.data.find(
@@ -169,7 +138,7 @@ class HoverAnnotation extends React.Component {
 
     let left = 0;
     if (ev) {
-      const {sd, ed} = this._cleanDates(ev.start_date, ev.end_date)
+      const {sd, ed} = _cleanDates(ev.start_date, ev.end_date)
       const width = this.props.x(ed.toDate()) - this.props.x(sd.toDate())
       left = this.props.x(sd.toDate()) + width / 2
     }

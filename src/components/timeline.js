@@ -72,15 +72,15 @@ class MarkerData extends React.Component {
     var ed = ''
 
     if (de != '') {
-      de = de.replace('-00-', '-12-').replace('-00', '-28').replace('0000', '2000')
+      ed = de.replace('-00-', '-12-').replace('-00', '-28').replace('0000', '2000')
     }
     else {
       if (ds.includes('-00-')) {
-        de = ds.replace('-00-', '-12-').replace('-00', '-31')
+        ed = ds.replace('-00-', '-12-').replace('-00', '-31')
       }
       else {
         if (ds.includes('-00')) {
-          de = ds.replace('-00', '-28')
+          ed = ds.replace('-00', '-28')
         }
         else {
           ed = moment(ds, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD')
@@ -91,7 +91,7 @@ class MarkerData extends React.Component {
     ds = ds.replace('-00-', '-01-').replace('-00', '-01').replace('0000', '2000')
 
     var sd = moment(ds, 'YYYY-MM-DD')
-    var ed = moment(de, 'YYYY-MM-DD')
+    var ed = moment(ed, 'YYYY-MM-DD')
 
     return { sd: sd, ed: ed }
   }

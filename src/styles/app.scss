@@ -80,6 +80,13 @@ body {
                 stroke: rgba(20, 209, 20, 0.7);
             }
         }
+        line.marker {
+            stroke: rgba(20, 209, 20, 0.7);
+            stroke-width: 1;
+            &.inactive {
+                display: none;
+            }
+        }
     }
     div#sidepane {
         div#sidepaneButton {

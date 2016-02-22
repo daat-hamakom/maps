@@ -110,6 +110,7 @@ class MarkerData extends React.Component {
 
         const rectProps = { x: x, width: width, y: y, height: height, rx: 2, ry: 2, className: className }
         const circleProps = { cx: x + width / 2, cy: y + (r / 2), r: r, className: className }
+        const lineProps = { x1: x + width / 2, y1: 0, x2: x + width / 2, y2: y, className: className}
 
         return <g key={d.id} onClick={(e) => {
           this.props.openEventSidepane([d])
@@ -120,6 +121,7 @@ class MarkerData extends React.Component {
         }}>
           <circle {...circleProps}></circle>
           <rect {...rectProps}></rect>
+          <line {...lineProps}></line>
         </g>
       })}
     </g>

@@ -162,10 +162,6 @@ class HoverAnnotation extends React.Component {
     return { sd: sd, ed: ed }
   }
 
-  componentDidUpdate () {
-    this.el = ReactDOM.findDOMNode(this)
-  }
-
   render () {
     const ev = this.props.data.find(
       (e) => this.props.app.hover == e.id
@@ -176,10 +172,6 @@ class HoverAnnotation extends React.Component {
       const {sd, ed} = this._cleanDates(ev.start_date, ev.end_date)
       const width = this.props.x(ed.toDate()) - this.props.x(sd.toDate())
       left = this.props.x(sd.toDate()) + width / 2
-    }
-
-    if (this.el) {
-      console.log(this.el.offsetWidth)
     }
 
     const className = this.props.app.hover ? 'annotation' : 'annotation inactive'

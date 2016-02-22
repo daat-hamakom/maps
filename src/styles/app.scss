@@ -87,6 +87,12 @@ body {
                 display: none;
             }
         }
+        div.annotation {
+            position: absolute;
+            top: -20px;
+            line-height: 20px;
+            background-color: rgba(20, 209, 20, 0.7);
+        }
     }
     div#sidepane {
         div#sidepaneButton {

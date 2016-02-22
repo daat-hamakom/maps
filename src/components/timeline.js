@@ -208,6 +208,15 @@ class D3Timeline extends React.Component {
   }
 }
 
+class HoverAnnotation extends React.Component {
+  render () {
+    const ev = this.props.data.find(
+      (e) => this.props.app.hover == e.id
+    )
+    return <div className='annotation' style=''>{ ev ? ev.title: 'Hello' }</div>
+  }
+}
+
 class Timeline extends React.Component {
   render () {
     const { startDate, endDate } = this.props.timeline
@@ -222,6 +231,7 @@ class Timeline extends React.Component {
         openEventSidepane={this.props.openEventSidepane}
         hoverEnterEvent={this.props.hoverEnterEvent}
         hoverExitEvent={this.props.hoverExitEvent} />
+      <HoverAnnotation data={this.props.events.items} app={this.props.app} />
     </div>
   }
 }

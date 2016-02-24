@@ -79,7 +79,8 @@ class GLMap extends React.Component {
         'source': 'eventMarkers',
         'paint': {
           'circle-color': '#2dc6e0',
-          'circle-radius': 18
+          'circle-opacity': 0.85,
+          'circle-radius': 15
         },
         'filter': ['>', 'point_count', 1]
       });

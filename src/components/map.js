@@ -56,7 +56,8 @@ class GLMap extends React.Component {
 
       var sourceObj = new mapboxgl.GeoJSONSource({
         'data': markerData,
-        'cluster': false
+        'cluster': true,
+        'clusterMaxZoom': 10
       })
 
       this.map.addSource('eventMarkers', sourceObj)
@@ -71,6 +72,31 @@ class GLMap extends React.Component {
           'icon-allow-overlap': true
         }
       })
+
+      this.map.addLayer({
+        'id': 'clusters',
+        'type': 'circle',
+        'source': 'eventMarkers',
+        'paint': {
+          'circle-color': '#2dc6e0',
+          'circle-radius': 18
+        },
+        'filter': ['>', 'point_count', 1]
+      });
+
+      this.map.addLayer({
+        'id': 'cluster-count',
+        'type': 'symbol',
+        'source': 'eventMarkers',
+        'layout': {
+          'text-field': '{point_count}',
+          'text-font': [
+            'DIN Offc Pro Medium',
+            'Arial Unicode MS Bold'
+          ],
+          'text-size': 12
+        }
+      });
 
       this.popup = new mapboxgl.Popup({
         closeButton: false,

@@ -28,7 +28,33 @@ class GLMap extends React.Component {
     mapboxgl.accessToken = this.props.token
     this.map = new mapboxgl.Map(this.props.view)
     this.markers = false
+    window.mymap = this.map
+
+    fetch('https://api.mapbox.com/styles/v1/mushon/cijzh8i5u0101bmkvm2sxj5l0?access_token=pk.eyJ1IjoibXVzaG9uIiwiYSI6IjY1bHhhTkEifQ.DhW2zcurHHBtmnc2FsMBqg')
+      .then(response =>
+        response.json()
+      )
+      .then(json =>
+        window.s1 = json
+      )
+
+    fetch('https://api.mapbox.com/styles/v1/mushon/cil109hzx001ztylz9akdzee9?access_token=pk.eyJ1IjoibXVzaG9uIiwiYSI6IjY1bHhhTkEifQ.DhW2zcurHHBtmnc2FsMBqg')
+      .then(response =>
+        response.json()
+      )
+      .then(json => {
+        window.s2 = json
+        setTimeout(function() {
+          for (let i in window.s1.layers) {
+            for (let [k1, v1] of Object.entries(window.s1.layers[i].paint)) {
+              const v2 = window.s2.layers[i].paint[k1]
+              window.mymap.setPaintProperty(window.s1.layers[i].id, k1, v2)
+            }
+          }
+        }, 10000)
+      })
   }
+
 
   componentDidUpdate () {
     if (!this.props.events.fetching && !this.markers && this.props.events.items.length > 0) {

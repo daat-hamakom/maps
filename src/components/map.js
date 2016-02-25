@@ -80,7 +80,7 @@ class GLMap extends React.Component {
         'paint': {
           'circle-color': '#2dc6e0',
           'circle-opacity': 0.85,
-          'circle-radius': 15
+          'circle-radius': 10
         },
         'filter': ['>', 'point_count', 1]
       });
@@ -95,7 +95,10 @@ class GLMap extends React.Component {
             'DIN Offc Pro Medium',
             'Arial Unicode MS Bold'
           ],
-          'text-size': 12
+          'text-size': 11
+        },
+        'paint': {
+          'text-color': '#ffffff'
         }
       });
 

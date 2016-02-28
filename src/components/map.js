@@ -30,7 +30,7 @@ class GLMap extends React.Component {
     this.markers = false
     window.mymap = this.map
 
-    fetch('https://api.mapbox.com/styles/v1/mushon/cijzh8i5u0101bmkvm2sxj5l0?access_token=pk.eyJ1IjoibXVzaG9uIiwiYSI6IjY1bHhhTkEifQ.DhW2zcurHHBtmnc2FsMBqg')
+    fetch('https://api.mapbox.com/styles/v1/mushon/cil109hzx001ztylz9akdzee9?access_token=pk.eyJ1IjoibXVzaG9uIiwiYSI6IjY1bHhhTkEifQ.DhW2zcurHHBtmnc2FsMBqg')
       .then(response =>
         response.json()
       )
@@ -38,22 +38,43 @@ class GLMap extends React.Component {
         window.s1 = json
       )
 
-    fetch('https://api.mapbox.com/styles/v1/mushon/cil109hzx001ztylz9akdzee9?access_token=pk.eyJ1IjoibXVzaG9uIiwiYSI6IjY1bHhhTkEifQ.DhW2zcurHHBtmnc2FsMBqg')
+    fetch('https://api.mapbox.com/styles/v1/mushon/cijzh8i5u0101bmkvm2sxj5l0?access_token=pk.eyJ1IjoibXVzaG9uIiwiYSI6IjY1bHhhTkEifQ.DhW2zcurHHBtmnc2FsMBqg')
       .then(response =>
         response.json()
       )
       .then(json => {
         window.s2 = json
         setTimeout(function() {
-          for (let i in window.s1.layers) {
-            for (let [k1, v1] of Object.entries(window.s1.layers[i].paint)) {
-              const v2 = window.s2.layers[i].paint[k1]
-              window.mymap.setPaintProperty(window.s1.layers[i].id, k1, v2)
+          try {
+            for (let i in window.s1.layers) {
+              if (window.s1.layers[i].paint) {
+                try {
+                  for (let [k1, v1] of Object.entries(window.s1.layers[i].paint)) {
+                    const v2 = window.s2.layers[i].paint[k1]
+                    console.log('paint', window.s1.layers[i].id, k1, v2)
+                    window.mymap.setPaintProperty(window.s1.layers[i].id, k1, v2)
+                  }
+                }
+                catch (e) {
+                  console.log('missing paint', i)
+                }
+              }
+              if (window.s1.layers[i].layout) {
+                for (let [k1, v1] of Object.entries(window.s1.layers[i].layout)) {
+                  try {
+                    const v2 = window.s2.layers[i].layout[k1]
+                    console.log('layout', window.s1.layers[i].id, k1, v2)
+                    window.mymap.setLayoutProperty(window.s1.layers[i].id, k1, v2)
+                  }
+                  catch (e) {
+                    console.log('missing layout', i)
+                  }
+                }
+              }
             }
-            for (let [k1, v1] of Object.entries(window.s1.layers[i].layout)) {
-              const v2 = window.s2.layers[i].layout[k1]
-              window.mymap.setLayoutProperty(window.s1.layers[i].id, k1, v2)
-            }
+          }
+          catch (e) {
+            console.log('problm!', e)
           }
         }, 10000)
       })
@@ -206,7 +227,7 @@ class GLMap extends React.Component {
 
 class Map extends React.Component {
   render () {
-    const view = { style: 'mapbox://styles/mushon/cijzh8i5u0101bmkvm2sxj5l0', center: [35, 31], zoom: 3, container: 'map' }
+    const view = { style: 'mapbox://styles/mushon/cil109hzx001ztylz9akdzee9', center: [35, 31], zoom: 3, container: 'map' }
     return <GLMap view={view} token={appconf.token.map} events={this.props.events}
       openEventSidepane={this.props.openEventSidepane}
       hoverEnterEvent={this.props.hoverEnterEvent}

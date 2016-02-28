@@ -10,16 +10,38 @@ class SidepaneButton extends React.Component {
 }
 
 class EventPane extends React.Component {
-  _cleanDates (sd, ed) {
-    const ds = moment(sd.replace('-00', '').replace('-00', '')).format('MMMM D, YYYY')
+  _cleanDates (ds, de) {
 
-    if (ed) {
-      const de = moment(ed.replace('-00', '').replace('-00', '')).format('MMMM D, YYYY')
-      return ds + ' - ' + de
+    let sd = moment(ds.replace('-00', '').replace('-00', ''))
+    if (ds.includes('-00-')) {
+      sd = sd.format('YYYY')
+    }
+    else if (ds.includes('-00')) {
+      sd = sd.format('MMMM YYYY')
     }
     else {
-      return ds
+      sd = sd.format('MMMM D, YYYY')
     }
+
+    console.log(ds, de)
+
+    let ed = ''
+    if (de != '') {
+      ed = moment(de.replace('-00', '').replace('-00', ''))
+      if (de.includes('-00-')) {
+        ed = ed.format('YYYY')
+      }
+      else if (de.includes('-00')) {
+        ed = ed.format('MMMM YYYY')
+      }
+      else {
+        ed = ed.format('MMMM D, YYYY')
+      }
+      return sd + ' - ' + ed
+    }
+
+    return sd
+
   }
 
   render () {

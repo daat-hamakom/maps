@@ -10,20 +10,28 @@ class SidepaneButton extends React.Component {
 }
 
 class EventPane extends React.Component {
-  _cleanDate (d) {
-    return d
-    // return moment(d.replace('-00', '').replace('-00', '')).format()
+  _cleanDates (sd, ed) {
+    const ds = moment(sd.replace('-00', '').replace('-00', '')).format('MMMM D, YYYY')
+
+    if (ed) {
+      const de = moment(ed.replace('-00', '').replace('-00', '')).format('MMMM D, YYYY')
+      return ds + ' - ' + de
+    }
+    else {
+      return ds
+    }
   }
 
   render () {
     const ev = this.props.sidepane.events[0]
     return <div id='eventpane' className={this.props.sidepane.open}>
       <span className='close' onClick={this.props.closeSidepane}>X</span>
+      <img src={ev.icon}></img>
+      <h3 className='project'>{ev.project}</h3>
       <h2 className='title'>{ev.title}</h2>
-      <div className='start-date'>{this._cleanDate(ev.start_date)}</div>
-      <div className='end-date'>{this._cleanDate(ev.end_date)}</div>
+      <div className='place'>{ev.place.name}</div>
+      <div className='date'>{this._cleanDates(ev.start_date, ev.end_date)}</div>
       <hr/>
-      <span>{ev.icon}</span>
       <div className='description' dangerouslySetInnerHTML={{__html: ev.description}}></div>
     </div>
   }

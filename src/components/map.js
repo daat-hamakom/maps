@@ -50,10 +50,6 @@ class GLMap extends React.Component {
               const v2 = window.s2.layers[i].paint[k1]
               window.mymap.setPaintProperty(window.s1.layers[i].id, k1, v2)
             }
-            for (let [k1, v1] of Object.entries(window.s1.layers[i].layout)) {
-              const v2 = window.s2.layers[i].layout[k1]
-              window.mymap.setLayoutProperty(window.s1.layers[i].id, k1, v2)
-            }
           }
         }, 10000)
       })

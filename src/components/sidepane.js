@@ -49,12 +49,14 @@ class EventPane extends React.Component {
     return <div id='eventpane' className={this.props.sidepane.open}>
       <span className='close' onClick={this.props.closeSidepane}>X</span>
       <img src={ev.icon}></img>
-      <h3 className='project'>{ev.project}</h3>
-      <h2 className='title'>{ev.title}</h2>
-      <div className='place'>{ev.place.name}</div>
-      <div className='date'>{this._cleanDates(ev.start_date, ev.end_date)}</div>
-      <hr/>
-      <div className='description' dangerouslySetInnerHTML={{__html: ev.description}}></div>
+      <div className='content'>
+        <h3 className='project'>{ev.project}</h3>
+        <h2 className='title'>{ev.title}</h2>
+        <div className='place'>{ev.place.name}</div>
+        <div className='date'>{this._cleanDates(ev.start_date, ev.end_date)}</div>
+        <hr/>
+        <div className='description' dangerouslySetInnerHTML={{__html: ev.description}}></div>
+      </div>
     </div>
   }
 }

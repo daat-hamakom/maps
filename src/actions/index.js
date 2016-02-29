@@ -15,6 +15,8 @@ export const CLOSE_SIDEPANE = 'CLOSE_SIDEPANE'
 
 export const HOVER_ENTER_EVENT = 'HOVER_ENTER_EVENT'
 export const HOVER_EXIT_EVENT = 'HOVER_EXIT_EVENT'
+export const SELECT_EVENT = 'SELECT_EVENT'
+export const DESELECT_EVENT = 'DESELECT_EVENT'
 
 export function requestEvents() {
   return { type: REQUEST_EVENTS }
@@ -74,4 +76,12 @@ export function hoverEnterEvent(ev) {
 
 export function hoverExitEvent() {
   return { type: HOVER_EXIT_EVENT }
+}
+
+export function selectEvent(ev) {
+  return { type: SELECT_EVENT, ev: ev }
+}
+
+export function deselectEvent() {
+  return { type: DESELECT_EVENT }
 }

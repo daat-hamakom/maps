@@ -2,14 +2,18 @@ import { combineReducers } from 'redux'
 import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS,
   ZOOM_TIMELINE, START_DRAG_TIMELINE, ON_DRAG_TIMELINE, END_DRAG_TIMELINE,
   OPEN_EVENT_SIDEPANE, CLOSE_SIDEPANE,
-  HOVER_ENTER_EVENT, HOVER_EXIT_EVENT } from '../actions'
+  HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT } from '../actions'
 
-function app(state = { hover: null }, action) {
+function app(state = { hover: null, selected: null }, action) {
   switch (action.type) {
     case HOVER_ENTER_EVENT:
       return Object.assign({}, state, { hover: action.ev })
     case HOVER_EXIT_EVENT:
       return Object.assign({}, state, { hover: null })
+    case SELECT_EVENT:
+      return Object.assign({}, state, { selected: action.ev })
+    case DESELECT_EVENT:
+      return Object.assign({}, state, { selected: null })
     default:
       return state
   }
@@ -31,13 +35,7 @@ function events(state = { fetching: false, items: [] }, action) {
 const timelineState = {
   startDate: new Date(1500, 1, 1),
   endDate: new Date(2050, 1, 1),
-  drag: {
-    active: false,
-    sd: 0,
-    ed: 0,
-    x: 0,
-    xc: 0
-  }
+  drag: { active: false, sd: 0, ed: 0, x: 0, xc: 0 }
 }
 
 function timeline(state = timelineState, action) {

@@ -27,7 +27,7 @@ class App extends React.Component {
         selectEvent={(ev) => { dispatch(selectEvent(ev)) }}
         deselectEvent={() => { dispatch(deselectEvent()) }} />
 
-      <Timeline events={this.props.events} app={this.props.app} timeline={this.props.timeline}
+      <Timeline app={this.props.app} events={this.props.events} timeline={this.props.timeline}
         onZoom={(b, e) => { dispatch(zoomTimeline(b, e)) }}
         dragStart={(x, w) => { dispatch(startDragTimeline(x, w)) }}
         drag={(x) => { dispatch(onDragTimeline(x)) }}

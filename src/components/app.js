@@ -6,7 +6,7 @@ import Sidepane from './sidepane'
 import Timeline from './timeline'
 import { fetchEvents, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline,
   openEventSidepane, closeSidepane,
-  hoverEnterEvent, hoverExitEvent } from '../actions'
+  hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent } from '../actions'
 
 import '../styles/app.scss'
 
@@ -24,7 +24,9 @@ class App extends React.Component {
       <Map events={this.props.events}
         openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev)) }}
-        hoverExitEvent={() => { dispatch(hoverExitEvent()) }} />
+        hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
+        selectEvent={(ev) => { dispatch(selectEvent(ev)) }}
+        deselectEvent={() => { dispatch(deselectEvent()) }} />
 
       <Timeline events={this.props.events} app={this.props.app} timeline={this.props.timeline}
         onZoom={(b, e) => { dispatch(zoomTimeline(b, e)) }}
@@ -33,7 +35,9 @@ class App extends React.Component {
         dragEnd={() => { dispatch(endDragTimeline()) }}
         openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev)) }}
-        hoverExitEvent={() => { dispatch(hoverExitEvent()) }} />
+        hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
+        selectEvent={(ev) => { dispatch(selectEvent(ev)) }}
+        deselectEvent={() => { dispatch(deselectEvent()) }} />
 
       <Sidepane sidepane={this.props.sidepane}
         closeSidepane={() => { dispatch(closeSidepane()) }}

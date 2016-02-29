@@ -102,18 +102,26 @@ class GLMap extends React.Component {
         }
       });
 
-      this.popup = new mapboxgl.Popup({
+      this.hover_popup = new mapboxgl.Popup({
         closeButton: false,
         closeOnClick: false,
         anchor: 'top'
       })
+
+      this.select_popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        anchor: 'top'
+      })
+
       this.hovering = false
+      this.selecting = false
 
       this.map.on('mousemove', (e) => {
         this.map.featuresAt(e.point, {layer: 'markers', radius: 7, includeGeometry: true}, (err, features) => {
           if (err || !features.length) {
             if (this.hovering) {
-              this.popup.remove()
+              this.hover_popup.remove()
               this.props.hoverExitEvent()
               this.hovering = false
             }
@@ -122,7 +130,7 @@ class GLMap extends React.Component {
 
           if (!this.hovering) {
             this.hovering = true
-            this.popup.setLngLat(features[0].geometry.coordinates)
+            this.hover_popup.setLngLat(features[0].geometry.coordinates)
               .setHTML('<div class="marker-popup">' +
                 '<div class="icon"><img src="' + features[0].properties.icon + '"></div>' +
                 '<div class="connector"></div>' +
@@ -131,7 +139,7 @@ class GLMap extends React.Component {
               .addTo(this.map)
 
             // fugly hack to grab the click on the popup
-            this.popup._content.onclick = (_e) => {
+            this.hover_popup._content.onclick = (_e) => {
               const featureIds = features.map((e) => e.properties.evid)
               this.props.openEventSidepane(this.props.events.items.filter(
                 (ev) => featureIds.includes(ev.id)

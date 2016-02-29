@@ -133,6 +133,13 @@ body {
             }
             span.close {
                 float: right;
+                background-color: black;
+                color: white;
+                font-size: 1em;
+                padding: 2px 7px;
+                border-radius: 50%;
+                font-weight: bold;
+                margin: 4px;
             }
             img {
                 width: 100%;

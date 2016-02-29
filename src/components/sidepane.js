@@ -47,7 +47,7 @@ class EventPane extends React.Component {
   render () {
     const ev = this.props.sidepane.events[0]
     return <div id='eventpane' className={this.props.sidepane.open}>
-      <span className='close' onClick={this.props.closeSidepane}>X</span>
+      <span className='close' onClick={this.props.closeSidepane}>✖</span>
       <img src={ev.icon}></img>
       <div className='content'>
         <h3 className='project'>{ev.project}</h3>

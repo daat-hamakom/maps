@@ -165,11 +165,18 @@ class GLMap extends React.Component {
   }
 
   handleSelected () {
-
+    const ev = this.props.app.selected[0]
+    this.select_popup.setLngLat(ev.place.position.split(',').map(x => +x).reverse())
+      .setHTML('<div class="marker-popup">' +
+        '<div class="icon"><img src="' + ev.icon + '"></div>' +
+        '<div class="connector"></div>' +
+        '<div class="dot"></div>' +
+        '</div>')
+      .addTo(this.map)
   }
 
   handleDeselected () {
-
+    this.select_popup.remove()
   }
 
   componentDidUpdate (prevProps, _prevState) {

@@ -188,8 +188,12 @@ class GLMap extends React.Component {
     if (prev == 0 && next > 0) {
       this.handleSelected()
     }
-    if (prev > 0 && next == 0) {
+    else if (prev > 0 && next == 0) {
       this.handleDeselected()
+    }
+    else if (prev > 0 && next > 0 && prevProps.app.selected[0].id != this.props.app.selected[0].id) {
+      this.handleDeselected()
+      this.handleSelected()
     }
   }
 

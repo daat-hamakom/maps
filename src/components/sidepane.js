@@ -23,8 +23,6 @@ class EventPane extends React.Component {
       sd = sd.format('MMMM D, YYYY')
     }
 
-    console.log(ds, de)
-
     let ed = ''
     if (de != '') {
       ed = moment(de.replace('-00', '').replace('-00', ''))
@@ -45,8 +43,9 @@ class EventPane extends React.Component {
   }
 
   render () {
-    const ev = this.props.sidepane.events[0]
-    return <div id='eventpane' className={this.props.sidepane.open}>
+    const evs = this.props.app.selected
+    const ev = evs[0]
+    return <div id='eventpane' className={evs.length > 0 ? 'open' : 'closed'}>
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
       <img src={ev.icon}></img>
       <div className='content'>
@@ -68,8 +67,8 @@ class EventsPane extends React.Component {
   }
 
   render () {
-    const evs = this.props.sidepane.events
-    return <div id='eventspane' className={this.props.sidepane.open}>
+    const evs = this.props.app.selected
+    return <div id='eventspane' className={evs.length > 0 ? 'open' : 'closed'}>
       <span className='close' onClick={this.props.closeSidepane}>X</span>
       {evs.map((e) => <div key={'list-event-' + e.id} className='event'>
         <h3>{e.title}</h3>
@@ -84,12 +83,12 @@ class EventsPane extends React.Component {
 class Sidepane extends React.Component {
 
   render () {
-    const evs = this.props.sidepane.events
-    return <div id='sidepane' className={this.props.sidepane.open}>
+    const evs = this.props.app.selected
+    return <div id='sidepane' className={evs.length > 0 ? 'open' : 'closed'}>
       <SidepaneButton openEventsSidepane={this.props.openEventsSidepane} />
       {evs.length == 1
-        ? <EventPane  sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
-        : <EventsPane sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
+        ? <EventPane  app={this.props.app} sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
+        : <EventsPane app={this.props.app} sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
       }
     </div>
   }

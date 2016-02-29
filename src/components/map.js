@@ -113,7 +113,6 @@ class GLMap extends React.Component {
     })
 
     this.hovering = false
-    this.selecting = false
 
     this.map.on('mousemove', (e) => {
       this.map.featuresAt(e.point, {layer: 'markers', radius: 7, includeGeometry: true}, (err, features) => {
@@ -139,7 +138,7 @@ class GLMap extends React.Component {
           // fugly hack to grab the click on the popup
           this.hover_popup._content.onclick = (_e) => {
             const featureIds = features.map((e) => e.properties.evid)
-            this.props.openEventSidepane(this.props.events.items.filter(
+            this.props.selectEvent(this.props.events.items.filter(
               (ev) => featureIds.includes(ev.id)
             ))
           }
@@ -157,7 +156,7 @@ class GLMap extends React.Component {
           return;
 
         const featureIds = features.map((e) => e.properties.evid)
-        this.props.openEventSidepane(this.props.events.items.filter(
+        this.props.selectEvent(this.props.events.items.filter(
           (ev) => featureIds.includes(ev.id)
         ))
 
@@ -165,9 +164,25 @@ class GLMap extends React.Component {
     })
   }
 
-  componentDidUpdate () {
+  handleSelected () {
+
+  }
+
+  handleDeselected () {
+
+  }
+
+  componentDidUpdate (prevProps, _prevState) {
     if (!this.props.events.fetching && !this.markers && this.props.events.items.length > 0) {
       this.initMap()
+    }
+    const prev = prevProps.app.selected.length
+    const next = this.props.app.selected.length
+    if (prev == 0 && next > 0) {
+      this.handleSelected()
+    }
+    if (prev > 0 && next == 0) {
+      this.handleDeselected()
     }
   }
 
@@ -188,10 +203,11 @@ class GLMap extends React.Component {
 class Map extends React.Component {
   render () {
     const view = { style: 'mapbox://styles/mushon/cijzh8i5u0101bmkvm2sxj5l0', center: [35, 31], zoom: 3, container: 'map' }
-    return <GLMap view={view} token={appconf.token.map} events={this.props.events}
-      openEventSidepane={this.props.openEventSidepane}
+    return <GLMap view={view} token={appconf.token.map} app={this.props.app} events={this.props.events}
       hoverEnterEvent={this.props.hoverEnterEvent}
-      hoverExitEvent={this.props.hoverExitEvent} />
+      hoverExitEvent={this.props.hoverExitEvent}
+      selectEvent={this.props.selectEvent}
+      deselectEvent={this.props.deselectEvent} />
   }
 }
 

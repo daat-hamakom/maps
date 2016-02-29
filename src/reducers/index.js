@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux'
 import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS,
   ZOOM_TIMELINE, START_DRAG_TIMELINE, ON_DRAG_TIMELINE, END_DRAG_TIMELINE,
-  OPEN_EVENT_SIDEPANE, CLOSE_SIDEPANE,
   HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT } from '../actions'
 
-function app(state = { hover: null, selected: null }, action) {
+function app(state = { hover: null, selected: [] }, action) {
   switch (action.type) {
     case HOVER_ENTER_EVENT:
       return Object.assign({}, state, { hover: action.ev })
@@ -13,7 +12,7 @@ function app(state = { hover: null, selected: null }, action) {
     case SELECT_EVENT:
       return Object.assign({}, state, { selected: action.ev })
     case DESELECT_EVENT:
-      return Object.assign({}, state, { selected: null })
+      return Object.assign({}, state, { selected: [] })
     default:
       return state
   }
@@ -71,12 +70,8 @@ function timeline(state = timelineState, action) {
   }
 }
 
-function sidepane(state = { open: 'closed', events: [] }, action) {
+function sidepane(state = { }, action) {
   switch (action.type) {
-    case OPEN_EVENT_SIDEPANE:
-      return Object.assign({}, state, { open: 'open', events: action.events })
-    case CLOSE_SIDEPANE:
-      return Object.assign({}, state, { open: 'closed', events: [] })
     default:
       return state
   }

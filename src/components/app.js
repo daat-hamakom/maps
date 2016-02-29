@@ -5,7 +5,6 @@ import Map from './map'
 import Sidepane from './sidepane'
 import Timeline from './timeline'
 import { fetchEvents, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline,
-  openEventSidepane, closeSidepane,
   hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent } from '../actions'
 
 import '../styles/app.scss'
@@ -21,7 +20,7 @@ class App extends React.Component {
     const { dispatch } = this.props
     return <div>
 
-      <Map events={this.props.events}
+      <Map app={this.props.app} events={this.props.events}
         openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev)) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
@@ -33,15 +32,13 @@ class App extends React.Component {
         dragStart={(x, w) => { dispatch(startDragTimeline(x, w)) }}
         drag={(x) => { dispatch(onDragTimeline(x)) }}
         dragEnd={() => { dispatch(endDragTimeline()) }}
-        openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }}
+        openEventSidepane={(ev) => { dispatch(selectEvent(ev)) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev)) }}
-        hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
-        selectEvent={(ev) => { dispatch(selectEvent(ev)) }}
-        deselectEvent={() => { dispatch(deselectEvent()) }} />
+        hoverExitEvent={() => { dispatch(hoverExitEvent()) }} />
 
-      <Sidepane sidepane={this.props.sidepane}
-        closeSidepane={() => { dispatch(closeSidepane()) }}
-        openEventsSidepane={() => { dispatch(openEventSidepane(this.props.events.items)) }} />
+      <Sidepane app={this.props.app} sidepane={this.props.sidepane}
+        closeSidepane={() => { dispatch(deselectEvent()) }}
+        openEventsSidepane={() => { dispatch(selectEvent(this.props.events.items)) }} />
 
     </div>
   }

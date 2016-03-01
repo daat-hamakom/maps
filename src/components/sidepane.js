@@ -47,7 +47,7 @@ class EventPane extends React.Component {
     const ev = evs[0]
     return <div id='eventpane' className={evs.length > 0 ? 'open' : 'closed'}>
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
-      <img src={ev.icon}></img>
+      <img src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
       <div className='content'>
         <h3 className='project'>{ev.project}</h3>
         <h2 className='title'>{ev.title}</h2>

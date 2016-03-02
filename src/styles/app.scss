@@ -1,6 +1,8 @@
 @import 'bourbon';
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic);
 
+$frameBorder: #222;
+
 * {
     margin: 0;
     padding: 0;
@@ -11,11 +13,13 @@ body {
     overflow: hidden;
     div#map {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 20px;
+        left: 10px;
         right: 0;
         bottom: 200px;
         width: 100%;
+        border: 2px solid $frameBorder;
+        border-width: 2px 0 0 2px;
         &.rectzoom {
             cursor: crosshair;
         }
@@ -111,7 +115,7 @@ body {
             width: 50px;
             border-radius: 50%;
             position: absolute;
-            top: 20px;
+            top: 30px;
             right: 20px;
             background: white;
             line-height: 42px;
@@ -121,13 +125,15 @@ body {
         }
         div#eventpane, div#eventspane {
             position: absolute;
-            top: 0;
-            right: 0;
+            top: 10px;
+            right: 5px;
+            border: 2px solid $frameBorder;
+            border-width: 2px 2px 0 0;
             background: #ffffff;
             width: 320px;
             bottom: 200px;
             overflow-y: scroll;
-            box-shadow: 0px -10px 7px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
             &.closed {
                 display: none;
             }

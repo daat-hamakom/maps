@@ -129,7 +129,7 @@ class GLMap extends React.Component {
           this.hovering = true
           this.hover_popup.setLngLat(features[0].geometry.coordinates)
             .setHTML('<div class="marker-popup">' +
-              '<div class="icon"><img src="' + features[0].properties.icon + '"></div>' +
+              '<div class="icon"><img src="' + features[0].properties.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_s.jpg' + '"></div>' +
               '<div class="connector"></div>' +
               '<div class="dot"></div>' +
               '</div>')

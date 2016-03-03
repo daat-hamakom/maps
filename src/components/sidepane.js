@@ -66,11 +66,17 @@ class EventsPane extends React.Component {
     // return moment(d.replace('-00', '').replace('-00', '')).format()
   }
 
+  handleClick = (e) => {
+    console.log()
+  }
+
   render () {
     const evs = this.props.app.selected
-    return <div id='eventspane' className={evs.length > 0 ? 'open' : 'closed'}>
+    return <div id='eventspane' className={evs.length > 0 ? 'open' : 'closed'} >
       <span className='close' onClick={this.props.closeSidepane}>X</span>
-      {evs.map((e) => <div key={'list-event-' + e.id} className='event'>
+      {evs.map((e) => <div key={'list-event-' + e.id} className='event' onClick={() => {
+        this.props.selectEvent([e])
+      }}>
         <h3>{e.title}</h3>
         <div className='start-date'>{this._cleanDate(e.start_date)}</div>
         <div className='end-date'>{this._cleanDate(e.end_date)}</div>
@@ -88,7 +94,7 @@ class Sidepane extends React.Component {
       <SidepaneButton openEventsSidepane={this.props.openEventsSidepane} />
       {evs.length == 1
         ? <EventPane  app={this.props.app} sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
-        : <EventsPane app={this.props.app} sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
+        : <EventsPane app={this.props.app} sidepane={this.props.sidepane} selectEvent={this.props.selectEvent} closeSidepane={this.props.closeSidepane} />
       }
     </div>
   }

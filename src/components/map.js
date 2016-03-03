@@ -55,7 +55,7 @@ class GLMap extends React.Component {
     var sourceObj = new mapboxgl.GeoJSONSource({
       'data': markerData,
       'cluster': true,
-      'clusterMaxZoom': 14
+      'clusterMaxZoom': 5
     })
 
     this.map.addSource('eventMarkers', sourceObj)
@@ -126,6 +126,11 @@ class GLMap extends React.Component {
         }
 
         if (!this.hovering) {
+
+          if (features[0].properties.cluster) {
+            return
+          }
+
           this.hovering = true
           this.hover_popup.setLngLat(features[0].geometry.coordinates)
             .setHTML('<div class="marker-popup">' +
@@ -152,16 +157,21 @@ class GLMap extends React.Component {
       this.map.featuresAt(e.point, {
         layer: 'markers', radius: 10, includeGeometry: true
       }, (err, features) => {
+
         if (err || !features.length)
           return;
 
-        const featureIds = features.map((e) => e.properties.evid)
-        this.props.selectEvent(this.props.events.items.filter(
-          (ev) => featureIds.includes(ev.id)
-        ))
+        if (features[0].properties.cluster) {
+          // this.map.setCenter(features[0].geometry.coordinates)
+          // this.map.setZoom(6.5)
+        }
+        else {
+          // we never get here since the cli ck was caught on the hover_popup
+        }
 
       })
     })
+
   }
 
   handleSelected () {

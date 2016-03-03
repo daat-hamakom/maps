@@ -38,6 +38,7 @@ class App extends React.Component {
 
       <Sidepane app={this.props.app} sidepane={this.props.sidepane}
         closeSidepane={() => { dispatch(deselectEvent()) }}
+        selectEvent={(ev) => { dispatch(selectEvent(ev)) }}
         openEventsSidepane={() => { dispatch(selectEvent(this.props.events.items)) }} />
 
     </div>

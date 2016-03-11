@@ -3,6 +3,8 @@
 
 $frameBorder: #222;
 
+$timelineHight: 140px;
+
 * {
     margin: 0;
     padding: 0;
@@ -13,11 +15,10 @@ body {
     overflow: hidden;
     div#map-container {
         position: absolute;
-        top: 20px;
+        top: 30px;
         left: 10px;
-        right: 0;
-        bottom: 200px;
-        width: 100%;
+        right: 10px;
+        bottom: $timelineHight;
         border: 2px solid $frameBorder;
         border-width: 2px 0 0 2px;
         h1.title {
@@ -82,10 +83,11 @@ body {
     div#timeline {
         position: absolute;
         bottom: 0;
-        height: 200px;
+        height: $timelineHight;
         width: 100%;
         background-color: white;
-        box-shadow: 0px -3px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.09);
+        z-index: 10;
         .axis path, .axis line {
             fill: none;
             stroke: #a2b3b7;
@@ -155,9 +157,9 @@ body {
             border-width: 2px 2px 0 0;
             background: #ffffff;
             width: 320px;
-            bottom: 200px;
+            bottom: $timelineHight;
             overflow-y: scroll;
-            box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+            box-shadow: -2px 2px 4px #EEF3F6;
             &.closed {
                 display: none;
             }

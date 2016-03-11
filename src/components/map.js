@@ -30,7 +30,7 @@ class GLMap extends React.Component {
     this.markers = false
     window.mymap = this.map
 
-    fetch('https://api.mapbox.com/styles/v1/mushon/cil109hzx001ztylz9akdzee9?access_token=pk.eyJ1IjoibXVzaG9uIiwiYSI6IjY1bHhhTkEifQ.DhW2zcurHHBtmnc2FsMBqg')
+    fetch('https://api.mapbox.com/styles/v1/mushon/cijzh8i5u0101bmkvm2sxj5l0?access_token=pk.eyJ1IjoibXVzaG9uIiwiYSI6IjY1bHhhTkEifQ.DhW2zcurHHBtmnc2FsMBqg')
       .then(response =>
         response.json()
       )
@@ -38,7 +38,7 @@ class GLMap extends React.Component {
         window.s1 = json
       )
 
-    fetch('https://api.mapbox.com/styles/v1/mushon/cijzh8i5u0101bmkvm2sxj5l0?access_token=pk.eyJ1IjoibXVzaG9uIiwiYSI6IjY1bHhhTkEifQ.DhW2zcurHHBtmnc2FsMBqg')
+    fetch('https://api.mapbox.com/styles/v1/mushon/cijzh5hn000zzbmkv7sw2g5os?access_token=pk.eyJ1IjoibXVzaG9uIiwiYSI6IjY1bHhhTkEifQ.DhW2zcurHHBtmnc2FsMBqg')
       .then(response =>
         response.json()
       )
@@ -227,7 +227,7 @@ class GLMap extends React.Component {
 
 class Map extends React.Component {
   render () {
-    const view = { style: 'mapbox://styles/mushon/cil109hzx001ztylz9akdzee9', center: [35, 31], zoom: 3, container: 'map' }
+    const view = { style: 'mapbox://styles/mushon/cijzh8i5u0101bmkvm2sxj5l0', center: [35, 31], zoom: 3, container: 'map' }
     return <GLMap view={view} token={appconf.token.map} events={this.props.events}
       openEventSidepane={this.props.openEventSidepane}
       hoverEnterEvent={this.props.hoverEnterEvent}

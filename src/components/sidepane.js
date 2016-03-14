@@ -54,6 +54,9 @@ class EventPane extends React.Component {
         <div className='place'>{ev.place.name}</div>
         <div className='date'>{this._cleanDates(ev.start_date, ev.end_date)}</div>
         <hr/>
+        {ev.media.filter((m) => m.type == 'sound').map((m) => <audio controls>
+          <source src={m.file} type="audio/mpeg"/>
+        </audio>)}
         <div className='description' dangerouslySetInnerHTML={{__html: ev.description}}></div>
       </div>
     </div>

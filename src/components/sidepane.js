@@ -55,8 +55,14 @@ class EventPane extends React.Component {
         <div className='date'>{this._cleanDates(ev.start_date, ev.end_date)}</div>
         <hr/>
         {ev.media.filter((m) => m.type == 'sound').map((m) => <audio controls>
-          <source src={m.file} type="audio/mpeg"/>
-        </audio>)}
+            <source src={m.file} type="audio/mpeg"/>
+          </audio>
+        )}
+        {ev.media.filter((m) => m.type == 'link' && m.url.contains('youtube')).map((m) => {
+            const yturl = m.url.replace('watch', 'embed').replace('/v', '/embed')
+            return <iframe allowFullScreen="allowfullscreen" frameBorder="0" src={yturl} width="250"></iframe>
+          }
+        )}
         <div className='description' dangerouslySetInnerHTML={{__html: ev.description}}></div>
       </div>
     </div>

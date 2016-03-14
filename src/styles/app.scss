@@ -138,6 +138,13 @@ body {
             &.closed {
                 display: none;
             }
+            span.media-dots {
+                span.media-dot {
+                    &.selected {
+
+                    }
+                }
+            }
             span.close {
                 float: right;
                 background-color: black;

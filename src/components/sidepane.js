@@ -42,12 +42,27 @@ class EventPane extends React.Component {
 
   }
 
+  constructor (props) {
+    super(props)
+    this.state = { selected_media: 0 }
+  }
+
   render () {
     const evs = this.props.app.selected
     const ev = evs[0]
     return <div id='eventpane' className={evs.length > 0 ? 'open' : 'closed'}>
+      <span className="media-dots">{ev.media.filter((m) => m.type == 'image').map((m, i) => {
+          return <span className={this.state.selected_media == i ? 'media-dot selected' : 'media-dot'} key={i} onClick={() => {
+            this.setState({ selected_media: i })
+          }}>{this.state.selected_media == i ? '●' : '○' }</span>
+        })
+      }</span>
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
-      <img src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+      {ev.media.filter((m) => m.type == 'image').length ?
+        <img src={ev.media[this.state.selected_media].file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+        : <img src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+      }
+
       <div className='content'>
         <h3 className='project'>{ev.project}</h3>
         <h2 className='title'>{ev.title}</h2>

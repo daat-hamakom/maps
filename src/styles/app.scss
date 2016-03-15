@@ -189,6 +189,39 @@ body {
                     width: 100%;
                 }
             }
+            div.event {
+                padding-top: 10px;
+                span.event-icon {
+                    float: left;
+                    width: 70px;
+                    height: 70px;
+                    margin: 15px;
+                    img {
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 50%;
+                    }
+                }
+                span.event-data {
+                    div.project {
+                        padding-top: 15px;
+                        font-size: 0.8em;
+                        color: #ADBEC7;
+                    }
+                    div.title {
+                        font-size: 1em;
+                    }
+                    div.date {
+                        font-size: 0.9em;
+                        color: #5D8599;
+                        font-style: italic;
+                    }
+                }
+                div.clear {
+                    clear: both;
+                    padding: 5px;
+                }
+            }
         }
     }
 }

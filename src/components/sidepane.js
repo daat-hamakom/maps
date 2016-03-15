@@ -1,17 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-class SidepaneButton extends React.Component {
-  render () {
-    return <div id='sidepaneButton' onClick={this.props.openEventsSidepane}>
-      +
-    </div>
-  }
-}
-
-class EventPane extends React.Component {
-  _cleanDates (ds, de) {
-
+function _cleanDates (ds, de) {
     let sd = moment(ds.replace('-00', '').replace('-00', ''))
     if (ds.includes('-00-')) {
       sd = sd.format('YYYY')
@@ -37,10 +27,18 @@ class EventPane extends React.Component {
       }
       return sd + ' - ' + ed
     }
-
     return sd
-
   }
+
+class SidepaneButton extends React.Component {
+  render () {
+    return <div id='sidepaneButton' onClick={this.props.openEventsSidepane}>
+      +
+    </div>
+  }
+}
+
+class EventPane extends React.Component {
 
   constructor (props) {
     super(props)
@@ -67,7 +65,7 @@ class EventPane extends React.Component {
         <h3 className='project'>{ev.project}</h3>
         <h2 className='title'>{ev.title}</h2>
         <div className='place'>{ev.place.name}</div>
-        <div className='date'>{this._cleanDates(ev.start_date, ev.end_date)}</div>
+        <div className='date'>{_cleanDates(ev.start_date, ev.end_date)}</div>
         <hr/>
         {ev.media.filter((m) => m.type == 'sound').map((m) => <audio controls>
             <source src={m.file} type="audio/mpeg"/>
@@ -85,10 +83,6 @@ class EventPane extends React.Component {
 }
 
 class EventsPane extends React.Component {
-  _cleanDate (d) {
-    return d
-    // return moment(d.replace('-00', '').replace('-00', '')).format()
-  }
 
   handleClick = (e) => {
     console.log()
@@ -101,10 +95,15 @@ class EventsPane extends React.Component {
       {evs.map((e) => <div key={'list-event-' + e.id} className='event' onClick={() => {
         this.props.selectEvent([e])
       }}>
-        <h3>{e.title}</h3>
-        <div className='start-date'>{this._cleanDate(e.start_date)}</div>
-        <div className='end-date'>{this._cleanDate(e.end_date)}</div>
-        <hr/>
+        <span className="event-icon">
+          <img src={e.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+        </span>
+        <span className="event-data">
+          <div className='project'>{e.project}</div>
+          <div className='title'>{e.title}</div>
+          <div className='date'>{_cleanDates(e.start_date, e.end_date)}</div>
+        </span>
+        <div className='clear'></div>
       </div>)}
     </div>
   }

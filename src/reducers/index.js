@@ -3,12 +3,12 @@ import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS,
   ZOOM_TIMELINE, START_DRAG_TIMELINE, ON_DRAG_TIMELINE, END_DRAG_TIMELINE,
   HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT } from '../actions'
 
-function app(state = { hover: null, selected: [] }, action) {
+function app(state = { hover: [], selected: [] }, action) {
   switch (action.type) {
     case HOVER_ENTER_EVENT:
       return Object.assign({}, state, { hover: action.ev })
     case HOVER_EXIT_EVENT:
-      return Object.assign({}, state, { hover: null })
+      return Object.assign({}, state, { hover: [] })
     case SELECT_EVENT:
       return Object.assign({}, state, { selected: action.ev })
     case DESELECT_EVENT:

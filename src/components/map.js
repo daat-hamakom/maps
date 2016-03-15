@@ -140,15 +140,18 @@ class GLMap extends React.Component {
               '</div>')
             .addTo(this.map)
 
+          const featureIds = features.map((e) => e.properties.evid)
+
           // fugly hack to grab the click on the popup
           this.hover_popup._content.onclick = (_e) => {
-            const featureIds = features.map((e) => e.properties.evid)
             this.props.selectEvent(this.props.events.items.filter(
               (ev) => featureIds.includes(ev.id)
             ))
           }
 
-          this.props.hoverEnterEvent(features[0].properties.evid)
+          this.props.hoverEnterEvent(this.props.events.items.filter(
+            (ev) => featureIds.includes(ev.id)
+          ))
         }
       })
     })
@@ -174,9 +177,16 @@ class GLMap extends React.Component {
 
   }
 
-  handleSelected () {
-    const ev = this.props.app.selected[0]
-    this.select_popup.setLngLat(ev.place.position.split(',').map(x => +x).reverse())
+  handleSelected (t) {
+    let ev = this.props.app.selected[0]
+    let popup = this.select_popup
+
+    if (t == 'hover') {
+      ev = this.props.app.hover[0]
+      popup = this.hover_popup
+    }
+
+    popup.setLngLat(ev.place.position.split(',').map(x => +x).reverse())
       .setHTML('<div class="marker-popup">' +
         '<div class="icon"><img src="' + ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_s.jpg' + '"></div>' +
         '<div class="connector"></div>' +
@@ -185,26 +195,35 @@ class GLMap extends React.Component {
       .addTo(this.map)
   }
 
-  handleDeselected () {
-    this.select_popup.remove()
+  handleDeselected (t) {
+    if (t == 'select')
+      this.select_popup.remove()
+    else if (t == 'hover')
+      this.hover_popup.remove()
+  }
+
+  checkSelectAndHover (t, prevProp, nextProp) {
+    const prev = prevProp.length
+    const next = nextProp.length
+    if (prev == 0 && next > 0) {
+      this.handleSelected(t)
+    }
+    else if (prev > 0 && next == 0) {
+      this.handleDeselected(t)
+    }
+    else if (prev > 0 && next > 0 && prevProp[0].id != nextProp[0].id) {
+      this.handleDeselected(t)
+      this.handleSelected(t)
+    }
   }
 
   componentDidUpdate (prevProps, _prevState) {
     if (!this.props.events.fetching && !this.markers && this.props.events.items.length > 0) {
       this.initMap()
     }
-    const prev = prevProps.app.selected.length
-    const next = this.props.app.selected.length
-    if (prev == 0 && next > 0) {
-      this.handleSelected()
-    }
-    else if (prev > 0 && next == 0) {
-      this.handleDeselected()
-    }
-    else if (prev > 0 && next > 0 && prevProps.app.selected[0].id != this.props.app.selected[0].id) {
-      this.handleDeselected()
-      this.handleSelected()
-    }
+
+    this.checkSelectAndHover('select', prevProps.app.selected, this.props.app.selected)
+    this.checkSelectAndHover('hover', prevProps.app.hover, this.props.app.hover)
   }
 
   componentWillUnmount () {

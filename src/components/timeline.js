@@ -107,7 +107,7 @@ class MarkerData extends React.Component {
         const width = this.props.x(ed.toDate()) - this.props.x(sd.toDate())
         const height = 3
         const r = height + 1
-        const className = this.props.app.hover == d.id || (
+        const className = (this.props.app.hover[0] && this.props.app.hover[0].id == d.id) || (
           this.props.app.selected[0] && this.props.app.selected[0].id == d.id) ? 'marker active' : 'marker inactive'
 
         const rectProps = { x: x, width: width, y: y, height: height, rx: 2, ry: 2, className: className }
@@ -117,7 +117,7 @@ class MarkerData extends React.Component {
         return <g key={d.id} onClick={(e) => {
           this.props.openEventSidepane([d])
         }} onMouseEnter={(e) => {
-          this.props.hoverEnterEvent(d.id)
+          this.props.hoverEnterEvent([d])
         }} onMouseLeave={(e) => {
           this.props.hoverExitEvent()
         }}>
@@ -134,7 +134,7 @@ class HoverAnnotation extends React.Component {
 
   render () {
     const ev = this.props.data.find(
-      (e) => this.props.app.hover == e.id || (
+      (e) => (this.props.app.hover[0] && this.props.app.hover[0].id == e.id) || (
         this.props.app.selected[0] && this.props.app.selected[0].id == e.id)
     )
 
@@ -145,7 +145,7 @@ class HoverAnnotation extends React.Component {
       left = this.props.x(sd.toDate()) + width / 2
     }
 
-    const className = this.props.app.hover || this.props.app.selected.length > 0 ? 'annotation' : 'annotation inactive'
+    const className = this.props.app.hover.length > 0 || this.props.app.selected.length > 0 ? 'annotation' : 'annotation inactive'
     return <div className={className} style={{left: left + 'px'}}>
       <span className='text'>{ ev ? ev.title: 'Hello' }</span>
     </div>

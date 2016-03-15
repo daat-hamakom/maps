@@ -142,16 +142,16 @@ class GLMap extends React.Component {
 
           const featureIds = features.map((e) => e.properties.evid)
 
+          this.props.hoverEnterEvent(this.props.events.items.filter(
+            (ev) => featureIds.includes(ev.id)
+          ))
+
           // fugly hack to grab the click on the popup
           this.hover_popup._content.onclick = (_e) => {
             this.props.selectEvent(this.props.events.items.filter(
               (ev) => featureIds.includes(ev.id)
             ))
           }
-
-          this.props.hoverEnterEvent(this.props.events.items.filter(
-            (ev) => featureIds.includes(ev.id)
-          ))
         }
       })
     })

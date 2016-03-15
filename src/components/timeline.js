@@ -116,6 +116,7 @@ class MarkerData extends React.Component {
 
         return <g key={d.id} onClick={(e) => {
           this.props.openEventSidepane([d])
+          this.props.hoverExitEvent()
         }} onMouseEnter={(e) => {
           this.props.hoverEnterEvent([d])
         }} onMouseLeave={(e) => {

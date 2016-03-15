@@ -151,6 +151,7 @@ class GLMap extends React.Component {
             this.props.selectEvent(this.props.events.items.filter(
               (ev) => featureIds.includes(ev.id)
             ))
+            this.props.hoverExitEvent()
           }
         }
       })

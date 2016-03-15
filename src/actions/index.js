@@ -15,6 +15,9 @@ export const HOVER_EXIT_EVENT = 'HOVER_EXIT_EVENT'
 export const SELECT_EVENT = 'SELECT_EVENT'
 export const DESELECT_EVENT = 'DESELECT_EVENT'
 
+export const OPEN_LIGHTBOX = 'OPEN_LIGHTBOX'
+export const CLOSE_LIGHTBOX = 'CLOSE_LIGHTBOX'
+
 export function requestEvents() {
   return { type: REQUEST_EVENTS }
 }
@@ -81,4 +84,12 @@ export function selectEvent(ev) {
 
 export function deselectEvent() {
   return { type: DESELECT_EVENT }
+}
+
+export function openLightbox(media) {
+  return { type: OPEN_LIGHTBOX, media: media }
+}
+
+export function closeLightbox() {
+  return { type: CLOSE_LIGHTBOX }
 }

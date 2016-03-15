@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import Lightbox from './lightbox'
 import Map from './map'
 import Sidepane from './sidepane'
 import Timeline from './timeline'
@@ -41,6 +42,8 @@ class App extends React.Component {
         selectEvent={(ev) => { dispatch(selectEvent(ev)) }}
         openEventsSidepane={() => { dispatch(selectEvent(this.props.events.items)) }} />
 
+      <Lightbox lightbox={this.props.lightbox} closeLightbox={() => { dispatch(closeLightbox()) }} />
+
     </div>
   }
 }
@@ -50,7 +53,8 @@ function select(state) {
     app: state.app,
     events: state.events,
     timeline: state.timeline,
-    sidepane: state.sidepane
+    sidepane: state.sidepane,
+    lightbox: state.lightbox
   }
 }
 

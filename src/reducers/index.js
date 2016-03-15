@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
 import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS,
   ZOOM_TIMELINE, START_DRAG_TIMELINE, ON_DRAG_TIMELINE, END_DRAG_TIMELINE,
-  HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT } from '../actions'
+  HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT,
+  OPEN_LIGHTBOX, CLOSE_LIGHTBOX } from '../actions'
 
 function app(state = { hover: [], selected: [] }, action) {
   switch (action.type) {
@@ -77,11 +78,23 @@ function sidepane(state = { }, action) {
   }
 }
 
+function lightbox(state = { media: null }, action) {
+  switch (action.type) {
+    case OPEN_LIGHTBOX:
+      return Object.assign({}, state, { media: action.media })
+    case CLOSE_LIGHTBOX:
+      return Object.assign({}, state, { media: null })
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   app,
   events,
   timeline,
-  sidepane
+  sidepane,
+  lightbox
 })
 
 export default rootReducer

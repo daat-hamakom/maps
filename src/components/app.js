@@ -6,7 +6,7 @@ import Map from './map'
 import Sidepane from './sidepane'
 import Timeline from './timeline'
 import { fetchEvents, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline,
-  hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent } from '../actions'
+  hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent, closeLightbox, openLightbox } from '../actions'
 
 import '../styles/app.scss'
 
@@ -40,7 +40,8 @@ class App extends React.Component {
       <Sidepane app={this.props.app} sidepane={this.props.sidepane}
         closeSidepane={() => { dispatch(deselectEvent()) }}
         selectEvent={(ev) => { dispatch(selectEvent(ev)) }}
-        openEventsSidepane={() => { dispatch(selectEvent(this.props.events.items)) }} />
+        openEventsSidepane={() => { dispatch(selectEvent(this.props.events.items)) }}
+        selectMedia={(m) => { dispatch(openLightbox(m)) }} />
 
       <Lightbox lightbox={this.props.lightbox} closeLightbox={() => { dispatch(closeLightbox()) }} />
 

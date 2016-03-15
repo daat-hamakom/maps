@@ -57,7 +57,11 @@ class EventPane extends React.Component {
       }</span>
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
       {ev.media.filter((m) => m.type == 'image').length ?
-        <img src={ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+        <img src={ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
+          onClick={() => {
+            this.props.selectMedia(ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file)}
+          }>
+        </img>
         : <img src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
       }
 
@@ -116,7 +120,7 @@ class Sidepane extends React.Component {
     return <div id='sidepane' className={evs.length > 0 ? 'open' : 'closed'}>
       <SidepaneButton openEventsSidepane={this.props.openEventsSidepane} />
       {evs.length == 1
-        ? <EventPane  app={this.props.app} sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} />
+        ? <EventPane  app={this.props.app} sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} selectMedia={this.props.selectMedia} />
         : <EventsPane app={this.props.app} sidepane={this.props.sidepane} selectEvent={this.props.selectEvent} closeSidepane={this.props.closeSidepane} />
       }
     </div>

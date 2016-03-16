@@ -188,6 +188,15 @@ body {
                 audio {
                     width: 100%;
                 }
+                div.youtube-cover {
+                    img.youtube-thumb {
+                        width: 250px;
+                    }
+                    img.youtube-play {
+                        position: absolute;
+                        left: 0px;
+                    }
+                }
             }
             div.event {
                 padding-top: 10px;

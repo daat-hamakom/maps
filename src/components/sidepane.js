@@ -77,12 +77,12 @@ class EventPane extends React.Component {
         )}
         {ev.media.filter((m) => m.type == 'link' && m.url.indexOf('youtube') !== -1).map((m) => {
             const yturl = m.url.replace('watch', 'embed').replace('/v', '/embed')
-            return <iframe allowFullScreen="allowfullscreen" frameBorder="0" src={yturl} width="250"
-              // onClick={(e) => {
-              //   e.stopPropagation()
-              //   e.preventDefault()
-              // }}
-            ></iframe>
+            return <div className='youtube-cover' onClick={() => {
+              this.props.selectMedia('youtube', yturl)
+            }}>
+              <img src='http://img.youtube.com/vi/693o0sd9z_4/0.jpg' className='youtube-thumb'></img>
+              <img className='youtube-play' src='/static/img/play.png'></img>
+            </div>
           }
         )}
         <div className='description' dangerouslySetInnerHTML={{__html: ev.description}}></div>

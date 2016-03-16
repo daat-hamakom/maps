@@ -59,7 +59,7 @@ class EventPane extends React.Component {
       {ev.media.filter((m) => m.type == 'image').length ?
         <img src={ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
           onClick={() => {
-            this.props.selectMedia(ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file)}
+            this.props.selectMedia('image', ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file)}
           }>
         </img>
         : <img src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
@@ -77,7 +77,12 @@ class EventPane extends React.Component {
         )}
         {ev.media.filter((m) => m.type == 'link' && m.url.indexOf('youtube') !== -1).map((m) => {
             const yturl = m.url.replace('watch', 'embed').replace('/v', '/embed')
-            return <iframe allowFullScreen="allowfullscreen" frameBorder="0" src={yturl} width="250"></iframe>
+            return <iframe allowFullScreen="allowfullscreen" frameBorder="0" src={yturl} width="250"
+              // onClick={(e) => {
+              //   e.stopPropagation()
+              //   e.preventDefault()
+              // }}
+            ></iframe>
           }
         )}
         <div className='description' dangerouslySetInnerHTML={{__html: ev.description}}></div>

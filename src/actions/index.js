@@ -86,8 +86,8 @@ export function deselectEvent() {
   return { type: DESELECT_EVENT }
 }
 
-export function openLightbox(media) {
-  return { type: OPEN_LIGHTBOX, media: media }
+export function openLightbox(mtype, media) {
+  return { type: OPEN_LIGHTBOX, mtype: mtype, media: media }
 }
 
 export function closeLightbox() {

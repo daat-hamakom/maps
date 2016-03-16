@@ -75,7 +75,7 @@ class EventPane extends React.Component {
             <source src={m.file} type="audio/mpeg"/>
           </audio>
         )}
-        {ev.media.filter((m) => m.type == 'link' && m.url.contains('youtube')).map((m) => {
+        {ev.media.filter((m) => m.type == 'link' && m.url.indexOf('youtube') !== -1).map((m) => {
             const yturl = m.url.replace('watch', 'embed').replace('/v', '/embed')
             return <iframe allowFullScreen="allowfullscreen" frameBorder="0" src={yturl} width="250"></iframe>
           }

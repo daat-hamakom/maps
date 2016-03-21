@@ -4,6 +4,10 @@ export const REQUEST_EVENTS = 'REQUEST_EVENTS'
 export const REQUEST_EVENTS_FAIL = 'REQUEST_EVENTS_FAIL'
 export const REQUEST_EVENTS_SUCCESS = 'REQUEST_EVENTS_SUCCESS'
 
+export const REQUEST_PROJECTS = 'REQUEST_PROJECTS'
+export const REQUEST_PROJECTS_FAIL = 'REQUEST_PROJECTS_FAIL'
+export const REQUEST_PROJECTS_SUCCESS = 'REQUEST_PROJECTS_SUCCESS'
+
 export const ZOOM_TIMELINE = 'ZOOM_TIMELINE'
 
 export const START_DRAG_TIMELINE = 'START_DRAG_TIMELINE'
@@ -42,6 +46,34 @@ export function fetchEvents() {
       )
       .catch(ex =>
         dispatch(requestEventsFail())
+      )
+  }
+}
+
+export function requestProjects() {
+  return { type: REQUEST_PROJECTS }
+}
+
+export function requestProjectsFail() {
+  return { type: REQUEST_PROJECTS_FAIL }
+}
+
+export function requestProjectsSuccess(items) {
+  return { type: REQUEST_PROJECTS_SUCCESS, items: items }
+}
+
+export function fetchProjects() {
+  return dispatch => {
+    dispatch(requestProjects())
+    return fetch('https://daat-hamakom-data.herokuapp.com/api/projects/')
+      .then(response =>
+        response.json()
+      )
+      .then(json =>
+        dispatch(requestProjectsSuccess(json))
+      )
+      .catch(ex =>
+        dispatch(requestProjectsFail())
       )
   }
 }

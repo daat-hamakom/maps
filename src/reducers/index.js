@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS,
+  REQUEST_PROJECTS, REQUEST_PROJECTS_FAIL, REQUEST_PROJECTS_SUCCESS,
   ZOOM_TIMELINE, START_DRAG_TIMELINE, ON_DRAG_TIMELINE, END_DRAG_TIMELINE,
   HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT,
   OPEN_LIGHTBOX, CLOSE_LIGHTBOX } from '../actions'
@@ -26,6 +27,19 @@ function events(state = { fetching: false, items: [] }, action) {
     case REQUEST_EVENTS_FAIL:
       return Object.assign({}, state, { fetching: false })
     case REQUEST_EVENTS_SUCCESS:
+      return Object.assign({}, state, { fetching: false, items: action.items })
+    default:
+      return state
+  }
+}
+
+function projects(state = { fetching: false, items: [] }, action) {
+  switch (action.type) {
+    case REQUEST_PROJECTS:
+      return Object.assign({}, state, { fetching: true })
+    case REQUEST_PROJECTS_FAIL:
+      return Object.assign({}, state, { fetching: false })
+    case REQUEST_PROJECTS_SUCCESS:
       return Object.assign({}, state, { fetching: false, items: action.items })
     default:
       return state
@@ -92,6 +106,7 @@ function lightbox(state = { mtype: null, media: null }, action) {
 const rootReducer = combineReducers({
   app,
   events,
+  projects,
   timeline,
   sidepane,
   lightbox

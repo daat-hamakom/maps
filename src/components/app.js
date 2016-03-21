@@ -5,7 +5,7 @@ import Lightbox from './lightbox'
 import Map from './map'
 import Sidepane from './sidepane'
 import Timeline from './timeline'
-import { fetchEvents, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline,
+import { fetchEvents, fetchProjects, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline,
   hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent, closeLightbox, openLightbox } from '../actions'
 
 import '../styles/app.scss'
@@ -15,6 +15,7 @@ class App extends React.Component {
   componentDidMount () {
     const { dispatch } = this.props
     dispatch(fetchEvents())
+    dispatch(fetchProjects())
   }
 
   render () {

@@ -2,7 +2,7 @@ import moment from 'moment'
 import React from 'react'
 
 function _cleanDates (ds, de) {
-    let sd = moment(ds.replace('-00', '').replace('-00', ''))
+    let sd = moment(ds.replace('-00', '').replace('-00', ''), 'YYYY-MM-DD')
     if (ds.includes('-00-')) {
       sd = sd.format('YYYY')
     }
@@ -15,7 +15,7 @@ function _cleanDates (ds, de) {
 
     let ed = ''
     if (de != '') {
-      ed = moment(de.replace('-00', '').replace('-00', ''))
+      ed = moment(de.replace('-00', '').replace('-00', ''), 'YYYY-MM-DD')
       if (de.includes('-00-')) {
         ed = ed.format('YYYY')
       }

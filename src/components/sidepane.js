@@ -66,7 +66,7 @@ class EventPane extends React.Component {
       }
 
       <div className='content'>
-        <h3 className='project'>{ev.project}</h3>
+        <h3 className='project'>{this.props.projects.items.find((p) => p.id == ev.project).title}</h3>
         <h2 className='title'>{ev.title}</h2>
         <div className='place'>{ev.place.name}</div>
         <div className='date'>{_cleanDates(ev.start_date, ev.end_date)}</div>
@@ -111,7 +111,7 @@ class EventsPane extends React.Component {
           <img src={e.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
         </span>
         <span className="event-data">
-          <div className='project'>{e.project}</div>
+          <div className='project'>{this.props.projects.items.find((p) => p.id == e.project).title}</div>
           <div className='title'>{e.title}</div>
           <div className='date'>{_cleanDates(e.start_date, e.end_date)}</div>
         </span>
@@ -128,8 +128,8 @@ class Sidepane extends React.Component {
     return <div id='sidepane' className={evs.length > 0 ? 'open' : 'closed'}>
       <SidepaneButton openEventsSidepane={this.props.openEventsSidepane} />
       {evs.length == 1
-        ? <EventPane  app={this.props.app} sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} selectMedia={this.props.selectMedia} />
-        : <EventsPane app={this.props.app} sidepane={this.props.sidepane} selectEvent={this.props.selectEvent} closeSidepane={this.props.closeSidepane} />
+        ? <EventPane  app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} selectMedia={this.props.selectMedia} />
+        : <EventsPane app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane} selectEvent={this.props.selectEvent} closeSidepane={this.props.closeSidepane} />
       }
     </div>
   }

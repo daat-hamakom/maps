@@ -38,7 +38,7 @@ class App extends React.Component {
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev)) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }} />
 
-      <Sidepane app={this.props.app} sidepane={this.props.sidepane}
+      <Sidepane app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane}
         closeSidepane={() => { dispatch(deselectEvent()) }}
         selectEvent={(ev) => { dispatch(selectEvent(ev)) }}
         openEventsSidepane={() => { dispatch(selectEvent(this.props.events.items)) }}
@@ -54,6 +54,7 @@ function select(state) {
   return {
     app: state.app,
     events: state.events,
+    projects: state.projects,
     timeline: state.timeline,
     sidepane: state.sidepane,
     lightbox: state.lightbox

@@ -12,11 +12,15 @@ def merge_styles(styles):
     merged = j1
     for layer in merged['layers']:
         layer['id'] = '{}-{}'.format(j1['id'], layer['id'])
+        if 'ref' in layer:
+            layer['ref'] = '{}-{}'.format(j1['id'], layer['ref'])
         if 'metadata' in layer:
             del layer['metadata']
 
     for layer in j2['layers']:
         layer['id'] = '{}-{}'.format(j2['id'], layer['id'])
+        if 'ref' in layer:
+            layer['ref'] = '{}-{}'.format(j2['id'], layer['ref'])
         merged['layers'].append(layer)
         if 'metadata' in layer:
             del layer['metadata']

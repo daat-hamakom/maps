@@ -16,8 +16,8 @@ def merge_styles(styles):
         layer['id'] = '{}-{}'.format(j1_name, layer['id'])
         if 'ref' in layer:
             layer['ref'] = '{}-{}'.format(j1_name, layer['ref'])
-        layer["metadata"] = {
-            "mapbox:group": "1452119469254.1111"
+        layer['metadata'] = {
+            'mapbox:group': j1_name
         }
 
     for layer in j2['layers']:
@@ -25,8 +25,8 @@ def merge_styles(styles):
         if 'ref' in layer:
             layer['ref'] = '{}-{}'.format(j2_name, layer['ref'])
         merged['layers'].append(layer)
-        layer["metadata"] = {
-            "mapbox:group": "1452207014560.2222"
+        layer['metadata'] = {
+            'mapbox:group': j2_name
         }
 
     for name, source in j2['sources'].items():
@@ -34,15 +34,15 @@ def merge_styles(styles):
             merged['sources'][name] = source
 
 
-    merged["metadata"] = {
-        "mapbox:groups": {
-            "1452119469254.1111": {
-                "name": j1_name,
-                "collapsed": False
+    merged['metadata'] = {
+        'mapbox:groups': {
+            j1_name: {
+                'name': j1_name,
+                'collapsed': False
             },
-            "1452207014560.2222": {
-                "name": j2_name,
-                "collapsed": False
+            j2_name: {
+                'name': j2_name,
+                'collapsed': False
             }
         }
     }

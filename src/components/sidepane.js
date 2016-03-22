@@ -76,7 +76,7 @@ class EventPane extends React.Component {
           </audio>
         )}
         {ev.media.filter((m) => m.type == 'link' && m.url.indexOf('youtube') !== -1).map((m) => {
-            const yturl = m.url.replace('watch', 'embed').replace('/v', '/embed')
+            const yturl = m.url.replace('watch', 'embed').replace('/v', '/embed').replace('?v=', '/')
             console.log(yturl)
             const ytid = /(embed\/|v=)([A-Za-z0-9_-]{11})/.exec(yturl)[2]
             const thumburl = 'http://img.youtube.com/vi/' + ytid + '/0.jpg'

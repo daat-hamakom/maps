@@ -88,7 +88,7 @@ class EventPane extends React.Component {
             </div>
           }
         )}
-        <div className='description' dangerouslySetInnerHTML={{__html: ev.description}}></div>
+        <div className='description' dangerouslySetInnerHTML={{__html: ev.description.replace(/a href/g, 'a target="_blank" href')}}></div>
       </div>
     </div>
   }

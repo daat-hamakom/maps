@@ -16,18 +16,36 @@ def merge_styles(styles):
         layer['id'] = '{}-{}'.format(j1_name, layer['id'])
         if 'ref' in layer:
             layer['ref'] = '{}-{}'.format(j1_name, layer['ref'])
-        if 'metadata' in layer:
-            del layer['metadata']
+        layer["metadata"] = {
+            "mapbox:group": "1452119469254.1111"
+        }
 
     for layer in j2['layers']:
         layer['id'] = '{}-{}'.format(j2_name, layer['id'])
         if 'ref' in layer:
             layer['ref'] = '{}-{}'.format(j2_name, layer['ref'])
         merged['layers'].append(layer)
-        if 'metadata' in layer:
-            del layer['metadata']
+        layer["metadata"] = {
+            "mapbox:group": "1452207014560.2222"
+        }
 
-    del merged['metadata']
+    for name, source in j2['sources'].items():
+        if not name in merged['sources']:
+            merged['sources'][name] = source
+
+
+    merged["metadata"] = {
+        "mapbox:groups": {
+            "1452119469254.1111": {
+                "name": j1_name,
+                "collapsed": False
+            },
+            "1452207014560.2222": {
+                "name": j2_name,
+                "collapsed": False
+            }
+        }
+    }
 
     with open('merged.json', 'w') as f:
         json.dump(merged, f, indent=4)

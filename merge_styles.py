@@ -6,21 +6,23 @@ import sys
 def merge_styles(styles):
     with open(styles[0], 'r') as s1:
         j1 = json.load(s1)
+        j1_name = s1.name.split('.')[0].split('/')[-1]
     with open(styles[1], 'r') as s2:
         j2 = json.load(s2)
+        j2_name = s2.name.split('.')[0].split('/')[-1]
 
     merged = j1
     for layer in merged['layers']:
-        layer['id'] = '{}-{}'.format(j1['id'], layer['id'])
+        layer['id'] = '{}-{}'.format(j1_name, layer['id'])
         if 'ref' in layer:
-            layer['ref'] = '{}-{}'.format(j1['id'], layer['ref'])
+            layer['ref'] = '{}-{}'.format(j1_name, layer['ref'])
         if 'metadata' in layer:
             del layer['metadata']
 
     for layer in j2['layers']:
-        layer['id'] = '{}-{}'.format(j2['id'], layer['id'])
+        layer['id'] = '{}-{}'.format(j2_name, layer['id'])
         if 'ref' in layer:
-            layer['ref'] = '{}-{}'.format(j2['id'], layer['ref'])
+            layer['ref'] = '{}-{}'.format(j2_name, layer['ref'])
         merged['layers'].append(layer)
         if 'metadata' in layer:
             del layer['metadata']

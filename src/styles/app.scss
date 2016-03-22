@@ -25,9 +25,9 @@ body {
         }
         div.mapboxgl-popup {
             width: 60px;
-            height: 100px;
-            margin-top: -91px;
+            margin-top: -87px;
             margin-left: 3px;
+            position: absolute;
             div.icon {
                 height: 52px;
                 width: 52px;
@@ -45,15 +45,18 @@ body {
                 width: 1px;
                 background-color: #19d1e7;
                 height: 10px;
-                margin-top: 0px;
-                margin-left: 26px;
+                position: absolute;
+                top: 52px;
+                left: 26px;
             }
             div.dot {
                 width: 9px;
                 height: 9px;
-                margin-left: 22px;
                 background-color: #19d1e7;
                 border-radius: 50%;
+                position: absolute;
+                top: 59px;
+                left: 22px;
             }
         }
     }

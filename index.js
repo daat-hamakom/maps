@@ -23,7 +23,9 @@ const store = createStoreWithMiddleware(rootReducer)
 ReactDOM.render((
   <Provider store={store}>
     <Router>
-      <Route path='/' component={App}/>
+      <Route path='/' component={App}>
+        <Route path='/project/:projId' component={App}/>
+      </Route>
       <Route path='about' component={About}/>
     </Router>
   </Provider>

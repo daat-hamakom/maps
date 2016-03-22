@@ -34,10 +34,14 @@ export function requestEventsSuccess(items) {
   return { type: REQUEST_EVENTS_SUCCESS, items: items }
 }
 
-export function fetchEvents() {
+export function fetchEvents(projId) {
   return dispatch => {
     dispatch(requestEvents())
-    return fetch('https://daat-hamakom-data.herokuapp.com/api/events/')
+    let url = 'https://daat-hamakom-data.herokuapp.com/api/events/'
+    if (projId) {
+      url = url + '?project=' + projId
+    }
+    return fetch(url)
       .then(response =>
         response.json()
       )

@@ -28,6 +28,7 @@ class GLMap extends React.Component {
     mapboxgl.accessToken = this.props.token
     this.map = new mapboxgl.Map(this.props.view)
     this.markers = false
+    this.resized = false
   }
 
   initMap() {
@@ -225,6 +226,12 @@ class GLMap extends React.Component {
 
     this.checkSelectAndHover('select', prevProps.app.selected, this.props.app.selected)
     this.checkSelectAndHover('hover', prevProps.app.hover, this.props.app.hover)
+
+    if (!this.resized) {
+      // resize on load to fit to initial dimensions
+      this.map.resize()
+      this.resized = true
+    }
   }
 
   componentWillUnmount () {

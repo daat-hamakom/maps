@@ -177,6 +177,10 @@ class GLMap extends React.Component {
       })
     })
 
+    // final resize attempt
+    this.map.resize()
+    this.resized = true
+
   }
 
   handleSelected (t) {
@@ -228,10 +232,10 @@ class GLMap extends React.Component {
     this.checkSelectAndHover('hover', prevProps.app.hover, this.props.app.hover)
 
     if (!this.resized) {
-      // resize on load to fit to initial dimensions
+      // trigger resize as long as we haven't completed map init yet
       this.map.resize()
-      this.resized = true
     }
+
   }
 
   componentWillUnmount () {

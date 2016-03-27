@@ -24,11 +24,25 @@ class GLMap extends React.Component {
     })
   }
 
+  switchLayers (layerPrefix, force = false) {
+    if (this.currentStyle == layerPrefix && !force)
+      return
+
+    const markerLayers = ['markers', 'clusters', 'cluster-count']
+    Object.keys(this.map.style._layers).forEach((l) => {
+      if (markerLayers.indexOf(l) == -1)
+        this.map.setLayoutProperty(l, 'visibility', l.indexOf(layerPrefix + '-') == 0 ? 'visible' : 'none')
+    })
+    this.currentStyle = layerPrefix
+  }
+
   componentDidMount () {
     mapboxgl.accessToken = this.props.token
     this.map = new mapboxgl.Map(this.props.view)
     this.markers = false
     this.resized = false
+    this.currentStyle = 'init'
+    this.switchLayers('default', true)
   }
 
   initMap() {
@@ -177,6 +191,8 @@ class GLMap extends React.Component {
       })
     })
 
+    this.switchLayers('default', true)
+
     // final resize attempt
     this.map.resize()
     this.resized = true
@@ -190,6 +206,10 @@ class GLMap extends React.Component {
     if (t == 'hover') {
       ev = this.props.app.hover[0]
       popup = this.hover_popup
+    }
+    else {
+      // test preindustrial style on Tripoli events
+      this.switchLayers(ev.place.name == 'Tripoli, Libya' ? 'preindustrial' : 'default')
     }
 
     popup.setLngLat(ev.place.position.split(',').map(x => +x).reverse())
@@ -254,7 +274,7 @@ class GLMap extends React.Component {
 
 class Map extends React.Component {
   render () {
-    const view = { style: 'mapbox://styles/mushon/cijzh8i5u0101bmkvm2sxj5l0', center: [35, 31], zoom: 3, container: 'map' }
+    const view = { style: 'mapbox://styles/mushon/cim3s6ylu00z3bkkkhpqjfrw8', center: [35, 31], zoom: 3, container: 'map' }
     return <GLMap view={view} token={appconf.token.map} app={this.props.app} events={this.props.events}
       hoverEnterEvent={this.props.hoverEnterEvent}
       hoverExitEvent={this.props.hoverExitEvent}

@@ -264,6 +264,7 @@ class GLMap extends React.Component {
 
   render () {
     return <div id='map-container'>
+      <h1 className='title'>Where & When of Jewish Culture</h1>
       <div id='map' className={this.state.rectzoom ? 'rectzoom' : 'norectzoom'} onKeyDown={(e) => {
         if (e.key = 'Shift') this.setState({ rectzoom: true })
       }} onKeyUp={(e) => {

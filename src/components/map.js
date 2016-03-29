@@ -263,11 +263,26 @@ class GLMap extends React.Component {
   }
 
   render () {
-    return <div id='map' className={this.state.rectzoom ? 'rectzoom' : 'norectzoom'} onKeyDown={(e) => {
-      if (e.key = 'Shift') this.setState({ rectzoom: true })
-    }} onKeyUp={(e) => {
-      if (e.key = 'Shift') this.setState({ rectzoom: false })
-    }}></div>
+    return <div id='map-container'>
+      <div id='map' className={this.state.rectzoom ? 'rectzoom' : 'norectzoom'} onKeyDown={(e) => {
+        if (e.key = 'Shift') this.setState({ rectzoom: true })
+      }} onKeyUp={(e) => {
+        if (e.key = 'Shift') this.setState({ rectzoom: false })
+      }}></div>
+      <div id='map-controls'>
+        <ul>
+          <li onClick={(e) => {
+            this.map.setZoom(this.map.getZoom() + 0.5)
+          }}><img src="/static/img/zoom-in.png"></img></li>
+          <li onClick={(e) => {
+            this.map.setZoom(this.map.getZoom() - 0.5)
+          }}><img src="/static/img/zoom-out.png"></img></li>
+          <li onClick={(e) => {
+            this.map.setBearing(0)
+          }}><img src="/static/img/orient-map.png"></img></li>
+        </ul>
+      </div>
+    </div>
   }
 
 }

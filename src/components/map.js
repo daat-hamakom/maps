@@ -30,8 +30,33 @@ class GLMap extends React.Component {
 
     const markerLayers = ['markers', 'clusters', 'cluster-count']
     Object.keys(this.map.style._layers).forEach((l) => {
-      if (markerLayers.indexOf(l) == -1)
-        this.map.setLayoutProperty(l, 'visibility', l.indexOf(layerPrefix + '-') == 0 ? 'visible' : 'none')
+      if (markerLayers.indexOf(l) == -1) {
+        const layer = this.map.getLayer(l)
+        switch (layer.type) {
+          case 'background':
+            this.map.setPaintProperty(l, 'background-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
+            break
+          case 'fill':
+            this.map.setPaintProperty(l, 'fill-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
+            break
+          case 'line':
+            this.map.setPaintProperty(l, 'line-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
+            break
+          case 'symbol':
+            // no special handling for symbol layers
+            this.map.setLayoutProperty(l, 'visibility', l.indexOf(layerPrefix + '-') == 0 ? 'visible' : 'none')
+            break
+          case 'raster':
+            this.map.setPaintProperty(l, 'raster-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
+            break
+          case 'circle':
+            this.map.setPaintProperty(l, 'circle-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
+            break
+          default:
+            this.map.setLayoutProperty(l, 'visibility', l.indexOf(layerPrefix + '-') == 0 ? 'visible' : 'none')
+            break
+        }
+      }
     })
     this.currentStyle = layerPrefix
   }

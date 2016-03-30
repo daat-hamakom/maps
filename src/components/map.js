@@ -7,6 +7,15 @@ import appconf from '../../config/client'
 require('script!mapbox-gl/dist/mapbox-gl.js')
 /*global mapboxgl*/
 
+const OPACITY_DICT = {
+  'background': ['background-opacity'],
+  'fill': ['fill-opacity'],
+  'line': ['line-opacity'],
+  'symbol': ['icon-opacity', 'text-opacity'],
+  'raster': ['raster-opacity'],
+  'circle': ['circle-opacity']
+}
+
 class GLMap extends React.Component {
 
   // Adapted from Tim Welch's code that can be found at
@@ -24,6 +33,8 @@ class GLMap extends React.Component {
     })
   }
 
+
+
   switchLayers (layerPrefix, force = false) {
     if (this.currentStyle == layerPrefix && !force)
       return
@@ -32,30 +43,16 @@ class GLMap extends React.Component {
     Object.keys(this.map.style._layers).forEach((l) => {
       if (markerLayers.indexOf(l) == -1) {
         const layer = this.map.getLayer(l)
-        switch (layer.type) {
-          case 'background':
-            this.map.setPaintProperty(l, 'background-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
-            break
-          case 'fill':
-            this.map.setPaintProperty(l, 'fill-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
-            break
-          case 'line':
-            this.map.setPaintProperty(l, 'line-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
-            break
-          case 'symbol':
-            this.map.setPaintProperty(l, 'text-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
-            this.map.setPaintProperty(l, 'icon-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
-            break
-          case 'raster':
-            this.map.setPaintProperty(l, 'raster-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
-            break
-          case 'circle':
-            this.map.setPaintProperty(l, 'circle-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
-            break
-          default:
-            this.map.setLayoutProperty(l, 'visibility', l.indexOf(layerPrefix + '-') == 0 ? 'visible' : 'none')
-            break
-        }
+        const oprops = OPACITY_DICT[layer.type]
+        const show = l.indexOf(layerPrefix + '-') == 0
+        oprops.forEach((p) => {
+          let opacity = show ? 1 : 0
+          const origval = layer.metadata['orig-' + p]
+          if (show && origval) {
+            opacity = origval
+          }
+          this.map.setPaintProperty(l, p, opacity)
+        })
       }
     })
     this.currentStyle = layerPrefix
@@ -300,7 +297,7 @@ class GLMap extends React.Component {
 
 class Map extends React.Component {
   render () {
-    const view = { style: 'mapbox://styles/mushon/cim3s6ylu00z3bkkkhpqjfrw8', center: [35, 31], zoom: 3, container: 'map' }
+    const view = { style: 'mapbox://styles/mushon/cimez8r6k00plbolzpmeovm8l', center: [35, 31], zoom: 3, container: 'map' }
     return <GLMap view={view} token={appconf.token.map} app={this.props.app} events={this.props.events}
       hoverEnterEvent={this.props.hoverEnterEvent}
       hoverExitEvent={this.props.hoverExitEvent}

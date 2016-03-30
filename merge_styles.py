@@ -46,7 +46,7 @@ def process_layer(alllayers, prefix, layer, default=False):
                     import pdb; pdb.set_trace()
             ltype = reflayer['type']
         for op in OPACITY_DICT[ltype]:
-            layer[op] = 0
+            layer['paint'][op] = 0
     return layer
 
 

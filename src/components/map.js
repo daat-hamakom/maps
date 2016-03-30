@@ -33,8 +33,6 @@ class GLMap extends React.Component {
     })
   }
 
-
-
   switchLayers (layerPrefix, force = false) {
     if (this.currentStyle == layerPrefix && !force)
       return

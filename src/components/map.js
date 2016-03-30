@@ -48,7 +48,7 @@ class GLMap extends React.Component {
         oprops.forEach((p) => {
           let opacity = show ? 1 : 0
           const origval = layer.metadata['orig-' + p]
-          if (show && origval) {
+          if (show && (origval !== undefined)) {
             opacity = origval
           }
           this.map.setPaintProperty(l, p, opacity)

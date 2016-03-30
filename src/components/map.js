@@ -43,8 +43,8 @@ class GLMap extends React.Component {
             this.map.setPaintProperty(l, 'line-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
             break
           case 'symbol':
-            // no special handling for symbol layers
-            this.map.setLayoutProperty(l, 'visibility', l.indexOf(layerPrefix + '-') == 0 ? 'visible' : 'none')
+            this.map.setPaintProperty(l, 'text-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
+            this.map.setPaintProperty(l, 'icon-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
             break
           case 'raster':
             this.map.setPaintProperty(l, 'raster-opacity', l.indexOf(layerPrefix + '-') == 0 ? 1 : 0)
@@ -68,6 +68,7 @@ class GLMap extends React.Component {
     this.resized = false
     this.currentStyle = 'init'
     this.switchLayers('default', true)
+    window.map = this.map
   }
 
   initMap() {

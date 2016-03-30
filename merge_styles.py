@@ -2,6 +2,7 @@
 import json
 import sys
 
+from copy import deepcopy
 from itertools import chain
 
 OPACITY_DICT = {
@@ -40,10 +41,7 @@ def process_layer(alllayers, prefix, layer, default=False):
             try:
                 reflayer = list(filter(lambda l: l['id'] == ref, alllayers))[0]
             except:
-                try:
-                    reflayer = list(filter(lambda l: l['id'] == refname, alllayers))[0]
-                except:
-                    import pdb; pdb.set_trace()
+                reflayer = list(filter(lambda l: l['id'] == refname, alllayers))[0]
             ltype = reflayer['type']
         for op in OPACITY_DICT[ltype]:
             layer['paint'][op] = 0
@@ -58,7 +56,7 @@ def merge_styles(styles):
         j2 = json.load(s2)
         j2_name = s2.name.split('.')[0].split('/')[-1]
 
-    merged = j1
+    merged = deepcopy(j1)
     merged['layers'] = []
 
     for layer in j1['layers']:

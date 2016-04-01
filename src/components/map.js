@@ -61,8 +61,8 @@ class GLMap extends React.Component {
     this.map = new mapboxgl.Map(this.props.view)
     this.markers = false
     this.resized = false
-    this.currentStyle = 'init'
-    this.switchLayers('default', true)
+    this.currentStyle = 'default'
+    // this.switchLayers('default')
     window.map = this.map
   }
 

@@ -7,6 +7,15 @@ import appconf from '../../config/client'
 require('script!mapbox-gl/dist/mapbox-gl.js')
 /*global mapboxgl*/
 
+const OPACITY_DICT = {
+  'background': ['background-opacity'],
+  'fill': ['fill-opacity'],
+  'line': ['line-opacity'],
+  'symbol': ['icon-opacity', 'text-opacity'],
+  'raster': ['raster-opacity'],
+  'circle': ['circle-opacity']
+}
+
 class GLMap extends React.Component {
 
   // Adapted from Tim Welch's code that can be found at
@@ -30,8 +39,19 @@ class GLMap extends React.Component {
 
     const markerLayers = ['markers', 'clusters', 'cluster-count']
     Object.keys(this.map.style._layers).forEach((l) => {
-      if (markerLayers.indexOf(l) == -1)
-        this.map.setLayoutProperty(l, 'visibility', l.indexOf(layerPrefix + '-') == 0 ? 'visible' : 'none')
+      if (markerLayers.indexOf(l) == -1) {
+        const layer = this.map.getLayer(l)
+        const oprops = OPACITY_DICT[layer.type]
+        const show = l.indexOf(layerPrefix + '-') == 0
+        oprops.forEach((p) => {
+          let opacity = show ? 1 : 0
+          const origval = layer.metadata['orig-' + p]
+          if (show && (origval !== undefined)) {
+            opacity = origval
+          }
+          this.map.setPaintProperty(l, p, opacity)
+        })
+      }
     })
     this.currentStyle = layerPrefix
   }
@@ -41,8 +61,9 @@ class GLMap extends React.Component {
     this.map = new mapboxgl.Map(this.props.view)
     this.markers = false
     this.resized = false
-    this.currentStyle = 'init'
-    this.switchLayers('default', true)
+    this.currentStyle = 'default'
+    // this.switchLayers('default')
+    window.map = this.map
   }
 
   initMap() {
@@ -290,7 +311,7 @@ class GLMap extends React.Component {
 
 class Map extends React.Component {
   render () {
-    const view = { style: 'mapbox://styles/mushon/cim3s6ylu00z3bkkkhpqjfrw8', center: [35, 31], zoom: 3, container: 'map' }
+    const view = { style: 'mapbox://styles/mushon/cimez8r6k00plbolzpmeovm8l', center: [35, 31], zoom: 3, container: 'map' }
     return <GLMap view={view} token={appconf.token.map} app={this.props.app} events={this.props.events}
       hoverEnterEvent={this.props.hoverEnterEvent}
       hoverExitEvent={this.props.hoverExitEvent}

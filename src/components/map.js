@@ -90,7 +90,7 @@ class GLMap extends React.Component {
 
     var sourceObj = new mapboxgl.GeoJSONSource({
       'data': markerData,
-      'cluster': false,
+      'cluster': true,
       'clusterMaxZoom': 5
     })
 

@@ -92,12 +92,12 @@ function sidepane(state = { }, action) {
   }
 }
 
-function lightbox(state = { mtype: null, media: null }, action) {
+function lightbox(state = { ev: null, selected: null }, action) {
   switch (action.type) {
     case OPEN_LIGHTBOX:
-      return Object.assign({}, state, { mtype: action.mtype, media: action.media })
+      return Object.assign({}, state, { ev: action.ev, selected: action.selected })
     case CLOSE_LIGHTBOX:
-      return Object.assign({}, state, { mtype: null, media: null })
+      return Object.assign({}, state, { ev: null, selected: null })
     default:
       return state
   }

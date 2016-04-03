@@ -58,10 +58,7 @@ class EventPane extends React.Component {
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
       {ev.media.filter((m) => m.type == 'image').length ?
         <img src={ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
-          onClick={() => {
-            this.props.selectMedia('image', ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_l.jpg')}
-          }>
-        </img>
+          onClick={() => { this.props.selectMedia(ev, this.state.selected_media) }}></img>
         : <img src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
       }
 

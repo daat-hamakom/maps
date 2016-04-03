@@ -122,8 +122,8 @@ export function deselectEvent() {
   return { type: DESELECT_EVENT }
 }
 
-export function openLightbox(mtype, media) {
-  return { type: OPEN_LIGHTBOX, mtype: mtype, media: media }
+export function openLightbox(ev, selected) {
+  return { type: OPEN_LIGHTBOX, ev: ev, selected: selected }
 }
 
 export function closeLightbox() {

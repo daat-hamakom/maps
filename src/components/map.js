@@ -151,65 +151,67 @@ class GLMap extends React.Component {
     this.hovering = false
 
     this.map.on('mousemove', (e) => {
-      this.map.featuresAt(e.point, {layer: 'markers', radius: 7, includeGeometry: true}, (err, features) => {
-        if (err || !features.length) {
-          if (this.hovering) {
-            this.hover_popup.remove()
-            this.props.hoverExitEvent()
-            this.hovering = false
-          }
+      const features = this.map.queryRenderedFeatures(e.point, { layers: ['markers']})
+      if (!features.length) {
+        if (this.hovering) {
+          this.hover_popup.remove()
+          this.props.hoverExitEvent()
+          this.hovering = false
+        }
+        return
+      }
+
+      if (!this.hovering) {
+
+        if (features[0].properties.cluster) {
           return
         }
 
-        if (!this.hovering) {
+        this.hovering = true
+        this.hover_popup.setLngLat(features[0].geometry.coordinates)
+          .setHTML('<div class="marker-popup">' +
+            '<div class="icon"><img src="' + features[0].properties.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_s.jpg' + '"></div>' +
+            '<div class="connector"></div>' +
+            '<div class="dot"></div>' +
+            '</div>')
+          .addTo(this.map)
 
-          if (features[0].properties.cluster) {
-            return
-          }
+        const featureIds = features.map((e) => e.properties.evid)
 
-          this.hovering = true
-          this.hover_popup.setLngLat(features[0].geometry.coordinates)
-            .setHTML('<div class="marker-popup">' +
-              '<div class="icon"><img src="' + features[0].properties.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_s.jpg' + '"></div>' +
-              '<div class="connector"></div>' +
-              '<div class="dot"></div>' +
-              '</div>')
-            .addTo(this.map)
+        this.props.hoverEnterEvent(this.props.events.items.filter(
+          (ev) => featureIds.includes(ev.id)
+        ))
 
-          const featureIds = features.map((e) => e.properties.evid)
-
-          this.props.hoverEnterEvent(this.props.events.items.filter(
+        // fugly hack to grab the click on the popup
+        this.hover_popup._content.onclick = (_e) => {
+          this.props.selectEvent(this.props.events.items.filter(
             (ev) => featureIds.includes(ev.id)
           ))
-
-          // fugly hack to grab the click on the popup
-          this.hover_popup._content.onclick = (_e) => {
-            this.props.selectEvent(this.props.events.items.filter(
-              (ev) => featureIds.includes(ev.id)
-            ))
-            this.props.hoverExitEvent()
-          }
+          this.props.hoverExitEvent()
         }
-      })
+      }
     })
 
     this.map.on('click', (e) => {
-      this.map.featuresAt(e.point, {
-        layer: 'markers', radius: 10, includeGeometry: true
-      }, (err, features) => {
 
-        if (err || !features.length)
-          return;
+      const features = this.map.queryRenderedFeatures(e.point, { layers: ['markers'] })
+      console.log('markers', features)
 
-        if (features[0].properties.cluster) {
-          // this.map.setCenter(features[0].geometry.coordinates)
-          // this.map.setZoom(6.5)
-        }
-        else {
-          // we never get here since the cli ck was caught on the hover_popup
-        }
 
-      })
+      const cfeatures = this.map.queryRenderedFeatures(e.point, { layers: ['clusters'] })
+      console.log('clusters', cfeatures)
+
+
+      if (!features.length)
+        return;
+
+      if (features[0].properties.cluster) {
+        // this.map.setCenter(features[0].geometry.coordinates)
+        // this.map.setZoom(6.5)
+      }
+      else {
+        // we never get here since the cli ck was caught on the hover_popup
+      }
     })
 
     this.switchLayers('default', true)

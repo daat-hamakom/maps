@@ -101,7 +101,13 @@ class EventsPane extends React.Component {
   }
 
   render () {
-    const evs = this.props.app.selected
+    const evs = this.props.app.selected.sort((a,b) => {
+      if (a.start_date < b.start_date)
+        return 1
+      if (a.start_date > b.start_date)
+        return -1
+      return 0
+    })
     return <div id='eventspane' className={evs.length > 0 ? 'open' : 'closed'} >
       <span className='close' onClick={this.props.closeSidepane}>X</span>
       {evs.map((e) => <div key={'list-event-' + e.id} className='event' onClick={() => {

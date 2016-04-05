@@ -279,11 +279,15 @@ body {
         div#lightbox-controls {
             span.prev-media {
                 color: white;
-                font-size: 2em;
+                font-size: 4em;
+                position: absolute;
+                left: 50px;
             }
             span.next-media {
                 color: white;
-                font-size: 2em;
+                font-size: 4em;
+                position: absolute;
+                right: 50px;
             }
             span.media-dots {
                 color: white;

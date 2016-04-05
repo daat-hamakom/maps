@@ -43,7 +43,7 @@ class Lightbox extends React.Component {
           }
           e.preventDefault()
           e.stopPropagation()
-        }}>❮</span>
+        }}>‹</span>
         <span className="media-dots">{this.props.lightbox.ev ? (this.props.lightbox.ev.media.map((m, i) => {
             return <span className={this.props.lightbox.selected == i ? 'media-dot selected' : 'media-dot'} key={i} onClick={(e) => {
               this.props.selectMedia(this.props.lightbox.ev, i)
@@ -58,7 +58,7 @@ class Lightbox extends React.Component {
           }
           e.preventDefault()
           e.stopPropagation()
-        }}>❯</span>
+        }}>›</span>
       </div>
     </div>
   }

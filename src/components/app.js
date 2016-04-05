@@ -45,7 +45,8 @@ class App extends React.Component {
         openEventsSidepane={() => { dispatch(selectEvent(this.props.events.items)) }}
         selectMedia={(t, m) => { dispatch(openLightbox(t, m)) }} />
 
-      <Lightbox lightbox={this.props.lightbox} closeLightbox={() => { dispatch(closeLightbox()) }} />
+      <Lightbox lightbox={this.props.lightbox} closeLightbox={() => { dispatch(closeLightbox()) }}
+        selectMedia={(t, m) => { dispatch(openLightbox(t, m)) }} />
 
     </div>
   }

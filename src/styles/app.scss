@@ -263,6 +263,7 @@ body {
         height: 100%;
         z-index: 1000;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         img {
@@ -271,6 +272,20 @@ body {
         }
         &.inactive {
             display: none;
+        }
+        div#media {
+            text-align: center;
+        }
+        div#lightbox-controls {
+            span.media-dots {
+                color: white;
+                span.media-dot {
+                    margin-left: 10px;
+                    &.selected {
+
+                    }
+                }
+            }
         }
     }
 }

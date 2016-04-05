@@ -277,6 +277,14 @@ body {
             text-align: center;
         }
         div#lightbox-controls {
+            span.prev-media {
+                color: white;
+                font-size: 2em;
+            }
+            span.next-media {
+                color: white;
+                font-size: 2em;
+            }
             span.media-dots {
                 color: white;
                 span.media-dot {

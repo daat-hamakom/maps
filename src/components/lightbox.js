@@ -37,6 +37,13 @@ class Lightbox extends React.Component {
         {active}
       </div>
       <div id='lightbox-controls'>
+        <span className="prev-media" onClick={(e) => {
+          if (this.props.lightbox.selected - 1 >= 0) {
+            this.props.selectMedia(this.props.lightbox.ev, this.props.lightbox.selected - 1)
+          }
+          e.preventDefault()
+          e.stopPropagation()
+        }}>❮</span>
         <span className="media-dots">{this.props.lightbox.ev ? (this.props.lightbox.ev.media.map((m, i) => {
             return <span className={this.props.lightbox.selected == i ? 'media-dot selected' : 'media-dot'} key={i} onClick={(e) => {
               this.props.selectMedia(this.props.lightbox.ev, i)
@@ -45,6 +52,13 @@ class Lightbox extends React.Component {
             }}>{this.props.lightbox.selected == i ? '●' : '○' }</span>
           })) : <span></span>
         }</span>
+        <span className="next-media"onClick={(e) => {
+          if (this.props.lightbox.selected + 1 < this.props.lightbox.ev.media.length) {
+            this.props.selectMedia(this.props.lightbox.ev, this.props.lightbox.selected + 1)
+          }
+          e.preventDefault()
+          e.stopPropagation()
+        }}>❯</span>
       </div>
     </div>
   }

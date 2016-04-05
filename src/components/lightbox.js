@@ -15,6 +15,18 @@ class LightboxYoutubeVideo extends React.Component {
 
 class Lightbox extends React.Component {
 
+  goLeft () {
+    if (this.props.lightbox.selected - 1 >= 0) {
+      this.props.selectMedia(this.props.lightbox.ev, this.props.lightbox.selected - 1)
+    }
+  }
+
+  goRight () {
+    if (this.props.lightbox.selected + 1 < this.props.lightbox.ev.media.length) {
+      this.props.selectMedia(this.props.lightbox.ev, this.props.lightbox.selected + 1)
+    }
+  }
+
   render () {
     let active = <div></div>
 
@@ -33,7 +45,12 @@ class Lightbox extends React.Component {
     }
 
     return <div id='lightbox' className={this.props.lightbox.ev ? 'active' : 'inactive'}
-      onClick={() => { this.props.closeLightbox() }}>
+      onClick={() => { this.props.closeLightbox() }}
+      onKeyDown={(e) => {
+        console.log(e)
+        if (e.keyCode == 37) this.goLeft()
+        else if (e.keyCode == 39) this.goRight()
+      }}>
       <div id='media'>
         {active}
       </div>
@@ -42,9 +59,7 @@ class Lightbox extends React.Component {
       </div>
       <div id='lightbox-controls'>
         <span className="prev-media" onClick={(e) => {
-          if (this.props.lightbox.selected - 1 >= 0) {
-            this.props.selectMedia(this.props.lightbox.ev, this.props.lightbox.selected - 1)
-          }
+          this.goLeft()
           e.preventDefault()
           e.stopPropagation()
         }}>‹</span>
@@ -57,9 +72,7 @@ class Lightbox extends React.Component {
           })) : <span></span>
         }</span>
         <span className="next-media"onClick={(e) => {
-          if (this.props.lightbox.selected + 1 < this.props.lightbox.ev.media.length) {
-            this.props.selectMedia(this.props.lightbox.ev, this.props.lightbox.selected + 1)
-          }
+          this.goRight()
           e.preventDefault()
           e.stopPropagation()
         }}>›</span>

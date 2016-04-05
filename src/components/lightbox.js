@@ -36,6 +36,9 @@ class Lightbox extends React.Component {
       <div id='media'>
         {active}
       </div>
+      <div id='title'>
+        {this.props.lightbox.ev ? this.props.lightbox.ev.media[this.props.lightbox.selected].title : ''}
+      </div>
       <div id='lightbox-controls'>
         <span className="prev-media" onClick={(e) => {
           if (this.props.lightbox.selected - 1 >= 0) {

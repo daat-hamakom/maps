@@ -58,7 +58,9 @@ class EventPane extends React.Component {
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
       {ev.media.filter((m) => m.type == 'image').length ?
         <img src={ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
-          onClick={() => { this.props.selectMedia(ev, this.state.selected_media) }}></img>
+          onClick={() => { this.props.selectMedia(ev, ev.media.findIndex((e) => {
+            return e.url == ev.media.filter((m) => m.type == 'image')[this.state.selected_media].url
+          })) }}></img>
         : <img src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
       }
 
@@ -77,7 +79,9 @@ class EventPane extends React.Component {
             const ytid = /(embed\/|v=)([A-Za-z0-9_-]{11})/.exec(yturl)[2]
             const thumburl = 'http://img.youtube.com/vi/' + ytid + '/0.jpg'
             return <div className='youtube-cover' onClick={() => {
-              this.props.selectMedia('youtube', yturl)
+              this.props.selectMedia(ev, ev.media.findIndex((e) => {
+                return e.url == m.url
+              }))
             }}>
               <img src={thumburl} className='youtube-thumb'></img>
               <img className='youtube-play' src='/static/img/play.png'></img>

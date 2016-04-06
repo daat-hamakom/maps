@@ -37,7 +37,8 @@ class GLMap extends React.Component {
     if (this.currentStyle == layerPrefix && !force)
       return
 
-    const markerLayers = ['markers', 'clusters', 'cluster-count']
+    const markerLayers = ['single-markers', 'single-clusters', 'single-cluster-count',
+      'cluster-markers', 'cluster-clusters', 'cluster-cluster-count']
     Object.keys(this.map.style._layers).forEach((l) => {
       if (markerLayers.indexOf(l) == -1) {
         const layer = this.map.getLayer(l)
@@ -76,9 +77,9 @@ class GLMap extends React.Component {
       placeMapping[ev.place.id].push(ev.id)
     })
 
-    const markerData = {
+    const singleMarkerData = {
       'type': 'FeatureCollection',
-      'features': this.props.events.items.map((ev, index) => {
+      'features': this.props.events.items.filter((ev) => placeMapping[ev.place.id].length == 1).map((ev, index) => {
         return {
           'type': 'Feature',
           'properties': {
@@ -95,18 +96,45 @@ class GLMap extends React.Component {
       })
     }
 
-    var sourceObj = new mapboxgl.GeoJSONSource({
-      'data': markerData,
-      'cluster': false,
+    const clusterMarkerData = {
+      'type': 'FeatureCollection',
+      'features': this.props.events.items.filter((ev) => placeMapping[ev.place.id].length > 1).map((ev, index) => {
+        return {
+          'type': 'Feature',
+          'properties': {
+            'description': ev.title,
+            'evid': ev.id,
+            'icon': ev.icon,
+            'marker-symbol': 'default-marker'
+          },
+          'geometry': {
+            'type': 'Point',
+            'coordinates': ev.place.position.split(',').map(x => +x).reverse()
+          }
+        }
+      })
+    }
+
+    const singleSourceObj = new mapboxgl.GeoJSONSource({
+      'data': singleMarkerData,
+      'cluster': true,
       'clusterMaxZoom': 5
     })
 
-    this.map.addSource('eventMarkers', sourceObj)
+    const clusterSourceObj = new mapboxgl.GeoJSONSource({
+      'data': clusterMarkerData,
+      'cluster': true,
+      'clusterRadius': 10,
+      'clusterMaxZoom': 5
+    })
+
+    this.map.addSource('singleEventMarkers', singleSourceObj)
+    this.map.addSource('clusterEventMarkers', clusterSourceObj)
 
     this.map.addLayer({
-      'id': 'markers',
+      'id': 'single-markers',
       'type': 'symbol',
-      'source': 'eventMarkers',
+      'source': 'singleEventMarkers',
       'interactive': true,
       'layout': {
         'icon-image': '{marker-symbol}',
@@ -115,9 +143,20 @@ class GLMap extends React.Component {
     })
 
     this.map.addLayer({
-      'id': 'clusters',
+      'id': 'cluster-markers',
+      'type': 'symbol',
+      'source': 'clusterEventMarkers',
+      'interactive': true,
+      'layout': {
+        'icon-image': '{marker-symbol}',
+        'icon-allow-overlap': true
+      }
+    })
+
+    this.map.addLayer({
+      'id': 'single-clusters',
       'type': 'circle',
-      'source': 'eventMarkers',
+      'source': 'singleEventMarkers',
       'paint': {
         'circle-color': '#2dc6e0',
         'circle-opacity': 0.85,
@@ -127,9 +166,38 @@ class GLMap extends React.Component {
     });
 
     this.map.addLayer({
-      'id': 'cluster-count',
+      'id': 'cluster-clusters',
+      'type': 'circle',
+      'source': 'clusterEventMarkers',
+      'paint': {
+        'circle-color': '#7de6f0',
+        'circle-opacity': 0.85,
+        'circle-radius': 10
+      },
+      'filter': ['>', 'point_count', 1]
+    });
+
+    this.map.addLayer({
+      'id': 'single-cluster-count',
       'type': 'symbol',
-      'source': 'eventMarkers',
+      'source': 'singleEventMarkers',
+      'layout': {
+        'text-field': '{point_count}',
+        'text-font': [
+          'DIN Offc Pro Medium',
+          'Arial Unicode MS Bold'
+        ],
+        'text-size': 11
+      },
+      'paint': {
+        'text-color': '#ffffff'
+      }
+    });
+
+    this.map.addLayer({
+      'id': 'cluster-cluster-count',
+      'type': 'symbol',
+      'source': 'clusterEventMarkers',
       'layout': {
         'text-field': '{point_count}',
         'text-font': [
@@ -202,12 +270,8 @@ class GLMap extends React.Component {
     this.map.on('click', (e) => {
 
       const features = this.map.queryRenderedFeatures(e.point, { layers: ['markers'] })
-      console.log('markers', features)
-
 
       const cfeatures = this.map.queryRenderedFeatures(e.point, { layers: ['clusters'] })
-      console.log('clusters', cfeatures)
-
 
       if (!features.length)
         return;

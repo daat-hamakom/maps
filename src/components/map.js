@@ -69,6 +69,13 @@ class GLMap extends React.Component {
   initMap() {
     this.markers = true
 
+    let placeMapping = {}
+    this.props.events.items.map((ev, index) => {
+      if (!placeMapping[ev.place.id])
+        placeMapping[ev.place.id] = []
+      placeMapping[ev.place.id].push(ev.id)
+    })
+
     const markerData = {
       'type': 'FeatureCollection',
       'features': this.props.events.items.map((ev, index) => {

@@ -240,7 +240,7 @@ class Timeline extends React.Component {
   render () {
     const { startDate, endDate } = this.props.timeline
     return <div id='timeline'>
-      <D3Timeline width={document.body.offsetWidth} height={200} data={this.props.events.items}
+      <D3Timeline width={document.body.offsetWidth} height={140} data={this.props.events.items}
         app={this.props.app} timeline={this.props.timeline}
         startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
         onZoom={this.props.onZoom}

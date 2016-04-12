@@ -118,7 +118,6 @@ class GLMap extends React.Component {
     const singleSourceObj = new mapboxgl.GeoJSONSource({
       'data': singleMarkerData,
       'cluster': true,
-      'clusterRadius': 20,
       'clusterMaxZoom': 5
     })
 
@@ -227,7 +226,7 @@ class GLMap extends React.Component {
     this.hovering = false
 
     this.map.on('mousemove', (e) => {
-      const features = this.map.queryRenderedFeatures(e.point, { layers: ['single-markers']})
+      const features = this.map.queryRenderedFeatures(e.point, { layers: ['markers']})
       if (!features.length) {
         if (this.hovering) {
           this.hover_popup.remove()

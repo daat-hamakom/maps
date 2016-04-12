@@ -303,10 +303,10 @@ class GLMap extends React.Component {
       <div id='map-controls'>
         <ul>
           <li onClick={(e) => {
-            this.map.setZoom(this.map.getZoom() + 0.5)
+            this.map.flyTo({zoom: this.map.getZoom() + 1})
           }}><img src="/static/img/zoom-in.png"></img></li>
           <li onClick={(e) => {
-            this.map.setZoom(this.map.getZoom() - 0.5)
+            this.map.flyTo({zoom: this.map.getZoom() - 1})
           }}><img src="/static/img/zoom-out.png"></img></li>
           <li onClick={(e) => {
             this.map.setBearing(0)

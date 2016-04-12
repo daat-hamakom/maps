@@ -59,7 +59,7 @@ class EventPane extends React.Component {
       {ev.media.filter((m) => m.type == 'image').length ?
         <img src={ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
           onClick={() => { this.props.selectMedia(ev, ev.media.findIndex((e) => {
-            return e.url == ev.media.filter((m) => m.type == 'image')[this.state.selected_media].url
+            return e.file == ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file
           })) }}></img>
         : <img src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
       }

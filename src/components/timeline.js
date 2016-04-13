@@ -135,8 +135,28 @@ class HoverAnnotation extends React.Component {
 
   render () {
     const ev = this.props.data.find(
-      (e) => (this.props.app.hover[0] && this.props.app.hover[0].id == e.id) || (
-        this.props.app.selected[0] && this.props.app.selected[0].id == e.id)
+      (e) => this.props.app.hover[0] && this.props.app.hover[0].id == e.id
+    )
+
+    let left = 0;
+    if (ev) {
+      const {sd, ed} = _cleanDates(ev.start_date, ev.end_date)
+      const width = this.props.x(ed.toDate()) - this.props.x(sd.toDate())
+      left = this.props.x(sd.toDate()) + width / 2
+    }
+
+    const className = this.props.app.hover.length > 0 ? 'annotation' : 'annotation inactive'
+    return <div className={className} style={{left: left + 'px'}}>
+      <span className='text'>{ ev ? ev.title: 'Hello' }</span>
+    </div>
+  }
+}
+
+class SelectAnnotation extends React.Component {
+
+  render () {
+    const ev = this.props.data.find(
+      (e) => this.props.app.selected[0] && this.props.app.selected[0].id == e.id
     )
 
     let left = 0;
@@ -232,6 +252,7 @@ class D3Timeline extends React.Component {
           hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent} />
       </svg>
       <HoverAnnotation data={this.props.data} app={this.props.app} x={this.x} />
+      <SelectAnnotation data={this.props.data} app={this.props.app} x={this.x} />
     </div>
   }
 }

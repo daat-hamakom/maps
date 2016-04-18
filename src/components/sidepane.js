@@ -42,7 +42,16 @@ class EventPane extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = { selected_media: 0 }
+    this.state = { evid: 0, selected_media: 0 }
+  }
+
+  componentWillReceiveProps (props) {
+    const evs = this.props.app.selected
+    if (evs && evs.length > 0) {
+      if (evs[0].id != this.state.evid) {
+        this.setState({ evid: evs[0].id, selected_media: 0})
+      }
+    }
   }
 
   render () {
@@ -51,7 +60,7 @@ class EventPane extends React.Component {
     return <div id='eventpane' className={evs.length > 0 ? 'open' : 'closed'}>
       <span className="media-dots">{ev.media.filter((m) => m.type == 'image').map((m, i) => {
           return <span className={this.state.selected_media == i ? 'media-dot selected' : 'media-dot'} key={i} onClick={() => {
-            this.setState({ selected_media: i })
+            this.setState(Object.assign({}, this.state, { selected_media: i }))
           }}>{this.state.selected_media == i ? '●' : '○' }</span>
         })
       }</span>

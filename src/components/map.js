@@ -103,6 +103,38 @@ class GLMap extends React.Component {
 
     this.map.addSource('eventMarkers', sourceObj)
 
+    const annotationData = {
+      'type': 'FeatureCollection',
+      'features': [{
+        'type': 'Feature',
+        'properties': {
+          'description': 'test'
+        },
+        'geometry': {
+          'type': 'LineString',
+          'coordinates': [[30, 10], [10, 30], [40, 40]]
+        }
+      }]
+    }
+
+    var annotationSourceObj = new mapboxgl.GeoJSONSource({
+      'data': annotationData,
+      'cluster': false,
+    })
+
+    this.map.addSource('annotations', annotationSourceObj)
+
+    this.map.addLayer({
+      'id': 'annotations',
+      'type': 'line',
+      'source': 'annotations',
+      'interactive': true,
+      'paint': {
+        'line-color': '#000',
+        'line-width': 1
+      }
+    })
+
     this.map.addLayer({
       'id': 'markers',
       'type': 'symbol',

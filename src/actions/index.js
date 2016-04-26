@@ -8,6 +8,10 @@ export const REQUEST_PROJECTS = 'REQUEST_PROJECTS'
 export const REQUEST_PROJECTS_FAIL = 'REQUEST_PROJECTS_FAIL'
 export const REQUEST_PROJECTS_SUCCESS = 'REQUEST_PROJECTS_SUCCESS'
 
+export const REQUEST_ANNOTATIONS = 'REQUEST_ANNOTATIONS'
+export const REQUEST_ANNOTATIONS_FAIL = 'REQUEST_ANNOTATIONS_FAIL'
+export const REQUEST_ANNOTATIONS_SUCCESS = 'REQUEST_ANNOTATIONS_SUCCESS'
+
 export const ZOOM_TIMELINE = 'ZOOM_TIMELINE'
 
 export const START_DRAG_TIMELINE = 'START_DRAG_TIMELINE'
@@ -79,6 +83,34 @@ export function fetchProjects() {
       )
       .catch(ex =>
         dispatch(requestProjectsFail())
+      )
+  }
+}
+
+export function requestAnnotations() {
+  return { type: REQUEST_ANNOTATIONS }
+}
+
+export function requestAnnotationsFail() {
+  return { type: REQUEST_ANNOTATIONS_FAIL }
+}
+
+export function requestAnnotationsSuccess(items) {
+  return { type: REQUEST_ANNOTATIONS_SUCCESS, items: items }
+}
+
+export function fetchProjects() {
+  return dispatch => {
+    dispatch(requestAnnotations())
+    return fetch('https://daat-hamakom-data.herokuapp.com/api/annotations/')
+      .then(response =>
+        response.json()
+      )
+      .then(json =>
+        dispatch(requestAnnotationsSuccess(json))
+      )
+      .catch(ex =>
+        dispatch(requestAnnotationsFail())
       )
   }
 }

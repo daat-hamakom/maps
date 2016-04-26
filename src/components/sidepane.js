@@ -42,16 +42,20 @@ class EventPane extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = { evid: 0, selected_media: 0 }
+    this.state = { evid: 0, selected_media: 0, hover: false }
   }
 
   componentWillReceiveProps (props) {
     const evs = this.props.app.selected
     if (evs && evs.length > 0) {
       if (evs[0].id != this.state.evid) {
-        this.setState({ evid: evs[0].id, selected_media: 0})
+        this.setState({ evid: evs[0].id, selected_media: 0, hover: false})
       }
     }
+  }
+
+  hoverMedia (hover) {
+    this.setState(Object.assign({}, this.state, { hover: hover }))
   }
 
   render () {
@@ -66,12 +70,17 @@ class EventPane extends React.Component {
       }</span>
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
       {ev.media.filter((m) => m.type == 'image').length ?
-        <img src={ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
+        <img className='media' src={ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
           onClick={() => { this.props.selectMedia(ev, ev.media.findIndex((e) => {
             return e.file == ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file
-          })) }}></img>
-        : <img src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+          })) }}
+          onMouseEnter={() => this.hoverMedia(true)} onMouseLeave={() => this.hoverMedia(false)}></img>
+        : <img className='media' src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
       }
+
+      <div className={ev.media.filter((m) => m.type == 'image').length ? 'magnify' : 'magnify hide'}>
+        <img src={this.state.hover ? "/static/img/magnify-h.png" : "/static/img/magnify.png"}></img>
+      </div>
 
       <div className='content'>
         <h3 className='project'>{this.props.projects.items.find((p) => p.id == ev.project).title}</h3>

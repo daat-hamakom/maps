@@ -184,6 +184,9 @@ body {
             img {
                 width: 100%;
                 height: 214px;
+                &.magnify {
+                    cursor: zoom-in;
+                }
             }
             div.content {
                 padding: 25px;

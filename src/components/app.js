@@ -25,9 +25,9 @@ class App extends React.Component {
 
       <Map app={this.props.app} events={this.props.events}
         openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }}
-        hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev)) }}
+        hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'map')) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
-        selectEvent={(ev) => { dispatch(selectEvent(ev)) }}
+        selectEvent={(ev) => { dispatch(selectEvent(ev, 'map')) }}
         deselectEvent={() => { dispatch(deselectEvent()) }} />
 
       <Timeline app={this.props.app} events={this.props.events} timeline={this.props.timeline}
@@ -35,14 +35,14 @@ class App extends React.Component {
         dragStart={(x, w) => { dispatch(startDragTimeline(x, w)) }}
         drag={(x) => { dispatch(onDragTimeline(x)) }}
         dragEnd={() => { dispatch(endDragTimeline()) }}
-        openEventSidepane={(ev) => { dispatch(selectEvent(ev)) }}
-        hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev)) }}
+        openEventSidepane={(ev) => { dispatch(selectEvent(ev, 'timeline')) }}
+        hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'timeline')) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }} />
 
       <Sidepane app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane}
         closeSidepane={() => { dispatch(deselectEvent()) }}
-        selectEvent={(ev) => { dispatch(selectEvent(ev)) }}
-        openEventsSidepane={() => { dispatch(selectEvent(this.props.events.items)) }}
+        selectEvent={(ev) => { dispatch(selectEvent(ev, 'sidepane')) }}
+        openEventsSidepane={() => { dispatch(selectEvent(this.props.events.items, 'sidepane')) }}
         selectMedia={(t, m) => { dispatch(openLightbox(t, m)) }} />
 
       <Lightbox lightbox={this.props.lightbox} closeLightbox={() => { dispatch(closeLightbox()) }}

@@ -5,16 +5,16 @@ import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS,
   HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT,
   OPEN_LIGHTBOX, CLOSE_LIGHTBOX } from '../actions'
 
-function app(state = { hover: [], selected: [] }, action) {
+function app(state = { hover: [], selected: [], origin: null }, action) {
   switch (action.type) {
     case HOVER_ENTER_EVENT:
-      return Object.assign({}, state, { hover: action.ev })
+      return Object.assign({}, state, { hover: action.ev, origin: action.origin })
     case HOVER_EXIT_EVENT:
-      return Object.assign({}, state, { hover: [] })
+      return Object.assign({}, state, { hover: [], origin: null })
     case SELECT_EVENT:
-      return Object.assign({}, state, { selected: action.ev })
+      return Object.assign({}, state, { selected: action.ev, origin: action.origin })
     case DESELECT_EVENT:
-      return Object.assign({}, state, { selected: [] })
+      return Object.assign({}, state, { selected: [], origin: null })
     default:
       return state
   }

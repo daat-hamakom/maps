@@ -229,7 +229,7 @@ class GLMap extends React.Component {
 
   }
 
-  handleSelected (t) {
+  handleSelected (t, origin) {
     let ev = this.props.app.selected[0]
     let popup = this.select_popup
 
@@ -251,7 +251,7 @@ class GLMap extends React.Component {
         '</div>')
       .addTo(this.map)
 
-    if (t == 'select') {
+    if (t == 'select' && origin != 'map') {
       this.map.flyTo({ center: coords })
     }
   }
@@ -263,18 +263,18 @@ class GLMap extends React.Component {
       this.hover_popup.remove()
   }
 
-  checkSelectAndHover (t, prevProp, nextProp) {
+  checkSelectAndHover (t, origin, prevProp, nextProp) {
     const prev = prevProp.length
     const next = nextProp.length
     if (prev == 0 && next > 0) {
-      this.handleSelected(t)
+      this.handleSelected(t, origin)
     }
     else if (prev > 0 && next == 0) {
       this.handleDeselected(t)
     }
     else if (prev > 0 && next > 0 && prevProp[0].id != nextProp[0].id) {
       this.handleDeselected(t)
-      this.handleSelected(t)
+      this.handleSelected(t, origin)
     }
   }
 
@@ -283,8 +283,8 @@ class GLMap extends React.Component {
       this.initMap()
     }
 
-    this.checkSelectAndHover('select', prevProps.app.selected, this.props.app.selected)
-    this.checkSelectAndHover('hover', prevProps.app.hover, this.props.app.hover)
+    this.checkSelectAndHover('select', this.props.app.origin, prevProps.app.selected, this.props.app.selected)
+    this.checkSelectAndHover('hover', this.props.app.origin, prevProps.app.hover, this.props.app.hover)
 
     if (!this.resized) {
       // trigger resize as long as we haven't completed map init yet

@@ -106,16 +106,16 @@ export function closeSidepane() {
   return { type: CLOSE_SIDEPANE }
 }
 
-export function hoverEnterEvent(ev) {
-  return { type: HOVER_ENTER_EVENT, ev: ev }
+export function hoverEnterEvent(ev, origin) {
+  return { type: HOVER_ENTER_EVENT, ev: ev, origin: origin }
 }
 
 export function hoverExitEvent() {
   return { type: HOVER_EXIT_EVENT }
 }
 
-export function selectEvent(ev) {
-  return { type: SELECT_EVENT, ev: ev }
+export function selectEvent(ev, origin) {
+  return { type: SELECT_EVENT, ev: ev, origin: origin }
 }
 
 export function deselectEvent() {

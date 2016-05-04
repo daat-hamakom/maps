@@ -242,13 +242,18 @@ class GLMap extends React.Component {
       this.switchLayers(ev.place.name == 'Tripoli, Libya' ? 'preindustrial' : 'default')
     }
 
-    popup.setLngLat(ev.place.position.split(',').map(x => +x).reverse())
+    const coords = ev.place.position.split(',').map(x => +x).reverse()
+    popup.setLngLat(coords)
       .setHTML('<div class="marker-popup">' +
         '<div class="icon"><img src="' + ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_s.jpg' + '"></div>' +
         '<div class="connector"></div>' +
         '<div class="dot"></div>' +
         '</div>')
       .addTo(this.map)
+
+    if (t == 'select') {
+      this.map.flyTo({ center: coords })
+    }
   }
 
   handleDeselected (t) {

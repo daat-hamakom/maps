@@ -234,8 +234,8 @@ class D3Timeline extends React.Component {
   };
 
   centerEvent(evid) {
-    const pos = this.refs['marker-data'].refs['marker-' + evid].getBBox().x
-    this.props.dragStart(pos, this.props.width)
+    const box = this.refs['marker-data'].refs['marker-' + evid].getBBox()
+    this.props.dragStart((box.x + box.width) / 2, this.props.width)
     this.props.drag(document.body.offsetWidth / 2)
     this.props.dragEnd()
   }

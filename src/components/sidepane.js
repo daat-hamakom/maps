@@ -66,11 +66,11 @@ class EventPane extends React.Component {
       }</span>
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
       {ev.media.filter((m) => m.type == 'image').length ?
-        <img className='magnify' src={ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
+        <img className='head magnify' src={ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
           onClick={() => { this.props.selectMedia(ev, ev.media.findIndex((e) => {
             return e.file == ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file
           })) }}></img>
-        : <img src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+        : <img className='head' src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
       }
 
       <div className='content'>
@@ -98,6 +98,12 @@ class EventPane extends React.Component {
           }
         )}
         <div className='description' dangerouslySetInnerHTML={{__html: ev.description.replace(/a href/g, 'a target="_blank" href')}}></div>
+        {ev.media.filter((m) => m.type == 'document').map((m) => {
+            return <div className='doc'>
+              <a href={m.file} target='_blank'>{m.title}</a>
+            </div>
+          }
+        )}
       </div>
     </div>
   }

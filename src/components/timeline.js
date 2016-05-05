@@ -114,7 +114,7 @@ class MarkerData extends React.Component {
         const circleProps = { cx: x + width / 2, cy: y + (r / 2), r: r, className: className }
         const lineProps = { x1: x + width / 2, y1: 0, x2: x + width / 2, y2: y, className: className}
 
-        return <g key={d.id} onClick={(e) => {
+        return <g ref={'marker-' + d.id} key={d.id} onClick={(e) => {
           this.props.openEventSidepane([d])
           this.props.hoverExitEvent()
         }} onMouseEnter={(e) => {
@@ -233,6 +233,13 @@ class D3Timeline extends React.Component {
     e.stopPropagation()
   };
 
+  centerEvent(evid) {
+    const pos = this.refs['marker-data'].refs['marker-' + evid].getBBox().x
+    this.props.dragStart(pos, this.props.width)
+    this.props.drag(document.body.offsetWidth / 2)
+    this.props.dragEnd()
+  }
+
   componentWillReceiveProps (props) {
     this.x = d3.time.scale()
       .domain([props.startDate, props.endDate])
@@ -240,15 +247,47 @@ class D3Timeline extends React.Component {
       .range([0, props.width])
   }
 
+  handleSelected(t, origin) {
+    if (t == 'select' && origin != 'timeline') {
+      let ev = this.props.app.selected[0]
+      console.log(ev)
+      this.centerEvent(ev.id)
+    }
+  }
+
+  handleDeselected(t) {
+    return
+  }
+
+  checkSelectAndHover (t, origin, prevProp, nextProp) {
+    const prev = prevProp.length
+    const next = nextProp.length
+    if (prev == 0 && next > 0) {
+      this.handleSelected(t, origin)
+    }
+    else if (prev > 0 && next == 0) {
+      this.handleDeselected(t)
+    }
+    else if (prev > 0 && next > 0 && prevProp[0].id != nextProp[0].id) {
+      this.handleDeselected(t)
+      this.handleSelected(t, origin)
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    this.checkSelectAndHover('select', this.props.app.origin, prevProps.app.selected, this.props.app.selected)
+    this.checkSelectAndHover('hover', this.props.app.origin, prevProps.app.hover, this.props.app.hover)
+  }
+
   render () {
-    return <div>
+    return <div ref='timeline'>
       <svg width={this.props.width} height={this.props.height}
         onWheel={this.onWheelHandler}
         onMouseDown={this.startDragHandler}
         onMouseUp={this.endDragHandler}
         onMouseMove={this.onDragHandler}>
         <YearAxis x={this.x} width={this.props.width} height={this.props.height} />
-        <MarkerData x={this.x} data={this.props.data} app={this.props.app} timeline={this.props.timeline} openEventSidepane={this.props.openEventSidepane}
+        <MarkerData ref='marker-data' x={this.x} data={this.props.data} app={this.props.app} timeline={this.props.timeline} openEventSidepane={this.props.openEventSidepane}
           hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent} />
       </svg>
       <HoverAnnotation data={this.props.data} app={this.props.app} x={this.x} />

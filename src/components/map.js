@@ -252,7 +252,21 @@ class GLMap extends React.Component {
       .addTo(this.map)
 
     if (t == 'select' && origin != 'map') {
-      this.map.flyTo({ center: coords })
+      if (ev.map_context) {
+        const zoom = {
+          'world': 1,
+          'continent': 3,
+          'country': 6,
+          'province': 10,
+          'city': 12,
+          'neighbourhood': 16
+        }[ev.map_context]
+        this.map.flyTo({ center: coords, zoom: zoom })
+      }
+      else {
+       this.map.flyTo({ center: coords })
+      }
+
     }
   }
 

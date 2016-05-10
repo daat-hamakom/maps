@@ -233,11 +233,18 @@ class D3Timeline extends React.Component {
     e.stopPropagation()
   };
 
-  centerEvent(evid) {
-    const box = this.refs['marker-data'].refs['marker-' + evid].getBBox()
-    this.props.dragStart((box.x + box.width) / 2, this.props.width)
-    this.props.drag(document.body.offsetWidth / 2)
-    this.props.dragEnd()
+  centerEvent(ev) {
+    const dates = _cleanDates(ev.start_date, ev.end_date)
+    const center = dates.ed.diff(dates.sd) / 2
+    const span = this.props.endDate - this.props.startDate
+    console.log(span, center)
+    console.log(dates.sd, dates.ed)
+    let ns = moment(dates.sd)
+    let ne = moment(dates.ed)
+    ns.subtract(span / 2)
+    ne.add(span / 2)
+    console.log(ns, ne)
+    this.props.shiftTimeline(ns, ne)
   }
 
   componentWillReceiveProps (props) {
@@ -251,7 +258,7 @@ class D3Timeline extends React.Component {
     if (t == 'select' && origin != 'timeline') {
       let ev = this.props.app.selected[0]
       console.log(ev)
-      this.centerEvent(ev.id)
+      this.centerEvent(ev)
     }
   }
 
@@ -307,6 +314,7 @@ class Timeline extends React.Component {
         dragStart={this.props.dragStart}
         drag={this.props.drag}
         dragEnd={this.props.dragEnd}
+        shiftTimeline={this.props.shiftTimeline}
         openEventSidepane={this.props.openEventSidepane}
         hoverEnterEvent={this.props.hoverEnterEvent}
         hoverExitEvent={this.props.hoverExitEvent} />

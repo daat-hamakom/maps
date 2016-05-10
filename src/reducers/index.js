@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS,
   REQUEST_PROJECTS, REQUEST_PROJECTS_FAIL, REQUEST_PROJECTS_SUCCESS,
-  ZOOM_TIMELINE, START_DRAG_TIMELINE, ON_DRAG_TIMELINE, END_DRAG_TIMELINE,
+  ZOOM_TIMELINE, START_DRAG_TIMELINE, ON_DRAG_TIMELINE, END_DRAG_TIMELINE, SHIFT_TIMELINE,
   HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT,
   OPEN_LIGHTBOX, CLOSE_LIGHTBOX } from '../actions'
 
@@ -77,9 +77,13 @@ function timeline(state = timelineState, action) {
         x: state.drag.x,
         xc: action.x,
         width: state.drag.width
-      } })
+      }})
     case END_DRAG_TIMELINE:
       return Object.assign({}, state, { drag: { active: false, x: 0, xc: 0, width: 0 }})
+    case SHIFT_TIMELINE:
+      const b = action.begin.toDate()
+      const e = action.end.toDate()
+      return Object.assign({}, state, { startDate: b, endDate: e })
     default:
       return state
   }

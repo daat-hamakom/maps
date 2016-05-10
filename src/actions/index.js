@@ -13,6 +13,7 @@ export const ZOOM_TIMELINE = 'ZOOM_TIMELINE'
 export const START_DRAG_TIMELINE = 'START_DRAG_TIMELINE'
 export const ON_DRAG_TIMELINE = 'ON_DRAG_TIMELINE'
 export const END_DRAG_TIMELINE = 'END_DRAG_TIMELINE'
+export const SHIFT_TIMELINE = 'SHIFT_TIMELINE'
 
 export const HOVER_ENTER_EVENT = 'HOVER_ENTER_EVENT'
 export const HOVER_EXIT_EVENT = 'HOVER_EXIT_EVENT'
@@ -96,6 +97,10 @@ export function onDragTimeline(x) {
 
 export function endDragTimeline() {
   return { type: END_DRAG_TIMELINE }
+}
+
+export function shiftTimeline(begin, end) {
+  return { type: SHIFT_TIMELINE, begin: begin, end: end }
 }
 
 export function openEventSidepane(events) {

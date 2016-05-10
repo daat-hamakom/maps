@@ -5,7 +5,7 @@ import Lightbox from './lightbox'
 import Map from './map'
 import Sidepane from './sidepane'
 import Timeline from './timeline'
-import { fetchEvents, fetchProjects, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline,
+import { fetchEvents, fetchProjects, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline, shiftTimeline,
   hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent, closeLightbox, openLightbox } from '../actions'
 
 import '../styles/app.scss'
@@ -35,6 +35,7 @@ class App extends React.Component {
         dragStart={(x, w) => { dispatch(startDragTimeline(x, w)) }}
         drag={(x) => { dispatch(onDragTimeline(x)) }}
         dragEnd={() => { dispatch(endDragTimeline()) }}
+        shiftTimeline={(b, e) => { dispatch(shiftTimeline(b, e)) }}
         openEventSidepane={(ev) => { dispatch(selectEvent(ev, 'timeline')) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'timeline')) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }} />

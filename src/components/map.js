@@ -74,7 +74,6 @@ class GLMap extends React.Component {
     const allevs = this.props.events
     const refs_f = refs.map(a => {
       const evcoords = a.events.map(e => allevs.items.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
-      console.log(evcoords)
       return {
         'type': 'Feature',
         'properties': {
@@ -316,7 +315,7 @@ class GLMap extends React.Component {
           'city': 12,
           'neighbourhood': 16
         }[ev.map_context]
-        // this.map.flyTo({ center: coords, zoom: zoom })
+        this.map.flyTo({ center: coords, zoom: zoom })
         this.addAnnotations(ev.id)
       }
       else {

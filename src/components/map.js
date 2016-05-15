@@ -39,6 +39,11 @@ class GLMap extends React.Component {
 
     const markerLayers = ['markers', 'clusters', 'cluster-count']
     Object.keys(this.map.style._layers).forEach((l) => {
+
+      if (l == 'annotations') {
+        return
+      }
+
       if (markerLayers.indexOf(l) == -1) {
         const layer = this.map.getLayer(l)
         const oprops = OPACITY_DICT[layer.type]
@@ -52,6 +57,7 @@ class GLMap extends React.Component {
           this.map.setPaintProperty(l, p, opacity)
         })
       }
+
     })
     this.currentStyle = layerPrefix
   }

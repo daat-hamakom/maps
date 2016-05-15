@@ -99,7 +99,7 @@ export function requestAnnotationsSuccess(items) {
   return { type: REQUEST_ANNOTATIONS_SUCCESS, items: items }
 }
 
-export function fetchProjects() {
+export function fetchAnnotations() {
   return dispatch => {
     dispatch(requestAnnotations())
     return fetch('https://daat-hamakom-data.herokuapp.com/api/annotations/')

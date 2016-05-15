@@ -251,7 +251,7 @@ class GLMap extends React.Component {
         '</div>')
       .addTo(this.map)
 
-    if (t == 'select' && origin != 'map') {
+    if (t == 'select') {
       if (ev.map_context) {
         const zoom = {
           'world': 1,

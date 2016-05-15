@@ -71,7 +71,10 @@ class GLMap extends React.Component {
     const paths  = annotations.filter(a => a.type == 'path')
     const comms  = annotations.filter(a => a.type == 'communication')
 
+    const allevs = this.props.events
     const refs_f = refs.map(a => {
+      const evcoords = a.events.map(e => allevs.items.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
+      console.log(evcoords)
       return {
         'type': 'Feature',
         'properties': {
@@ -79,7 +82,7 @@ class GLMap extends React.Component {
         },
         'geometry': {
           'type': 'LineString',
-          'coordinates': [[30, 10], [10, 30], [40, 40]]
+          'coordinates': evcoords
         }
       }
     })

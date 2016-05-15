@@ -237,13 +237,10 @@ class D3Timeline extends React.Component {
     const dates = _cleanDates(ev.start_date, ev.end_date)
     const center = dates.ed.diff(dates.sd) / 2
     const span = this.props.endDate - this.props.startDate
-    console.log(span, center)
-    console.log(dates.sd, dates.ed)
     let ns = moment(dates.sd)
     let ne = moment(dates.ed)
     ns.subtract(span / 2)
     ne.add(span / 2)
-    console.log(ns, ne)
     this.props.shiftTimeline(ns, ne)
   }
 

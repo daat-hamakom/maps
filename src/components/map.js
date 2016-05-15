@@ -62,6 +62,57 @@ class GLMap extends React.Component {
     this.currentStyle = layerPrefix
   }
 
+  addAnnotations (evid) {
+
+    const annotations = this.props.annotations.items.filter(a => a.events.includes(evid))
+
+    const refs   = annotations.filter(a => a.type == 'reference')
+    const groups = annotations.filter(a => a.type == 'group')
+    const paths  = annotations.filter(a => a.type == 'path')
+    const comms  = annotations.filter(a => a.type == 'communication')
+
+    const refs_f = refs.map(a => {
+      return {
+        'type': 'Feature',
+        'properties': {
+          'description': 'test'
+        },
+        'geometry': {
+          'type': 'LineString',
+          'coordinates': [[30, 10], [10, 30], [40, 40]]
+        }
+      }
+    })
+
+    const annotationData = {
+      'type': 'FeatureCollection',
+      'features': refs_f
+    }
+
+    var annotationSourceObj = new mapboxgl.GeoJSONSource({
+      'data': annotationData,
+      'cluster': false,
+    })
+
+    this.map.addSource('annotations', annotationSourceObj)
+
+    this.map.addLayer({
+      'id': 'annotations',
+      'type': 'line',
+      'source': 'annotations',
+      'interactive': true,
+      'paint': {
+        'line-color': '#000',
+        'line-width': 1
+      }
+    })
+  }
+
+  removeAnnotations () {
+    this.map.removeLayer('annotations')
+    this.map.removeSource('annotations')
+  }
+
   componentDidMount () {
     mapboxgl.accessToken = this.props.token
     this.map = new mapboxgl.Map(this.props.view)
@@ -108,38 +159,6 @@ class GLMap extends React.Component {
     })
 
     this.map.addSource('eventMarkers', sourceObj)
-
-    const annotationData = {
-      'type': 'FeatureCollection',
-      'features': [{
-        'type': 'Feature',
-        'properties': {
-          'description': 'test'
-        },
-        'geometry': {
-          'type': 'LineString',
-          'coordinates': [[30, 10], [10, 30], [40, 40]]
-        }
-      }]
-    }
-
-    var annotationSourceObj = new mapboxgl.GeoJSONSource({
-      'data': annotationData,
-      'cluster': false,
-    })
-
-    this.map.addSource('annotations', annotationSourceObj)
-
-    this.map.addLayer({
-      'id': 'annotations',
-      'type': 'line',
-      'source': 'annotations',
-      'interactive': true,
-      'paint': {
-        'line-color': '#000',
-        'line-width': 1
-      }
-    })
 
     this.map.addLayer({
       'id': 'markers',
@@ -240,12 +259,7 @@ class GLMap extends React.Component {
     this.map.on('click', (e) => {
 
       const features = this.map.queryRenderedFeatures(e.point, { layers: ['markers'] })
-      console.log('markers', features)
-
-
       const cfeatures = this.map.queryRenderedFeatures(e.point, { layers: ['clusters'] })
-      console.log('clusters', cfeatures)
-
 
       if (!features.length)
         return;
@@ -299,7 +313,8 @@ class GLMap extends React.Component {
           'city': 12,
           'neighbourhood': 16
         }[ev.map_context]
-        this.map.flyTo({ center: coords, zoom: zoom })
+        // this.map.flyTo({ center: coords, zoom: zoom })
+        this.addAnnotations(ev.id)
       }
       else {
        this.map.flyTo({ center: coords })
@@ -309,8 +324,10 @@ class GLMap extends React.Component {
   }
 
   handleDeselected (t) {
-    if (t == 'select')
+    if (t == 'select') {
       this.select_popup.remove()
+      this.removeAnnotations()
+    }
     else if (t == 'hover')
       this.hover_popup.remove()
   }
@@ -378,11 +395,10 @@ class GLMap extends React.Component {
 class Map extends React.Component {
   render () {
     const view = { style: 'mapbox://styles/mushon/cimez8r6k00plbolzpmeovm8l', center: [35, 31], zoom: 3, container: 'map' }
-    return <GLMap view={view} token={appconf.token.map} app={this.props.app} events={this.props.events}
-      hoverEnterEvent={this.props.hoverEnterEvent}
-      hoverExitEvent={this.props.hoverExitEvent}
-      selectEvent={this.props.selectEvent}
-      deselectEvent={this.props.deselectEvent} />
+    return <GLMap view={view} token={appconf.token.map} app={this.props.app}
+      events={this.props.events} annotations={this.props.annotations}
+      hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent}
+      selectEvent={this.props.selectEvent} deselectEvent={this.props.deselectEvent} />
   }
 }
 

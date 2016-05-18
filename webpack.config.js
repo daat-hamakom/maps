@@ -18,7 +18,6 @@ module.exports = {
             { test: /\.json$/, loader: 'json-loader' },
             {
                 test: /\.js$/,
-                // include: path.resolve(__dirname, 'js/render/painter/use_program.js'),
                 include: path.resolve(__dirname, 'node_modules/mapbox-gl/js/render/painter/use_program.js'),
                 loader: 'transform/cacheable?brfs'
             },

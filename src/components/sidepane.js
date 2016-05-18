@@ -79,9 +79,12 @@ class EventPane extends React.Component {
         <div className='place'>{ev.place.name}</div>
         <div className='date'>{_cleanDates(ev.start_date, ev.end_date)}</div>
         <hr/>
-        {ev.media.filter((m) => m.type == 'sound').map((m) => <audio controls>
-            <source src={m.file} type="audio/mpeg"/>
-          </audio>
+        {ev.media.filter((m) => m.type == 'sound').map((m) => <div className="audio-container">
+            <audio controls>
+              <source src={m.file} type="audio/mpeg"/>
+            </audio>
+            <p>{m.title}</p>
+          </div>
         )}
         {ev.media.filter((m) => m.type == 'link' && m.url.indexOf('youtube') !== -1).map((m) => {
             const yturl = m.url.replace('watch', 'embed').replace('/v', '/embed').replace('?v=', '/')

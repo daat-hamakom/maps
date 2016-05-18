@@ -2,10 +2,7 @@ import React from 'react'
 
 import appconf from '../../config/client'
 
-// Need to directly script-load instead of proper import since GL JS doesn't support webpack
-// https://github.com/mapbox/mapbox-gl-js/issues/1649
-require('script!mapbox-gl/dist/mapbox-gl.js')
-/*global mapboxgl*/
+import mapboxgl from 'mapbox-gl'
 
 const OPACITY_DICT = {
   'background': ['background-opacity'],

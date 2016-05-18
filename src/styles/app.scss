@@ -21,6 +21,9 @@ body {
         bottom: $timelineHight;
         border: 2px solid $frameBorder;
         border-width: 2px 0 0 2px;
+        &.shrink {
+            right: 310px;
+        }
         h1.title {
             background-color: transparent;
             position: absolute;

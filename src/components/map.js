@@ -26,7 +26,8 @@ class GLMap extends React.Component {
 
   componentWillMount () {
     this.setState({
-      rectzoom : false
+      rectzoom : false,
+      shrink: 'noshrink'
     })
   }
 
@@ -312,6 +313,7 @@ class GLMap extends React.Component {
           'city': 12,
           'neighbourhood': 16
         }[ev.map_context]
+        this.map.resize()
         this.map.flyTo({ center: coords, zoom: zoom })
         this.addAnnotations(ev.id)
       }
@@ -326,6 +328,7 @@ class GLMap extends React.Component {
     if (t == 'select') {
       this.select_popup.remove()
       this.removeAnnotations()
+      this.map.resize()
     }
     else if (t == 'hover')
       this.hover_popup.remove()
@@ -344,6 +347,15 @@ class GLMap extends React.Component {
       this.handleDeselected(t)
       this.handleSelected(t, origin)
     }
+  }
+
+  componentWillReceiveProps (props) {
+    // check if an event is selected to we can shrink the map
+    let shrink = 'noshrink'
+    if (props.app.selected.length > 0) {
+      shrink = 'shrink'
+    }
+    this.setState(Object.assign({}, this.state, { shrink: shrink }))
   }
 
   componentDidUpdate (prevProps, _prevState) {
@@ -366,7 +378,7 @@ class GLMap extends React.Component {
   }
 
   render () {
-    return <div id='map-container'>
+    return <div id='map-container' className={this.state.shrink}>
       <h1 className='title'>Where & When of Jewish Culture</h1>
       <div id='map' className={this.state.rectzoom ? 'rectzoom' : 'norectzoom'} onKeyDown={(e) => {
         if (e.keyCode == 16) this.setState({ rectzoom: true })

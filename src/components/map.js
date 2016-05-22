@@ -38,7 +38,7 @@ class GLMap extends React.Component {
     const markerLayers = ['markers', 'clusters', 'cluster-count']
     Object.keys(this.map.style._layers).forEach((l) => {
 
-      if (l == 'annotations') {
+      if (l.startsWith('annotations-')) {
         return
       }
 
@@ -60,17 +60,11 @@ class GLMap extends React.Component {
     this.currentStyle = layerPrefix
   }
 
-  addAnnotations (evid) {
-
-    const annotations = this.props.annotations.items.filter(a => a.events.includes(evid))
-
-    const refs   = annotations.filter(a => a.type == 'reference')
-    const groups = annotations.filter(a => a.type == 'group')
-    const paths  = annotations.filter(a => a.type == 'path')
-    const comms  = annotations.filter(a => a.type == 'communication')
+  addSingleAnnotationsLayer(evid, name, pattern) {
+    const annotations = this.props.annotations.items.filter(a => a.events.includes(evid)).filter(a => a.type == name)
 
     const allevs = this.props.events
-    const refs_f = refs.map(a => {
+    const anns = annotations.map(a => {
       const evcoords = a.events.map(e => allevs.items.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
       return {
         'type': 'Feature',
@@ -86,7 +80,7 @@ class GLMap extends React.Component {
 
     const annotationData = {
       'type': 'FeatureCollection',
-      'features': refs_f
+      'features': anns
     }
 
     var annotationSourceObj = new mapboxgl.GeoJSONSource({
@@ -94,23 +88,38 @@ class GLMap extends React.Component {
       'cluster': false,
     })
 
-    this.map.addSource('annotations', annotationSourceObj)
+    this.map.addSource('annotations-' + name, annotationSourceObj)
 
     this.map.addLayer({
-      'id': 'annotations',
+      'id': 'annotations-' + name,
       'type': 'line',
-      'source': 'annotations',
+      'source': 'annotations-' + name,
       'interactive': true,
       'paint': {
         'line-color': '#000',
-        'line-width': 1
+        'line-width': 10,
+        'line-pattern': pattern
       }
     })
   }
 
+  addAnnotations (evid) {
+    this.addSingleAnnotationsLayer(evid, 'reference', 'ann_origin')
+    this.addSingleAnnotationsLayer(evid, 'path', 'ann_travel')
+    this.addSingleAnnotationsLayer(evid, 'communication', 'ann_communication')
+    // this.addSingleAnnotationsLayer(evid, 'group', 'xxx')
+
+  }
+
   removeAnnotations () {
-    this.map.removeLayer('annotations')
-    this.map.removeSource('annotations')
+    this.map.removeLayer('annotations-reference')
+    this.map.removeSource('annotations-reference')
+
+    this.map.removeLayer('annotations-path')
+    this.map.removeSource('annotations-path')
+
+    this.map.removeLayer('annotations-communication')
+    this.map.removeSource('annotations-communication')
   }
 
   componentDidMount () {

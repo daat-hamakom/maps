@@ -60,7 +60,7 @@ class GLMap extends React.Component {
     this.currentStyle = layerPrefix
   }
 
-  addSingleAnnotationsLayer(evid, name, pattern) {
+  addSingleLineLayer(evid, name, pattern) {
     const annotations = this.props.annotations.items.filter(a => a.events.includes(evid)).filter(a => a.type == name)
 
     const allevs = this.props.events
@@ -103,11 +103,58 @@ class GLMap extends React.Component {
     })
   }
 
+  addSingleMarkerLayer(evid, name, icon) {
+    const annotations = this.props.annotations.items.filter(a => a.events.includes(evid)).filter(a => a.type == name)
+
+    const allevs = this.props.events
+    const anns = annotations.map(a => {
+      const evcoords = a.events.map(e => allevs.items.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
+
+      return evcoords.map(c => { return {
+        'type': 'Feature',
+        'properties': {
+          'description': 'test',
+          'marker-icon': icon
+        },
+        'geometry': {
+          'type': 'Point',
+          'coordinates': c
+        }
+      }})
+
+    })
+
+    const annotationData = {
+      'type': 'FeatureCollection',
+      'features': anns[0] // we support just one set of groups!
+    }
+
+    console.log('grp', annotationData)
+
+    var annotationSourceObj = new mapboxgl.GeoJSONSource({
+      'data': annotationData,
+      'cluster': false,
+    })
+
+    this.map.addSource('annotations-' + name, annotationSourceObj)
+
+    this.map.addLayer({
+      'id': 'annotations-' + name,
+      'type': 'symbol',
+      'source': 'annotations-' + name,
+      'interactive': true,
+      'layout': {
+        'icon-image': '{marker-icon}',
+        'icon-allow-overlap': true
+      }
+    })
+  }
+
   addAnnotations (evid) {
-    this.addSingleAnnotationsLayer(evid, 'reference', 'ann_origin')
-    this.addSingleAnnotationsLayer(evid, 'path', 'ann_travel')
-    this.addSingleAnnotationsLayer(evid, 'communication', 'ann_communication')
-    // this.addSingleAnnotationsLayer(evid, 'group', 'xxx')
+    this.addSingleLineLayer(evid, 'reference', 'ann_origin')
+    this.addSingleLineLayer(evid, 'path', 'ann_travel')
+    this.addSingleLineLayer(evid, 'communication', 'ann_communication')
+    this.addSingleMarkerLayer(evid, 'group', 'grouped-marker')
 
   }
 
@@ -120,6 +167,9 @@ class GLMap extends React.Component {
 
     this.map.removeLayer('annotations-communication')
     this.map.removeSource('annotations-communication')
+
+    this.map.removeLayer('annotations-group')
+    this.map.removeSource('annotations-group')
   }
 
   componentDidMount () {

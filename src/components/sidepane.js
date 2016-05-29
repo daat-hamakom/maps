@@ -127,7 +127,7 @@ class EventsPane extends React.Component {
       return 0
     })
     return <div id='eventspane' className={evs.length > 0 ? 'open' : 'closed'} >
-      <span className='close' onClick={this.props.closeSidepane}>X</span>
+      <span className='close' onClick={this.props.closeSidepane}>✖</span>
       {evs.map((e) => <div key={'list-event-' + e.id} className='event' onClick={() => {
         this.props.selectEvent([e])
       }}>

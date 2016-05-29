@@ -367,7 +367,7 @@ class GLMap extends React.Component {
 
     if (t == 'select') {
       if (ev.map_context) {
-        const zoom = {
+        let zoom = {
           'world': 1,
           'continent': 3,
           'country': 6,
@@ -375,6 +375,12 @@ class GLMap extends React.Component {
           'city': 12,
           'neighbourhood': 16
         }[ev.map_context]
+
+        // override zooming on events with annotations to continent, for now
+        if (this.props.annotations.items.filter(a => a.events.includes(ev.id))) {
+          zoom = 3
+        }
+
         this.map.resize()
         this.map.flyTo({ center: coords, zoom: zoom })
         this.addAnnotations(ev.id)

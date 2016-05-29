@@ -353,8 +353,10 @@ class GLMap extends React.Component {
       popup = this.hover_popup
     }
     else {
-      // test preindustrial style on Tripoli events
-      this.switchLayers(ev.place.name == 'Tripoli, Libya' ? 'preindustrial' : 'default')
+      if (ev.start_date < '1789-')  // vive la revolution
+        this.switchLayers('preindustrial')
+      else
+        this.switchLayers('default')
     }
 
     const coords = ev.place.position.split(',').map(x => +x).reverse()

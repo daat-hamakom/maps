@@ -65,7 +65,11 @@ class GLMap extends React.Component {
 
     const allevs = this.props.events
     const anns = annotations.map(a => {
-      const evcoords = a.events.map(e => allevs.items.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
+      let evs = a.events
+      if (a.events[0] != a.origin)
+        evs = evs.reverse()
+
+      const evcoords = evs.map(e => allevs.items.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
       return {
         'type': 'Feature',
         'properties': {

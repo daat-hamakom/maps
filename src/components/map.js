@@ -162,18 +162,18 @@ class GLMap extends React.Component {
 
   }
 
+  removeSingleLayer(name) {
+    if (map.getLayer(name)) {
+      this.map.removeLayer(name)
+      this.map.removeSource(name)
+    }
+  }
+
   removeAnnotations () {
-    this.map.removeLayer('annotations-reference')
-    this.map.removeSource('annotations-reference')
-
-    this.map.removeLayer('annotations-path')
-    this.map.removeSource('annotations-path')
-
-    this.map.removeLayer('annotations-communication')
-    this.map.removeSource('annotations-communication')
-
-    this.map.removeLayer('annotations-group')
-    this.map.removeSource('annotations-group')
+    this.removeSingleLayer('annotations-reference')
+    this.removeSingleLayer('annotations-path')
+    this.removeSingleLayer('annotations-communication')
+    this.removeSingleLayer('annotations-group')
   }
 
   componentDidMount () {

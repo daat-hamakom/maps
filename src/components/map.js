@@ -97,7 +97,7 @@ class GLMap extends React.Component {
       'interactive': true,
       'paint': {
         'line-color': '#000',
-        'line-width': 10,
+        'line-width': 7,
         'line-pattern': pattern
       }
     })

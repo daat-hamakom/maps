@@ -133,8 +133,6 @@ class GLMap extends React.Component {
       'features': anns[0] // we support just one set of groups!
     }
 
-    console.log('grp', annotationData)
-
     var annotationSourceObj = new mapboxgl.GeoJSONSource({
       'data': annotationData,
       'cluster': false,
@@ -159,7 +157,6 @@ class GLMap extends React.Component {
     this.addSingleLineLayer(evid, 'path', 'ann_travel')
     this.addSingleLineLayer(evid, 'communication', 'ann_communication')
     this.addSingleMarkerLayer(evid, 'group', 'grouped-marker')
-
   }
 
   removeSingleLayer(name) {

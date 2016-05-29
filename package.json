@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node server.js",
-    "dist": "webpack --config ./webpack.config.js --progress --colors",
+    "dist": "webpack --config ./webpack.config.js --colors",
     "postinstall": "npm run dist",
     "lint": "./node_modules/eslint/bin/eslint.js src",
     "repl": "babel-node"

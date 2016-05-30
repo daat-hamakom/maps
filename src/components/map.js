@@ -35,7 +35,7 @@ class GLMap extends React.Component {
     if (this.currentStyle == layerPrefix && !force)
       return
 
-    const markerLayers = ['markers', 'clusters', 'cluster-count']
+    const markerLayers = ['markers']
     Object.keys(this.map.style._layers).forEach((l) => {
 
       if (l.startsWith('annotations-')) {
@@ -233,35 +233,6 @@ class GLMap extends React.Component {
       }
     })
 
-    this.map.addLayer({
-      'id': 'clusters',
-      'type': 'circle',
-      'source': 'eventMarkers',
-      'paint': {
-        'circle-color': '#2dc6e0',
-        'circle-opacity': 0.85,
-        'circle-radius': 10
-      },
-      'filter': ['>', 'point_count', 1]
-    });
-
-    this.map.addLayer({
-      'id': 'cluster-count',
-      'type': 'symbol',
-      'source': 'eventMarkers',
-      'layout': {
-        'text-field': '{point_count}',
-        'text-font': [
-          'DIN Offc Pro Medium',
-          'Arial Unicode MS Bold'
-        ],
-        'text-size': 11
-      },
-      'paint': {
-        'text-color': '#ffffff'
-      }
-    });
-
     this.hover_popup = new mapboxgl.Popup({
       closeButton: false,
       closeOnClick: false,
@@ -315,23 +286,6 @@ class GLMap extends React.Component {
           ))
           this.props.hoverExitEvent()
         }
-      }
-    })
-
-    this.map.on('click', (e) => {
-
-      const features = this.map.queryRenderedFeatures(e.point, { layers: ['markers'] })
-      const cfeatures = this.map.queryRenderedFeatures(e.point, { layers: ['clusters'] })
-
-      if (!features.length)
-        return;
-
-      if (features[0].properties.cluster) {
-        // this.map.setCenter(features[0].geometry.coordinates)
-        // this.map.setZoom(6.5)
-      }
-      else {
-        // we never get here since the cli ck was caught on the hover_popup
       }
     })
 

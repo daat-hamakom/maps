@@ -162,6 +162,8 @@ class GLMap extends React.Component {
   removeSingleLayer(name) {
     if (this.map.getLayer(name)) {
       this.map.removeLayer(name)
+    }
+    if (this.map.getSource(name)) {
       this.map.removeSource(name)
     }
   }

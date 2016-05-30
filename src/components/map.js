@@ -160,7 +160,7 @@ class GLMap extends React.Component {
   }
 
   removeSingleLayer(name) {
-    if (map.getLayer(name)) {
+    if (this.map.getLayer(name)) {
       this.map.removeLayer(name)
       this.map.removeSource(name)
     }
@@ -435,7 +435,7 @@ class GLMap extends React.Component {
     this.checkSelectAndHover('select', this.props.app.origin, prevProps.app.selected, this.props.app.selected)
     this.checkSelectAndHover('hover', this.props.app.origin, prevProps.app.hover, this.props.app.hover)
 
-    if (!this.resized) {
+    if (!this.resized && this.map) {
       // trigger resize as long as we haven't completed map init yet
       this.map.resize()
     }

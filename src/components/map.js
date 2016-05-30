@@ -162,11 +162,12 @@ class GLMap extends React.Component {
     })
   }
 
-  addAnnotations (evid) {
-    this.addSingleLineLayer(evid, 'reference', 'ann_origin')
-    this.addSingleLineLayer(evid, 'path', 'ann_travel')
-    this.addSingleLineLayer(evid, 'communication', 'ann_communication')
-    this.addSingleMarkerLayer(evid, 'group', 'grouped-marker')
+  addAnnotations (evid, t) {
+    const p = t + '-'
+    this.addSingleLineLayer(evid, p + 'reference', 'ann_origin')
+    this.addSingleLineLayer(evid, p + 'path', 'ann_travel')
+    this.addSingleLineLayer(evid, p + 'communication', 'ann_communication')
+    this.addSingleMarkerLayer(evid, p + 'group', 'grouped-marker')
   }
 
   addPlaceMarkers () {
@@ -202,11 +203,12 @@ class GLMap extends React.Component {
     }
   }
 
-  removeAnnotations () {
-    this.removeSingleLayer('annotations-reference')
-    this.removeSingleLayer('annotations-path')
-    this.removeSingleLayer('annotations-communication')
-    this.removeSingleLayer('annotations-group')
+  removeAnnotations (t) {
+    const p = 'annotations-' + t + '-'
+    this.removeSingleLayer(p +'reference')
+    this.removeSingleLayer(p + 'path')
+    this.removeSingleLayer(p + 'communication')
+    this.removeSingleLayer(p + 'group')
   }
 
   componentDidMount () {
@@ -360,12 +362,15 @@ class GLMap extends React.Component {
 
         this.map.resize()
         this.map.flyTo({ center: coords, zoom: zoom })
-        this.addAnnotations(ev.id)
+        this.addAnnotations(ev.id, 'select')
       }
       else {
        this.map.flyTo({ center: coords })
       }
-
+    }
+    else {
+      // hover annotations
+      this.addAnnotations(ev.id, 'hover')
     }
   }
 
@@ -373,11 +378,13 @@ class GLMap extends React.Component {
     if (t == 'select') {
       this.select_popup.remove()
       this.switchLayers('default')
-      this.removeAnnotations()
+      this.removeAnnotations('select')
       this.map.resize()
     }
-    else if (t == 'hover')
+    else {
       this.hover_popup.remove()
+      this.removeAnnotations('hover')
+    }
   }
 
   checkSelectAndHover (t, origin, prevProp, nextProp) {

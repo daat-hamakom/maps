@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux'
+import { cleanDates } from './utils'
+
 import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS,
   REQUEST_PROJECTS, REQUEST_PROJECTS_FAIL, REQUEST_PROJECTS_SUCCESS,
   REQUEST_ANNOTATIONS, REQUEST_ANNOTATIONS_FAIL, REQUEST_ANNOTATIONS_SUCCESS,
@@ -31,7 +33,7 @@ function events(state = { fetching: false, items: [] }, action) {
     case REQUEST_EVENTS_FAIL:
       return Object.assign({}, state, { fetching: false })
     case REQUEST_EVENTS_SUCCESS:
-      return Object.assign({}, state, { fetching: false, items: action.items })
+      return Object.assign({}, state, { fetching: false, items: action.items.map(cleanDates) })
     default:
       return state
   }

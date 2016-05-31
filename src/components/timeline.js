@@ -100,7 +100,8 @@ class MarkerData extends React.Component {
   render () {
     return <g ref='markerData' className='markers'>
       {this.props.data.map((d) => {
-        let {sd, ed} = _cleanDates(d.start_date, d.end_date)
+        const sd = moment(d.start_date)
+        const ed = moment(d.end_date)
 
         const x = this.props.x(sd.toDate())
         const y = 40+(d.id%10)*10

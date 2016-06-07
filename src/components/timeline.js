@@ -284,22 +284,44 @@ class D3Timeline extends React.Component {
   }
 }
 
+
+class ResearchTimeline extends React.Component {
+  render () {
+    return <div id='project'>
+      <div className='buttons'></div>
+      <div className='searchbar'>
+        <span className='select'>Researches</span>
+      </div>
+      <div className='pane'>
+        <span className='name'>{this.props.research ? this.props.research.title : ''}</span>
+      </div>
+    </div>
+  }
+}
+
+
 class Timeline extends React.Component {
   render () {
     const { startDate, endDate } = this.props.timeline
-    return <div id='timeline'>
-      <D3Timeline width={document.body.offsetWidth} height={140} data={this.props.events.items}
-        app={this.props.app} timeline={this.props.timeline}
-        startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
-        onZoom={this.props.onZoom}
-        dragStart={this.props.dragStart}
-        drag={this.props.drag}
-        dragEnd={this.props.dragEnd}
-        shiftTimeline={this.props.shiftTimeline}
-        openEventSidepane={this.props.openEventSidepane}
-        hoverEnterEvent={this.props.hoverEnterEvent}
-        hoverExitEvent={this.props.hoverExitEvent} />
-    </div>
+    if (this.props.proj) {
+      const research = this.props.projects.items.find((p) => { return p.id == this.props.proj })
+      return <ResearchTimeline research={research} />
+    }
+    else {
+      return <div id='timeline'>
+        <D3Timeline width={document.body.offsetWidth} height={140} data={this.props.events.items}
+          app={this.props.app} timeline={this.props.timeline}
+          startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
+          onZoom={this.props.onZoom}
+          dragStart={this.props.dragStart}
+          drag={this.props.drag}
+          dragEnd={this.props.dragEnd}
+          shiftTimeline={this.props.shiftTimeline}
+          openEventSidepane={this.props.openEventSidepane}
+          hoverEnterEvent={this.props.hoverEnterEvent}
+          hoverExitEvent={this.props.hoverExitEvent} />
+      </div>
+    }
   }
 }
 

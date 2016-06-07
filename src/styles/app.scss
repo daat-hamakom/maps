@@ -3,7 +3,7 @@
 
 $frameBorder: #222;
 
-$timelineHight: 140px;
+$timelineHeight: 340px;
 
 * {
     margin: 0;
@@ -18,7 +18,7 @@ body {
         top: 30px;
         left: 10px;
         right: 10px;
-        bottom: $timelineHight;
+        bottom: $timelineHeight;
         border: 2px solid $frameBorder;
         border-width: 2px 0 0 2px;
         &.shrink {
@@ -90,7 +90,7 @@ body {
     div#timeline {
         position: absolute;
         bottom: 0;
-        height: $timelineHight;
+        height: $timelineHeight;
         width: 100%;
         background-color: white;
         box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.09);
@@ -143,6 +143,30 @@ body {
             }
         }
     }
+    div#project {
+        position: absolute;
+        bottom: 0;
+        height: 400px;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.09);
+        z-index: 10;
+        div.buttons {
+            background-color: #E1E9ED;
+            width: 40px;
+            height: 100%;
+            float: left;
+        }
+        div.searchbar {
+            background-color: #E1E9ED;
+            // margin-left: 20px;
+            height: 40px;
+            width: 100%;
+        }
+        div.pane {
+
+        }
+    }
     div#sidepane {
         div#sidepaneButton {
             height: 50px;
@@ -166,7 +190,7 @@ body {
             border-width: 2px 2px 0 0;
             background: #ffffff;
             width: 320px;
-            bottom: $timelineHight;
+            bottom: $timelineHeight;
             overflow-y: scroll;
             box-shadow: -2px 2px 4px #EEF3F6;
             &.closed {

@@ -13,6 +13,13 @@ const OPACITY_DICT = {
   'circle': ['circle-opacity']
 }
 
+function getEventStyle (ev) {
+  if (ev.start_date < '1789-')  // vive la revolution
+    return 'preindustrial'
+  else
+    return 'default'
+}
+
 class GLMap extends React.Component {
 
   // Adapted from Tim Welch's code that can be found at
@@ -32,6 +39,9 @@ class GLMap extends React.Component {
   }
 
   switchLayers (layerPrefix, force = false) {
+
+    this.props.setAppStyle(layerPrefix)
+
     if (this.currentStyle == layerPrefix && !force)
       return
 
@@ -306,10 +316,7 @@ class GLMap extends React.Component {
       popup = this.hover_popup
     }
     else {
-      if (ev.start_date < '1789-')  // vive la revolution
-        this.switchLayers('preindustrial')
-      else
-        this.switchLayers('default')
+      this.switchLayers(getEventStyle(ev))
     }
 
     const coords = ev.place.position.split(',').map(x => +x).reverse()
@@ -429,7 +436,7 @@ class Map extends React.Component {
     return <GLMap view={view} token={appconf.token.map} app={this.props.app}
       events={this.props.events} annotations={this.props.annotations}
       hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent}
-      selectEvent={this.props.selectEvent} deselectEvent={this.props.deselectEvent} />
+      selectEvent={this.props.selectEvent} deselectEvent={this.props.deselectEvent} setAppStyle={this.props.setAppStyle} />
   }
 }
 

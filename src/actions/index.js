@@ -27,6 +27,8 @@ export const DESELECT_EVENT = 'DESELECT_EVENT'
 export const OPEN_LIGHTBOX = 'OPEN_LIGHTBOX'
 export const CLOSE_LIGHTBOX = 'CLOSE_LIGHTBOX'
 
+export const SET_APP_STYLE = 'SET_APP_STYLE'
+
 export function requestEvents() {
   return { type: REQUEST_EVENTS }
 }
@@ -165,4 +167,8 @@ export function openLightbox(ev, selected) {
 
 export function closeLightbox() {
   return { type: CLOSE_LIGHTBOX }
+}
+
+export function setAppStyle(style) {
+  return { type: SET_APP_STYLE, style: style }
 }

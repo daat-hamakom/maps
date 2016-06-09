@@ -6,7 +6,7 @@ import Map from './map'
 import Sidepane from './sidepane'
 import Timeline from './timeline'
 import { fetchEvents, fetchProjects, fetchAnnotations, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline, shiftTimeline,
-  hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent, closeLightbox, openLightbox } from '../actions'
+  hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent, closeLightbox, openLightbox, setAppStyle } from '../actions'
 
 import '../styles/app.scss'
 
@@ -22,14 +22,15 @@ class App extends React.Component {
 
   render () {
     const { dispatch } = this.props
-    return <div>
+    return <div className={'app ' + this.props.app.style}>
 
       <Map app={this.props.app} events={this.props.events} annotations={this.props.annotations}
         openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'map')) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
         selectEvent={(ev) => { dispatch(selectEvent(ev, 'map')) }}
-        deselectEvent={() => { dispatch(deselectEvent()) }} />
+        deselectEvent={() => { dispatch(deselectEvent()) }}
+        setAppStyle={(s) => { dispatch(setAppStyle(s)) }} />
 
       <Timeline app={this.props.app} events={this.props.events} timeline={this.props.timeline}
         onZoom={(b, e) => { dispatch(zoomTimeline(b, e)) }}

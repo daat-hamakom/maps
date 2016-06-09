@@ -3,10 +3,10 @@ import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS,
   REQUEST_PROJECTS, REQUEST_PROJECTS_FAIL, REQUEST_PROJECTS_SUCCESS,
   REQUEST_ANNOTATIONS, REQUEST_ANNOTATIONS_FAIL, REQUEST_ANNOTATIONS_SUCCESS,
   ZOOM_TIMELINE, START_DRAG_TIMELINE, ON_DRAG_TIMELINE, END_DRAG_TIMELINE, SHIFT_TIMELINE,
-  HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT,
+  HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT, SET_APP_STYLE,
   OPEN_LIGHTBOX, CLOSE_LIGHTBOX } from '../actions'
 
-function app(state = { hover: [], selected: [], origin: null }, action) {
+function app(state = { hover: [], selected: [], origin: null, style: 'default' }, action) {
   switch (action.type) {
     case HOVER_ENTER_EVENT:
       return Object.assign({}, state, { hover: action.ev, origin: action.origin })
@@ -16,6 +16,8 @@ function app(state = { hover: [], selected: [], origin: null }, action) {
       return Object.assign({}, state, { selected: action.ev, origin: action.origin })
     case DESELECT_EVENT:
       return Object.assign({}, state, { selected: [], origin: null })
+    case SET_APP_STYLE:
+      return Object.assign({}, state, { style: action.style })
     default:
       return state
   }

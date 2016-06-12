@@ -169,6 +169,30 @@ class GLMap extends React.Component {
     this.addSingleMarkerLayer(evid, 'group', 'grouped-marker')
   }
 
+  addPlaceMarkers () {
+    const events1789 = this.props.events.items.filter(e => getEventStyle(e) == 'preindustrial')
+    const places = events1789.map(e => e.place).map((p) => {
+      const coords = p.position.split(',').map(x => +x).reverse()
+      return {
+        'type': 'Feature',
+        'properties': {
+          'title': p.name.split(',')[0],
+          'zoomlevel': p.zoomlevel
+        },
+        'geometry': {
+          'type': 'Point',
+          'coordinates': coords
+        }
+      }
+    })
+    const data = {
+      'type': 'FeatureCollection',
+      'features': places
+    }
+    const source = new mapboxgl.GeoJSONSource({ 'data': data })
+    console.log('places', data)
+  }
+
   removeSingleLayer(name) {
     if (this.map.getLayer(name)) {
       this.map.removeLayer(name)
@@ -197,13 +221,6 @@ class GLMap extends React.Component {
 
   initMap() {
     this.markers = true
-
-    let placeMapping = {}
-    this.props.events.items.map((ev, index) => {
-      if (!placeMapping[ev.place.id])
-        placeMapping[ev.place.id] = []
-      placeMapping[ev.place.id].push(ev.id)
-    })
 
     const markerData = {
       'type': 'FeatureCollection',
@@ -242,6 +259,8 @@ class GLMap extends React.Component {
         'icon-allow-overlap': true
       }
     })
+
+    this.addPlaceMarkers()
 
     this.hover_popup = new mapboxgl.Popup({
       closeButton: false,

@@ -57,19 +57,33 @@ class EventPane extends React.Component {
   render () {
     const evs = this.props.app.selected
     const ev = evs[0]
+    const medias = ev.media.filter((m) => m.type == 'image' || (m.type == 'link' && m.url.indexOf('youtube') !== -1))
+    const m = medias[this.state.selected_media]
+    let thumburl = ''
+    if (m.type != 'image') {
+      const yturl = m.url.replace('watch', 'embed').replace('/v', '/embed').replace('?v=', '/')
+      const ytid = /(embed\/|v=)([A-Za-z0-9_-]{11})/.exec(yturl)[2]
+      thumburl = 'http://img.youtube.com/vi/' + ytid + '/0.jpg'
+    }
+
     return <div id='eventpane' className={evs.length > 0 ? 'open' : 'closed'}>
-      <span className="media-dots">{ev.media.filter((m) => m.type == 'image').map((m, i) => {
+      <span className="media-dots">{medias.map((m, i) => {
           return <span className={this.state.selected_media == i ? 'media-dot selected' : 'media-dot'} key={i} onClick={() => {
             this.setState(Object.assign({}, this.state, { selected_media: i }))
           }}>{this.state.selected_media == i ? '●' : '○' }</span>
         })
       }</span>
+
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
-      {ev.media.filter((m) => m.type == 'image').length ?
-        <img className='head magnify' src={ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
-          onClick={() => { this.props.selectMedia(ev, ev.media.findIndex((e) => {
-            return e.file == ev.media.filter((m) => m.type == 'image')[this.state.selected_media].file
-          })) }}></img>
+
+      {medias.length ?
+        m.type == 'image' ?
+          <img className='head magnify' src={m.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
+            onClick={() => { this.props.selectMedia(ev, ev.media.findIndex((e) => { return e.file == m.file })) }}></img>
+          : <div className='youtube-cover' onClick={() => { this.props.selectMedia(ev, ev.media.findIndex((e) => { return e.url == m.url })) }}>
+              <img src={thumburl} className='youtube-thumb'></img>
+              <img className='youtube-play' src='/static/img/play.png'></img>
+            </div>
         : <img className='head' src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
       }
 
@@ -86,20 +100,7 @@ class EventPane extends React.Component {
             <p>{m.title}</p>
           </div>
         )}
-        {ev.media.filter((m) => m.type == 'link' && m.url.indexOf('youtube') !== -1).map((m) => {
-            const yturl = m.url.replace('watch', 'embed').replace('/v', '/embed').replace('?v=', '/')
-            const ytid = /(embed\/|v=)([A-Za-z0-9_-]{11})/.exec(yturl)[2]
-            const thumburl = 'http://img.youtube.com/vi/' + ytid + '/0.jpg'
-            return <div className='youtube-cover' onClick={() => {
-              this.props.selectMedia(ev, ev.media.findIndex((e) => {
-                return e.url == m.url
-              }))
-            }}>
-              <img src={thumburl} className='youtube-thumb'></img>
-              <img className='youtube-play' src='/static/img/play.png'></img>
-            </div>
-          }
-        )}
+
         <div className='description' dangerouslySetInnerHTML={{__html: ev.description.replace(/a href/g, 'a target="_blank" href')}}></div>
         {ev.media.filter((m) => m.type == 'document').map((m) => {
             return <div className='doc'>

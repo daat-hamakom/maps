@@ -30,7 +30,6 @@
     "express": "^4.13.3",
     "history": "^1.13.1",
     "imports-loader": "^0.6.5",
-    "json-loader": "^0.5.4",
     "mapbox-gl": "^0.20.0",
     "moment": "^2.11.1",
     "node-bourbon": "^4.2.3",
@@ -46,9 +45,7 @@
     "sass-loader": "^3.1.2",
     "script-loader": "^0.6.1",
     "style-loader": "^0.13.0",
-    "transform-loader": "^0.2.3",
     "webpack": "^1.12.9",
-    "webworkify-webpack": "^1.0.6",
     "whatwg-fetch": "^0.10.1"
   },
   "devDependencies": {

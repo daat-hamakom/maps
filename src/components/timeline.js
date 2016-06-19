@@ -3,8 +3,11 @@ import moment from 'moment'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactFauxDOM from 'react-faux-dom'
+import Select from 'react-select';
 
 import { zoomTimeline } from '../actions'
+
+import 'react-select/dist/react-select.css';
 
 function _cleanDates (ds, de) {
   // take start date and optional end date, both accept 00 ranges

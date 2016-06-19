@@ -60,7 +60,7 @@ class EventPane extends React.Component {
     const medias = ev.media.filter((m) => m.type == 'image' || (m.type == 'link' && m.url.indexOf('youtube') !== -1))
     const m = medias[this.state.selected_media]
     let thumburl = ''
-    if (m.type != 'image') {
+    if (m && m.type != 'image') {
       const yturl = m.url.replace('watch', 'embed').replace('/v', '/embed').replace('?v=', '/')
       const ytid = /(embed\/|v=)([A-Za-z0-9_-]{11})/.exec(yturl)[2]
       thumburl = 'http://img.youtube.com/vi/' + ytid + '/0.jpg'

@@ -25,7 +25,8 @@ class App extends React.Component {
     const { dispatch } = this.props
     return <div className={'app ' + this.props.app.style}>
 
-      <Map app={this.props.app} events={this.props.events} annotations={this.props.annotations}
+      <Map app={this.props.app} events={this.props.events}
+        annotations={this.props.annotations} places={this.props.places}
         openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'map')) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }}

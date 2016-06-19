@@ -69,7 +69,7 @@ function places(state = { fetching: false, items: [] }, action) {
       return Object.assign({}, state, { fetching: true })
     case REQUEST_PLACES_FAIL:
       return Object.assign({}, state, { fetching: false })
-    case REQUEST_PLACESS_SUCCESS:
+    case REQUEST_PLACES_SUCCESS:
       return Object.assign({}, state, { fetching: false, items: action.items })
     default:
       return state

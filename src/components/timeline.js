@@ -297,6 +297,7 @@ class ProjectMetadata extends React.Component {
       <div className='titles'>
         <h2>{p.title}</h2>
         <h3>{p.subtitle}</h3>
+        <p>{p.researchers.join(', ')}</p>
       </div>
       <div className='description' dangerouslySetInnerHTML={{__html: p.synopsis.replace(/a href/g, 'a target="_blank" href')}}></div>
       <div className='image'>

@@ -142,29 +142,36 @@ body {
                 display: none;
             }
         }
-    }
-    div#project {
-        position: absolute;
-        bottom: 0;
-        height: 400px;
-        width: 100%;
-        background-color: white;
-        box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.09);
-        z-index: 10;
-        div.buttons {
-            background-color: #E1E9ED;
-            width: 40px;
-            height: 100%;
-            float: left;
-        }
-        div.searchbar {
-            background-color: #E1E9ED;
-            // margin-left: 20px;
+        div#filter {
             height: 40px;
-            width: 100%;
         }
-        div.pane {
-
+        div#metadata {
+            div.project {
+                height: 200px;
+                overflow-y: scroll;
+                div.titles {
+                    width: 20%;
+                    float: left;
+                    padding: 10px;
+                    h2 {
+                        font-size: 1.4em;
+                        margin-bottom: 10px;
+                    }
+                    h3 {
+                        font-size: 1em;
+                    }
+                }
+                div.description {
+                    width: 40%;
+                    float: left;
+                    padding: 10px;
+                }
+                div.image {
+                    height: 214px;
+                    float: left;
+                    padding: 10px;
+                }
+            }
         }
     }
     div#sidepane {

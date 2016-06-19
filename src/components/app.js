@@ -15,6 +15,7 @@ class App extends React.Component {
   componentDidMount () {
     const { dispatch } = this.props
     const projId = this.props.params.projId
+
     dispatch(fetchEvents(projId))
     dispatch(fetchProjects())
     dispatch(fetchAnnotations())

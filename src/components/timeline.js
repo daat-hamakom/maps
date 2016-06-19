@@ -284,44 +284,59 @@ class D3Timeline extends React.Component {
   }
 }
 
-
-class ResearchTimeline extends React.Component {
+class FilterBar extends React.Component {
   render () {
-    return <div id='project'>
-      <div className='buttons'></div>
-      <div className='searchbar'>
-        <span className='select'>Researches</span>
+    return <div id='filter'></div>
+  }
+}
+
+class ProjectMetadata extends React.Component {
+  render () {
+    const p = this.props.project
+    return <div className='project'>
+      <div className='titles'>
+        <h2>{p.title}</h2>
+        <h3>{p.subtitle}</h3>
       </div>
-      <div className='pane'>
-        <span className='name'>{this.props.research ? this.props.research.title : ''}</span>
+      <div className='description' dangerouslySetInnerHTML={{__html: p.synopsis.replace(/a href/g, 'a target="_blank" href')}}></div>
+      <div className='image'>
+        <img src={p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
       </div>
     </div>
   }
 }
 
+class TimelineMetadata extends React.Component {
+  render () {
+    if (this.props.project)
+      return <div id='metadata'>
+        <ProjectMetadata project={this.props.project} />
+      </div>
+    else
+      return <div id='metadata'></div>
+  }
+}
 
 class Timeline extends React.Component {
   render () {
     const { startDate, endDate } = this.props.timeline
-    if (this.props.proj) {
-      const research = this.props.projects.items.find((p) => { return p.id == this.props.proj })
-      return <ResearchTimeline research={research} />
-    }
-    else {
-      return <div id='timeline'>
-        <D3Timeline width={document.body.offsetWidth} height={140} data={this.props.events.items}
-          app={this.props.app} timeline={this.props.timeline}
-          startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
-          onZoom={this.props.onZoom}
-          dragStart={this.props.dragStart}
-          drag={this.props.drag}
-          dragEnd={this.props.dragEnd}
-          shiftTimeline={this.props.shiftTimeline}
-          openEventSidepane={this.props.openEventSidepane}
-          hoverEnterEvent={this.props.hoverEnterEvent}
-          hoverExitEvent={this.props.hoverExitEvent} />
-      </div>
-    }
+    const research = this.props.proj ? this.props.projects.items.find((p) => { return p.id == this.props.proj }) : null
+
+    return <div id='timeline'>
+      <FilterBar />
+      <D3Timeline width={document.body.offsetWidth} height={140} data={this.props.events.items}
+        app={this.props.app} timeline={this.props.timeline}
+        startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
+        onZoom={this.props.onZoom}
+        dragStart={this.props.dragStart}
+        drag={this.props.drag}
+        dragEnd={this.props.dragEnd}
+        shiftTimeline={this.props.shiftTimeline}
+        openEventSidepane={this.props.openEventSidepane}
+        hoverEnterEvent={this.props.hoverEnterEvent}
+        hoverExitEvent={this.props.hoverExitEvent} />
+      <TimelineMetadata project={research} />
+    </div>
   }
 }
 

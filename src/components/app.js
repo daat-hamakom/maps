@@ -63,6 +63,7 @@ function select(state) {
     events: state.events,
     projects: state.projects,
     annotations: state.annotations,
+    places: state.places,
     timeline: state.timeline,
     sidepane: state.sidepane,
     lightbox: state.lightbox

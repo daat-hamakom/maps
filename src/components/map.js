@@ -84,6 +84,8 @@ class GLMap extends React.Component {
         evs = evs.reverse()
 
       const evcoords = evs.map(e => allevs.items.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
+      const placecoords = a.places.map(p => this.props.places.items.find(pl => pl.id == p).position.split(',').map(x => +x).reverse())
+
       return {
         'type': 'Feature',
         'properties': {
@@ -91,7 +93,7 @@ class GLMap extends React.Component {
         },
         'geometry': {
           'type': 'LineString',
-          'coordinates': evcoords
+          'coordinates': evcoords.concat(placecoords)
         }
       }
     })
@@ -457,7 +459,7 @@ class Map extends React.Component {
   render () {
     const view = { style: 'mapbox://styles/mushon/cimez8r6k00plbolzpmeovm8l', center: [35, 31], zoom: 3, container: 'map' }
     return <GLMap view={view} token={appconf.token.map} app={this.props.app}
-      events={this.props.events} annotations={this.props.annotations}
+      events={this.props.events} annotations={this.props.annotations} places={this.props.places}
       hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent}
       selectEvent={this.props.selectEvent} deselectEvent={this.props.deselectEvent} setAppStyle={this.props.setAppStyle} />
   }

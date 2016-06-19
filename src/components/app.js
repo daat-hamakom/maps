@@ -5,7 +5,7 @@ import Lightbox from './lightbox'
 import Map from './map'
 import Sidepane from './sidepane'
 import Timeline from './timeline'
-import { fetchEvents, fetchProjects, fetchAnnotations, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline, shiftTimeline,
+import { fetchEvents, fetchProjects, fetchAnnotations, fetchPlaces, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline, shiftTimeline,
   hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent, closeLightbox, openLightbox, setAppStyle } from '../actions'
 
 import '../styles/app.scss'
@@ -18,6 +18,7 @@ class App extends React.Component {
     dispatch(fetchEvents(projId))
     dispatch(fetchProjects())
     dispatch(fetchAnnotations())
+    dispatch(fetchPlaces())
   }
 
   render () {

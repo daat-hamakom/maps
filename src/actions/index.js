@@ -12,6 +12,10 @@ export const REQUEST_ANNOTATIONS = 'REQUEST_ANNOTATIONS'
 export const REQUEST_ANNOTATIONS_FAIL = 'REQUEST_ANNOTATIONS_FAIL'
 export const REQUEST_ANNOTATIONS_SUCCESS = 'REQUEST_ANNOTATIONS_SUCCESS'
 
+export const REQUEST_PLACES = 'REQUEST_PLACES'
+export const REQUEST_PLACES_FAIL = 'REQUEST_PLACES_FAIL'
+export const REQUEST_PLACES_SUCCESS = 'REQUEST_PLACES_SUCCESS'
+
 export const ZOOM_TIMELINE = 'ZOOM_TIMELINE'
 
 export const START_DRAG_TIMELINE = 'START_DRAG_TIMELINE'
@@ -113,6 +117,34 @@ export function fetchAnnotations() {
       )
       .catch(ex =>
         dispatch(requestAnnotationsFail())
+      )
+  }
+}
+
+export function requestPlaces() {
+  return { type: REQUEST_PLACES }
+}
+
+export function requestPlacesFail() {
+  return { type: REQUEST_PLACES_FAIL }
+}
+
+export function requestPlacesSuccess(items) {
+  return { type: REQUEST_PLACES_SUCCESS, items: items }
+}
+
+export function fetchPlaces() {
+  return dispatch => {
+    dispatch(requestPlaces())
+    return fetch('https://daat-hamakom-data.herokuapp.com/api/places/')
+      .then(response =>
+        response.json()
+      )
+      .then(json =>
+        dispatch(requestPlacesSuccess(json))
+      )
+      .catch(ex =>
+        dispatch(requestPlacesFail())
       )
   }
 }

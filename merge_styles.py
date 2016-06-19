@@ -49,41 +49,44 @@ def process_layer(alllayers, prefix, layer, default=False):
 
 
 def merge_styles(styles):
-    with open(styles[0], 'r') as s1:
-        j1 = json.load(s1)
-        j1_name = s1.name.split('.')[0].split('/')[-1]
-    with open(styles[1], 'r') as s2:
-        j2 = json.load(s2)
-        j2_name = s2.name.split('.')[0].split('/')[-1]
 
-    merged = deepcopy(j1)
+    with open(styles[0], 'r') as base:
+        jb = json.load(base)
+        jb_name = base.name.split('.')[0].split('/')[-1]
+
+    merged = deepcopy(jb)
     merged['layers'] = []
 
-    for layer in j1['layers']:
-        l = process_layer(j1['layers'], j1_name, layer, default=True)
+    for layer in jb['layers']:
+        l = process_layer(jb['layers'], jb_name, layer, default=True)
         merged['layers'].append(l)
-
-    for layer in j2['layers']:
-        l = process_layer(j2['layers'], j2_name, layer)
-        merged['layers'].append(l)
-
-    for name, source in j2['sources'].items():
-        if not name in merged['sources']:
-            merged['sources'][name] = source
-
 
     merged['metadata'] = {
         'mapbox:groups': {
-            j1_name: {
-                'name': j1_name,
-                'collapsed': False
-            },
-            j2_name: {
-                'name': j2_name,
+            jb_name: {
+                'name': jb_name,
                 'collapsed': False
             }
         }
     }
+
+    for stylename in styles[1:]:
+        with open(stylename, 'r') as f:
+            j = json.load(f)
+            j_name = f.name.split('.')[0].split('/')[-1]
+
+        for layer in j['layers']:
+            l = process_layer(j['layers'], j_name, layer)
+            merged['layers'].append(l)
+
+        for name, source in j['sources'].items():
+            if not name in merged['sources']:
+                merged['sources'][name] = source
+
+        merged['metadata']['mapbox:groups'][j_name] = {
+            'name': j_name,
+            'collapsed': False
+        }
 
     with open('merged.json', 'w') as f:
         json.dump(merged, f, indent=4)

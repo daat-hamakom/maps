@@ -131,33 +131,18 @@ class MarkerData extends React.Component {
   }
 }
 
-class HoverAnnotation extends React.Component {
+class AnnotationLabel extends React.Component {
 
   render () {
-    const ev = this.props.data.find(
+    let ev = this.props.data.find(
       (e) => this.props.app.hover[0] && this.props.app.hover[0].id == e.id
     )
 
-    let left = 0;
-    if (ev) {
-      const {sd, ed} = _cleanDates(ev.start_date, ev.end_date)
-      const width = this.props.x(ed.toDate()) - this.props.x(sd.toDate())
-      left = this.props.x(sd.toDate()) + width / 2
+    if (!ev) {
+      ev = this.props.data.find(
+        (e) => this.props.app.selected[0] && this.props.app.selected[0].id == e.id
+      )
     }
-
-    const className = this.props.app.hover.length > 0 ? 'annotation' : 'annotation inactive'
-    return <div className={className} style={{left: left + 'px'}}>
-      <span className='text'>{ ev ? ev.title: 'Hello' }</span>
-    </div>
-  }
-}
-
-class SelectAnnotation extends React.Component {
-
-  render () {
-    const ev = this.props.data.find(
-      (e) => this.props.app.selected[0] && this.props.app.selected[0].id == e.id
-    )
 
     let left = 0;
     if (ev) {
@@ -166,7 +151,7 @@ class SelectAnnotation extends React.Component {
       left = this.props.x(sd.toDate()) + width / 2
     }
 
-    const className = this.props.app.hover.length > 0 || this.props.app.selected.length > 0 ? 'annotation' : 'annotation inactive'
+    const className = ev ? 'annotation' : 'annotation inactive'
     return <div className={className} style={{left: left + 'px'}}>
       <span className='text'>{ ev ? ev.title: 'Hello' }</span>
     </div>
@@ -254,7 +239,6 @@ class D3Timeline extends React.Component {
   handleSelected(t, origin) {
     if (t == 'select' && origin != 'timeline') {
       let ev = this.props.app.selected[0]
-      console.log(ev)
       this.centerEvent(ev)
     }
   }
@@ -294,8 +278,7 @@ class D3Timeline extends React.Component {
         <MarkerData ref='marker-data' x={this.x} data={this.props.data} app={this.props.app} timeline={this.props.timeline} openEventSidepane={this.props.openEventSidepane}
           hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent} />
       </svg>
-      <HoverAnnotation data={this.props.data} app={this.props.app} x={this.x} />
-      <SelectAnnotation data={this.props.data} app={this.props.app} x={this.x} />
+      <AnnotationLabel data={this.props.data} app={this.props.app} x={this.x} />
     </div>
   }
 }

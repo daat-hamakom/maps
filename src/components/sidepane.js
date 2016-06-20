@@ -66,7 +66,8 @@ class EventPane extends React.Component {
       thumburl = 'http://img.youtube.com/vi/' + ytid + '/0.jpg'
     }
 
-    return <div id='eventpane' className={evs.length > 0 ? 'open' : 'closed'}>
+    const bottom = 40 + 145 + (this.props.proj ? 200 : 0)
+    return <div id='eventpane' className={evs.length > 0 ? 'open' : 'closed'} style={{bottom: bottom + 'px'}}>
       <span className="media-dots">{medias.map((m, i) => {
           return <span className={this.state.selected_media == i ? 'media-dot selected' : 'media-dot'} key={i} onClick={() => {
             this.setState(Object.assign({}, this.state, { selected_media: i }))
@@ -127,7 +128,8 @@ class EventsPane extends React.Component {
         return -1
       return 0
     })
-    return <div id='eventspane' className={evs.length > 0 ? 'open' : 'closed'} >
+    const bottom = 40 + 145 + (this.props.proj ? 200 : 0)
+    return <div id='eventspane' className={evs.length > 0 ? 'open' : 'closed'} style={{bottom: bottom + 'px'}}>
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
       {evs.map((e) => <div key={'list-event-' + e.id} className='event' onClick={() => {
         this.props.selectEvent([e])
@@ -153,8 +155,8 @@ class Sidepane extends React.Component {
     return <div id='sidepane' className={evs.length > 0 ? 'open' : 'closed'}>
       <SidepaneButton openEventsSidepane={this.props.openEventsSidepane} />
       {evs.length == 1
-        ? <EventPane  app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane} closeSidepane={this.props.closeSidepane} selectMedia={this.props.selectMedia} />
-        : <EventsPane app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane} selectEvent={this.props.selectEvent} closeSidepane={this.props.closeSidepane} />
+        ? <EventPane  app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane} proj={this.props.proj} closeSidepane={this.props.closeSidepane} selectMedia={this.props.selectMedia} />
+        : <EventsPane app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane} proj={this.props.proj} selectEvent={this.props.selectEvent} closeSidepane={this.props.closeSidepane} />
       }
     </div>
   }

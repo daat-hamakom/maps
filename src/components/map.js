@@ -430,7 +430,8 @@ class GLMap extends React.Component {
   }
 
   render () {
-    return <div id='map-container' className={this.state.shrink}>
+    const bottom = 40 + 145 + (this.props.proj ? 200 : 0)
+    return <div id='map-container' className={this.state.shrink} style={{bottom: bottom + 'px'}}>
       <h1 className='title'>Where & When of Jewish Culture</h1>
       <div id='map' className={this.state.rectzoom ? 'rectzoom' : 'norectzoom'} onKeyDown={(e) => {
         if (e.keyCode == 16) this.setState({ rectzoom: true })
@@ -458,7 +459,7 @@ class GLMap extends React.Component {
 class Map extends React.Component {
   render () {
     const view = { style: 'mapbox://styles/mushon/cimez8r6k00plbolzpmeovm8l', center: [35, 31], zoom: 3, container: 'map' }
-    return <GLMap view={view} token={appconf.token.map} app={this.props.app}
+    return <GLMap view={view} token={appconf.token.map} app={this.props.app} proj={this.props.proj}
       events={this.props.events} annotations={this.props.annotations} places={this.props.places}
       hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent}
       selectEvent={this.props.selectEvent} deselectEvent={this.props.deselectEvent} setAppStyle={this.props.setAppStyle} />

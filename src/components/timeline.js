@@ -291,7 +291,7 @@ class FilterBar extends React.Component {
   render () {
     const options = this.props.projects.map((p) => { return { value: p.id, label: p.title }} )
     return <div id='filter'>
-      <Select name="search-bar" disabled={true} value={this.props.project ? this.props.project.id : null}
+      <Select name="search-bar" placeholder='Filter by research, person, organization, place, tag or free text' disabled={true} value={this.props.project ? this.props.project.id : null}
         options={options} multi={true} />
     </div>
   }
@@ -342,7 +342,12 @@ class Timeline extends React.Component {
       endDate = new Date(endDate.substr(0, 4), 12, 31)
     }
 
-    return <div id='timeline'>
+    let height = 40 + 145;
+    if (research) {
+      height = height + 200;
+    }
+
+    return <div id='timeline' style={{height: height + 'px'}}>
       <FilterBar project={research} projects={this.props.projects.items} />
       <D3Timeline width={document.body.offsetWidth} height={140} data={this.props.events.items}
         app={this.props.app} timeline={this.props.timeline}

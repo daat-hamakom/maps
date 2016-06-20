@@ -1,0 +1,186 @@
+{
+    "version": 8,
+    "name": "modernism",
+    "metadata": {
+        "mapbox:autocomposite": true,
+        "mapbox:type": "template"
+    },
+    "center": [
+        1.736198418780475,
+        44.74434278261438
+    ],
+    "zoom": 4.7509022561300736,
+    "bearing": 0,
+    "pitch": 0,
+    "sources": {
+        "composite": {
+            "url": "mapbox://mapbox.mapbox-streets-v7,mushon.9areqx75",
+            "type": "vector"
+        }
+    },
+    "sprite": "mapbox://sprites/mushon/ciphz44q10038dcnk9gc4zolb",
+    "glyphs": "mapbox://fonts/mushon/{fontstack}/{range}.pbf",
+    "layers": [
+        {
+            "id": "background",
+            "type": "background",
+            "interactive": true,
+            "paint": {
+                "background-color": "hsl(359, 89%, 56%)"
+            }
+        },
+        {
+            "id": "background texture",
+            "ref": "background",
+            "interactive": true,
+            "paint": {
+                "background-color": "hsl(22, 77%, 7%)",
+                "background-pattern": "diagonal-64-2w"
+            }
+        },
+        {
+            "id": "landuse_overlay_national_park",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "landuse_overlay",
+            "interactive": true,
+            "filter": [
+                "==",
+                "class",
+                "national_park"
+            ],
+            "paint": {
+                "fill-color": "hsl(0, 0%, 100%)",
+                "fill-opacity": 1,
+                "fill-pattern": "diagonal-64-3w"
+            }
+        },
+        {
+            "id": "landuse_park",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "landuse",
+            "interactive": true,
+            "filter": [
+                "==",
+                "class",
+                "park"
+            ],
+            "paint": {
+                "fill-color": "#f22c2f",
+                "fill-pattern": "diagonal-64-3w"
+            }
+        },
+        {
+            "id": "waterway",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "waterway",
+            "interactive": true,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "$type",
+                    "LineString"
+                ],
+                [
+                    "in",
+                    "class",
+                    "canal",
+                    "river"
+                ]
+            ],
+            "paint": {
+                "line-color": "hsl(217, 100%, 27%)",
+                "line-width": {
+                    "base": 1.4,
+                    "stops": [
+                        [
+                            8,
+                            0.5
+                        ],
+                        [
+                            20,
+                            15
+                        ]
+                    ]
+                }
+            }
+        },
+        {
+            "id": "water",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "water",
+            "interactive": true,
+            "paint": {
+                "fill-color": "hsl(217, 100%, 27%)"
+            }
+        },
+        {
+            "id": "water texture",
+            "ref": "water",
+            "interactive": true,
+            "paint": {
+                "fill-color": "hsl(45, 58%, 79%)",
+                "fill-pattern": "diagonal-64-3w"
+            }
+        },
+        {
+            "id": "building",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "building",
+            "interactive": true,
+            "layout": {
+                "visibility": "none"
+            },
+            "paint": {
+                "fill-color": "hsl(217, 100%, 27%)"
+            }
+        },
+        {
+            "id": "labels: city",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "1789",
+            "interactive": true,
+            "filter": [
+                "==",
+                "zoomlevel",
+                "city"
+            ],
+            "layout": {
+                "text-line-height": 0.9,
+                "text-size": 16,
+                "icon-image": "circle-blue",
+                "text-transform": "uppercase",
+                "text-font": [
+                    "DIN Offc Pro Cond Medium",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-justify": "left",
+                "visibility": "visible",
+                "text-offset": [
+                    0.45,
+                    0
+                ],
+                "icon-size": 0.45,
+                "text-anchor": "left",
+                "text-field": "{title}",
+                "text-rotate": -45
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 100%)",
+                "text-halo-color": "#f22c2f",
+                "text-halo-width": 3
+            }
+        }
+    ],
+    "created": "2016-06-16T07:16:56.438Z",
+    "id": "ciphz44q10038dcnk9gc4zolb",
+    "modified": "2016-06-16T12:54:57.911Z",
+    "owner": "mushon",
+    "draft": false
+}

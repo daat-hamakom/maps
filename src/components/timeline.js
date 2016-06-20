@@ -289,16 +289,10 @@ class D3Timeline extends React.Component {
 
 class FilterBar extends React.Component {
   render () {
-    var options = [
-      { value: 'one', label: 'One' },
-      { value: 'two', label: 'Two' }
-    ];
-
-    function logChange(val) {
-      console.log("Selected: " + val);
-    }
+    const options = this.props.projects.map((p) => { return { value: p.id, label: p.title }} )
     return <div id='filter'>
-      <Select name="form-field-name" value="one" options={options} onChange={logChange} />
+      <Select name="search-bar" disabled={true} value={this.props.project ? this.props.project.id : null}
+        options={options} multi={true} />
     </div>
   }
 }
@@ -333,11 +327,23 @@ class TimelineMetadata extends React.Component {
 
 class Timeline extends React.Component {
   render () {
-    const { startDate, endDate } = this.props.timeline
+    let { startDate, endDate } = this.props.timeline
     const research = this.props.proj ? this.props.projects.items.find((p) => { return p.id == this.props.proj }) : null
 
+    if (research && this.props.events.items.length) {
+      startDate = this.props.events.items.map(e => e.start_date).reduce((prev, cur, curind, ar) => {
+        return cur < prev ? cur : prev
+      })
+      endDate = this.props.events.items.map(e => e.end_date).reduce((prev, cur, curind, ar) => {
+        return cur > prev ? cur : prev
+      })
+
+      startDate = new Date(startDate.substr(0, 4), 1, 1)
+      endDate = new Date(endDate.substr(0, 4), 12, 31)
+    }
+
     return <div id='timeline'>
-      <FilterBar />
+      <FilterBar project={research} projects={this.props.projects.items} />
       <D3Timeline width={document.body.offsetWidth} height={140} data={this.props.events.items}
         app={this.props.app} timeline={this.props.timeline}
         startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}

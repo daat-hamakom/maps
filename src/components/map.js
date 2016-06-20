@@ -20,6 +20,12 @@ const OPACITY_DICT = {
 function getEventStyle (ev) {
   if (ev.start_date < '1789-')  // vive la revolution
     return 'preindustrial'
+  if (ev.start_date < '1939-')  // vive la revolution
+    return 'modernism'
+  if (ev.start_date < '1945-')  // vive la revolution
+    return 'darktimes'
+  if (ev.start_date < '2050-')  // vive la revolution
+    return 'postwar'
   else
     return 'default'
 }
@@ -458,7 +464,7 @@ class GLMap extends React.Component {
 
 class Map extends React.Component {
   render () {
-    const view = { style: 'mapbox://styles/mushon/cimez8r6k00plbolzpmeovm8l', center: [35, 31], zoom: 3, container: 'map' }
+    const view = { style: 'mapbox://styles/mushon/cipnm6qef001rdgm3jdj74ym5', center: [35, 31], zoom: 3, container: 'map' }
     return <GLMap view={view} token={appconf.token.map} app={this.props.app} proj={this.props.proj}
       events={this.props.events} annotations={this.props.annotations} places={this.props.places}
       hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent}

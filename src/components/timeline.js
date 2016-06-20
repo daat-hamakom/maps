@@ -3,8 +3,11 @@ import moment from 'moment'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactFauxDOM from 'react-faux-dom'
+import Select from 'react-select';
 
 import { zoomTimeline } from '../actions'
+
+import 'react-select/dist/react-select.css';
 
 function _cleanDates (ds, de) {
   // take start date and optional end date, both accept 00 ranges
@@ -100,7 +103,8 @@ class MarkerData extends React.Component {
   render () {
     return <g ref='markerData' className='markers'>
       {this.props.data.map((d) => {
-        let {sd, ed} = _cleanDates(d.start_date, d.end_date)
+        const sd = moment(d.start_date)
+        const ed = moment(d.end_date)
 
         const x = this.props.x(sd.toDate())
         const y = 40+(d.id%10)*10
@@ -283,10 +287,68 @@ class D3Timeline extends React.Component {
   }
 }
 
+class FilterBar extends React.Component {
+  render () {
+    const options = this.props.projects.map((p) => { return { value: p.id, label: p.title }} )
+    return <div id='filter'>
+      <Select name="search-bar" placeholder='Filter by research, person, organization, place, tag or free text' disabled={true} value={this.props.project ? this.props.project.id : null}
+        options={options} multi={true} />
+    </div>
+  }
+}
+
+class ProjectMetadata extends React.Component {
+  render () {
+    const p = this.props.project
+    return <div className='project'>
+      <div className='titles'>
+        <h2>{p.title}</h2>
+        <h3>{p.subtitle}</h3>
+        <p>{p.researchers.join(', ')}</p>
+      </div>
+      <div className='description' dangerouslySetInnerHTML={{__html: p.synopsis.replace(/a href/g, 'a target="_blank" href')}}></div>
+      <div className='image'>
+        <img src={p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+      </div>
+    </div>
+  }
+}
+
+class TimelineMetadata extends React.Component {
+  render () {
+    if (this.props.project)
+      return <div id='metadata'>
+        <ProjectMetadata project={this.props.project} />
+      </div>
+    else
+      return <div id='metadata'></div>
+  }
+}
+
 class Timeline extends React.Component {
   render () {
-    const { startDate, endDate } = this.props.timeline
-    return <div id='timeline'>
+    let { startDate, endDate } = this.props.timeline
+    const research = this.props.proj ? this.props.projects.items.find((p) => { return p.id == this.props.proj }) : null
+
+    if (research && this.props.events.items.length) {
+      startDate = this.props.events.items.map(e => e.start_date).reduce((prev, cur, curind, ar) => {
+        return cur < prev ? cur : prev
+      })
+      endDate = this.props.events.items.map(e => e.end_date).reduce((prev, cur, curind, ar) => {
+        return cur > prev ? cur : prev
+      })
+
+      startDate = new Date(startDate.substr(0, 4), 1, 1)
+      endDate = new Date(endDate.substr(0, 4), 12, 31)
+    }
+
+    let height = 40 + 145;
+    if (research) {
+      height = height + 200;
+    }
+
+    return <div id='timeline' style={{height: height + 'px'}}>
+      <FilterBar project={research} projects={this.props.projects.items} />
       <D3Timeline width={document.body.offsetWidth} height={140} data={this.props.events.items}
         app={this.props.app} timeline={this.props.timeline}
         startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
@@ -298,6 +360,7 @@ class Timeline extends React.Component {
         openEventSidepane={this.props.openEventSidepane}
         hoverEnterEvent={this.props.hoverEnterEvent}
         hoverExitEvent={this.props.hoverExitEvent} />
+      <TimelineMetadata project={research} />
     </div>
   }
 }

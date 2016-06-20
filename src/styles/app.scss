@@ -3,8 +3,6 @@
 
 $frameBorder: #222;
 
-$timelineHight: 140px;
-
 * {
     margin: 0;
     padding: 0;
@@ -18,7 +16,6 @@ body {
         top: 30px;
         left: 10px;
         right: 10px;
-        bottom: $timelineHight;
         border: 2px solid $frameBorder;
         border-width: 2px 0 0 2px;
         &.shrink {
@@ -90,7 +87,6 @@ body {
     div#timeline {
         position: absolute;
         bottom: 0;
-        height: $timelineHight;
         width: 100%;
         background-color: white;
         box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.09);
@@ -142,6 +138,45 @@ body {
                 display: none;
             }
         }
+        div#filter {
+            height: 40px;
+            padding: 7px;
+            background-color: #e1e9ed;
+            div.Select-value {
+                background-color: #ffb400;
+                border-radius: 5px;
+                color: #fff;
+            }
+        }
+        div#metadata {
+            div.project {
+                height: 200px;
+                overflow-y: scroll;
+                div.titles {
+                    width: 20%;
+                    float: left;
+                    padding: 10px;
+                    h2 {
+                        font-size: 1.4em;
+                        margin-bottom: 10px;
+                    }
+                    h3 {
+                        font-size: 1em;
+                        color: #d4d4d4;
+                    }
+                }
+                div.description {
+                    width: 40%;
+                    float: left;
+                    padding: 10px;
+                }
+                div.image {
+                    height: 214px;
+                    float: left;
+                    padding: 10px;
+                }
+            }
+        }
     }
     div#sidepane {
         div#sidepaneButton {
@@ -166,7 +201,6 @@ body {
             border-width: 2px 2px 0 0;
             background: #ffffff;
             width: 320px;
-            bottom: $timelineHight;
             overflow-y: scroll;
             box-shadow: -2px 2px 4px #EEF3F6;
             &.closed {

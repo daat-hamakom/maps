@@ -289,7 +289,17 @@ class D3Timeline extends React.Component {
 
 class FilterBar extends React.Component {
   render () {
-    return <div id='filter'></div>
+    var options = [
+      { value: 'one', label: 'One' },
+      { value: 'two', label: 'Two' }
+    ];
+
+    function logChange(val) {
+      console.log("Selected: " + val);
+    }
+    return <div id='filter'>
+      <Select name="form-field-name" value="one" options={options} onChange={logChange} />
+    </div>
   }
 }
 

@@ -80,11 +80,9 @@ class GLMap extends React.Component {
     this.currentStyle = layerPrefix
   }
 
-  addSingleLineLayer(evid, name, pattern) {
-    const annotations = this.props.annotations.items.filter(a => a.events.includes(evid)).filter(a => a.type == name)
-
+  addSingleLineLayer(annotations, evid, name, pattern) {
     const allevs = this.props.events
-    const anns = annotations.map(a => {
+    const anns = annotations.filter(a => a.type == name).map(a => {
       let evs = a.events
       if (a.events[0] != a.origin)
         evs = evs.reverse()
@@ -129,11 +127,9 @@ class GLMap extends React.Component {
     })
   }
 
-  addSingleMarkerLayer(evid, name, icon) {
-    const annotations = this.props.annotations.items.filter(a => a.events.includes(evid)).filter(a => a.type == name)
-
+  addSingleMarkerLayer(annotations, evid, name, icon) {
     const allevs = this.props.events
-    const anns = annotations.map(a => {
+    const anns = annotations.filter(a => a.type == name).map(a => {
       const evcoords = a.events.map(e => allevs.items.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
 
       return evcoords.map(c => { return {
@@ -175,10 +171,11 @@ class GLMap extends React.Component {
   }
 
   addAnnotations (evid) {
-    this.addSingleLineLayer(evid, 'reference', 'ann_origin')
-    this.addSingleLineLayer(evid, 'path', 'ann_travel')
-    this.addSingleLineLayer(evid, 'communication', 'ann_communication')
-    this.addSingleMarkerLayer(evid, 'group', 'grouped-marker')
+    const annotations = this.props.annotations.items.filter(a => a.events.includes(evid))
+    this.addSingleLineLayer(annotations, evid, 'reference', 'ann_origin')
+    this.addSingleLineLayer(annotations, evid, 'path', 'ann_travel')
+    this.addSingleLineLayer(annotations, evid, 'communication', 'ann_communication')
+    this.addSingleMarkerLayer(annotations, evid, 'group', 'grouped-marker')
   }
 
   addPlaceMarkers () {

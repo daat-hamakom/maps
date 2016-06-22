@@ -1,5 +1,6 @@
 @import 'bourbon';
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic);
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,800');
+@import url('https://fonts.googleapis.com/css?family=Vesper+Libre:400,700,900');
 
 $frameBorder: #222;
 
@@ -8,9 +9,21 @@ $frameBorder: #222;
     padding: 0;
 }
 
+p {
+  margin-bottom: 0.5em;
+  line-height: 1.2em;
+}
+
 body {
     font-family: 'Open Sans', $helvetica;
+    font-size: 15px;
     overflow: hidden;
+    .app{
+      position: absolute;
+      height: 100%;
+      width: 100%;
+    }
+
     div#map-container {
         position: absolute;
         top: 30px;
@@ -159,6 +172,8 @@ body {
                     h2 {
                         font-size: 1.4em;
                         margin-bottom: 10px;
+                        font-weight: 800;
+                        line-height: 1em;
                     }
                     h3 {
                         font-size: 1em;
@@ -202,7 +217,7 @@ body {
             background: #ffffff;
             width: 320px;
             overflow-y: scroll;
-            box-shadow: -2px 2px 4px #EEF3F6;
+            box-shadow: -2px 2px 4px rgba(94, 94, 94, 0.29);
             &.closed {
                 display: none;
             }
@@ -217,14 +232,13 @@ body {
             }
             span.close {
                 float: right;
-                background-color: black;
-                color: white;
-                font-size: 1em;
-                padding: 2px 7px;
-                border-radius: 50%;
-                font-weight: bold;
                 margin: 4px;
                 cursor: pointer;
+                background: url('/static/img/card-close.svg');
+                width:20px;
+                height:20px;
+                text-indent: -99999em;
+                display: block;
             }
             img.head {
                 width: 100%;
@@ -249,11 +263,15 @@ body {
             div.content {
                 padding: 25px;
                 h3.project {
-                    color: #ADBEC7;
+                    color: #5D8599;
                     font-size: 14px;
+                    font-weight: 400;
                 }
                 h2.title {
-                    font-size: 20px;
+                    font-size: 1.4em;
+                    margin-bottom: 10px;
+                    font-weight: 800;
+                    line-height: 1em;
                 }
                 div.place {
 
@@ -395,5 +413,44 @@ body {
             }
 
         }
+    }
+    .preindustrial{
+      background: #222;
+      div#map-container{
+        font-family: 'Vesper Libre';
+        border-color: #c8081a;
+        h1 {
+          color: #c8081a;
+        }
+      }
+      div#sidepane{
+        div#eventpane,
+        div#eventspane{
+          background: #eee5dd url(/static/img/preindustrial_tex.svg);
+          // font-size: 16px;
+          font-family: 'Vesper Libre';
+          border-color: #c8081a;
+          div.content{
+            color: #5a3d02;
+            h2{
+              color: #1f1913;
+            }
+            h3.project,
+            div.date {
+              color: #c8081a;
+            }
+            hr {
+              border-color: #c8081a;
+            }
+          }
+        }
+      }
+      div.marker-popup{
+        div.icon,
+        div.connector,
+        div.dot{
+          background-color: #c8081a !important;
+        }
+      }
     }
 }

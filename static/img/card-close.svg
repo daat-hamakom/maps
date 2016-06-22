@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>card-close</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="event-card" transform="translate(-298.000000, -3.000000)">
+            <g id="close" transform="translate(298.000000, 3.000000)">
+                <circle id="Oval-1566" fill="#31373F" cx="10" cy="10" r="10"></circle>
+                <polygon id="Rectangle-9643" fill="#FFFFFF" points="10 8.23223305 7.34834957 5.58058262 5.58058262 7.34834957 8.23223305 10 5.58058262 12.6516504 7.34834957 14.4194174 10 11.767767 12.6516504 14.4194174 14.4194174 12.6516504 11.767767 10 14.4194174 7.34834957 12.6516504 5.58058262 10 8.23223305"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

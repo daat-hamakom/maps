@@ -26,7 +26,7 @@ body {
 
     div#map-container {
         position: absolute;
-        top: 30px;
+        top: 50px;
         left: 10px;
         right: 10px;
         border: 2px solid $frameBorder;
@@ -34,11 +34,18 @@ body {
         &.shrink {
             right: 310px;
         }
-        h1.title {
-            background-color: transparent;
-            position: absolute;
-            top: -22px;
-            font-size: 0.9em;
+        #logo {
+          position: absolute;
+          top: -45px;
+          text-indent: -99999em;
+          overflow: hidden;
+          background: url("/static/img/jewish_cultures_on_the_map.svg") no-repeat;
+          height: 41px;
+          width: 100%;
+          h1.title {
+              background-color: transparent;
+              font-size: 0.9em;
+          }
         }
         div#map-controls {
             position: absolute;
@@ -205,10 +212,10 @@ body {
             width: 50px;
             border-radius: 50%;
             position: absolute;
-            top: 30px;
+            top: 60px;
             right: 20px;
             background: white;
-            line-height: 42px;
+            line-height: 50px;
             text-align: center;
             font-weight: bold;
             font-size: 1.9em;
@@ -425,8 +432,8 @@ body {
       div#map-container{
         font-family: 'Vesper Libre';
         border-color: #c8081a;
-        h1 {
-          color: #c8081a;
+        #logo {
+          background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg");
         }
       }
       div#sidepane{

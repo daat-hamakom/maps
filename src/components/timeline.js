@@ -316,7 +316,7 @@ class ProjectMetadata extends React.Component {
 
 class TimelineMetadata extends React.Component {
   render () {
-    if (this.props.project)
+    if (this.props.project && this.props.app.proj)
       return <div id='metadata'>
         <ProjectMetadata project={this.props.project} />
       </div>
@@ -343,7 +343,7 @@ class Timeline extends React.Component {
     }
 
     let height = 46 + 120; // search + timeline
-    if (research) {
+    if (research && this.props.app.proj) {
       height = height + 200;
     }
 
@@ -360,7 +360,7 @@ class Timeline extends React.Component {
         openEventSidepane={this.props.openEventSidepane}
         hoverEnterEvent={this.props.hoverEnterEvent}
         hoverExitEvent={this.props.hoverExitEvent} />
-      <TimelineMetadata project={research} />
+      <TimelineMetadata project={research} app={this.props.app} />
     </div>
   }
 }

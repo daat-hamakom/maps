@@ -339,6 +339,12 @@ class GLMap extends React.Component {
       }
     })
 
+    this.map.on('mousedown', (e) => {
+      if (this.props.app.proj && this.props.proj) {
+        this.props.toggleProj()
+      }
+    })
+
     this.switchLayers('default', true)
 
     // final resize attempt
@@ -423,6 +429,13 @@ class GLMap extends React.Component {
       hshrink = 'hshrink'
     }
     this.setState(Object.assign({}, this.state, { hshrink: hshrink }))
+
+    let vshrink = 'novshrink'
+    if (props.proj && props.app.proj) {
+      vshrink = 'vshrink'
+    }
+    this.setState(Object.assign({}, this.state, { vshrink: vshrink }))
+    this.triggerResize = true
   }
 
   componentDidUpdate (prevProps, _prevState) {
@@ -433,9 +446,10 @@ class GLMap extends React.Component {
     this.checkSelectAndHover('select', this.props.app.origin, prevProps.app.selected, this.props.app.selected)
     this.checkSelectAndHover('hover', this.props.app.origin, prevProps.app.hover, this.props.app.hover)
 
-    if (!this.resized && this.map) {
+    if ((!this.resized && this.map) || this.triggerResize) {
       // trigger resize as long as we haven't completed map init yet
       this.map.resize()
+      this.triggerResize = false
     }
 
   }
@@ -479,7 +493,8 @@ class Map extends React.Component {
     return <GLMap view={view} token={appconf.token.map} app={this.props.app} proj={this.props.proj}
       events={this.props.events} annotations={this.props.annotations} places={this.props.places}
       hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent}
-      selectEvent={this.props.selectEvent} deselectEvent={this.props.deselectEvent} setAppStyle={this.props.setAppStyle} />
+      selectEvent={this.props.selectEvent} deselectEvent={this.props.deselectEvent} setAppStyle={this.props.setAppStyle}
+      toggleProj={this.props.toggleProj} />
   }
 }
 

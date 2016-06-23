@@ -44,7 +44,8 @@ class GLMap extends React.Component {
   componentWillMount () {
     this.setState({
       rectzoom : false,
-      shrink: 'noshrink'
+      vshrink: 'novshrink',
+      hshrink: 'nohshrink'
     })
   }
 
@@ -417,11 +418,11 @@ class GLMap extends React.Component {
 
   componentWillReceiveProps (props) {
     // check if an event is selected to we can shrink the map
-    let shrink = 'noshrink'
+    let hshrink = 'nohshrink'
     if (props.app.selected.length > 0) {
-      shrink = 'shrink'
+      hshrink = 'hshrink'
     }
-    this.setState(Object.assign({}, this.state, { shrink: shrink }))
+    this.setState(Object.assign({}, this.state, { hshrink: hshrink }))
   }
 
   componentDidUpdate (prevProps, _prevState) {
@@ -444,8 +445,7 @@ class GLMap extends React.Component {
   }
 
   render () {
-    const bottom = 46 + 120 + (this.props.proj ? 200 : 0)
-    return <div id='map-container' className={this.state.shrink} style={{bottom: bottom + 'px'}}>
+    return <div id='map-container' className={this.state.vshrink + ' ' + this.state.hshrink}>
       <div id="logo">
         <h1 className='title'>Jewish Cultures on the Map</h1>
         <p>Interactive Exploration in Time & Space</p>

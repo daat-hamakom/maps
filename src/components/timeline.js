@@ -107,7 +107,7 @@ class MarkerData extends React.Component {
         const ed = moment(d.end_date)
 
         const x = this.props.x(sd.toDate())
-        const y = 40+(d.id%10)*10
+        const y = 20+(d.id%10)*10
         const width = this.props.x(ed.toDate()) - this.props.x(sd.toDate())
         const height = 3
         const r = height + 1
@@ -342,14 +342,14 @@ class Timeline extends React.Component {
       endDate = new Date(endDate.substr(0, 4), 12, 31)
     }
 
-    let height = 40 + 145;
+    let height = 46 + 120; // search + timeline
     if (research) {
       height = height + 200;
     }
 
     return <div id='timeline' style={{height: height + 'px'}}>
       <FilterBar project={research} projects={this.props.projects.items} />
-      <D3Timeline width={document.body.offsetWidth} height={140} data={this.props.events.items}
+      <D3Timeline width={document.body.offsetWidth} height={120} data={this.props.events.items}
         app={this.props.app} timeline={this.props.timeline}
         startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
         onZoom={this.props.onZoom}

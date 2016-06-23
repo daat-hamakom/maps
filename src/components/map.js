@@ -444,7 +444,7 @@ class GLMap extends React.Component {
   }
 
   render () {
-    const bottom = 40 + 145 + (this.props.proj ? 200 : 0)
+    const bottom = 46 + 120 + (this.props.proj ? 200 : 0)
     return <div id='map-container' className={this.state.shrink} style={{bottom: bottom + 'px'}}>
       <div id="logo">
         <h1 className='title'>Jewish Cultures on the Map</h1>

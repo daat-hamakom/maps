@@ -45,7 +45,8 @@ class App extends React.Component {
         shiftTimeline={(b, e) => { dispatch(shiftTimeline(b, e)) }}
         openEventSidepane={(ev) => { dispatch(selectEvent(ev, 'timeline')) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'timeline')) }}
-        hoverExitEvent={() => { dispatch(hoverExitEvent()) }} />
+        hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
+        toggleProj={() => { dispatch(toggleProj()) }} />
 
       <Sidepane app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane}
         proj={this.props.params.projId}

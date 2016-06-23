@@ -348,6 +348,7 @@ class Timeline extends React.Component {
     }
 
     return <div id='timeline' style={{height: height + 'px'}}>
+      <div className='handle-container'><div className='handle' onClick={(e) => { this.props.toggleProj() }}></div></div>
       <FilterBar project={research} projects={this.props.projects.items} />
       <D3Timeline width={document.body.offsetWidth} height={120} data={this.props.events.items}
         app={this.props.app} timeline={this.props.timeline}

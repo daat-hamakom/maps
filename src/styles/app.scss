@@ -164,6 +164,9 @@ body {
         div#filter {
             padding: 5px;
             background-color: #e1e9ed;
+            border-color: #5d8599;
+            border-width: 1px 0px 0px 0px;
+            border-style: solid;
             .Select-control{
               border: none;
               background-color: #fff;
@@ -206,6 +209,23 @@ body {
                     float: left;
                     padding: 10px;
                 }
+            }
+        }
+        div.handle-container {
+            width: 100%;
+            height: 14px;
+            position: absolute;
+            z-index: -200;
+            div.handle {
+                height: 100%;
+                width: 5%;
+                background-color: #e1e9ed;
+                border-radius: 3px 3px 0px 0px;
+                border-color: #5d8599;
+                border-width: 1px 1px 0px 1px;
+                border-style: solid;
+                margin: 0 auto;
+                margin-top: -14px;
             }
         }
     }

@@ -39,7 +39,9 @@
             <text id="Interactive-Explorat" font-family="SuezOne-Regular, Suez One" font-size="16" font-weight="normal" fill="#2DC6E0">
                 <tspan x="21" y="34">Interactive Exploration in Time </tspan>
                 <tspan x="266.424" y="34">&amp;</tspan>
-                <tspan x="279.176" y="34"> Space</tspan>
+            </text>
+            <text id="" font-family="SuezOne-Regular, Suez One" font-size="16" font-weight="normal" fill="#2DC6E0">
+                <tspan x="282" y="34">Space</tspan>
             </text>
         </g>
     </g>

@@ -389,12 +389,11 @@ class GLMap extends React.Component {
 
         this.map.resize()
         this.map.flyTo({ center: coords, zoom: zoom })
-        this.addAnnotations(ev.id)
       }
       else {
        this.map.flyTo({ center: coords })
       }
-
+      this.addAnnotations(ev.id)
     }
   }
 

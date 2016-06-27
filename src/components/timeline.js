@@ -326,21 +326,43 @@ class TimelineMetadata extends React.Component {
 }
 
 class Timeline extends React.Component {
+
+  constructor (props) {
+    super(props)
+    this.resized = false
+  }
+
+  componentDidUpdate () {
+    if (!this.resized && this.props.events.items.length) {
+      const research = this.props.proj ? this.props.projects.items.find((p) => { return p.id == this.props.proj }) : null
+      if (research) {
+        let startDate = this.props.events.items.map(e => e.start_date).reduce((prev, cur, curind, ar) => {
+          return cur < prev ? cur : prev
+        })
+        let endDate = this.props.events.items.map(e => e.end_date).reduce((prev, cur, curind, ar) => {
+          return cur > prev ? cur : prev
+        })
+
+        let ns = moment(startDate)
+        let ne = moment(endDate)
+
+        const padding = (ne - ns) / 20
+
+        ns.subtract(padding)
+        ne.add(padding)
+
+        this.resized = true
+        this.props.shiftTimeline(ns, ne)
+      }
+      else {
+        this.resized = true
+      }
+    }
+  }
+
   render () {
     let { startDate, endDate } = this.props.timeline
     const research = this.props.proj ? this.props.projects.items.find((p) => { return p.id == this.props.proj }) : null
-
-    if (research && this.props.events.items.length) {
-      startDate = this.props.events.items.map(e => e.start_date).reduce((prev, cur, curind, ar) => {
-        return cur < prev ? cur : prev
-      })
-      endDate = this.props.events.items.map(e => e.end_date).reduce((prev, cur, curind, ar) => {
-        return cur > prev ? cur : prev
-      })
-
-      startDate = new Date(startDate.substr(0, 4), 1, 1)
-      endDate = new Date(endDate.substr(0, 4), 12, 31)
-    }
 
     let height = 46 + 120; // search + timeline
     if (research && this.props.app.proj) {

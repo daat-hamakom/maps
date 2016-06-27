@@ -1,6 +1,8 @@
 import moment from 'moment'
 import React from 'react'
 
+import AudioComponent from './utils'
+
 function _cleanDates (ds, de) {
     let sd = moment(ds.replace('-00', '').replace('-00', ''), 'YYYY-MM-DD')
     if (ds.includes('-00-')) {
@@ -94,9 +96,7 @@ class EventPane extends React.Component {
         <div className='date'>{_cleanDates(ev.start_date, ev.end_date)}</div>
         <hr/>
         {ev.media.filter((m) => m.type == 'sound').map((m) => <div className="audio-container">
-            <audio controls>
-              <source src={m.file} type="audio/mpeg"/>
-            </audio>
+            <AudioComponent src={m.file} type='audio/mpeg' key={'audio-' + m.id} />
             <p>{m.title}</p>
           </div>
         )}

@@ -178,7 +178,7 @@ class GLMap extends React.Component {
     const group = annotations.filter(a => a.type == 'group')
 
     let evs = [evid]
-    if (group) {
+    if (group.length) {
       evs = group[0].events
     }
 

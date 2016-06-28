@@ -21,9 +21,9 @@ function getEventStyle (ev) {
   if (ev.start_date < '1789-')  // vive la revolution
     return 'preindustrial'
   if (ev.start_date < '1900-')  // vive la revolution
-    return 'default'            // until we have the Industrial map
+    return 'modernism'            // until we have the Industrial map
   if (ev.start_date < '1939-')  // vive la revolution
-    return 'default'            // until we have the Modernism map
+    return 'modernism'            // until we have the Modernism map
   if (ev.start_date < '1945-')  // vive la revolution
     return 'darktimes'
   if (ev.start_date < '2050-')  // vive la revolution
@@ -485,6 +485,9 @@ class GLMap extends React.Component {
             this.map.setBearing(0)
           }}><img src="/static/img/orient-map.png"></img></li>
         </ul>
+      </div>
+      <div id='map-credit'>
+        <a href="http://www.daat-hamakom.com/" target="blank" title="Daat Hamakom—I-Core In The Study of Modern Jewish Culture">Daat Hamakom</a>
       </div>
     </div>
   }

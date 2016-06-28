@@ -483,6 +483,9 @@ class GLMap extends React.Component {
           }}><img src="/static/img/orient-map.png"></img></li>
         </ul>
       </div>
+      <div id='map-credit'>
+        <a href="http://www.daat-hamakom.com/" target="blank" title="Daat Hamakom—I-Core In The Study of Modern Jewish Culture">Daat Hamakom</a>
+      </div>
     </div>
   }
 

@@ -63,6 +63,20 @@ body {
                 }
             }
         }
+        div#map-credit{
+          margin-top: -25px;
+          z-index: 100;
+          position: absolute;
+          padding: 3px;
+          a {
+            display: block;
+            height: 19px;
+            width: 70px;
+            background: url("/static/img/daat-logo.svg") no-repeat;
+            text-indent: -99999em;
+            overflow: hidden;
+          }
+        }
         div#map {
             width: 100%;
             height: 100%;
@@ -170,6 +184,12 @@ body {
             .Select-control{
               border: none;
               background-color: #fff;
+              .Select-arrow{
+                background: url('/static/img/search.svg');
+                border: none;
+                width: 20px;
+                height: 20px;
+              }
             }
             .Select-placeholder{
               color: #B6C5CB;

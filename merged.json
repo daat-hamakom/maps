@@ -3152,7 +3152,7 @@
         {
             "paint": {
                 "background-opacity": 0, 
-                "background-color": "hsl(359, 89%, 56%)"
+                "background-color": "hsl(36, 32%, 94%)"
             }, 
             "metadata": {
                 "mapbox:group": "modernism"
@@ -3163,21 +3163,8 @@
         }, 
         {
             "paint": {
-                "background-opacity": 0, 
-                "background-pattern": "diagonal-64-2w", 
-                "background-color": "hsl(22, 77%, 7%)"
-            }, 
-            "metadata": {
-                "mapbox:group": "modernism"
-            }, 
-            "ref": "modernism-background", 
-            "id": "modernism-background texture", 
-            "interactive": true
-        }, 
-        {
-            "paint": {
                 "fill-color": "hsl(0, 0%, 100%)", 
-                "fill-pattern": "diagonal-64-3w", 
+                "fill-pattern": "usgs-316-paper", 
                 "fill-opacity": 0
             }, 
             "filter": [
@@ -3197,8 +3184,8 @@
         }, 
         {
             "paint": {
-                "fill-color": "#f22c2f", 
-                "fill-pattern": "diagonal-64-3w", 
+                "fill-color": "hsl(20, 67%, 61%)", 
+                "fill-pattern": "usgs-316-paper", 
                 "fill-opacity": 0
             }, 
             "filter": [
@@ -3217,7 +3204,7 @@
         }, 
         {
             "paint": {
-                "line-color": "hsl(217, 100%, 27%)", 
+                "line-color": "hsl(20, 7%, 50%)", 
                 "line-opacity": 0, 
                 "line-width": {
                     "base": 1.4, 
@@ -3250,15 +3237,48 @@
             "source": "composite", 
             "source-layer": "waterway", 
             "metadata": {
-                "mapbox:group": "modernism"
+                "mapbox:group": "modernism", 
+                "orig-line-opacity": {
+                    "base": 1, 
+                    "stops": [
+                        [
+                            8, 
+                            0
+                        ], 
+                        [
+                            10, 
+                            1
+                        ]
+                    ]
+                }
             }, 
             "type": "line", 
             "id": "modernism-waterway", 
             "interactive": true
         }, 
         {
+            "layout": {}, 
             "paint": {
-                "fill-color": "hsl(217, 100%, 27%)", 
+                "fill-translate": {
+                    "base": 1, 
+                    "stops": [
+                        [
+                            0, 
+                            [
+                                -1, 
+                                -1
+                            ]
+                        ], 
+                        [
+                            7, 
+                            [
+                                -3, 
+                                -3
+                            ]
+                        ]
+                    ]
+                }, 
+                "fill-color": "hsl(20, 92%, 62%)", 
                 "fill-opacity": 0
             }, 
             "source": "composite", 
@@ -3267,28 +3287,66 @@
                 "mapbox:group": "modernism"
             }, 
             "type": "fill", 
-            "id": "modernism-water", 
+            "id": "modernism-water shadow", 
             "interactive": true
         }, 
         {
             "paint": {
-                "fill-color": "hsl(45, 58%, 79%)", 
-                "fill-pattern": "diagonal-64-3w", 
+                "fill-outline-color": "hsl(20, 92%, 62%)", 
+                "fill-color": "hsl(36, 29%, 89%)", 
                 "fill-opacity": 0
             }, 
+            "source": "composite", 
+            "source-layer": "water", 
+            "metadata": {
+                "mapbox:group": "modernism", 
+                "orig-fill-opacity": 1
+            }, 
+            "type": "fill", 
+            "id": "modernism-water", 
+            "interactive": true
+        }, 
+        {
+            "layout": {
+                "visibility": "visible"
+            }, 
+            "paint": {
+                "background-opacity": 0, 
+                "background-pattern": "usgs-316-paper", 
+                "background-color": "hsl(22, 77%, 7%)"
+            }, 
+            "interactive": true, 
+            "type": "background", 
+            "id": "modernism-background texture", 
             "metadata": {
                 "mapbox:group": "modernism"
-            }, 
-            "ref": "modernism-water", 
-            "id": "modernism-water texture", 
-            "interactive": true
+            }
         }, 
         {
             "layout": {
                 "visibility": "none"
             }, 
             "paint": {
-                "fill-color": "hsl(217, 100%, 27%)", 
+                "fill-color": "hsl(45, 58%, 79%)", 
+                "fill-pattern": "usgs-316-paper", 
+                "fill-opacity": 0
+            }, 
+            "source": "composite", 
+            "source-layer": "water", 
+            "metadata": {
+                "mapbox:group": "modernism", 
+                "orig-fill-opacity": 1
+            }, 
+            "type": "fill", 
+            "id": "modernism-water texture", 
+            "interactive": true
+        }, 
+        {
+            "layout": {
+                "visibility": "visible"
+            }, 
+            "paint": {
+                "fill-color": "hsl(45, 100%, 50%)", 
                 "fill-opacity": 0
             }, 
             "source": "composite", 
@@ -3302,45 +3360,286 @@
         }, 
         {
             "layout": {
-                "text-rotate": -45, 
-                "icon-size": 0.45, 
-                "text-size": 16, 
+                "icon-size": 2, 
+                "text-size": {
+                    "base": 1, 
+                    "stops": [
+                        [
+                            11, 
+                            12
+                        ], 
+                        [
+                            22, 
+                            25
+                        ]
+                    ]
+                }, 
                 "text-font": [
-                    "DIN Offc Pro Cond Medium", 
+                    "Rubik One Regular", 
                     "Arial Unicode MS Regular"
                 ], 
                 "visibility": "visible", 
-                "icon-image": "circle-blue", 
+                "icon-image": "rect-red", 
                 "text-field": "{title}", 
-                "text-anchor": "left", 
+                "text-anchor": "top-left", 
                 "text-justify": "left", 
-                "text-line-height": 0.9, 
+                "text-line-height": 0.8, 
                 "text-offset": [
-                    0.45, 
-                    0
+                    -0.15, 
+                    0.5
                 ], 
-                "text-transform": "uppercase"
+                "text-transform": "uppercase", 
+                "text-max-width": 3
             }, 
             "paint": {
-                "text-color": "hsl(0, 0%, 100%)", 
+                "text-color": "hsl(22, 77%, 7%)", 
                 "text-opacity": 0, 
-                "text-halo-width": 3, 
-                "text-halo-color": "#f22c2f", 
                 "icon-opacity": 0
             }, 
             "filter": [
                 "==", 
                 "zoomlevel", 
-                "city"
+                "site"
+            ], 
+            "source": "composite", 
+            "minzoom": 10, 
+            "source-layer": "1789", 
+            "interactive": true, 
+            "type": "symbol", 
+            "id": "modernism-labels: site", 
+            "metadata": {
+                "mapbox:group": "modernism", 
+                "orig-icon-opacity": 0.9
+            }
+        }, 
+        {
+            "layout": {
+                "text-letter-spacing": 0, 
+                "text-rotate": -25, 
+                "icon-size": 0.5, 
+                "text-size": {
+                    "base": 1, 
+                    "stops": [
+                        [
+                            7, 
+                            10
+                        ], 
+                        [
+                            22, 
+                            80
+                        ]
+                    ]
+                }, 
+                "text-font": [
+                    "Rubik One Regular", 
+                    "Arial Unicode MS Regular"
+                ], 
+                "visibility": "visible", 
+                "icon-image": "rect-red-25deg", 
+                "text-field": "{title}", 
+                "text-anchor": "top-left", 
+                "text-justify": "left", 
+                "text-line-height": 0.9, 
+                "text-offset": [
+                    0, 
+                    0
+                ], 
+                "text-transform": "lowercase", 
+                "text-max-width": 3
+            }, 
+            "paint": {
+                "text-color": "hsl(22, 77%, 7%)", 
+                "text-opacity": 0, 
+                "text-halo-width": 4, 
+                "icon-opacity": 0
+            }, 
+            "filter": [
+                "==", 
+                "zoomlevel", 
+                "town"
+            ], 
+            "source": "composite", 
+            "minzoom": 7, 
+            "source-layer": "1789", 
+            "maxzoom": 18, 
+            "interactive": true, 
+            "type": "symbol", 
+            "id": "modernism-labels: town", 
+            "metadata": {
+                "mapbox:group": "modernism", 
+                "orig-icon-opacity": 0.9
+            }
+        }, 
+        {
+            "layout": {
+                "text-letter-spacing": 0, 
+                "text-rotate": -25, 
+                "icon-size": 1, 
+                "text-size": {
+                    "base": 1, 
+                    "stops": [
+                        [
+                            4, 
+                            12
+                        ], 
+                        [
+                            12, 
+                            30
+                        ]
+                    ]
+                }, 
+                "text-font": [
+                    "Rubik One Regular", 
+                    "Arial Unicode MS Regular"
+                ], 
+                "visibility": "visible", 
+                "icon-image": "rect-red-25deg", 
+                "text-field": "{title}", 
+                "text-anchor": "bottom-left", 
+                "text-justify": "left", 
+                "text-line-height": 0.9, 
+                "text-offset": [
+                    0, 
+                    0
+                ], 
+                "text-transform": "lowercase", 
+                "text-max-width": 3
+            }, 
+            "paint": {
+                "text-color": "hsl(22, 77%, 7%)", 
+                "text-opacity": 0, 
+                "text-halo-width": 4, 
+                "icon-opacity": 0
+            }, 
+            "filter": [
+                "in", 
+                "zoomlevel", 
+                "city", 
+                "largecity"
+            ], 
+            "source": "composite", 
+            "minzoom": 4, 
+            "source-layer": "1789", 
+            "maxzoom": 18, 
+            "interactive": true, 
+            "type": "symbol", 
+            "id": "modernism-labels: city", 
+            "metadata": {
+                "mapbox:group": "modernism", 
+                "orig-icon-opacity": 0.9
+            }
+        }, 
+        {
+            "layout": {
+                "text-letter-spacing": 0.1, 
+                "icon-size": 0.5, 
+                "symbol-placement": "point", 
+                "text-size": {
+                    "base": 1, 
+                    "stops": [
+                        [
+                            6, 
+                            12
+                        ], 
+                        [
+                            22, 
+                            80
+                        ]
+                    ]
+                }, 
+                "text-font": [
+                    "Rubik One Regular", 
+                    "Arial Unicode MS Regular"
+                ], 
+                "visibility": "visible", 
+                "text-field": "{title}", 
+                "text-anchor": "center", 
+                "text-justify": "left", 
+                "text-line-height": 0.9, 
+                "text-offset": [
+                    0, 
+                    0
+                ], 
+                "text-transform": "lowercase", 
+                "text-max-width": 3
+            }, 
+            "paint": {
+                "text-color": "#c71b00", 
+                "text-opacity": 0, 
+                "text-halo-width": 4, 
+                "icon-opacity": 0
+            }, 
+            "filter": [
+                "==", 
+                "zoomlevel", 
+                "area"
+            ], 
+            "source": "composite", 
+            "minzoom": 5, 
+            "source-layer": "1789", 
+            "maxzoom": 18, 
+            "interactive": true, 
+            "type": "symbol", 
+            "id": "modernism-labels: area", 
+            "metadata": {
+                "mapbox:group": "modernism", 
+                "orig-icon-opacity": 0.9
+            }
+        }, 
+        {
+            "layout": {
+                "text-rotate": -25, 
+                "icon-size": 1, 
+                "text-size": {
+                    "base": 1, 
+                    "stops": [
+                        [
+                            6, 
+                            20
+                        ], 
+                        [
+                            22, 
+                            80
+                        ]
+                    ]
+                }, 
+                "text-font": [
+                    "Rubik One Regular", 
+                    "Arial Unicode MS Regular"
+                ], 
+                "visibility": "visible", 
+                "icon-image": "rect-red-25deg", 
+                "text-field": "{title}", 
+                "text-anchor": "bottom-left", 
+                "text-justify": "left", 
+                "text-line-height": 0.9, 
+                "text-offset": [
+                    0, 
+                    0.1
+                ], 
+                "text-transform": "lowercase", 
+                "text-max-width": 3
+            }, 
+            "paint": {
+                "text-color": "hsl(22, 35%, 16%)", 
+                "text-opacity": 0, 
+                "icon-opacity": 0
+            }, 
+            "filter": [
+                "==", 
+                "zoomlevel", 
+                "metropolis"
             ], 
             "source": "composite", 
             "source-layer": "1789", 
-            "metadata": {
-                "mapbox:group": "modernism"
-            }, 
+            "maxzoom": 18, 
+            "interactive": true, 
             "type": "symbol", 
-            "id": "modernism-labels: city", 
-            "interactive": true
+            "id": "modernism-labels: metropolis", 
+            "metadata": {
+                "mapbox:group": "modernism", 
+                "orig-icon-opacity": 0.9
+            }
         }, 
         {
             "layout": {}, 

@@ -254,7 +254,8 @@ class GLMap extends React.Component {
             'description': ev.title,
             'evid': ev.id,
             'icon': ev.icon,
-            'marker-symbol': 'default-marker'
+            'marker-symbol': 'default-marker',
+            'style': getEventStyle(ev)
           },
           'geometry': {
             'type': 'Point',
@@ -263,6 +264,8 @@ class GLMap extends React.Component {
         }
       })
     }
+
+    console.log('evmarkers', markerData)
 
     var sourceObj = new mapboxgl.GeoJSONSource({
       'data': markerData,

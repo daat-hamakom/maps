@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-import AudioComponent from './utils'
+import { AudioComponent } from './utils'
 
 function _cleanDates (ds, de) {
     let sd = moment(ds.replace('-00', '').replace('-00', ''), 'YYYY-MM-DD')

@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 import ReactFauxDOM from 'react-faux-dom'
 import Select from 'react-select';
 
+import { getEventStyle } from './utils'
 import { zoomTimeline } from '../actions'
 
 import 'react-select/dist/react-select.css';
@@ -111,8 +112,9 @@ class MarkerData extends React.Component {
         const width = this.props.x(ed.toDate()) - this.props.x(sd.toDate())
         const height = 3
         const r = height + 1
-        const className = (this.props.app.hover[0] && this.props.app.hover[0].id == d.id) || (
+        let className = (this.props.app.hover[0] && this.props.app.hover[0].id == d.id) || (
           this.props.app.selected[0] && this.props.app.selected[0].id == d.id) ? 'marker active' : 'marker inactive'
+        className = className + ' ' + getEventStyle(d)
 
         const rectProps = { x: x, width: width, y: y, height: height, rx: 2, ry: 2, className: className }
         const circleProps = { cx: x + width / 2, cy: y + (r / 2), r: r, className: className }

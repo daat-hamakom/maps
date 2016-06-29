@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { getEventStyle } from './utils'
 import appconf from '../../config/client'
 
 // Need to directly script-load instead of proper import since GL JS doesn't support webpack
@@ -15,21 +16,6 @@ const OPACITY_DICT = {
   'symbol': ['icon-opacity', 'text-opacity'],
   'raster': ['raster-opacity'],
   'circle': ['circle-opacity']
-}
-
-function getEventStyle (ev) {
-  if (ev.start_date < '1789-')  // vive la revolution
-    return 'preindustrial'
-  if (ev.start_date < '1900-')  // vive la revolution
-    return 'modernism'            // until we have the Industrial map
-  if (ev.start_date < '1939-')  // vive la revolution
-    return 'modernism'            // until we have the Modernism map
-  if (ev.start_date < '1945-')  // vive la revolution
-    return 'darktimes'
-  if (ev.start_date < '2050-')  // vive la revolution
-    return 'postwar'
-  else
-    return 'default'
 }
 
 class GLMap extends React.Component {

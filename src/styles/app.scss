@@ -1,6 +1,7 @@
 @import 'bourbon';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,800');
 @import url('https://fonts.googleapis.com/css?family=Vesper+Libre:400,700,900');
+@import url('https://fonts.googleapis.com/css?family=Rubik+One');
 
 $frameBorder: #222;
 
@@ -368,7 +369,6 @@ body {
                 }
                 h2.title {
                     font-size: 1.4em;
-                    margin-bottom: 10px;
                     font-weight: 800;
                     line-height: 1em;
                 }
@@ -513,6 +513,11 @@ body {
 
         }
     }
+
+////////////////////////
+// CONDITIONAL STYLES //
+////////////////////////
+
     .preindustrial{
       background: #222;
       div#map-container{
@@ -555,4 +560,50 @@ body {
           }
         }
     }
+
+    .modernism{
+      background: #fbf5ed;
+      div#map-container{
+        border-color: #f78045;
+        // #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg");}
+      }
+      div#sidepane{
+        div#eventpane,
+        div#eventspane{
+          background: #fcf6ed url(/static/img/modernism_tex.svg);
+          // font-size: 16px;
+          border-color: #f78045;
+          div.content{
+            color: #200e04;
+            h2{
+              color: #200e04;
+              font-family: 'Rubik One';
+              font-weight: 400;
+            }
+            h3.project{
+              color: #f78045;
+              font-weight: 700;
+            }
+            div.date {
+              color: #f78045;
+            }
+            hr {
+              border-top: 3px solid #200e04;
+            }
+          }
+        }
+      }
+      div.mapboxgl-popup {
+          margin-top: -93px !important;  // not sure why we need this, something moved
+          div.marker-popup{
+            div.icon,
+            div.connector,
+            div.dot{
+              background-color: #c8081a !important;
+            }
+          }
+        }
+    }
+
+
 }

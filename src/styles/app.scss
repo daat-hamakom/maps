@@ -128,57 +128,6 @@ body {
         background-color: white;
         box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.09);
         z-index: 10;
-        svg {
-          position: absolute;
-          top:247px;
-        }
-        .axis path, .axis line {
-            fill: none;
-            stroke: #a2b3b7;
-            stroke-width: 1;
-            shape-rendering: crispEdges;
-        }
-        .tick line {
-            color: #a2b3b7;
-        }
-        .tick text {
-            fill: rgba(162, 179, 183, 1);
-            stroke: rgba(162, 179, 183, 0.6);
-            font-size: 0.8em;
-        }
-        rect.marker, circle.marker {
-            fill: rgba(209, 209, 209, 0.7);
-            stroke: rgba(209, 209, 209, 0.7);
-            cursor: pointer;
-            &.active {
-                fill: rgba(45, 198, 224, 0.7);
-                stroke: rgba(45, 198, 224, 0.7);
-            }
-        }
-        line.marker {
-            stroke: #2dc6e0;
-            stroke-width: 1;
-            &.inactive {
-                display: none;
-            }
-        }
-        div.annotation {
-            position: absolute;
-            top: 26px;
-            line-height: 20px;
-            z-index: 100;
-            span.text {
-                color: #ffffff;
-                padding: 1px 5px;
-                font-size: 0.8em;
-                margin-left: -50%;
-                background-color: #2dc6e0;
-                white-space: nowrap;
-            }
-            &.inactive {
-                display: none;
-            }
-        }
         div#filter {
             padding: 5px;
             background-color: #e1e9ed;
@@ -205,10 +154,10 @@ body {
             }
         }
         div#metadata {
-            position: absolute;
-            top:47px;
             div.project {
                 height: 200px;
+                background: #d0dce2;
+                box-shadow: 0 0px 3px 0px #5D8599 inset;
                 overflow-y: scroll;
                 div.titles {
                     width: 20%;
@@ -222,13 +171,16 @@ body {
                     }
                     h3 {
                         font-size: 1em;
-                        color: #d4d4d4;
+                        color: #92ADBA;
                     }
                 }
                 div.description {
                     width: 40%;
                     float: left;
                     padding: 10px;
+                    p {
+                      line-height: 1.4em;
+                    }
                 }
                 div.image {
                     height: 214px;
@@ -236,6 +188,57 @@ body {
                     padding: 10px;
                 }
             }
+        }
+        svg {
+          box-shadow: 0 0 -5px #5D8599;
+          position: absolute;
+          .axis path, .axis line {
+              fill: none;
+              stroke: #a2b3b7;
+              stroke-width: 1;
+              shape-rendering: crispEdges;
+          }
+          .tick line {
+              color: #a2b3b7;
+          }
+          .tick text {
+              fill: rgba(162, 179, 183, 1);
+              stroke: rgba(162, 179, 183, 0.6);
+              font-size: 0.8em;
+          }
+          rect.marker, circle.marker {
+              fill: rgba(209, 209, 209, 0.7);
+              stroke: rgba(209, 209, 209, 0.7);
+              cursor: pointer;
+              &.active {
+                  fill: rgba(45, 198, 224, 0.7);
+                  stroke: rgba(45, 198, 224, 0.7);
+              }
+          }
+          line.marker {
+              stroke: #2dc6e0;
+              stroke-width: 1;
+              &.inactive {
+                  display: none;
+              }
+          }
+          div.annotation {
+              position: absolute;
+              top: 26px;
+              line-height: 20px;
+              z-index: 100;
+              span.text {
+                  color: #ffffff;
+                  padding: 1px 5px;
+                  font-size: 0.8em;
+                  margin-left: -50%;
+                  background-color: #2dc6e0;
+                  white-space: nowrap;
+              }
+              &.inactive {
+                  display: none;
+              }
+          }
         }
         div.handle-container {
             width: 100%;

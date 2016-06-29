@@ -5,11 +5,11 @@
         "mapbox:groups": {
             "1457775441776.539": {
                 "name": "admin",
-                "collapsed": true
+                "collapsed": false
             },
             "1457687299875.739": {
                 "name": "water",
-                "collapsed": true
+                "collapsed": false
             },
             "1457688636265.5356": {
                 "name": "graticules",
@@ -17,11 +17,11 @@
             },
             "1457775853123.0503": {
                 "name": "buildings",
-                "collapsed": true
+                "collapsed": false
             },
             "1444855815295.714": {
                 "name": "Hillshading",
-                "collapsed": true
+                "collapsed": false
             },
             "1444856087950.3635": {
                 "name": "labels",
@@ -29,7 +29,7 @@
             },
             "1457709037464.275": {
                 "name": "landcover",
-                "collapsed": true
+                "collapsed": false
             },
             "1457688930018.0486": {
                 "name": "overlays",
@@ -37,7 +37,7 @@
             },
             "1457688920031.92": {
                 "name": "land",
-                "collapsed": true
+                "collapsed": false
             }
         },
         "mapbox:trackposition": false
@@ -316,7 +316,7 @@
             "interactive": true,
             "paint": {
                 "fill-color": "rgba(219,200,180,0)",
-                "fill-pattern": "tex1-sml",
+                "fill-pattern": "tex1_sml",
                 "fill-opacity": 0
             }
         },
@@ -347,7 +347,7 @@
             "paint": {
                 "fill-color": "#f0dcc8",
                 "fill-opacity": 0,
-                "fill-pattern": "tex1-sml"
+                "fill-pattern": "tex1_sml"
             }
         },
         {
@@ -688,7 +688,7 @@
                         ]
                     ]
                 },
-                "background-pattern": "tex1-sml"
+                "background-pattern": "tex1_sml"
             }
         },
         {
@@ -1210,7 +1210,8 @@
                             20
                         ]
                     ]
-                }
+                },
+                "text-anchor": "top"
             },
             "paint": {
                 "text-color": "rgba(74,62,47,1)"
@@ -1219,7 +1220,7 @@
     ],
     "created": "2016-01-29T09:15:43.895Z",
     "id": "cijzh5hn000zzbmkv7sw2g5os",
-    "modified": "2016-06-16T12:55:10.025Z",
+    "modified": "2016-06-23T12:06:47.203Z",
     "owner": "mushon",
     "draft": false
 }

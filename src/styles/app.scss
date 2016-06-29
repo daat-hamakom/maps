@@ -162,10 +162,14 @@ body {
                 div.titles {
                     width: 20%;
                     float: left;
-                    padding: 10px;
+                    padding-top: 10px;
+                    position: absolute;
+                    * {
+                      margin-left: 10px;
+                      margin-right: 10px;
+                    }
                     h2 {
                         font-size: 1.4em;
-                        margin-bottom: 10px;
                         font-weight: 800;
                         line-height: 1em;
                     }
@@ -173,25 +177,36 @@ body {
                         font-size: 1em;
                         color: #92ADBA;
                     }
+                    p {
+                      margin-top: 0.5em;
+                    }
                 }
                 div.description {
                     width: 40%;
+                    margin-left: 20%;
                     float: left;
-                    padding: 10px;
+                    * {
+                      margin: 10px;
+                    }
                     p {
                       line-height: 1.4em;
                     }
                 }
                 div.image {
                     height: 214px;
+                    width: 40%;
                     float: left;
-                    padding: 10px;
+                    text-align: right;
+                    img {
+                      margin: 10px;
+                    }
                 }
             }
         }
         svg {
-          box-shadow: 0 0 -5px #5D8599;
+          background: #fff;
           position: absolute;
+          bottom:0;
           .axis path, .axis line {
               fill: none;
               stroke: #a2b3b7;
@@ -222,23 +237,23 @@ body {
                   display: none;
               }
           }
-          div.annotation {
-              position: absolute;
-              top: 26px;
-              line-height: 20px;
-              z-index: 100;
-              span.text {
-                  color: #ffffff;
-                  padding: 1px 5px;
-                  font-size: 0.8em;
-                  margin-left: -50%;
-                  background-color: #2dc6e0;
-                  white-space: nowrap;
-              }
-              &.inactive {
-                  display: none;
-              }
-          }
+        }
+        div.annotation {
+            position: absolute;
+            bottom: 119px;
+            line-height: 20px;
+            z-index: 100;
+            span.text {
+                color: #ffffff;
+                padding: 1px 5px;
+                font-size: 0.8em;
+                margin-left: -50%;
+                background-color: #2dc6e0;
+                white-space: nowrap;
+            }
+            &.inactive {
+                display: none;
+            }
         }
         div.handle-container {
             width: 100%;

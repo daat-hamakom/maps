@@ -237,11 +237,20 @@ body {
               font-size: 0.8em;
           }
           rect.marker, circle.marker {
-              fill: rgba(209, 209, 209, 0.7);
+              // fill: rgba(209, 209, 209, 0.7);
+              r: 3px;
+              stroke-width: 4px;
+              stroke: transparent;
               cursor: pointer;
               &.active {
-                  fill: rgba(45, 198, 224, 0.7);
+                  // fill: rgba(45, 198, 224, 0.7);
+                  r: 5px;
+                  stroke-width: 0;
               }
+          }
+          rect.marker {
+            opacity: 0.5;
+            height: 2px
           }
           line.marker {
               stroke: #2dc6e0;
@@ -572,7 +581,8 @@ body {
           }
         }
     }
-    div#timeline svg circle.marker.preindustrial {
+    div#timeline svg circle.marker.preindustrial,
+    div#timeline svg rect.marker.preindustrial {
       fill: #c8081a;
     }
 
@@ -621,7 +631,8 @@ body {
           }
         }
       }
-      div#timeline svg circle.marker.modernism {
+      div#timeline svg circle.marker.modernism,
+      div#timeline svg rect.marker.modernism {
         fill: #200e04;
       }
 
@@ -670,7 +681,8 @@ body {
           }
         }
       }
-    div#timeline svg circle.marker.darktimes {
+    div#timeline svg circle.marker.darktimes,
+    div#timeline svg rect.marker.darktimes {
       fill: #d42027;
     }
 
@@ -717,7 +729,8 @@ body {
           }
         }
     }
-    div#timeline svg circle.marker.postwar {
+    div#timeline svg circle.marker.postwar,
+    div#timeline svg rect.marker.postwar {
       fill: #32668b;
     }
 

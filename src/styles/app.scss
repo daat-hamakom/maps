@@ -630,7 +630,7 @@ body {
       div#sidepane{
         div#eventpane,
         div#eventspane{
-          background: #fcf6ed url(/static/img/postwar_tex.svg);
+          background: #fcf6ed url('/static/img/postwar_tex.png');
           // font-size: 16px;
           border-color: #32668b;
           div.content{
@@ -639,7 +639,6 @@ body {
             div.title{
               color: #32668b;
               font-weight: 700;
-              font-style: italic;
             }
             .project,
             div.date {

@@ -179,21 +179,18 @@ class GLMap extends React.Component {
   }
 
   addPlaceMarkers () {
-    const events1789 = this.props.events.items.filter(e => getEventStyle(e) == 'preindustrial')
-    const places = events1789.map(e => e.place).map((p) => {
-      const coords = p.position.split(',').map(x => +x).reverse()
-      return {
-        'type': 'Feature',
-        'properties': {
-          'title': p.name.split(',')[0],
-          'zoomlevel': p.zoomlevel
-        },
-        'geometry': {
-          'type': 'Point',
-          'coordinates': coords
-        }
+    const places = this.props.events.items.map(e => { return {
+      'type': 'Feature',
+      'properties': {
+        'title': e.place.name.split(',')[0],
+        'zoomlevel': e.place.zoomlevel,
+        'period': getEventStyle(e)
+      },
+      'geometry': {
+        'type': 'Point',
+        'coordinates': e.place.position.split(',').map(x => +x).reverse()
       }
-    })
+    }})
     const data = {
       'type': 'FeatureCollection',
       'features': places

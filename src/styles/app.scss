@@ -238,11 +238,9 @@ body {
           }
           rect.marker, circle.marker {
               fill: rgba(209, 209, 209, 0.7);
-              stroke: rgba(209, 209, 209, 0.7);
               cursor: pointer;
               &.active {
                   fill: rgba(45, 198, 224, 0.7);
-                  stroke: rgba(45, 198, 224, 0.7);
               }
           }
           line.marker {
@@ -574,6 +572,9 @@ body {
           }
         }
     }
+    div#timeline svg circle.marker.preindustrial {
+      fill: #c8081a;
+    }
 
 
     .modernism{
@@ -619,7 +620,10 @@ body {
             }
           }
         }
-    }
+      }
+      div#timeline svg circle.marker.modernism {
+        fill: #200e04;
+      }
 
 
     .darktimes{
@@ -665,6 +669,9 @@ body {
             }
           }
         }
+      }
+    div#timeline svg circle.marker.darktimes {
+      fill: #d42027;
     }
 
     .postwar{
@@ -710,6 +717,8 @@ body {
           }
         }
     }
-
+    div#timeline svg circle.marker.postwar {
+      fill: #32668b;
+    }
 
 }

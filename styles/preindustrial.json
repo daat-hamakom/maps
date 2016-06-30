@@ -21,7 +21,7 @@
             },
             "1444855815295.714": {
                 "name": "Hillshading",
-                "collapsed": false
+                "collapsed": true
             },
             "1444856087950.3635": {
                 "name": "labels",
@@ -66,8 +66,8 @@
             "url": "mapbox://mushon.cik1cfpi",
             "type": "vector"
         },
-        "mapbox://mushon.9areqx75": {
-            "url": "mapbox://mushon.9areqx75",
+        "mapbox://mushon.5ea69xbc": {
+            "url": "mapbox://mushon.5ea69xbc",
             "type": "vector"
         },
         "mapbox://mushon.59w3ai1n": {
@@ -404,18 +404,6 @@
             }
         },
         {
-            "id": "grass-pattern",
-            "metadata": {
-                "mapbox:group": "1457709037464.275"
-            },
-            "ref": "grass",
-            "interactive": true,
-            "paint": {
-                "fill-pattern": "tex1_sml",
-                "fill-opacity": 0
-            }
-        },
-        {
             "id": "hillshade-94",
             "type": "fill",
             "metadata": {
@@ -448,20 +436,6 @@
                     ]
                 },
                 "fill-antialias": false
-            }
-        },
-        {
-            "id": "hillshade-94-pattern",
-            "metadata": {
-                "mapbox:group": "1444855815295.714"
-            },
-            "ref": "hillshade-94",
-            "interactive": true,
-            "paint": {
-                "fill-color": "rgba(41,34,26,1)",
-                "fill-opacity": 0,
-                "fill-antialias": false,
-                "fill-pattern": "texture-64"
             }
         },
         {
@@ -500,20 +474,6 @@
             }
         },
         {
-            "id": "hillshade-89-pattern",
-            "metadata": {
-                "mapbox:group": "1444855815295.714"
-            },
-            "ref": "hillshade-89",
-            "interactive": true,
-            "paint": {
-                "fill-color": "rgba(46,38,29,1)",
-                "fill-opacity": 0,
-                "fill-antialias": false,
-                "fill-pattern": "texture-64"
-            }
-        },
-        {
             "id": "hillshade-78",
             "type": "fill",
             "metadata": {
@@ -545,20 +505,6 @@
                     ]
                 },
                 "fill-antialias": false
-            }
-        },
-        {
-            "id": "hillshade-78-pattern",
-            "metadata": {
-                "mapbox:group": "1444855815295.714"
-            },
-            "ref": "hillshade-78",
-            "interactive": true,
-            "paint": {
-                "fill-color": "rgba(31,25,19,1)",
-                "fill-opacity": 0,
-                "fill-antialias": false,
-                "fill-pattern": "texture-64"
             }
         },
         {
@@ -596,20 +542,6 @@
             }
         },
         {
-            "id": "hillshade-67-pattern",
-            "metadata": {
-                "mapbox:group": "1444855815295.714"
-            },
-            "ref": "hillshade-67",
-            "interactive": true,
-            "paint": {
-                "fill-color": "#2e261d",
-                "fill-opacity": 0,
-                "fill-antialias": false,
-                "fill-pattern": "texture-64"
-            }
-        },
-        {
             "id": "hillshade-56",
             "type": "fill",
             "metadata": {
@@ -642,20 +574,6 @@
                     ]
                 },
                 "fill-antialias": false
-            }
-        },
-        {
-            "id": "hillshade-56-pattern",
-            "metadata": {
-                "mapbox:group": "1444855815295.714"
-            },
-            "ref": "hillshade-56",
-            "interactive": true,
-            "paint": {
-                "fill-color": "rgba(97,83,56,0.44)",
-                "fill-opacity": 0,
-                "fill-antialias": false,
-                "fill-pattern": "texture-64"
             }
         },
         {
@@ -1179,22 +1097,30 @@
             }
         },
         {
-            "id": "labels: city",
+            "id": "labels-city",
             "type": "symbol",
-            "source": "mapbox://mushon.9areqx75",
-            "source-layer": "1789",
+            "source": "mapbox://mushon.5ea69xbc",
+            "source-layer": "places",
             "minzoom": 2,
             "interactive": true,
             "filter": [
-                "==",
-                "zoomlevel",
-                "city"
+                "all",
+                [
+                    "==",
+                    "period",
+                    "preindustrial"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "city"
+                ]
             ],
             "layout": {
                 "visibility": "visible",
                 "text-field": "{title}",
                 "text-font": [
-                    "GoudyMedieval Regular",
+                    "Quintessential Regular",
                     "Arial Unicode MS Regular"
                 ],
                 "text-transform": "none",
@@ -1203,11 +1129,11 @@
                     "stops": [
                         [
                             1,
-                            14
+                            11
                         ],
                         [
-                            4,
-                            20
+                            9,
+                            24
                         ]
                     ]
                 },
@@ -1220,7 +1146,7 @@
     ],
     "created": "2016-01-29T09:15:43.895Z",
     "id": "cijzh5hn000zzbmkv7sw2g5os",
-    "modified": "2016-06-23T12:06:47.203Z",
+    "modified": "2016-06-30T10:56:41.341Z",
     "owner": "mushon",
     "draft": false
 }

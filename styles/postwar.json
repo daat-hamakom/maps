@@ -34,7 +34,7 @@
             },
             "1444850978189.4492": {
                 "name": "Landcovers",
-                "collapsed": true
+                "collapsed": false
             }
         }
     },
@@ -47,7 +47,7 @@
     "pitch": 0,
     "sources": {
         "composite": {
-            "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v7,mushon.277625nf,mushon.cik1cfpi,mushon.73giuah3,mushon.9areqx75",
+            "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v7,mushon.277625nf,mushon.cik1cfpi,mushon.73giuah3,mushon.5ea69xbc",
             "type": "vector"
         }
     },
@@ -1181,15 +1181,23 @@
             }
         },
         {
-            "id": "labels: city",
+            "id": "labels-city",
             "type": "symbol",
             "source": "composite",
-            "source-layer": "1789",
+            "source-layer": "places",
             "interactive": true,
             "filter": [
-                "==",
-                "zoomlevel",
-                "city"
+                "all",
+                [
+                    "==",
+                    "period",
+                    "postwar"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "city"
+                ]
             ],
             "layout": {
                 "visibility": "visible",
@@ -1211,7 +1219,7 @@
     ],
     "created": "2016-04-18T14:32:30.945Z",
     "id": "cin63p0wn0092d4nko4s7508y",
-    "modified": "2016-06-29T12:43:06.170Z",
+    "modified": "2016-06-30T10:48:53.583Z",
     "owner": "mushon",
     "draft": false
 }

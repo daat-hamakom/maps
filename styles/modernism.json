@@ -7,7 +7,7 @@
         "mapbox:groups": {
             "30b520c34435f22b487e3142379efeaa": {
                 "name": "landcover",
-                "collapsed": true
+                "collapsed": false
             },
             "24657fffa0d23a8b7b985d892549a999": {
                 "name": "water",
@@ -16,15 +16,15 @@
         }
     },
     "center": [
-        6.693449346346142,
-        48.74234454681138
+        12.405735453767107,
+        43.333371213164895
     ],
-    "zoom": 4.812706643798621,
+    "zoom": 4.703644163661273,
     "bearing": 0,
     "pitch": 0,
     "sources": {
         "composite": {
-            "url": "mapbox://mapbox.mapbox-streets-v7,mapbox.mapbox-terrain-v2,mushon.9areqx75,mushon.9s0t4u9d",
+            "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v7,mushon.9s0t4u9d,mushon.5ea69xbc",
             "type": "vector"
         }
     },
@@ -37,23 +37,6 @@
             "interactive": true,
             "paint": {
                 "background-color": "hsl(36, 49%, 92%)"
-            }
-        },
-        {
-            "id": "landuse_overlay_national_park",
-            "type": "fill",
-            "source": "composite",
-            "source-layer": "landuse_overlay",
-            "interactive": true,
-            "filter": [
-                "==",
-                "class",
-                "national_park"
-            ],
-            "paint": {
-                "fill-color": "hsl(0, 0%, 100%)",
-                "fill-opacity": 1,
-                "fill-pattern": "usgs-316-paper"
             }
         },
         {
@@ -73,6 +56,23 @@
             "paint": {
                 "fill-color": "hsl(36, 51%, 90%)",
                 "fill-opacity": 1
+            }
+        },
+        {
+            "id": "landuse_overlay_national_park",
+            "type": "fill",
+            "source": "composite",
+            "source-layer": "landuse_overlay",
+            "interactive": true,
+            "filter": [
+                "==",
+                "class",
+                "national_park"
+            ],
+            "paint": {
+                "fill-color": "hsl(0, 0%, 100%)",
+                "fill-opacity": 1,
+                "fill-pattern": "usgs-316-paper"
             }
         },
         {
@@ -247,16 +247,24 @@
             }
         },
         {
-            "id": "labels: site",
+            "id": "labels-site",
             "type": "symbol",
             "source": "composite",
-            "source-layer": "1789",
+            "source-layer": "places",
             "minzoom": 10,
             "interactive": true,
             "filter": [
-                "==",
-                "zoomlevel",
-                "site"
+                "all",
+                [
+                    "==",
+                    "period",
+                    "modernism"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "site"
+                ]
             ],
             "layout": {
                 "text-line-height": 0.8,
@@ -273,7 +281,7 @@
                         ]
                     ]
                 },
-                "icon-image": "rect-black",
+                "icon-image": "rect-red",
                 "text-transform": "uppercase",
                 "text-font": [
                     "Rubik One Regular",
@@ -285,28 +293,36 @@
                     -0.15,
                     0.5
                 ],
-                "icon-size": 2,
+                "icon-size": 1.5,
                 "text-anchor": "top-left",
                 "text-field": "{title}",
                 "text-max-width": 3
             },
             "paint": {
-                "text-color": "hsl(20, 67%, 25%)",
+                "text-color": "hsl(20, 72%, 18%)",
                 "icon-opacity": 0.9
             }
         },
         {
-            "id": "labels: town",
+            "id": "labels-town",
             "type": "symbol",
             "source": "composite",
-            "source-layer": "1789",
+            "source-layer": "places",
             "minzoom": 7,
             "maxzoom": 18,
             "interactive": true,
             "filter": [
-                "==",
-                "zoomlevel",
-                "town"
+                "all",
+                [
+                    "==",
+                    "period",
+                    "modernism"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "town"
+                ]
             ],
             "layout": {
                 "text-line-height": 0.9,
@@ -319,11 +335,11 @@
                         ],
                         [
                             22,
-                            80
+                            50
                         ]
                     ]
                 },
-                "icon-image": "rect-red-25deg",
+                "icon-image": "rect-black-25deg",
                 "text-transform": "lowercase",
                 "text-font": [
                     "Rubik One Regular",
@@ -343,7 +359,7 @@
                 "text-max-width": 3
             },
             "paint": {
-                "text-color": "hsl(20, 67%, 25%)",
+                "text-color": "hsl(20, 92%, 62%)",
                 "icon-opacity": 1,
                 "text-halo-width": 4,
                 "text-translate": [
@@ -353,18 +369,26 @@
             }
         },
         {
-            "id": "labels: city",
+            "id": "labels-city",
             "type": "symbol",
             "source": "composite",
-            "source-layer": "1789",
+            "source-layer": "places",
             "minzoom": 4,
             "maxzoom": 18,
             "interactive": true,
             "filter": [
-                "in",
-                "zoomlevel",
-                "city",
-                "largecity"
+                "all",
+                [
+                    "==",
+                    "period",
+                    "modernism"
+                ],
+                [
+                    "in",
+                    "zoomlevel",
+                    "city",
+                    "largecity"
+                ]
             ],
             "layout": {
                 "text-line-height": 0.9,
@@ -373,7 +397,7 @@
                     "stops": [
                         [
                             4,
-                            12
+                            10
                         ],
                         [
                             12,
@@ -401,7 +425,7 @@
                 "text-max-width": 3
             },
             "paint": {
-                "text-color": "hsl(20, 67%, 25%)",
+                "text-color": "hsl(20, 72%, 18%)",
                 "icon-opacity": 1,
                 "text-halo-width": 4,
                 "text-translate": [
@@ -411,17 +435,25 @@
             }
         },
         {
-            "id": "labels: area",
+            "id": "labels-area",
             "type": "symbol",
             "source": "composite",
-            "source-layer": "1789",
+            "source-layer": "places",
             "minzoom": 5,
             "maxzoom": 18,
             "interactive": true,
             "filter": [
-                "==",
-                "zoomlevel",
-                "area"
+                "all",
+                [
+                    "==",
+                    "period",
+                    "modernism"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "area"
+                ]
             ],
             "layout": {
                 "text-line-height": 0.9,
@@ -463,16 +495,24 @@
             }
         },
         {
-            "id": "labels: metropolis",
+            "id": "labels-metropolis",
             "type": "symbol",
             "source": "composite",
-            "source-layer": "1789",
+            "source-layer": "places",
             "maxzoom": 18,
             "interactive": true,
             "filter": [
-                "==",
-                "zoomlevel",
-                "metropolis"
+                "all",
+                [
+                    "==",
+                    "period",
+                    "modernism"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "metropolis"
+                ]
             ],
             "layout": {
                 "text-line-height": 0.9,
@@ -481,11 +521,11 @@
                     "stops": [
                         [
                             6,
-                            20
+                            16
                         ],
                         [
                             22,
-                            80
+                            60
                         ]
                     ]
                 },
@@ -508,7 +548,7 @@
                 "text-max-width": 3
             },
             "paint": {
-                "text-color": "hsl(20, 67%, 25%)",
+                "text-color": "hsl(20, 72%, 18%)",
                 "icon-opacity": 1,
                 "text-translate": [
                     -1,
@@ -519,7 +559,7 @@
     ],
     "created": "2016-06-16T07:16:56.438Z",
     "id": "ciphz44q10038dcnk9gc4zolb",
-    "modified": "2016-06-29T08:02:42.280Z",
+    "modified": "2016-06-30T10:48:05.260Z",
     "owner": "mushon",
     "draft": false
 }

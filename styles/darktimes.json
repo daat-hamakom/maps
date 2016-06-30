@@ -12,10 +12,10 @@
         }
     },
     "center": [
-        9.734973342506123,
-        50.00814606387746
+        30.88599387027287,
+        39.14517398080906
     ],
-    "zoom": 10.49105361913376,
+    "zoom": 3.721400085892407,
     "bearing": 0,
     "pitch": 0,
     "sources": {
@@ -24,7 +24,7 @@
             "type": "raster"
         },
         "composite": {
-            "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v7,mushon.9areqx75",
+            "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v7,mushon.5ea69xbc",
             "type": "vector"
         }
     },
@@ -357,15 +357,23 @@
             }
         },
         {
-            "id": "labels: city",
+            "id": "labels-city",
             "type": "symbol",
             "source": "composite",
-            "source-layer": "1789",
+            "source-layer": "places",
             "interactive": true,
             "filter": [
-                "==",
-                "zoomlevel",
-                "city"
+                "all",
+                [
+                    "==",
+                    "period",
+                    "darktimes"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "city"
+                ]
             ],
             "layout": {
                 "text-field": "{title}",
@@ -383,7 +391,7 @@
     ],
     "created": "2016-06-05T10:18:39.237Z",
     "id": "cip2frg1i001bcnku0t03cp5i",
-    "modified": "2016-06-29T08:18:46.168Z",
+    "modified": "2016-06-30T10:45:46.611Z",
     "owner": "mushon",
     "draft": false
 }

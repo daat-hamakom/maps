@@ -2302,19 +2302,6 @@
             "interactive": true
         }, 
         {
-            "paint": {
-                "fill-pattern": "tex1_sml", 
-                "fill-opacity": 0
-            }, 
-            "interactive": true, 
-            "ref": "preindustrial-grass", 
-            "id": "preindustrial-grass-pattern", 
-            "metadata": {
-                "mapbox:group": "preindustrial", 
-                "orig-fill-opacity": 0
-            }
-        }, 
-        {
             "layout": {
                 "visibility": "visible"
             }, 
@@ -2348,21 +2335,6 @@
                         ]
                     ]
                 }
-            }
-        }, 
-        {
-            "paint": {
-                "fill-color": "rgba(41,34,26,1)", 
-                "fill-pattern": "texture-64", 
-                "fill-antialias": false, 
-                "fill-opacity": 0
-            }, 
-            "interactive": true, 
-            "ref": "preindustrial-hillshade-94", 
-            "id": "preindustrial-hillshade-94-pattern", 
-            "metadata": {
-                "mapbox:group": "preindustrial", 
-                "orig-fill-opacity": 0
             }
         }, 
         {
@@ -2402,21 +2374,6 @@
             }
         }, 
         {
-            "paint": {
-                "fill-color": "rgba(46,38,29,1)", 
-                "fill-pattern": "texture-64", 
-                "fill-antialias": false, 
-                "fill-opacity": 0
-            }, 
-            "interactive": true, 
-            "ref": "preindustrial-hillshade-89", 
-            "id": "preindustrial-hillshade-89-pattern", 
-            "metadata": {
-                "mapbox:group": "preindustrial", 
-                "orig-fill-opacity": 0
-            }
-        }, 
-        {
             "layout": {
                 "visibility": "visible"
             }, 
@@ -2450,21 +2407,6 @@
             "type": "fill", 
             "id": "preindustrial-hillshade-78", 
             "interactive": true
-        }, 
-        {
-            "paint": {
-                "fill-color": "rgba(31,25,19,1)", 
-                "fill-pattern": "texture-64", 
-                "fill-antialias": false, 
-                "fill-opacity": 0
-            }, 
-            "interactive": true, 
-            "ref": "preindustrial-hillshade-78", 
-            "id": "preindustrial-hillshade-78-pattern", 
-            "metadata": {
-                "mapbox:group": "preindustrial", 
-                "orig-fill-opacity": 0
-            }
         }, 
         {
             "layout": {
@@ -2502,21 +2444,6 @@
             "interactive": true
         }, 
         {
-            "paint": {
-                "fill-color": "#2e261d", 
-                "fill-pattern": "texture-64", 
-                "fill-antialias": false, 
-                "fill-opacity": 0
-            }, 
-            "interactive": true, 
-            "ref": "preindustrial-hillshade-67", 
-            "id": "preindustrial-hillshade-67-pattern", 
-            "metadata": {
-                "mapbox:group": "preindustrial", 
-                "orig-fill-opacity": 0
-            }
-        }, 
-        {
             "layout": {
                 "visibility": "visible"
             }, 
@@ -2550,21 +2477,6 @@
                         ]
                     ]
                 }
-            }
-        }, 
-        {
-            "paint": {
-                "fill-color": "rgba(97,83,56,0.44)", 
-                "fill-pattern": "texture-64", 
-                "fill-antialias": false, 
-                "fill-opacity": 0
-            }, 
-            "interactive": true, 
-            "ref": "preindustrial-hillshade-56", 
-            "id": "preindustrial-hillshade-56-pattern", 
-            "metadata": {
-                "mapbox:group": "preindustrial", 
-                "orig-fill-opacity": 0
             }
         }, 
         {
@@ -3113,16 +3025,16 @@
                     "stops": [
                         [
                             1, 
-                            14
+                            11
                         ], 
                         [
-                            4, 
-                            20
+                            9, 
+                            24
                         ]
                     ]
                 }, 
                 "text-font": [
-                    "GoudyMedieval Regular", 
+                    "Quintessential Regular", 
                     "Arial Unicode MS Regular"
                 ], 
                 "text-anchor": "top", 
@@ -3136,18 +3048,26 @@
                 "icon-opacity": 0
             }, 
             "filter": [
-                "==", 
-                "zoomlevel", 
-                "city"
+                "all", 
+                [
+                    "==", 
+                    "period", 
+                    "preindustrial"
+                ], 
+                [
+                    "==", 
+                    "zoomlevel", 
+                    "city"
+                ]
             ], 
-            "source": "mapbox://mushon.9areqx75", 
+            "source": "mapbox://mushon.5ea69xbc", 
             "minzoom": 2, 
-            "source-layer": "1789", 
+            "source-layer": "places", 
             "metadata": {
                 "mapbox:group": "preindustrial"
             }, 
             "type": "symbol", 
-            "id": "preindustrial-labels: city", 
+            "id": "preindustrial-labels-city", 
             "interactive": true
         }, 
         {
@@ -3160,6 +3080,26 @@
             }, 
             "type": "background", 
             "id": "modernism-background", 
+            "interactive": true
+        }, 
+        {
+            "paint": {
+                "fill-color": "hsl(36, 51%, 90%)", 
+                "fill-opacity": 0
+            }, 
+            "filter": [
+                "==", 
+                "class", 
+                "grass"
+            ], 
+            "source": "composite", 
+            "source-layer": "landcover", 
+            "metadata": {
+                "mapbox:group": "modernism", 
+                "orig-fill-opacity": 1
+            }, 
+            "type": "fill", 
+            "id": "modernism-grass", 
             "interactive": true
         }, 
         {
@@ -3181,26 +3121,6 @@
             }, 
             "type": "fill", 
             "id": "modernism-landuse_overlay_national_park", 
-            "interactive": true
-        }, 
-        {
-            "paint": {
-                "fill-color": "hsl(36, 51%, 90%)", 
-                "fill-opacity": 0
-            }, 
-            "filter": [
-                "==", 
-                "class", 
-                "grass"
-            ], 
-            "source": "composite", 
-            "source-layer": "landcover", 
-            "metadata": {
-                "mapbox:group": "modernism", 
-                "orig-fill-opacity": 1
-            }, 
-            "type": "fill", 
-            "id": "modernism-grass", 
             "interactive": true
         }, 
         {
@@ -3392,7 +3312,7 @@
         }, 
         {
             "layout": {
-                "icon-size": 2, 
+                "icon-size": 1.5, 
                 "text-size": {
                     "base": 1, 
                     "stops": [
@@ -3411,7 +3331,7 @@
                     "Arial Unicode MS Regular"
                 ], 
                 "visibility": "visible", 
-                "icon-image": "rect-black", 
+                "icon-image": "rect-red", 
                 "text-field": "{title}", 
                 "text-anchor": "top-left", 
                 "text-justify": "left", 
@@ -3424,24 +3344,32 @@
                 "text-max-width": 3
             }, 
             "paint": {
-                "text-color": "hsl(20, 67%, 25%)", 
+                "text-color": "hsl(20, 72%, 18%)", 
                 "text-opacity": 0, 
                 "icon-opacity": 0
             }, 
             "filter": [
-                "==", 
-                "zoomlevel", 
-                "site"
+                "all", 
+                [
+                    "==", 
+                    "period", 
+                    "modernism"
+                ], 
+                [
+                    "==", 
+                    "zoomlevel", 
+                    "site"
+                ]
             ], 
             "source": "composite", 
             "minzoom": 10, 
-            "source-layer": "1789", 
+            "source-layer": "places", 
             "metadata": {
                 "mapbox:group": "modernism", 
                 "orig-icon-opacity": 0.9
             }, 
             "type": "symbol", 
-            "id": "modernism-labels: site", 
+            "id": "modernism-labels-site", 
             "interactive": true
         }, 
         {
@@ -3458,7 +3386,7 @@
                         ], 
                         [
                             22, 
-                            80
+                            50
                         ]
                     ]
                 }, 
@@ -3467,7 +3395,7 @@
                     "Arial Unicode MS Regular"
                 ], 
                 "visibility": "visible", 
-                "icon-image": "rect-red-25deg", 
+                "icon-image": "rect-black-25deg", 
                 "text-field": "{title}", 
                 "text-anchor": "bottom-left", 
                 "text-justify": "left", 
@@ -3480,7 +3408,7 @@
                 "text-max-width": 3
             }, 
             "paint": {
-                "text-color": "hsl(20, 67%, 25%)", 
+                "text-color": "hsl(20, 92%, 62%)", 
                 "text-translate": [
                     -1, 
                     -1
@@ -3490,20 +3418,28 @@
                 "icon-opacity": 0
             }, 
             "filter": [
-                "==", 
-                "zoomlevel", 
-                "town"
+                "all", 
+                [
+                    "==", 
+                    "period", 
+                    "modernism"
+                ], 
+                [
+                    "==", 
+                    "zoomlevel", 
+                    "town"
+                ]
             ], 
             "source": "composite", 
             "minzoom": 7, 
-            "source-layer": "1789", 
+            "source-layer": "places", 
             "maxzoom": 18, 
             "metadata": {
                 "mapbox:group": "modernism", 
                 "orig-icon-opacity": 1
             }, 
             "type": "symbol", 
-            "id": "modernism-labels: town", 
+            "id": "modernism-labels-town", 
             "interactive": true
         }, 
         {
@@ -3516,7 +3452,7 @@
                     "stops": [
                         [
                             4, 
-                            12
+                            10
                         ], 
                         [
                             12, 
@@ -3542,7 +3478,7 @@
                 "text-max-width": 3
             }, 
             "paint": {
-                "text-color": "hsl(20, 67%, 25%)", 
+                "text-color": "hsl(20, 72%, 18%)", 
                 "text-translate": [
                     -1, 
                     -1
@@ -3552,21 +3488,29 @@
                 "icon-opacity": 0
             }, 
             "filter": [
-                "in", 
-                "zoomlevel", 
-                "city", 
-                "largecity"
+                "all", 
+                [
+                    "==", 
+                    "period", 
+                    "modernism"
+                ], 
+                [
+                    "in", 
+                    "zoomlevel", 
+                    "city", 
+                    "largecity"
+                ]
             ], 
             "source": "composite", 
             "minzoom": 4, 
-            "source-layer": "1789", 
+            "source-layer": "places", 
             "maxzoom": 18, 
             "metadata": {
                 "mapbox:group": "modernism", 
                 "orig-icon-opacity": 1
             }, 
             "type": "symbol", 
-            "id": "modernism-labels: city", 
+            "id": "modernism-labels-city", 
             "interactive": true
         }, 
         {
@@ -3610,20 +3554,28 @@
                 "icon-opacity": 0
             }, 
             "filter": [
-                "==", 
-                "zoomlevel", 
-                "area"
+                "all", 
+                [
+                    "==", 
+                    "period", 
+                    "modernism"
+                ], 
+                [
+                    "==", 
+                    "zoomlevel", 
+                    "area"
+                ]
             ], 
             "source": "composite", 
             "minzoom": 5, 
-            "source-layer": "1789", 
+            "source-layer": "places", 
             "maxzoom": 18, 
             "metadata": {
                 "mapbox:group": "modernism", 
                 "orig-icon-opacity": 0.9
             }, 
             "type": "symbol", 
-            "id": "modernism-labels: area", 
+            "id": "modernism-labels-area", 
             "interactive": true
         }, 
         {
@@ -3635,11 +3587,11 @@
                     "stops": [
                         [
                             6, 
-                            20
+                            16
                         ], 
                         [
                             22, 
-                            80
+                            60
                         ]
                     ]
                 }, 
@@ -3661,7 +3613,7 @@
                 "text-max-width": 3
             }, 
             "paint": {
-                "text-color": "hsl(20, 67%, 25%)", 
+                "text-color": "hsl(20, 72%, 18%)", 
                 "text-translate": [
                     -1, 
                     -1
@@ -3670,19 +3622,27 @@
                 "icon-opacity": 0
             }, 
             "filter": [
-                "==", 
-                "zoomlevel", 
-                "metropolis"
+                "all", 
+                [
+                    "==", 
+                    "period", 
+                    "modernism"
+                ], 
+                [
+                    "==", 
+                    "zoomlevel", 
+                    "metropolis"
+                ]
             ], 
             "source": "composite", 
-            "source-layer": "1789", 
+            "source-layer": "places", 
             "maxzoom": 18, 
             "metadata": {
                 "mapbox:group": "modernism", 
                 "orig-icon-opacity": 1
             }, 
             "type": "symbol", 
-            "id": "modernism-labels: metropolis", 
+            "id": "modernism-labels-metropolis", 
             "interactive": true
         }, 
         {
@@ -4052,17 +4012,25 @@
                 "icon-opacity": 0
             }, 
             "filter": [
-                "==", 
-                "zoomlevel", 
-                "city"
+                "all", 
+                [
+                    "==", 
+                    "period", 
+                    "darktimes"
+                ], 
+                [
+                    "==", 
+                    "zoomlevel", 
+                    "city"
+                ]
             ], 
             "source": "composite", 
-            "source-layer": "1789", 
+            "source-layer": "places", 
             "metadata": {
                 "mapbox:group": "darktimes"
             }, 
             "type": "symbol", 
-            "id": "darktimes-labels: city", 
+            "id": "darktimes-labels-city", 
             "interactive": true
         }, 
         {
@@ -5265,17 +5233,25 @@
                 "icon-opacity": 0
             }, 
             "filter": [
-                "==", 
-                "zoomlevel", 
-                "city"
+                "all", 
+                [
+                    "==", 
+                    "period", 
+                    "postwar"
+                ], 
+                [
+                    "==", 
+                    "zoomlevel", 
+                    "city"
+                ]
             ], 
             "source": "composite", 
-            "source-layer": "1789", 
+            "source-layer": "places", 
             "metadata": {
                 "mapbox:group": "postwar"
             }, 
             "type": "symbol", 
-            "id": "postwar-labels: city", 
+            "id": "postwar-labels-city", 
             "interactive": true
         }
     ], 
@@ -5293,9 +5269,9 @@
             "url": "mapbox://mushon.2vburh9t", 
             "type": "vector"
         }, 
-        "mapbox://mapbox.satellite": {
-            "url": "mapbox://mapbox.satellite", 
-            "type": "raster"
+        "mapbox://mushon.5ea69xbc": {
+            "url": "mapbox://mushon.5ea69xbc", 
+            "type": "vector"
         }, 
         "composite": {
             "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6", 
@@ -5305,13 +5281,13 @@
             "url": "mapbox://mushon.59w3ai1n", 
             "type": "vector"
         }, 
-        "mapbox://mushon.9areqx75": {
-            "url": "mapbox://mushon.9areqx75", 
-            "type": "vector"
-        }, 
         "mapbox://mapbox.mapbox-terrain-v2": {
             "url": "mapbox://mapbox.mapbox-terrain-v2", 
             "type": "vector"
+        }, 
+        "mapbox://mapbox.satellite": {
+            "url": "mapbox://mapbox.satellite", 
+            "type": "raster"
         }, 
         "mapbox://mushon.277625nf": {
             "url": "mapbox://mushon.277625nf", 

@@ -583,7 +583,10 @@ body {
     }
     div#timeline svg circle.marker.preindustrial,
     div#timeline svg rect.marker.preindustrial {
-      fill: #c8081a;
+      fill: lighten(#c8081a, 20);
+      &.active{
+        fill: #c8081a;
+      }
     }
 
 
@@ -633,7 +636,10 @@ body {
       }
       div#timeline svg circle.marker.modernism,
       div#timeline svg rect.marker.modernism {
-        fill: #200e04;
+        fill: lighten(#200e04, 20);
+        &.active{
+          fill: #200e04;
+        }
       }
 
 
@@ -683,13 +689,19 @@ body {
       }
     div#timeline svg circle.marker.darktimes,
     div#timeline svg rect.marker.darktimes {
-      fill: #d42027;
+        fill: lighten(#d42027, 20);
+        &.active{
+          fill: #d42027;
+        }
     }
+
+    $postwar-primary: #32668b;
+    $postwar-secondary: #97ad26;
 
     .postwar{
       background: #f7fae0;
       div#map-container{
-        border-color: #32668b;
+        border-color: $postwar-primary;
         // #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg");}
       }
       div#sidepane{
@@ -697,24 +709,21 @@ body {
         div#eventspane{
           background: #fcf6ed url('/static/img/postwar_tex.png');
           // font-size: 16px;
-          border-color: #32668b;
+          border-color: $postwar-primary;
           div.content{
-            color: #32668b;
+            color: $postwar-primary;
             h2,
             div.title{
-              color: #32668b;
+              color: $postwar-primary;
               font-weight: 700;
             }
             .project,
             div.date {
-              color: #97ad26 !important;
+              color: $postwar-secondary !important;
               font-weight: 400;
             }
-            div.date {
-              color: #97ad26;
-            }
             hr {
-              border-top: 3px solid #32668b;
+              border-top: 3px solid $postwar-primary;
             }
           }
         }
@@ -724,14 +733,17 @@ body {
             div.icon,
             div.connector,
             div.dot{
-              background-color: #32668b !important;
+              background-color: $postwar-primary !important;
             }
           }
         }
     }
     div#timeline svg circle.marker.postwar,
     div#timeline svg rect.marker.postwar {
-      fill: #32668b;
+      fill: lighten($postwar-primary, 20);
+      &.active{
+        fill: $postwar-primary;
+      }
     }
 
 }

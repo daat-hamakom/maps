@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,800');
 @import url('https://fonts.googleapis.com/css?family=Vesper+Libre:400,700,900');
 @import url('https://fonts.googleapis.com/css?family=Rubik+One');
+@import url('https://fonts.googleapis.com/css?family=Pirata+One');
 
 $frameBorder: #222;
 
@@ -620,6 +621,51 @@ body {
         }
     }
 
+
+    .darktimes{
+      background: #252321;
+      div#map-container{
+        border-color: #d42027;
+        #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg");}
+      }
+      div#sidepane{
+        div#eventpane,
+        div#eventspane{
+          background: #c3bcb3 url('/static/img/postwar_tex.png');
+          border-color: #d42027;
+          div.content{
+            color: #252321;
+            h2,
+            div.title{
+              color: #d42027;
+              font-weight: 400;
+              font-family: 'Pirata One', cursive;
+              font-size: 1.8em;
+            }
+            .project,
+            div.date {
+              color: #d42027 !important;
+              font-weight: 400;
+            }
+            div.date {
+              color: #252321;
+            }
+            hr {
+              border-top: 3px solid #d42027;
+            }
+          }
+        }
+      }
+      div.mapboxgl-popup {
+          div.marker-popup{
+            div.icon,
+            div.connector,
+            div.dot{
+              background-color: #d42027 !important;
+            }
+          }
+        }
+    }
 
     .postwar{
       background: #f7fae0;

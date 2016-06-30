@@ -110,7 +110,7 @@ class MarkerData extends React.Component {
         const x = this.props.x(sd.toDate())
         const y = 20+(d.id%10)*10
         const width = this.props.x(ed.toDate()) - this.props.x(sd.toDate())
-        const height = 3
+        const height = 2
         const r = height + 1
         let className = (this.props.app.hover[0] && this.props.app.hover[0].id == d.id) || (
           this.props.app.selected[0] && this.props.app.selected[0].id == d.id) ? 'marker active' : 'marker inactive'
@@ -202,7 +202,7 @@ class D3Timeline extends React.Component {
   onWheelHandler = (e) => {
     const direction = e.deltaY != Math.abs(e.deltaY) ? 1 : -1
     const pos = e.clientX / this.props.width
-    
+
     this.doZoom(direction, pos)
 
     e.preventDefault()

@@ -112,15 +112,16 @@ class MarkerData extends React.Component {
         const width = this.props.x(ed.toDate()) - this.props.x(sd.toDate())
         const height = 2
         const r = height + 1
+        const evstyle = getEventStyle(d)
         let className = (this.props.app.hover[0] && this.props.app.hover[0].id == d.id) || (
           this.props.app.selected[0] && this.props.app.selected[0].id == d.id) ? 'marker active' : 'marker inactive'
-        className = className + ' ' + getEventStyle(d)
+        className = className + ' ' + evstyle
 
         const rectProps = { x: x, width: width, y: y, height: height, rx: 2, ry: 2, className: className }
         const circleProps = { cx: x + width / 2, cy: y + (r / 2), r: r, className: className }
         const lineProps = { x1: x + width / 2, y1: 0, x2: x + width / 2, y2: y, className: className}
 
-        return <g ref={'marker-' + d.id} key={d.id} onClick={(e) => {
+        return <g className={evstyle} ref={'marker-' + d.id} key={d.id} onClick={(e) => {
           this.props.openEventSidepane([d])
           this.props.hoverExitEvent()
         }} onMouseEnter={(e) => {
@@ -157,7 +158,8 @@ class AnnotationLabel extends React.Component {
       left = this.props.x(sd.toDate()) + width / 2
     }
 
-    const className = ev ? 'annotation' : 'annotation inactive'
+    const className = ev ? 'annotation' + ' ' + getEventStyle(ev) : 'annotation inactive'
+
     return <div className={className} style={{left: left + 'px'}}>
       <span className='text'>{ ev ? ev.title: 'Hello' }</span>
     </div>

@@ -196,6 +196,7 @@ class GLMap extends React.Component {
       'features': places
     }
     const source = new mapboxgl.GeoJSONSource({ 'data': data })
+    this.map.addSource('place-labels', source)
     console.log('places', data)
   }
 
@@ -231,14 +232,15 @@ class GLMap extends React.Component {
     const markerData = {
       'type': 'FeatureCollection',
       'features': this.props.events.items.map((ev, index) => {
+        const style = getEventStyle(ev)
         return {
           'type': 'Feature',
           'properties': {
             'description': ev.title,
             'evid': ev.id,
             'icon': ev.icon,
-            'marker-symbol': 'default-marker',
-            'style': getEventStyle(ev)
+            'marker-symbol': style + '-marker',
+            'style': style
           },
           'geometry': {
             'type': 'Point',
@@ -304,7 +306,7 @@ class GLMap extends React.Component {
 
         this.hovering = true
         this.hover_popup.setLngLat(features[0].geometry.coordinates)
-          .setHTML('<div class="marker-popup">' +
+          .setHTML('<div class="marker-popup ' + features[0].properties.style + '">' +
             '<div class="icon"><img src="' + features[0].properties.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_s.jpg' + '"></div>' +
             '<div class="connector"></div>' +
             '<div class="dot"></div>' +

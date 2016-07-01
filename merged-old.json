@@ -2550,6 +2550,40 @@
             "interactive": true
         },
         {
+            "layout": {},
+            "paint": {
+                "line-blur": 0.5,
+                "line-opacity": 0
+            },
+            "source": "composite",
+            "source-layer": "building",
+            "metadata": {
+                "mapbox:group": "preindustrial",
+                "orig-line-opacity": 0
+            },
+            "type": "line",
+            "id": "preindustrial-building",
+            "interactive": true
+        },
+        {
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "fill-pattern": "texture-64",
+                "fill-opacity": 0
+            },
+            "source": "composite",
+            "source-layer": "building",
+            "metadata": {
+                "mapbox:group": "preindustrial",
+                "orig-fill-opacity": 0
+            },
+            "type": "fill",
+            "id": "preindustrial-building-pattern",
+            "interactive": true
+        },
+        {
             "layout": {
                 "visibility": "visible"
             },
@@ -2991,60 +3025,6 @@
                     "stops": [
                         [
                             1,
-                            10
-                        ],
-                        [
-                            9,
-                            22
-                        ]
-                    ]
-                },
-                "text-font": [
-                    "Quintessential Regular",
-                    "Arial Unicode MS Regular"
-                ],
-                "text-anchor": "center",
-                "text-field": "{title}",
-                "visibility": "visible",
-                "text-padding": 10,
-                "text-transform": "none"
-            },
-            "paint": {
-                "text-color": "rgba(74,62,47,1)",
-                "text-opacity": 0,
-                "icon-opacity": 0
-            },
-            "filter": [
-                "all",
-                [
-                    "==",
-                    "period",
-                    "preindustrial"
-                ],
-                [
-                    "in",
-                    "zoomlevel",
-                    "city",
-                    "largecity"
-                ]
-            ],
-            "source": "mapbox://mushon.5ea69xbc",
-            "minzoom": 2,
-            "source-layer": "places",
-            "metadata": {
-                "mapbox:group": "preindustrial"
-            },
-            "type": "symbol",
-            "id": "preindustrial-labels-city",
-            "interactive": true
-        },
-        {
-            "layout": {
-                "text-size": {
-                    "base": 1,
-                    "stops": [
-                        [
-                            1,
                             11
                         ],
                         [
@@ -3060,60 +3040,6 @@
                 "text-anchor": "top",
                 "text-field": "{title}",
                 "visibility": "visible",
-                "text-padding": 10,
-                "text-transform": "uppercase"
-            },
-            "paint": {
-                "text-color": "rgba(74,62,47,1)",
-                "text-opacity": 0,
-                "icon-opacity": 0
-            },
-            "filter": [
-                "all",
-                [
-                    "==",
-                    "period",
-                    "preindustrial"
-                ],
-                [
-                    "==",
-                    "zoomlevel",
-                    "metropolis"
-                ]
-            ],
-            "source": "mapbox://mushon.5ea69xbc",
-            "minzoom": 2,
-            "source-layer": "places",
-            "metadata": {
-                "mapbox:group": "preindustrial"
-            },
-            "type": "symbol",
-            "id": "preindustrial-labels-metropolis",
-            "interactive": true
-        },
-        {
-            "layout": {
-                "text-letter-spacing": 0.05,
-                "text-size": {
-                    "base": 1,
-                    "stops": [
-                        [
-                            1,
-                            14
-                        ],
-                        [
-                            9,
-                            22
-                        ]
-                    ]
-                },
-                "text-font": [
-                    "Gothic Ultra OT Regular",
-                    "Arial Unicode MS Regular"
-                ],
-                "text-anchor": "center",
-                "text-field": "{title}",
-                "visibility": "visible",
                 "text-transform": "none"
             },
             "paint": {
@@ -3131,7 +3057,7 @@
                 [
                     "==",
                     "zoomlevel",
-                    "area"
+                    "city"
                 ]
             ],
             "source": "mapbox://mushon.5ea69xbc",
@@ -3141,7 +3067,7 @@
                 "mapbox:group": "preindustrial"
             },
             "type": "symbol",
-            "id": "preindustrial-labels-area",
+            "id": "preindustrial-labels-city",
             "interactive": true
         },
         {
@@ -3341,7 +3267,7 @@
                 "fill-color": "hsl(0, 0%, 100%)",
                 "fill-opacity": 0
             },
-            "source": "composite",
+            "source": "mapbox://mushon.277625nf",
             "source-layer": "ne_10m_bathymetry_i_2000",
             "metadata": {
                 "mapbox:group": "modernism",
@@ -3349,41 +3275,6 @@
             },
             "type": "fill",
             "id": "modernism-ne-10m-bathymetry-i-2000",
-            "interactive": true
-        },
-        {
-            "layout": {
-                "visibility": "visible"
-            },
-            "paint": {
-                "fill-translate": [
-                    1,
-                    1
-                ],
-                "fill-color": "hsl(20, 92%, 62%)",
-                "fill-opacity": 0
-            },
-            "source": "composite",
-            "source-layer": "building",
-            "metadata": {
-                "mapbox:group": "modernism",
-                "orig-fill-opacity": 0.35
-            },
-            "type": "fill",
-            "id": "modernism-building shadow",
-            "interactive": true
-        },
-        {
-            "paint": {
-                "fill-color": "hsl(0, 0%, 100%)",
-                "fill-opacity": 0
-            },
-            "metadata": {
-                "mapbox:group": "modernism",
-                "orig-fill-opacity": 1
-            },
-            "ref": "modernism-building shadow",
-            "id": "modernism-building",
             "interactive": true
         },
         {
@@ -3401,6 +3292,23 @@
             "metadata": {
                 "mapbox:group": "modernism"
             }
+        },
+        {
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "fill-color": "hsl(45, 100%, 50%)",
+                "fill-opacity": 0
+            },
+            "source": "composite",
+            "source-layer": "building",
+            "metadata": {
+                "mapbox:group": "modernism"
+            },
+            "type": "fill",
+            "id": "modernism-building",
+            "interactive": true
         },
         {
             "layout": {
@@ -3433,22 +3341,10 @@
                     0.5
                 ],
                 "text-transform": "uppercase",
-                "text-max-width": 3,
-                "icon-offset": [
-                    5,
-                    -1
-                ]
+                "text-max-width": 3
             },
             "paint": {
-                "icon-translate": [
-                    0,
-                    0
-                ],
                 "text-color": "hsl(20, 72%, 18%)",
-                "text-translate": [
-                    7,
-                    0
-                ],
                 "text-opacity": 0,
                 "icon-opacity": 0
             },
@@ -3479,7 +3375,7 @@
         {
             "layout": {
                 "text-letter-spacing": 0,
-                "text-rotate": -15,
+                "text-rotate": -25,
                 "icon-size": 0.5,
                 "text-size": {
                     "base": 1,
@@ -3490,19 +3386,18 @@
                         ],
                         [
                             22,
-                            25
+                            50
                         ]
                     ]
                 },
-                "icon-rotate": -15,
                 "text-font": [
                     "Rubik One Regular",
                     "Arial Unicode MS Regular"
                 ],
                 "visibility": "visible",
-                "icon-image": "rect-red",
+                "icon-image": "rect-black-25deg",
                 "text-field": "{title}",
-                "text-anchor": "top-left",
+                "text-anchor": "bottom-left",
                 "text-justify": "left",
                 "text-line-height": 0.9,
                 "text-offset": [
@@ -3510,16 +3405,12 @@
                     0
                 ],
                 "text-transform": "lowercase",
-                "text-max-width": 3,
-                "icon-offset": [
-                    5,
-                    -1
-                ]
+                "text-max-width": 3
             },
             "paint": {
-                "text-color": "hsl(20, 72%, 18%)",
+                "text-color": "hsl(20, 92%, 62%)",
                 "text-translate": [
-                    4,
+                    -1,
                     -1
                 ],
                 "text-halo-width": 4,
@@ -3544,7 +3435,6 @@
             "source-layer": "places",
             "maxzoom": 18,
             "metadata": {
-                "orig-text-opacity": 0.75,
                 "mapbox:group": "modernism",
                 "orig-icon-opacity": 1
             },
@@ -3555,7 +3445,7 @@
         {
             "layout": {
                 "text-letter-spacing": 0,
-                "text-rotate": -15,
+                "text-rotate": -25,
                 "icon-size": 1,
                 "text-size": {
                     "base": 1,
@@ -3566,46 +3456,36 @@
                         ],
                         [
                             12,
-                            25
+                            30
                         ]
                     ]
                 },
-                "icon-rotate": -15,
                 "text-font": [
                     "Rubik One Regular",
                     "Arial Unicode MS Regular"
                 ],
                 "visibility": "visible",
-                "icon-image": "rect-red",
-                "text-padding": 10,
-                "text-anchor": "top-left",
+                "icon-image": "rect-red-25deg",
+                "text-field": "{title}",
+                "text-anchor": "bottom-left",
                 "text-justify": "left",
                 "text-line-height": 0.9,
                 "text-offset": [
                     0,
                     0
                 ],
-                "text-field": "{title}",
                 "text-transform": "lowercase",
-                "text-max-width": 3,
-                "icon-offset": [
-                    5,
-                    -1
-                ]
+                "text-max-width": 3
             },
             "paint": {
-                "icon-translate": [
-                    0,
-                    0
-                ],
-                "text-opacity": 0,
-                "icon-opacity": 0,
+                "text-color": "hsl(20, 72%, 18%)",
                 "text-translate": [
-                    4,
+                    -1,
                     -1
                 ],
                 "text-halo-width": 4,
-                "text-color": "hsl(20, 72%, 18%)"
+                "text-opacity": 0,
+                "icon-opacity": 0
             },
             "filter": [
                 "all",
@@ -3635,8 +3515,7 @@
         },
         {
             "layout": {
-                "text-letter-spacing": 0.2,
-                "text-rotate": -15,
+                "text-letter-spacing": 0.1,
                 "icon-size": 0.5,
                 "symbol-placement": "point",
                 "text-size": {
@@ -3648,7 +3527,7 @@
                         ],
                         [
                             22,
-                            40
+                            80
                         ]
                     ]
                 },
@@ -3688,6 +3567,7 @@
                 ]
             ],
             "source": "mapbox://mushon.5ea69xbc",
+            "minzoom": 5,
             "source-layer": "places",
             "maxzoom": 18,
             "metadata": {
@@ -3700,52 +3580,42 @@
         },
         {
             "layout": {
-                "text-rotate": -15,
+                "text-rotate": -25,
                 "icon-size": 1,
                 "text-size": {
                     "base": 1,
                     "stops": [
                         [
-                            0,
-                            10
+                            6,
+                            16
                         ],
                         [
                             22,
-                            40
+                            60
                         ]
                     ]
                 },
-                "icon-rotate": -15,
                 "text-font": [
                     "Rubik One Regular",
                     "Arial Unicode MS Regular"
                 ],
                 "visibility": "visible",
-                "icon-image": "rect-red",
-                "text-padding": 20,
-                "text-anchor": "top-left",
+                "icon-image": "rect-red-25deg",
+                "text-field": "{title}",
+                "text-anchor": "bottom-left",
                 "text-justify": "left",
                 "text-line-height": 0.9,
                 "text-offset": [
                     0,
                     0.1
                 ],
-                "text-field": "{title}",
                 "text-transform": "lowercase",
-                "text-max-width": 3,
-                "icon-offset": [
-                    5,
-                    -1
-                ]
+                "text-max-width": 3
             },
             "paint": {
-                "icon-translate": [
-                    0,
-                    0
-                ],
                 "text-color": "hsl(20, 72%, 18%)",
                 "text-translate": [
-                    4,
+                    -1,
                     -1
                 ],
                 "text-opacity": 0,
@@ -4640,7 +4510,7 @@
                 "fill-pattern": "usgs-428-k",
                 "fill-opacity": 0
             },
-            "source": "composite",
+            "source": "mapbox://mushon.277625nf",
             "minzoom": 2,
             "source-layer": "ne_10m_admin_0_countries_lakes",
             "metadata": {
@@ -4758,7 +4628,7 @@
                 "fill-color": "hsl(112, 75%, 92%)",
                 "fill-opacity": 0
             },
-            "source": "mapbox://mushon.cik1cfpi",
+            "source": "mapbox://mushon.277625nf",
             "source-layer": "ne_10m_bathymetry_k_200",
             "metadata": {
                 "mapbox:group": "postwar"
@@ -4775,7 +4645,7 @@
                 "fill-color": "hsl(84, 86%, 93%)",
                 "fill-opacity": 0
             },
-            "source": "mapbox://mushon.73giuah3",
+            "source": "mapbox://mushon.277625nf",
             "source-layer": "ne_10m_bathymetry_h_3000",
             "metadata": {
                 "mapbox:group": "postwar"
@@ -5346,29 +5216,16 @@
         {
             "layout": {
                 "icon-size": 0.5,
-                "text-size": {
-                    "base": 1,
-                    "stops": [
-                        [
-                            8,
-                            11
-                        ],
-                        [
-                            19,
-                            16
-                        ]
-                    ]
-                },
                 "text-font": [
                     "Source Sans Pro Italic",
                     "Arial Unicode MS Regular"
                 ],
-                "visibility": "visible",
+                "text-anchor": "bottom-right",
                 "icon-image": "triangle-11",
                 "text-field": "{title}",
-                "text-anchor": "top-right",
+                "visibility": "visible",
                 "text-justify": "right",
-                "text-transform": "none"
+                "text-size": 14
             },
             "paint": {
                 "text-color": "hsl(205, 47%, 37%)",
@@ -5385,242 +5242,16 @@
                 [
                     "==",
                     "zoomlevel",
-                    "site"
+                    "city"
                 ]
             ],
             "source": "mapbox://mushon.5ea69xbc",
-            "minzoom": 10,
             "source-layer": "places",
-            "interactive": true,
-            "type": "symbol",
-            "id": "postwar-labels-site",
-            "metadata": {
-                "mapbox:group": "postwar"
-            }
-        },
-        {
-            "layout": {
-                "icon-size": 0.5,
-                "text-size": {
-                    "base": 1,
-                    "stops": [
-                        [
-                            6,
-                            11
-                        ],
-                        [
-                            16,
-                            18
-                        ]
-                    ]
-                },
-                "text-font": [
-                    "Source Sans Pro Italic",
-                    "Arial Unicode MS Regular"
-                ],
-                "visibility": "visible",
-                "icon-image": "triangle-11",
-                "text-field": "{title}",
-                "text-anchor": "top-right",
-                "text-justify": "right",
-                "text-transform": "none"
-            },
-            "paint": {
-                "text-color": "hsl(205, 47%, 37%)",
-                "text-opacity": 0,
-                "icon-opacity": 0
-            },
-            "filter": [
-                "all",
-                [
-                    "==",
-                    "period",
-                    "postwar"
-                ],
-                [
-                    "==",
-                    "zoomlevel",
-                    "town"
-                ]
-            ],
-            "source": "mapbox://mushon.5ea69xbc",
-            "minzoom": 6,
-            "source-layer": "places",
-            "maxzoom": 16,
-            "metadata": {
-                "mapbox:group": "postwar"
-            },
-            "type": "symbol",
-            "id": "postwar-labels-town",
-            "interactive": true
-        },
-        {
-            "layout": {
-                "icon-size": 0.5,
-                "text-size": {
-                    "base": 1,
-                    "stops": [
-                        [
-                            3,
-                            13
-                        ],
-                        [
-                            14,
-                            20
-                        ]
-                    ]
-                },
-                "text-font": [
-                    "Source Sans Pro Italic",
-                    "Arial Unicode MS Regular"
-                ],
-                "visibility": "visible",
-                "icon-image": "triangle-11",
-                "text-field": "{title}",
-                "text-anchor": "top-right",
-                "text-justify": "right",
-                "text-transform": "none"
-            },
-            "paint": {
-                "text-color": "hsl(205, 47%, 37%)",
-                "text-opacity": 0,
-                "icon-opacity": 0
-            },
-            "filter": [
-                "all",
-                [
-                    "==",
-                    "period",
-                    "postwar"
-                ],
-                [
-                    "in",
-                    "zoomlevel",
-                    "city",
-                    "largecity"
-                ]
-            ],
-            "source": "mapbox://mushon.5ea69xbc",
-            "minzoom": 3,
-            "source-layer": "places",
-            "maxzoom": 14,
             "metadata": {
                 "mapbox:group": "postwar"
             },
             "type": "symbol",
             "id": "postwar-labels-city",
-            "interactive": true
-        },
-        {
-            "layout": {
-                "text-letter-spacing": 0.3,
-                "icon-size": 0.5,
-                "text-size": {
-                    "base": 1,
-                    "stops": [
-                        [
-                            3,
-                            13
-                        ],
-                        [
-                            14,
-                            20
-                        ]
-                    ]
-                },
-                "text-font": [
-                    "Source Sans Pro Regular",
-                    "Arial Unicode MS Regular"
-                ],
-                "visibility": "visible",
-                "text-field": "{title}",
-                "text-anchor": "center",
-                "text-justify": "right",
-                "text-transform": "uppercase"
-            },
-            "paint": {
-                "text-color": "hsl(109, 38%, 31%)",
-                "text-opacity": 0,
-                "icon-opacity": 0
-            },
-            "filter": [
-                "all",
-                [
-                    "==",
-                    "period",
-                    "postwar"
-                ],
-                [
-                    "==",
-                    "zoomlevel",
-                    "area"
-                ]
-            ],
-            "source": "mapbox://mushon.5ea69xbc",
-            "source-layer": "places",
-            "maxzoom": 12,
-            "interactive": true,
-            "type": "symbol",
-            "id": "postwar-labels-area",
-            "metadata": {
-                "mapbox:group": "postwar"
-            }
-        },
-        {
-            "layout": {
-                "icon-size": 0.5,
-                "text-size": {
-                    "base": 1,
-                    "stops": [
-                        [
-                            0,
-                            12
-                        ],
-                        [
-                            14,
-                            25
-                        ]
-                    ]
-                },
-                "text-font": [
-                    "Source Sans Pro Italic",
-                    "Arial Unicode MS Regular"
-                ],
-                "visibility": "visible",
-                "icon-image": "triangle-11",
-                "text-field": "{title}",
-                "text-anchor": "top-right",
-                "text-justify": "right",
-                "text-padding": 10,
-                "text-transform": "uppercase"
-            },
-            "paint": {
-                "text-color": "hsl(205, 47%, 37%)",
-                "text-opacity": 0,
-                "icon-opacity": 0
-            },
-            "filter": [
-                "all",
-                [
-                    "==",
-                    "period",
-                    "postwar"
-                ],
-                [
-                    "==",
-                    "zoomlevel",
-                    "metropolis"
-                ]
-            ],
-            "source": "mapbox://mushon.5ea69xbc",
-            "minzoom": 1,
-            "source-layer": "places",
-            "maxzoom": 14,
-            "metadata": {
-                "mapbox:group": "postwar"
-            },
-            "type": "symbol",
-            "id": "postwar-labels-metropolis",
             "interactive": true
         }
     ],

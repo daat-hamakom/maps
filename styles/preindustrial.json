@@ -645,38 +645,6 @@
             }
         },
         {
-            "id": "building",
-            "type": "line",
-            "metadata": {
-                "mapbox:group": "1457775853123.0503"
-            },
-            "source": "composite",
-            "source-layer": "building",
-            "interactive": true,
-            "layout": {},
-            "paint": {
-                "line-opacity": 0,
-                "line-blur": 0.5
-            }
-        },
-        {
-            "id": "building-pattern",
-            "type": "fill",
-            "metadata": {
-                "mapbox:group": "1457775853123.0503"
-            },
-            "source": "composite",
-            "source-layer": "building",
-            "interactive": true,
-            "layout": {
-                "visibility": "visible"
-            },
-            "paint": {
-                "fill-pattern": "texture-64",
-                "fill-opacity": 0
-            }
-        },
-        {
             "id": "ne-50m-graticules-10",
             "type": "line",
             "metadata": {
@@ -1111,9 +1079,10 @@
                     "preindustrial"
                 ],
                 [
-                    "==",
+                    "in",
                     "zoomlevel",
-                    "city"
+                    "city",
+                    "largecity"
                 ]
             ],
             "layout": {
@@ -1129,6 +1098,54 @@
                     "stops": [
                         [
                             1,
+                            10
+                        ],
+                        [
+                            9,
+                            22
+                        ]
+                    ]
+                },
+                "text-anchor": "center",
+                "text-padding": 10
+            },
+            "paint": {
+                "text-color": "rgba(74,62,47,1)"
+            }
+        },
+        {
+            "id": "labels-metropolis",
+            "type": "symbol",
+            "source": "mapbox://mushon.5ea69xbc",
+            "source-layer": "places",
+            "minzoom": 2,
+            "interactive": true,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "period",
+                    "preindustrial"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "metropolis"
+                ]
+            ],
+            "layout": {
+                "visibility": "visible",
+                "text-field": "{title}",
+                "text-font": [
+                    "Quintessential Regular",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-transform": "uppercase",
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            1,
                             11
                         ],
                         [
@@ -1137,7 +1154,56 @@
                         ]
                     ]
                 },
-                "text-anchor": "top"
+                "text-anchor": "top",
+                "text-padding": 10
+            },
+            "paint": {
+                "text-color": "rgba(74,62,47,1)"
+            }
+        },
+        {
+            "id": "labels-area",
+            "type": "symbol",
+            "source": "mapbox://mushon.5ea69xbc",
+            "source-layer": "places",
+            "minzoom": 2,
+            "interactive": true,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "period",
+                    "preindustrial"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "area"
+                ]
+            ],
+            "layout": {
+                "visibility": "visible",
+                "text-field": "{title}",
+                "text-font": [
+                    "Gothic Ultra OT Regular",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-transform": "none",
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            1,
+                            14
+                        ],
+                        [
+                            9,
+                            22
+                        ]
+                    ]
+                },
+                "text-anchor": "center",
+                "text-letter-spacing": 0.05
             },
             "paint": {
                 "text-color": "rgba(74,62,47,1)"
@@ -1146,7 +1212,7 @@
     ],
     "created": "2016-01-29T09:15:43.895Z",
     "id": "cijzh5hn000zzbmkv7sw2g5os",
-    "modified": "2016-06-30T10:56:41.341Z",
+    "modified": "2016-07-01T13:32:33.600Z",
     "owner": "mushon",
     "draft": false
 }

@@ -39,10 +39,10 @@
         }
     },
     "center": [
-        13.142394932367381,
-        38.98124119699125
+        34.87055348182986,
+        32.131965025287485
     ],
-    "zoom": 5.6956325581409875,
+    "zoom": 9.929690543328894,
     "bearing": 0,
     "pitch": 0,
     "sources": {
@@ -1181,10 +1181,12 @@
             }
         },
         {
-            "id": "labels-city",
+            "id": "labels-site",
             "type": "symbol",
+            "metadata": {},
             "source": "composite",
             "source-layer": "places",
+            "minzoom": 10,
             "interactive": true,
             "filter": [
                 "all",
@@ -1196,21 +1198,240 @@
                 [
                     "==",
                     "zoomlevel",
-                    "city"
+                    "site"
                 ]
             ],
             "layout": {
-                "visibility": "visible",
-                "text-field": "{title}",
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            8,
+                            11
+                        ],
+                        [
+                            19,
+                            16
+                        ]
+                    ]
+                },
+                "icon-image": "triangle-11",
+                "text-transform": "none",
                 "text-font": [
                     "Source Sans Pro Italic",
                     "Arial Unicode MS Regular"
                 ],
-                "icon-image": "triangle-11",
-                "text-anchor": "bottom-right",
+                "text-justify": "right",
+                "visibility": "visible",
                 "icon-size": 0.5,
-                "text-size": 14,
-                "text-justify": "right"
+                "text-anchor": "top-right",
+                "text-field": "{title}"
+            },
+            "paint": {
+                "text-color": "hsl(205, 47%, 37%)"
+            }
+        },
+        {
+            "id": "labels-town",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "places",
+            "minzoom": 6,
+            "maxzoom": 16,
+            "interactive": true,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "period",
+                    "postwar"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "town"
+                ]
+            ],
+            "layout": {
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            6,
+                            11
+                        ],
+                        [
+                            16,
+                            18
+                        ]
+                    ]
+                },
+                "icon-image": "triangle-11",
+                "text-transform": "none",
+                "text-font": [
+                    "Source Sans Pro Italic",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-justify": "right",
+                "visibility": "visible",
+                "icon-size": 0.5,
+                "text-anchor": "top-right",
+                "text-field": "{title}"
+            },
+            "paint": {
+                "text-color": "hsl(205, 47%, 37%)"
+            }
+        },
+        {
+            "id": "labels-city",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "places",
+            "minzoom": 3,
+            "maxzoom": 14,
+            "interactive": true,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "period",
+                    "postwar"
+                ],
+                [
+                    "in",
+                    "zoomlevel",
+                    "city",
+                    "largecity"
+                ]
+            ],
+            "layout": {
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            3,
+                            13
+                        ],
+                        [
+                            14,
+                            20
+                        ]
+                    ]
+                },
+                "icon-image": "triangle-11",
+                "text-transform": "none",
+                "text-font": [
+                    "Source Sans Pro Italic",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-justify": "right",
+                "visibility": "visible",
+                "icon-size": 0.5,
+                "text-anchor": "top-right",
+                "text-field": "{title}"
+            },
+            "paint": {
+                "text-color": "hsl(205, 47%, 37%)"
+            }
+        },
+        {
+            "id": "labels-area",
+            "type": "symbol",
+            "metadata": {},
+            "source": "composite",
+            "source-layer": "places",
+            "maxzoom": 12,
+            "interactive": true,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "period",
+                    "postwar"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "area"
+                ]
+            ],
+            "layout": {
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            3,
+                            13
+                        ],
+                        [
+                            14,
+                            20
+                        ]
+                    ]
+                },
+                "text-transform": "uppercase",
+                "text-font": [
+                    "Source Sans Pro Regular",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-justify": "right",
+                "visibility": "visible",
+                "icon-size": 0.5,
+                "text-anchor": "center",
+                "text-field": "{title}",
+                "text-letter-spacing": 0.3
+            },
+            "paint": {
+                "text-color": "hsl(109, 38%, 31%)"
+            }
+        },
+        {
+            "id": "labels-metropolis",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "places",
+            "minzoom": 1,
+            "maxzoom": 14,
+            "interactive": true,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "period",
+                    "postwar"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "metropolis"
+                ]
+            ],
+            "layout": {
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            0,
+                            12
+                        ],
+                        [
+                            14,
+                            25
+                        ]
+                    ]
+                },
+                "icon-image": "triangle-11",
+                "text-transform": "uppercase",
+                "text-font": [
+                    "Source Sans Pro Italic",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-justify": "right",
+                "text-padding": 10,
+                "visibility": "visible",
+                "icon-size": 0.5,
+                "text-anchor": "top-right",
+                "text-field": "{title}"
             },
             "paint": {
                 "text-color": "hsl(205, 47%, 37%)"
@@ -1219,7 +1440,7 @@
     ],
     "created": "2016-04-18T14:32:30.945Z",
     "id": "cin63p0wn0092d4nko4s7508y",
-    "modified": "2016-06-30T10:48:53.583Z",
+    "modified": "2016-07-01T12:38:03.940Z",
     "owner": "mushon",
     "draft": false
 }

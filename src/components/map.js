@@ -357,7 +357,7 @@ class GLMap extends React.Component {
 
     const coords = ev.place.position.split(',').map(x => +x).reverse()
     popup.setLngLat(coords)
-      .setHTML('<div class="marker-popup">' +
+      .setHTML('<div class="marker-popup ' + getEventStyle(ev) + '">' +
         '<div class="icon"><img src="' + ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_s.jpg' + '"></div>' +
         '<div class="connector"></div>' +
         '<div class="dot"></div>' +

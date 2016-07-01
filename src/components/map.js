@@ -159,7 +159,7 @@ class GLMap extends React.Component {
     })
   }
 
-  addAnnotations (evid) {
+  addAnnotations (evid, period) {
     let annotations = this.props.annotations.items.filter(a => a.events.includes(evid))
     const group = annotations.filter(a => a.type == 'group')
 
@@ -169,13 +169,13 @@ class GLMap extends React.Component {
     }
 
     // only show group for the single event
-    this.addSingleMarkerLayer(annotations, evid, 'group', 'grouped-marker')
+    this.addSingleMarkerLayer(annotations, evid, 'group', period + '-grouped-marker')
 
     annotations = this.props.annotations.items.filter(a => a.events.filter(x => evs.indexOf(x) > -1).length)
     // for the rest, extend annotations to the group
-    this.addSingleLineLayer(annotations, evid, 'reference', 'ann_origin')
-    this.addSingleLineLayer(annotations, evid, 'path', 'ann_travel')
-    this.addSingleLineLayer(annotations, evid, 'communication', 'ann_communication')
+    this.addSingleLineLayer(annotations, evid, 'reference', period + '-ann_origin')
+    this.addSingleLineLayer(annotations, evid, 'path', period + '-ann_travel')
+    this.addSingleLineLayer(annotations, evid, 'communication', period + '-ann_communication')
   }
 
   addPlaceMarkers () {
@@ -381,7 +381,7 @@ class GLMap extends React.Component {
       else {
        this.map.flyTo({ center: coords })
       }
-      this.addAnnotations(ev.id)
+      this.addAnnotations(ev.id, getEventStyle(ev))
     }
   }
 

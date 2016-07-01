@@ -441,7 +441,7 @@ body {
                     float: left;
                     width: 70px;
                     height: 70px;
-                    margin: 15px;
+                    margin: 15px 15px 0 0;
                     img {
                         width: 70px;
                         height: 70px;
@@ -449,6 +449,8 @@ body {
                     }
                 }
                 span.event-data {
+                  float: left;
+                  width: 185px;
                     div.project {
                         padding-top: 15px;
                         font-size: 0.8em;
@@ -456,8 +458,6 @@ body {
                     }
                     div.title {
                         font-size: 1em;
-                        text-overflow: ellipsis;
-                        max-height: 3em;
                     }
                     div.date {
                         font-size: 0.9em;

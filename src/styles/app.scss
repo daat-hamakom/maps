@@ -545,7 +545,7 @@ body {
     $preindustrial-primary: #795a2e;
     $preindustrial-secondary: #1f1913;
 
-    .preindustrial{
+    .app.preindustrial{
       background: $preindustrial-primary;
       div#map-container{
         // border-color: $preindustrial-primary;
@@ -574,28 +574,34 @@ body {
           }
         }
       }
-      div.mapboxgl-popup {
-          div.marker-popup{
-            div.icon,
-            div.connector,
-            div.dot{
-              background-color: $preindustrial-primary !important;
-            }
-          }
-        }
     }
-    div#timeline svg circle.marker.preindustrial,
-    div#timeline svg rect.marker.preindustrial {
-      fill: lighten($preindustrial-primary, 20);
-      &.active{
-        fill: $preindustrial-primary;
+    div.marker-popup.preindustrial{
+      div.icon,
+      div.connector,
+      div.dot{
+        background-color: $preindustrial-primary !important;
+      }
+    }
+    div.annotation.preindustrial span.text{
+      background-color: $preindustrial-primary !important;
+    }
+    div#timeline svg g.preindustrial{
+      circle.marker,
+      rect.marker{
+        fill: lighten($preindustrial-primary, 20);
+        &.active{
+          fill: $preindustrial-primary;
+        }
+      }
+      line.marker{
+        stroke: $preindustrial-primary;
       }
     }
 
     $modernism-primary: #f78045;
-    $modernism-secondary: #200e04;
+    $modernism-secondary: #4f230d;
 
-    .modernism{
+    .app.modernism{
       background: $modernism-primary;
       div#map-container{
         // border-color: $modernism-primary;
@@ -629,28 +635,35 @@ body {
           }
         }
       }
-      div.mapboxgl-popup {
-          div.marker-popup{
-            div.icon,
-            div.connector,
-            div.dot{
-              background-color: $modernism-primary !important;
-            }
-          }
-        }
-      }
-      div#timeline svg circle.marker.modernism,
-      div#timeline svg rect.marker.modernism {
+    }
+    div#timeline svg g.modernism{
+      circle.marker,
+      rect.marker{
         fill: lighten($modernism-primary, 20);
         &.active{
           fill: $modernism-primary;
         }
       }
+      line.marker{
+        stroke: $modernism-primary;
+      }
+    }
+    div.annotation.modernism span.text{
+      background-color: $modernism-primary !important;
+    }
+    div.marker-popup.modernism{
+      div.icon,
+      div.connector,
+      div.dot{
+        background-color: $modernism-primary !important;
+      }
+    }
 
-      $darktimes-primary: #d42027;
-      $darktimes-secondary: #252321;
+    $darktimes-primary: #d42027;
+    $darktimes-secondary: #252321;
 
-    .darktimes{
+
+    .app.darktimes{
       background: $darktimes-primary;
       div#map-container{
         border-color: $darktimes-secondary;
@@ -684,28 +697,34 @@ body {
           }
         }
       }
-      div.mapboxgl-popup {
-          div.marker-popup{
-            div.icon,
-            div.connector,
-            div.dot{
-              background-color: $darktimes-primary !important;
-            }
-          }
-        }
-      }
-    div#timeline svg circle.marker.darktimes,
-    div#timeline svg rect.marker.darktimes {
+    }
+    div#timeline svg g.darktimes{
+      circle.marker,
+      rect.marker{
         fill: lighten($darktimes-primary, 20);
         &.active{
           fill: $darktimes-primary;
         }
+      }
+      line.marker{
+        stroke: $darktimes-primary;
+      }
+    }
+    div.annotation.darktimes span.text{
+      background-color: $darktimes-primary !important;
+    }
+    div.marker-popup.darktimes{
+      div.icon,
+      div.connector,
+      div.dot{
+        background-color: $darktimes-primary !important;
+      }
     }
 
     $postwar-primary: #32668b;
     $postwar-secondary: #97ad26;
 
-    .postwar{
+    .app.postwar{
       background: $postwar-primary;
       div#map-container{
         border-color: $postwar-secondary;
@@ -735,21 +754,27 @@ body {
           }
         }
       }
-      div.mapboxgl-popup {
-          div.marker-popup{
-            div.icon,
-            div.connector,
-            div.dot{
-              background-color: $postwar-primary !important;
-            }
-          }
-        }
     }
-    div#timeline svg circle.marker.postwar,
-    div#timeline svg rect.marker.postwar {
-      fill: lighten($postwar-primary, 20);
-      &.active{
-        fill: $postwar-primary;
+    div#timeline svg g.postwar{
+      circle.marker,
+      rect.marker{
+        fill: lighten($postwar-secondary, 20);
+        &.active{
+          fill: $postwar-secondary;
+        }
+      }
+      line.marker{
+        stroke: $postwar-secondary;
+      }
+    }
+    div.annotation.postwar span.text{
+      background-color: $postwar-secondary !important;
+    }
+    div.marker-popup{
+      div.icon,
+      div.connector,
+      div.dot{
+        background-color: $postwar-secondary !important;
       }
     }
 

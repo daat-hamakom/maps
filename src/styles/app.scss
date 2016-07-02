@@ -28,12 +28,15 @@ body {
 
     div#map-container {
         position: absolute;
-        top: 50px;
-        left: 10px;
-        right: 10px;
+        // top: 50px;
+        // left: 10px;
+        // right: 10px;
+        top: 0;
+        left: 0;
+        right: 0;
         bottom: 166px;
-        border: 2px solid $frameBorder;
-        border-width: 2px 0 0 2px;
+        // border: 2px solid $frameBorder;
+        // border-width: 2px 0 0 2px;
         &.vshrink {
             bottom: 366px;
         }
@@ -42,7 +45,9 @@ body {
         }
         #logo {
           position: absolute;
-          top: -45px;
+          top: 5px;
+          left: 8px;
+          z-index: 1;
           text-indent: -99999em;
           overflow: hidden;
           background: url("/static/img/jewish_cultures_on_the_map.svg") no-repeat;
@@ -55,7 +60,7 @@ body {
         }
         div#map-controls {
             position: absolute;
-            top: 0;
+            top: 45px;
             left: 0;
             ul {
                 list-style: none;
@@ -316,7 +321,7 @@ body {
             width: 50px;
             border-radius: 50%;
             position: absolute;
-            top: 60px;
+            top: 20px;
             right: 20px;
             background: white;
             line-height: 50px;
@@ -549,7 +554,7 @@ body {
       background: $preindustrial-primary;
       div#map-container{
         // border-color: $preindustrial-primary;
-        #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg"); }
+        // #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg"); }
       }
       div#sidepane{
         div#eventpane,
@@ -605,7 +610,7 @@ body {
       background: $modernism-primary;
       div#map-container{
         // border-color: $modernism-primary;
-        #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg");}
+        // #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg");}
       }
       div#sidepane{
         div#eventpane,
@@ -728,12 +733,12 @@ body {
       background: $postwar-primary;
       div#map-container{
         border-color: $postwar-secondary;
-        #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg");}
+        // #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg");}
       }
       div#sidepane{
         div#eventpane,
         div#eventspane{
-          background: #fcf6ed url('/static/img/postwar_tex.png');
+          // background: #fcf6ed url('/static/img/postwar_tex.png');
           // font-size: 16px;
           border-color: $postwar-secondary;
           div.content{

@@ -35,7 +35,7 @@ function _cleanDates (ds, de) {
 class SidepaneButton extends React.Component {
   render () {
     return <div id='sidepaneButton' onClick={this.props.openEventsSidepane}>
-      +
+      list view
     </div>
   }
 }

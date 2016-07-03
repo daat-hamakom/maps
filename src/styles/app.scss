@@ -52,7 +52,7 @@ body {
           overflow: hidden;
           background: url("/static/img/jewish_cultures_on_the_map.svg") no-repeat;
           height: 41px;
-          width: 100%;
+          width: 330px;
           h1.title {
               background-color: transparent;
               font-size: 0.9em;
@@ -317,18 +317,15 @@ body {
     }
     div#sidepane {
         div#sidepaneButton {
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
+            height: 32px;
+            width: 32px;
+            background: url("/static/img/list_btn.svg") no-repeat;
             position: absolute;
             top: 20px;
             right: 20px;
-            background: white;
-            line-height: 50px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.9em;
             cursor: pointer;
+            overflow: hidden;
+            text-indent: -999999em;
         }
         div#eventpane, div#eventspane {
             position: absolute;
@@ -457,7 +454,6 @@ body {
                   float: left;
                   width: 185px;
                     div.project {
-                        padding-top: 15px;
                         font-size: 0.8em;
                         color: #ADBEC7;
                     }

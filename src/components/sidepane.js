@@ -69,12 +69,12 @@ class EventPane extends React.Component {
     }
 
     return <div id='eventpane' className={evs.length > 0 ? 'open' : 'closed'}>
-      <span className="media-dots">{medias.map((m, i) => {
+      <div className="media-dots">{medias.map((m, i) => {
           return <span className={this.state.selected_media == i ? 'media-dot selected' : 'media-dot'} key={i} onClick={() => {
             this.setState(Object.assign({}, this.state, { selected_media: i }))
           }}>{this.state.selected_media == i ? '●' : '○' }</span>
         })
-      }</span>
+      }</div>
 
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
 

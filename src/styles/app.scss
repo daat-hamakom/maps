@@ -344,14 +344,17 @@ body {
             &.closed {
                 display: none;
             }
-            span.media-dots {
-                span.media-dot {
-                    margin-left: 10px;
-                    cursor: pointer;
-                    &.selected {
+            div.media-dots {
+              margin: 2px 7px;
+              span.media-dot {
+                margin: 2px;
+                cursor: pointer;
+                display: block;
+                float: left;
+                &.selected {
 
-                    }
                 }
+              }
             }
             span.close {
               position: fixed;
@@ -367,6 +370,7 @@ body {
             img.head {
                 width: 100%;
                 height: 214px;
+                margin-top: 5px;
                 &.magnify {
                     cursor: zoom-in;
                 }
@@ -518,7 +522,7 @@ body {
                 div.title {
                     color: white
                 }
-                span.media-dots {
+                div.media-dots {
                     color: white;
                     cursor: pointer;
                     span.media-dot {

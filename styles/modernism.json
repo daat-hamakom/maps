@@ -16,10 +16,10 @@
         }
     },
     "center": [
-        34.81410601297293,
-        31.989313632238094
+        15.724402194865434,
+        46.08127180165218
     ],
-    "zoom": 9.737894738301373,
+    "zoom": 3.085559107590245,
     "bearing": 0,
     "pitch": 0,
     "sources": {
@@ -335,7 +335,6 @@
             "source": "composite",
             "source-layer": "places",
             "minzoom": 7,
-            "maxzoom": 18,
             "interactive": true,
             "filter": [
                 "all",
@@ -406,7 +405,6 @@
             "source": "composite",
             "source-layer": "places",
             "minzoom": 4,
-            "maxzoom": 18,
             "interactive": true,
             "filter": [
                 "all",
@@ -481,7 +479,6 @@
             "type": "symbol",
             "source": "composite",
             "source-layer": "places",
-            "maxzoom": 18,
             "interactive": true,
             "filter": [
                 "all",
@@ -541,7 +538,6 @@
             "type": "symbol",
             "source": "composite",
             "source-layer": "places",
-            "maxzoom": 18,
             "interactive": true,
             "filter": [
                 "all",
@@ -611,7 +607,7 @@
     ],
     "created": "2016-06-16T07:16:56.438Z",
     "id": "ciphz44q10038dcnk9gc4zolb",
-    "modified": "2016-07-01T14:48:23.171Z",
+    "modified": "2016-07-03T13:15:01.778Z",
     "owner": "mushon",
     "draft": false
 }

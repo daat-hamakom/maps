@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 
-import { AudioComponent } from './utils'
+import { AudioComponent, getEventStyle } from './utils'
 
 function _cleanDates (ds, de) {
     let sd = moment(ds.replace('-00', '').replace('-00', ''), 'YYYY-MM-DD')
@@ -129,7 +129,7 @@ class EventsPane extends React.Component {
     })
     return <div id='eventspane' className={evs.length > 0 ? 'open' : 'closed'}>
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
-      {evs.map((e) => <div key={'list-event-' + e.id} className='event' onClick={() => {
+      {evs.map((e) => <div key={'list-event-' + e.id} className={'event ' + getEventStyle(e)} onClick={() => {
         this.props.selectEvent([e])
       }}>
         <span className="event-icon">

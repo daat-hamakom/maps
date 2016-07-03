@@ -321,8 +321,8 @@ body {
             width: 32px;
             background: url("/static/img/list_btn.svg") no-repeat;
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 10px;
+            right: 10px;
             cursor: pointer;
             overflow: hidden;
             text-indent: -999999em;
@@ -354,14 +354,15 @@ body {
                 }
             }
             span.close {
-                float: right;
-                margin: 4px;
-                cursor: pointer;
-                background: url('/static/img/card-close.svg');
-                width:20px;
-                height:20px;
-                text-indent: -99999em;
-                display: block;
+              position: fixed;
+              margin: 7px;
+              right: 7px;
+              cursor: pointer;
+              background: url('/static/img/card-close.svg');
+              width:20px;
+              height:20px;
+              text-indent: -99999em;
+              display: block;
             }
             img.head {
                 width: 100%;
@@ -450,7 +451,7 @@ body {
                         border-radius: 50%;
                     }
                 }
-                span.event-data {
+                div.event-data {
                   float: left;
                   width: 185px;
                     div.project {
@@ -552,27 +553,25 @@ body {
         // border-color: $preindustrial-primary;
         // #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg"); }
       }
-      div#sidepane{
-        div#eventpane,
-        div#eventspane{
-          background: #eee5dd url(/static/img/preindustrial_tex.svg);
-          font-family: 'Vesper Libre';
-          // border-color: $preindustrial-primary;
-          div.content,
-          div.event{
-            color: $preindustrial-secondary;
-            h2,
-            div.title{
-              color: $preindustrial-secondary;
-            }
-            .project,
-            div.date {
-              color: $preindustrial-primary !important;
-            }
-            hr {
-              border-color: $preindustrial-primary;
-            }
-          }
+    }
+    .app.preindustrial div#sidepane div#eventpane,
+    div#eventspane .event.preindustrial{
+      background: #eee5dd url(/static/img/preindustrial_tex.svg);
+      font-family: 'Vesper Libre';
+      // border-color: $preindustrial-primary;
+      div.content,
+      div.event-data{
+        color: $preindustrial-secondary;
+        h2,
+        div.title{
+          color: $preindustrial-secondary;
+        }
+        .project,
+        div.date {
+          color: $preindustrial-primary !important;
+        }
+        hr {
+          border-color: $preindustrial-primary;
         }
       }
     }
@@ -608,32 +607,29 @@ body {
         // border-color: $modernism-primary;
         // #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg");}
       }
-      div#sidepane{
-        div#eventpane,
-        div#eventspane{
-          background: #fcf6ed url(/static/img/modernism_tex.svg);
-          // font-size: 16px;
-          // border-color: $modernism-primary;
-          div.content{
-            color: $modernism-secondary;
-            h2,
-            div.title{
-              color: $modernism-secondary;
-              font-family: 'Rubik One';
-              font-weight: 400;
-            }
-            .project,
-            div.date {
-              color: $modernism-primary !important;
-              font-weight: 700;
-            }
-            div.date {
-              color: $modernism-primary;
-            }
-            hr {
-              border-top: 3px solid $modernism-secondary;
-            }
-          }
+    }
+    .app.modernism div#sidepane div#eventpane,
+    div#eventspane .event.modernism{
+      background: #fcf6ed url(/static/img/modernism_tex.svg);
+      div.content,
+      div.event-data{
+        color: $modernism-secondary;
+        h2,
+        div.title{
+          color: $modernism-secondary;
+          font-family: 'Rubik One';
+          font-weight: 400 !important;
+        }
+        .project,
+        div.date {
+          color: $modernism-primary !important;
+          font-weight: 700;
+        }
+        div.date {
+          color: $modernism-primary;
+        }
+        hr {
+          border-top: 3px solid $modernism-secondary;
         }
       }
     }
@@ -663,40 +659,41 @@ body {
     $darktimes-primary: #d42027;
     $darktimes-secondary: #252321;
 
-
     .app.darktimes{
       background: $darktimes-primary;
       div#map-container{
         border-color: $darktimes-secondary;
         #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg");}
       }
-      div#sidepane{
-        div#eventpane,
-        div#eventspane{
-          background: #c3bcb3 url('/static/img/postwar_tex.png');
-          border-color: $darktimes-secondary;
-          div.content{
-            color: $darktimes-secondary;
-            h2,
-            div.title{
-              color: $darktimes-primary;
-              font-weight: 400;
-              font-family: 'Pirata One', cursive;
-              font-size: 1.8em;
-            }
-            .project,
-            div.date {
-              color: $darktimes-primary !important;
-              font-weight: 400;
-            }
-            div.date {
-              color: $darktimes-secondary;
-            }
-            hr {
-              border-top: 3px solid $darktimes-primary;
-            }
-          }
+    }
+    .app.darktimes div#sidepane div#eventpane,
+    div#eventspane .event.darktimes{
+      background: #c3bcb3 url('/static/img/postwar_tex.png');
+      border-color: $darktimes-secondary;
+      div.content,
+      div.event-data{
+        color: $darktimes-secondary;
+        h2,
+        div.title{
+          color: $darktimes-primary;
+          font-weight: 400;
+          font-family: 'Pirata One', cursive;
+          font-size: 1.8em;
         }
+        .project,
+        div.date {
+          color: $darktimes-primary !important;
+          font-weight: 400 !important;
+        }
+        div.date {
+          color: $darktimes-secondary;
+        }
+        hr {
+          border-top: 3px solid $darktimes-primary;
+        }
+      }
+      div.event-data div.title{
+        font-size: 1.4em !important;
       }
     }
     div#timeline svg g.darktimes{
@@ -731,28 +728,26 @@ body {
         border-color: $postwar-secondary;
         // #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg");}
       }
-      div#sidepane{
-        div#eventpane,
-        div#eventspane{
-          // background: #fcf6ed url('/static/img/postwar_tex.png');
-          // font-size: 16px;
-          border-color: $postwar-secondary;
-          div.content{
-            color: $postwar-primary;
-            h2,
-            div.title{
-              color: $postwar-primary;
-              font-weight: 700;
-            }
-            .project,
-            div.date {
-              color: $postwar-secondary !important;
-              font-weight: 400;
-            }
-            hr {
-              border-top: 3px solid $postwar-primary;
-            }
-          }
+    }
+    .app.postwar div#sidepane div#eventpane,
+    div#eventspane .event.postwar{
+      background: #fcf6ed url('/static/img/postwar_tex.png');
+      border-color: $postwar-secondary;
+      div.content,
+      div.event-data{
+        color: $postwar-primary;
+        h2,
+        div.title{
+          color: $postwar-primary;
+          font-weight: 700;
+        }
+        .project,
+        div.date {
+          color: $postwar-secondary !important;
+          font-weight: 400;
+        }
+        hr {
+          border-top: 3px solid $postwar-primary;
         }
       }
     }
@@ -778,5 +773,4 @@ body {
         background-color: $postwar-secondary !important;
       }
     }
-
 }

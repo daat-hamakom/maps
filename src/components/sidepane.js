@@ -135,11 +135,11 @@ class EventsPane extends React.Component {
         <span className="event-icon">
           <img src={e.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
         </span>
-        <span className="event-data">
+        <div className="event-data">
           <div className='project'>{this.props.projects.items.find((p) => p.id == e.project).title}</div>
           <div className='title'>{e.title}</div>
           <div className='date'>{_cleanDates(e.start_date, e.end_date)}</div>
-        </span>
+        </div>
         <div className='clear'></div>
       </div>)}
     </div>

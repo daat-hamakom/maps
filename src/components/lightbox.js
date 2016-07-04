@@ -73,14 +73,14 @@ class Lightbox extends React.Component {
           <div className='title'>
             {this.props.lightbox.ev ? this.props.lightbox.ev.media[this.props.lightbox.selected].title : ''}
           </div>
-          <span className="media-dots">{this.props.lightbox.ev ? (this.props.lightbox.ev.media.map((m, i) => {
+          <div className="media-dots">{this.props.lightbox.ev ? (this.props.lightbox.ev.media.map((m, i) => {
               return <span className={this.props.lightbox.selected == i ? 'media-dot selected' : 'media-dot'} key={i} onClick={(e) => {
                 this.props.selectMedia(this.props.lightbox.ev, i)
                 e.preventDefault()
                 e.stopPropagation()
               }}>{this.props.lightbox.selected == i ? '●' : '○' }</span>
             })) : <span></span>
-          }</span>
+          }</div>
         </div>
 
 

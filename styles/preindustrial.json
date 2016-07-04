@@ -15,10 +15,6 @@
                 "name": "graticules",
                 "collapsed": false
             },
-            "1457775853123.0503": {
-                "name": "buildings",
-                "collapsed": false
-            },
             "1444855815295.714": {
                 "name": "Hillshading",
                 "collapsed": true
@@ -1065,6 +1061,102 @@
             }
         },
         {
+            "id": "labels-site",
+            "type": "symbol",
+            "source": "mapbox://mushon.5ea69xbc",
+            "source-layer": "places",
+            "minzoom": 8,
+            "interactive": true,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "period",
+                    "preindustrial"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "site"
+                ]
+            ],
+            "layout": {
+                "visibility": "visible",
+                "text-field": "{title}",
+                "text-font": [
+                    "Quintessential Regular",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-transform": "none",
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            6,
+                            10
+                        ],
+                        [
+                            16,
+                            22
+                        ]
+                    ]
+                },
+                "text-anchor": "top",
+                "text-padding": 5
+            },
+            "paint": {
+                "text-color": "hsl(33, 20%, 28%)"
+            }
+        },
+        {
+            "id": "labels-town",
+            "type": "symbol",
+            "source": "mapbox://mushon.5ea69xbc",
+            "source-layer": "places",
+            "minzoom": 5,
+            "interactive": true,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "period",
+                    "preindustrial"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "town"
+                ]
+            ],
+            "layout": {
+                "visibility": "visible",
+                "text-field": "{title}",
+                "text-font": [
+                    "Quintessential Regular",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-transform": "none",
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            6,
+                            10
+                        ],
+                        [
+                            16,
+                            22
+                        ]
+                    ]
+                },
+                "text-anchor": "top",
+                "text-padding": 5
+            },
+            "paint": {
+                "text-color": "hsl(33, 20%, 28%)"
+            }
+        },
+        {
             "id": "labels-city",
             "type": "symbol",
             "source": "mapbox://mushon.5ea69xbc",
@@ -1106,11 +1198,11 @@
                         ]
                     ]
                 },
-                "text-anchor": "center",
-                "text-padding": 10
+                "text-anchor": "top",
+                "text-padding": 5
             },
             "paint": {
-                "text-color": "rgba(74,62,47,1)"
+                "text-color": "hsl(33, 20%, 28%)"
             }
         },
         {
@@ -1155,7 +1247,7 @@
                     ]
                 },
                 "text-anchor": "top",
-                "text-padding": 10
+                "text-padding": 5
             },
             "paint": {
                 "text-color": "rgba(74,62,47,1)"
@@ -1202,7 +1294,7 @@
                         ]
                     ]
                 },
-                "text-anchor": "center",
+                "text-anchor": "top",
                 "text-letter-spacing": 0.05
             },
             "paint": {
@@ -1212,7 +1304,7 @@
     ],
     "created": "2016-01-29T09:15:43.895Z",
     "id": "cijzh5hn000zzbmkv7sw2g5os",
-    "modified": "2016-07-01T13:32:33.600Z",
+    "modified": "2016-07-03T13:08:35.593Z",
     "owner": "mushon",
     "draft": false
 }

@@ -12,10 +12,10 @@
         }
     },
     "center": [
-        30.88599387027287,
-        39.14517398080906
+        35.23510288013102,
+        45.78553690320243
     ],
-    "zoom": 3.721400085892407,
+    "zoom": 3.445555825265327,
     "bearing": 0,
     "pitch": 0,
     "sources": {
@@ -357,7 +357,114 @@
             }
         },
         {
+            "id": "labels-site",
+            "type": "symbol",
+            "metadata": {},
+            "source": "composite",
+            "source-layer": "places",
+            "minzoom": 9,
+            "interactive": true,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "period",
+                    "darktimes"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "site"
+                ]
+            ],
+            "layout": {
+                "text-field": "{title}",
+                "text-font": [
+                    "Pirata One Regular",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-anchor": "top",
+                "text-size": 13
+            },
+            "paint": {
+                "text-color": "hsl(0, 0%, 0%)",
+                "text-halo-color": "hsl(0, 0%, 0%)"
+            }
+        },
+        {
+            "id": "labels-town",
+            "type": "symbol",
+            "metadata": {},
+            "source": "composite",
+            "source-layer": "places",
+            "minzoom": 4,
+            "interactive": true,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "period",
+                    "darktimes"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "town"
+                ]
+            ],
+            "layout": {
+                "text-field": "{title}",
+                "text-font": [
+                    "Pirata One Regular",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-anchor": "top",
+                "text-size": 13
+            },
+            "paint": {
+                "text-color": "hsl(0, 49%, 55%)",
+                "text-halo-color": "hsl(0, 0%, 0%)",
+                "text-halo-width": 1
+            }
+        },
+        {
             "id": "labels-city",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "places",
+            "minzoom": 2,
+            "interactive": true,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "period",
+                    "darktimes"
+                ],
+                [
+                    "in",
+                    "zoomlevel",
+                    "city",
+                    "largecity"
+                ]
+            ],
+            "layout": {
+                "text-field": "{title}",
+                "text-font": [
+                    "Pirata One Regular",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-anchor": "top",
+                "text-size": 15
+            },
+            "paint": {
+                "text-color": "hsl(0, 89%, 43%)",
+                "text-halo-color": "hsl(0, 0%, 0%)",
+                "text-halo-width": 3
+            }
+        },
+        {
+            "id": "labels-metropolis",
             "type": "symbol",
             "source": "composite",
             "source-layer": "places",
@@ -372,7 +479,7 @@
                 [
                     "==",
                     "zoomlevel",
-                    "city"
+                    "metropolis"
                 ]
             ],
             "layout": {
@@ -380,18 +487,56 @@
                 "text-font": [
                     "Pirata One Regular",
                     "Arial Unicode MS Regular"
-                ]
+                ],
+                "text-anchor": "top",
+                "text-transform": "uppercase",
+                "text-size": 18
             },
             "paint": {
                 "text-color": "hsl(0, 89%, 43%)",
                 "text-halo-color": "hsl(0, 0%, 0%)",
                 "text-halo-width": 3
             }
+        },
+        {
+            "id": "labels-area",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "places",
+            "interactive": true,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "period",
+                    "darktimes"
+                ],
+                [
+                    "==",
+                    "zoomlevel",
+                    "area"
+                ]
+            ],
+            "layout": {
+                "text-field": "{title}",
+                "text-font": [
+                    "Pirata One Regular",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-anchor": "top",
+                "text-transform": "none",
+                "text-size": 20,
+                "text-letter-spacing": 0.3,
+                "text-rotate": 45
+            },
+            "paint": {
+                "text-color": "hsla(185, 3%, 21%, 0.52)"
+            }
         }
     ],
     "created": "2016-06-05T10:18:39.237Z",
     "id": "cip2frg1i001bcnku0t03cp5i",
-    "modified": "2016-06-30T10:45:46.611Z",
+    "modified": "2016-07-03T12:50:00.866Z",
     "owner": "mushon",
     "draft": false
 }

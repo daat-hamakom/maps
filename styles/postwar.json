@@ -26,7 +26,7 @@
             },
             "1444850654682.7075": {
                 "name": "Marine labels",
-                "collapsed": false
+                "collapsed": true
             },
             "1444850853666.2222": {
                 "name": "Waterway labels",
@@ -39,10 +39,10 @@
         }
     },
     "center": [
-        34.87055348182986,
-        32.131965025287485
+        34.78954757570392,
+        32.073988110072435
     ],
-    "zoom": 9.929690543328894,
+    "zoom": 12.388778128692008,
     "bearing": 0,
     "pitch": 0,
     "sources": {
@@ -480,7 +480,7 @@
             },
             "source": "composite",
             "source-layer": "building",
-            "minzoom": 15,
+            "minzoom": 11,
             "interactive": true,
             "paint": {
                 "fill-outline-color": "#c0c0c0",
@@ -488,12 +488,12 @@
                     "base": 1,
                     "stops": [
                         [
-                            15,
+                            11,
                             0
                         ],
                         [
-                            16.5,
-                            0.2
+                            14,
+                            0.15
                         ]
                     ]
                 },
@@ -677,9 +677,9 @@
                 "visibility": "visible"
             },
             "paint": {
-                "line-width": 0.35,
-                "line-opacity": 0.3,
-                "line-color": "hsl(109, 38%, 31%)"
+                "line-width": 0.5,
+                "line-opacity": 0.25,
+                "line-color": "hsl(22, 100%, 50%)"
             }
         },
         {
@@ -1183,7 +1183,6 @@
         {
             "id": "labels-site",
             "type": "symbol",
-            "metadata": {},
             "source": "composite",
             "source-layer": "places",
             "minzoom": 10,
@@ -1237,7 +1236,6 @@
             "source": "composite",
             "source-layer": "places",
             "minzoom": 6,
-            "maxzoom": 16,
             "interactive": true,
             "filter": [
                 "all",
@@ -1288,7 +1286,6 @@
             "source": "composite",
             "source-layer": "places",
             "minzoom": 3,
-            "maxzoom": 14,
             "interactive": true,
             "filter": [
                 "all",
@@ -1337,10 +1334,9 @@
         {
             "id": "labels-area",
             "type": "symbol",
-            "metadata": {},
             "source": "composite",
             "source-layer": "places",
-            "maxzoom": 12,
+            "maxzoom": 15,
             "interactive": true,
             "filter": [
                 "all",
@@ -1391,7 +1387,6 @@
             "source": "composite",
             "source-layer": "places",
             "minzoom": 1,
-            "maxzoom": 14,
             "interactive": true,
             "filter": [
                 "all",
@@ -1440,7 +1435,7 @@
     ],
     "created": "2016-04-18T14:32:30.945Z",
     "id": "cin63p0wn0092d4nko4s7508y",
-    "modified": "2016-07-01T12:38:03.940Z",
+    "modified": "2016-07-03T13:26:08.890Z",
     "owner": "mushon",
     "draft": false
 }

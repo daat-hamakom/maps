@@ -35,7 +35,7 @@ function _cleanDates (ds, de) {
 class SidepaneButton extends React.Component {
   render () {
     return <div id='sidepaneButton' onClick={this.props.openEventsSidepane}>
-      +
+      list view
     </div>
   }
 }
@@ -69,12 +69,12 @@ class EventPane extends React.Component {
     }
 
     return <div id='eventpane' className={evs.length > 0 ? 'open' : 'closed'}>
-      <span className="media-dots">{medias.map((m, i) => {
+      <div className="media-dots">{medias.map((m, i) => {
           return <span className={this.state.selected_media == i ? 'media-dot selected' : 'media-dot'} key={i} onClick={() => {
             this.setState(Object.assign({}, this.state, { selected_media: i }))
           }}>{this.state.selected_media == i ? '●' : '○' }</span>
         })
-      }</span>
+      }</div>
 
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
 
@@ -135,11 +135,11 @@ class EventsPane extends React.Component {
         <span className="event-icon">
           <img src={e.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
         </span>
-        <span className="event-data">
+        <div className="event-data">
           <div className='project'>{this.props.projects.items.find((p) => p.id == e.project).title}</div>
           <div className='title'>{e.title}</div>
           <div className='date'>{_cleanDates(e.start_date, e.end_date)}</div>
-        </span>
+        </div>
         <div className='clear'></div>
       </div>)}
     </div>

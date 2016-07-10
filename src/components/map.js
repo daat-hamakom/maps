@@ -481,7 +481,7 @@ class GLMap extends React.Component {
 
 class Map extends React.Component {
   render () {
-    const view = { style: 'mapbox://styles/mushon/ciq6o4i9d0065erm45t672onm', center: [35, 31], zoom: 3, container: 'map' }
+    const view = { style: 'mapbox://styles/mushon/cipnm6qef001rdgm3jdj74ym5', center: [35, 31], zoom: 3, container: 'map' }
     return <GLMap view={view} token={appconf.token.map} app={this.props.app} proj={this.props.proj}
       events={this.props.events} annotations={this.props.annotations} places={this.props.places}
       hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent}

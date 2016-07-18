@@ -25,6 +25,7 @@ ReactDOM.render((
     <Router>
       <Route path='/' component={App}>
         <Route path='/project/:projId' component={App}/>
+        <Route path='/event/:eventId' component={App}/>
       </Route>
       <Route path='about' component={About}/>
     </Router>

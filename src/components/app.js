@@ -12,12 +12,32 @@ import '../styles/app.scss'
 
 class App extends React.Component {
 
+  constructor (props) {
+    super(props)
+    this.loaded = false
+  }
+
   componentDidMount () {
     const { dispatch } = this.props
     dispatch(fetchEvents())
     dispatch(fetchProjects())
     dispatch(fetchAnnotations())
     dispatch(fetchPlaces())
+  }
+
+  finishedLoading () {
+    return (!this.props.events.fetching && this.props.events.items.length > 0) &&
+      (!this.props.projects.fetching && this.props.projects.items.length > 0) &&
+      (!this.props.annotations.fetching && this.props.annotations.items.length > 0) &&
+      (!this.props.places.fetching && this.props.places.items.length > 0)
+  }
+
+  componentDidUpdate (prevProps) {
+    if (!this.loaded && this.props.params.eventId && this.finishedLoading()) {
+      this.loaded = true
+      const ev = this.props.events.items.filter(e => e.id == this.props.params.eventId)
+      this.props.dispatch(selectEvent(ev, 'url'))
+    }
   }
 
   render () {

@@ -23,12 +23,6 @@ class GLMap extends React.Component {
   // Adapted from Tim Welch's code that can be found at
   // https://github.com/twelch/react-mapbox-gl-seed/blob/4d78eb0/src/components/GLMap.js
 
-  static propTypes = {
-    view: React.PropTypes.object,
-    token: React.PropTypes.string,
-    events: React.PropTypes.object
-  };
-
   componentWillMount () {
     this.setState({
       rectzoom : false,

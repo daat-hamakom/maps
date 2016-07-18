@@ -179,7 +179,7 @@ class GLMap extends React.Component {
   }
 
   addPlaceMarkers () {
-    const places = this.props.events.items.map(e => { return {
+    const places = this.props.events.map(e => { return {
       'type': 'Feature',
       'properties': {
         'title': e.place.name.split(',')[0],
@@ -231,7 +231,7 @@ class GLMap extends React.Component {
 
     const markerData = {
       'type': 'FeatureCollection',
-      'features': this.props.events.items.map((ev, index) => {
+      'features': this.props.events.map((ev, index) => {
         const style = getEventStyle(ev)
         return {
           'type': 'Feature',
@@ -315,13 +315,13 @@ class GLMap extends React.Component {
 
         const featureIds = features.map((e) => e.properties.evid)
 
-        this.props.hoverEnterEvent(this.props.events.items.filter(
+        this.props.hoverEnterEvent(this.props.events.filter(
           (ev) => featureIds.includes(ev.id)
         ))
 
         // fugly hack to grab the click on the popup
         this.hover_popup._content.onclick = (_e) => {
-          this.props.selectEvent(this.props.events.items.filter(
+          this.props.selectEvent(this.props.events.filter(
             (ev) => featureIds.includes(ev.id)
           ))
           this.props.hoverExitEvent()
@@ -428,7 +428,7 @@ class GLMap extends React.Component {
   }
 
   componentDidUpdate (prevProps, _prevState) {
-    if (!this.props.events.fetching && !this.markers && this.props.events.items.length > 0) {
+    if (!this.props.events.fetching && !this.markers && this.props.events.length > 0) {
       this.initMap()
     }
 

@@ -352,13 +352,13 @@ class Timeline extends React.Component {
   }
 
   componentDidUpdate () {
-    if (!this.resized && this.props.events.items.length) {
+    if (!this.resized && this.props.events.length) {
       const research = this.props.proj ? this.props.projects.items.find((p) => { return p.id == this.props.proj }) : null
       if (research) {
-        let startDate = this.props.events.items.map(e => e.start_date).reduce((prev, cur, curind, ar) => {
+        let startDate = this.props.events.map(e => e.start_date).reduce((prev, cur, curind, ar) => {
           return cur < prev ? cur : prev
         })
-        let endDate = this.props.events.items.map(e => e.end_date).reduce((prev, cur, curind, ar) => {
+        let endDate = this.props.events.map(e => e.end_date).reduce((prev, cur, curind, ar) => {
           return cur > prev ? cur : prev
         })
 
@@ -392,7 +392,7 @@ class Timeline extends React.Component {
       <div className='handle-container'><div className='handle' onClick={(e) => { this.props.toggleProj() }}></div></div>
       <FilterBar project={research} projects={this.props.projects.items} />
       <TimelineMetadata project={research} app={this.props.app} />
-      <D3Timeline width={document.body.offsetWidth} height={120} data={this.props.events.items}
+      <D3Timeline width={document.body.offsetWidth} height={120} data={this.props.events}
         app={this.props.app} timeline={this.props.timeline}
         startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
         onZoom={this.props.onZoom}

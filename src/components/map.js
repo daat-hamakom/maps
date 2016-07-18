@@ -76,7 +76,7 @@ class GLMap extends React.Component {
       if (a.events[0] != a.origin)
         evs = evs.reverse()
 
-      const evcoords = evs.map(e => allevs.items.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
+      const evcoords = evs.map(e => allevs.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
       const placecoords = a.places.map(p => this.props.places.items.find(pl => pl.id == p).position.split(',').map(x => +x).reverse())
 
       return {
@@ -119,7 +119,7 @@ class GLMap extends React.Component {
   addSingleMarkerLayer(annotations, evid, name, icon) {
     const allevs = this.props.events
     const anns = annotations.filter(a => a.type == name).map(a => {
-      const evcoords = a.events.map(e => allevs.items.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
+      const evcoords = a.events.map(e => allevs.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
 
       return evcoords.map(c => { return {
         'type': 'Feature',
@@ -226,10 +226,8 @@ class GLMap extends React.Component {
     window.map = this.map
   }
 
-  initMap() {
-    this.markers = true
-
-    const markerData = {
+  getMarkerData () {
+    return {
       'type': 'FeatureCollection',
       'features': this.props.events.map((ev, index) => {
         const style = getEventStyle(ev)
@@ -249,11 +247,13 @@ class GLMap extends React.Component {
         }
       })
     }
+  }
 
-    console.log('evmarkers', markerData)
+  initMap() {
+    this.markers = true
 
     var sourceObj = new mapboxgl.GeoJSONSource({
-      'data': markerData,
+      'data': this.getMarkerData(),
       'cluster': false,
       'clusterMaxZoom': 5
     })
@@ -340,7 +340,10 @@ class GLMap extends React.Component {
     // final resize attempt
     this.map.resize()
     this.resized = true
+  }
 
+  updateMarkers () {
+    this.map.getSource('eventMarkers').setData(this.getMarkerData())
   }
 
   handleSelected (t, origin) {
@@ -428,8 +431,14 @@ class GLMap extends React.Component {
   }
 
   componentDidUpdate (prevProps, _prevState) {
-    if (!this.props.events.fetching && !this.markers && this.props.events.length > 0) {
+    if (!this.markers && this.props.events.length > 0) {
       this.initMap()
+    }
+
+    if (this.markers && this.props.events.length != prevProps.events.length) {
+      // for simplicity, we assume that length checks are enough here
+      // if two prop updates actually happened and length are same then we'll skip an update and hit a bug
+      this.updateMarkers()
     }
 
     this.checkSelectAndHover('select', this.props.app.origin, prevProps.app.selected, this.props.app.selected)

@@ -21,7 +21,7 @@ export function getEventStyle (ev) {
   if (ev.start_date < '1789-')  // vive la revolution
     return 'preindustrial'
   if (ev.start_date < '1900-')  // vive la revolution
-    return 'modernism'            // until we have the Industrial map
+    return 'nineteenth'            // until we have the Industrial map
   if (ev.start_date < '1939-')  // vive la revolution
     return 'modernism'            // until we have the Modernism map
   if (ev.start_date < '1945-')  // vive la revolution

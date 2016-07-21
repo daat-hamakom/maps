@@ -2,20 +2,15 @@
     "version": 8,
     "name": "darktimes",
     "metadata": {
-        "mapbox:autocomposite": true,
+        "mapbox:autocomposite": false,
         "mapbox:type": "default",
-        "mapbox:groups": {
-            "1456969573402.7817": {
-                "name": "Hillshading",
-                "collapsed": false
-            }
-        }
+        "mapbox:groups": {}
     },
     "center": [
-        35.23510288013102,
-        45.78553690320243
+        35.70928528944887,
+        32.59271351950689
     ],
-    "zoom": 3.445555825265327,
+    "zoom": 7.510314908873226,
     "bearing": 0,
     "pitch": 0,
     "sources": {
@@ -24,7 +19,7 @@
             "type": "raster"
         },
         "composite": {
-            "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v7,mushon.5ea69xbc",
+            "url": "mapbox://mapbox.mapbox-streets-v7,mushon.5ea69xbc",
             "type": "vector"
         }
     },
@@ -37,7 +32,7 @@
             "interactive": true,
             "layout": {},
             "paint": {
-                "background-color": "hsl(33, 46%, 19%)"
+                "background-color": "hsl(33, 64%, 33%)"
             }
         },
         {
@@ -51,217 +46,9 @@
             "paint": {
                 "raster-saturation": -1,
                 "raster-opacity": 0.65,
-                "raster-brightness-min": 0.35
-            }
-        },
-        {
-            "id": "hillshade_highlight_bright",
-            "type": "fill",
-            "metadata": {
-                "mapbox:group": "1456969573402.7817"
-            },
-            "source": "composite",
-            "source-layer": "hillshade",
-            "maxzoom": 16,
-            "interactive": true,
-            "filter": [
-                "==",
-                "level",
-                94
-            ],
-            "layout": {
-                "visibility": "visible"
-            },
-            "paint": {
-                "fill-color": "hsl(29, 100%, 51%)",
-                "fill-opacity": {
-                    "stops": [
-                        [
-                            14,
-                            0.04
-                        ],
-                        [
-                            16,
-                            0
-                        ]
-                    ]
-                },
-                "fill-antialias": false
-            }
-        },
-        {
-            "id": "hillshade_highlight_med",
-            "type": "fill",
-            "metadata": {
-                "mapbox:group": "1456969573402.7817"
-            },
-            "source": "composite",
-            "source-layer": "hillshade",
-            "maxzoom": 16,
-            "interactive": true,
-            "filter": [
-                "==",
-                "level",
-                90
-            ],
-            "layout": {
-                "visibility": "visible"
-            },
-            "paint": {
-                "fill-color": "hsl(29, 100%, 51%)",
-                "fill-opacity": {
-                    "stops": [
-                        [
-                            14,
-                            0.04
-                        ],
-                        [
-                            16,
-                            0
-                        ]
-                    ]
-                },
-                "fill-antialias": false
-            }
-        },
-        {
-            "id": "hillshade_shadow_faint",
-            "type": "fill",
-            "metadata": {
-                "mapbox:group": "1456969573402.7817"
-            },
-            "source": "composite",
-            "source-layer": "hillshade",
-            "maxzoom": 16,
-            "interactive": true,
-            "filter": [
-                "==",
-                "level",
-                89
-            ],
-            "layout": {
-                "visibility": "visible"
-            },
-            "paint": {
-                "fill-color": "hsl(29, 27%, 44%)",
-                "fill-opacity": {
-                    "stops": [
-                        [
-                            14,
-                            0.033
-                        ],
-                        [
-                            16,
-                            0
-                        ]
-                    ]
-                },
-                "fill-antialias": false
-            }
-        },
-        {
-            "id": "hillshade_shadow_med",
-            "type": "fill",
-            "metadata": {
-                "mapbox:group": "1456969573402.7817"
-            },
-            "source": "composite",
-            "source-layer": "hillshade",
-            "maxzoom": 16,
-            "interactive": true,
-            "filter": [
-                "==",
-                "level",
-                78
-            ],
-            "layout": {
-                "visibility": "visible"
-            },
-            "paint": {
-                "fill-color": "hsl(29, 41%, 27%)",
-                "fill-opacity": {
-                    "stops": [
-                        [
-                            14,
-                            0.033
-                        ],
-                        [
-                            16,
-                            0
-                        ]
-                    ]
-                },
-                "fill-antialias": false
-            }
-        },
-        {
-            "id": "hillshade_shadow_dark",
-            "type": "fill",
-            "metadata": {
-                "mapbox:group": "1456969573402.7817"
-            },
-            "source": "composite",
-            "source-layer": "hillshade",
-            "maxzoom": 16,
-            "interactive": true,
-            "filter": [
-                "==",
-                "level",
-                67
-            ],
-            "layout": {
-                "visibility": "visible"
-            },
-            "paint": {
-                "fill-color": "hsl(29, 57%, 22%)",
-                "fill-opacity": {
-                    "stops": [
-                        [
-                            14,
-                            0.06
-                        ],
-                        [
-                            16,
-                            0
-                        ]
-                    ]
-                },
-                "fill-antialias": false
-            }
-        },
-        {
-            "id": "hillshade_shadow_extreme",
-            "type": "fill",
-            "metadata": {
-                "mapbox:group": "1456969573402.7817"
-            },
-            "source": "composite",
-            "source-layer": "hillshade",
-            "maxzoom": 16,
-            "interactive": true,
-            "filter": [
-                "==",
-                "level",
-                56
-            ],
-            "layout": {
-                "visibility": "visible"
-            },
-            "paint": {
-                "fill-color": "hsl(29, 71%, 19%)",
-                "fill-opacity": {
-                    "stops": [
-                        [
-                            14,
-                            0.06
-                        ],
-                        [
-                            16,
-                            0
-                        ]
-                    ]
-                },
-                "fill-antialias": false
+                "raster-contrast": 0.65,
+                "raster-brightness-max": 0.8,
+                "raster-brightness-min": 0.3
             }
         },
         {
@@ -299,19 +86,19 @@
                     ]
                 },
                 "line-join": "round",
-                "visibility": "visible"
+                "visibility": "none"
             },
             "paint": {
-                "line-color": "hsl(185, 2%, 10%)",
+                "line-color": "hsl(0, 96%, 21%)",
                 "line-width": {
                     "base": 1.3,
                     "stops": [
                         [
-                            8.5,
+                            6.5,
                             0.1
                         ],
                         [
-                            20,
+                            14,
                             8
                         ]
                     ]
@@ -320,19 +107,32 @@
                     "base": 1,
                     "stops": [
                         [
+                            6,
+                            0
+                        ],
+                        [
+                            10,
+                            0.6
+                        ]
+                    ]
+                },
+                "line-blur": {
+                    "base": 1,
+                    "stops": [
+                        [
                             8,
                             0
                         ],
                         [
-                            8.5,
-                            1
+                            14,
+                            10
                         ]
                     ]
                 }
             }
         },
         {
-            "id": "water",
+            "id": "wate-shadow",
             "type": "fill",
             "source": "composite",
             "source-layer": "water",
@@ -341,14 +141,28 @@
                 "visibility": "visible"
             },
             "paint": {
-                "fill-color": "hsl(0, 0%, 0%)",
+                "fill-color": "hsl(0, 89%, 43%)",
                 "fill-outline-color": "hsla(0, 0%, 0%, 0.52)",
-                "fill-opacity": 0.7
+                "fill-opacity": 0.7,
+                "fill-translate": [
+                    -1.5,
+                    -1.5
+                ]
+            }
+        },
+        {
+            "id": "water",
+            "ref": "wate-shadow",
+            "interactive": true,
+            "paint": {
+                "fill-color": "hsl(0, 0%, 0%)",
+                "fill-outline-color": "hsl(0, 89%, 43%)",
+                "fill-opacity": 0.8
             }
         },
         {
             "id": "water texture",
-            "ref": "water",
+            "ref": "wate-shadow",
             "interactive": true,
             "paint": {
                 "fill-color": "hsla(185, 3%, 21%, 0.52)",
@@ -359,7 +173,6 @@
         {
             "id": "labels-site",
             "type": "symbol",
-            "metadata": {},
             "source": "composite",
             "source-layer": "places",
             "minzoom": 9,
@@ -394,7 +207,6 @@
         {
             "id": "labels-town",
             "type": "symbol",
-            "metadata": {},
             "source": "composite",
             "source-layer": "places",
             "minzoom": 4,
@@ -536,7 +348,7 @@
     ],
     "created": "2016-06-05T10:18:39.237Z",
     "id": "cip2frg1i001bcnku0t03cp5i",
-    "modified": "2016-07-03T12:50:00.866Z",
+    "modified": "2016-07-21T09:17:38.965Z",
     "owner": "mushon",
     "draft": false
 }

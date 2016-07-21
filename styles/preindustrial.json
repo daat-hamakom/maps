@@ -36,7 +36,8 @@
                 "collapsed": false
             }
         },
-        "mapbox:trackposition": false
+        "mapbox:trackposition": false,
+        "mapbox:autocomposite": false
     },
     "center": [
         18.680128565568253,
@@ -46,32 +47,8 @@
     "bearing": 0,
     "pitch": 0,
     "sources": {
-        "mapbox://mushon.277625nf": {
-            "url": "mapbox://mushon.277625nf",
-            "type": "vector"
-        },
         "composite": {
-            "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v6",
-            "type": "vector"
-        },
-        "mapbox://mushon.2vburh9t": {
-            "url": "mapbox://mushon.2vburh9t",
-            "type": "vector"
-        },
-        "mapbox://mushon.cik1cfpi": {
-            "url": "mapbox://mushon.cik1cfpi",
-            "type": "vector"
-        },
-        "mapbox://mushon.5ea69xbc": {
-            "url": "mapbox://mushon.5ea69xbc",
-            "type": "vector"
-        },
-        "mapbox://mushon.59w3ai1n": {
-            "url": "mapbox://mushon.59w3ai1n",
-            "type": "vector"
-        },
-        "mapbox://mushon.73giuah3": {
-            "url": "mapbox://mushon.73giuah3",
+            "url": "mapbox://mushon.277625nf,mushon.2vburh9t,mapbox.mapbox-streets-v6,mushon.cik1cfpi,mushon.73giuah3,mapbox.mapbox-terrain-v2,mushon.59w3ai1n,mushon.5ea69xbc",
             "type": "vector"
         }
     },
@@ -119,7 +96,7 @@
             "metadata": {
                 "mapbox:group": "1457688920031.92"
             },
-            "source": "mapbox://mushon.277625nf",
+            "source": "composite",
             "source-layer": "ne_10m_admin_0_countries_lakes",
             "minzoom": 2,
             "interactive": true,
@@ -137,7 +114,7 @@
             "metadata": {
                 "mapbox:group": "1457687299875.739"
             },
-            "source": "mapbox://mushon.2vburh9t",
+            "source": "composite",
             "source-layer": "ne_10m_rivers_lake_centerlines",
             "interactive": true,
             "layout": {
@@ -322,7 +299,7 @@
             "metadata": {
                 "mapbox:group": "1457687299875.739"
             },
-            "source": "mapbox://mushon.cik1cfpi",
+            "source": "composite",
             "source-layer": "ne_10m_bathymetry_k_200",
             "interactive": true,
             "layout": {
@@ -352,7 +329,7 @@
             "metadata": {
                 "mapbox:group": "1457687299875.739"
             },
-            "source": "mapbox://mushon.73giuah3",
+            "source": "composite",
             "source-layer": "ne_10m_bathymetry_h_3000",
             "minzoom": 1,
             "interactive": true,
@@ -646,7 +623,7 @@
             "metadata": {
                 "mapbox:group": "1457688636265.5356"
             },
-            "source": "mapbox://mushon.59w3ai1n",
+            "source": "composite",
             "source-layer": "ne_50m_graticules_10",
             "interactive": true,
             "layout": {
@@ -677,7 +654,7 @@
             "metadata": {
                 "mapbox:group": "1444856087950.3635"
             },
-            "source": "mapbox://mushon.2vburh9t",
+            "source": "composite",
             "source-layer": "ne_10m_rivers_lake_centerlines",
             "minzoom": 4,
             "interactive": true,
@@ -1063,7 +1040,7 @@
         {
             "id": "labels-site",
             "type": "symbol",
-            "source": "mapbox://mushon.5ea69xbc",
+            "source": "composite",
             "source-layer": "places",
             "minzoom": 8,
             "interactive": true,
@@ -1111,7 +1088,7 @@
         {
             "id": "labels-town",
             "type": "symbol",
-            "source": "mapbox://mushon.5ea69xbc",
+            "source": "composite",
             "source-layer": "places",
             "minzoom": 5,
             "interactive": true,
@@ -1159,7 +1136,7 @@
         {
             "id": "labels-city",
             "type": "symbol",
-            "source": "mapbox://mushon.5ea69xbc",
+            "source": "composite",
             "source-layer": "places",
             "minzoom": 2,
             "interactive": true,
@@ -1208,7 +1185,7 @@
         {
             "id": "labels-metropolis",
             "type": "symbol",
-            "source": "mapbox://mushon.5ea69xbc",
+            "source": "composite",
             "source-layer": "places",
             "minzoom": 2,
             "interactive": true,
@@ -1256,7 +1233,7 @@
         {
             "id": "labels-area",
             "type": "symbol",
-            "source": "mapbox://mushon.5ea69xbc",
+            "source": "composite",
             "source-layer": "places",
             "minzoom": 2,
             "interactive": true,
@@ -1304,7 +1281,7 @@
     ],
     "created": "2016-01-29T09:15:43.895Z",
     "id": "cijzh5hn000zzbmkv7sw2g5os",
-    "modified": "2016-07-03T13:08:35.593Z",
+    "modified": "2016-07-21T09:17:20.108Z",
     "owner": "mushon",
     "draft": false
 }

@@ -602,8 +602,66 @@ body {
       }
     }
 
-    $modernism-primary: #f78045;
-    $modernism-secondary: #4f230d;
+    $nineteenth-primary: #f78045;
+    $nineteenth-secondary: #832e1a;
+
+    .app.nineteenth{
+      background: $nineteenth-primary;
+      div#map-container{
+        // border-color: $nineteenth-primary;
+        // #logo { background-image: url("/static/img/jewish_cultures_on_the_map_negative.svg");}
+      }
+    }
+    .app.nineteenth div#sidepane div#eventpane,
+    div#eventspane .event.nineteenth {
+      background: #f4e6d7 url(/static/img/nineteenth_tex.svg);
+      div.content,
+      div.event-data{
+        color: $nineteenth-secondary;
+        h2,
+        div.title{
+          color: $nineteenth-secondary;
+          font-family: 'Rubik One';
+          font-weight: 400 !important;
+        }
+        .project,
+        div.date {
+          color: $nineteenth-primary !important;
+          font-weight: 700;
+        }
+        div.date {
+          color: $nineteenth-primary;
+        }
+        hr {
+          border-top: 3px solid $nineteenth-secondary;
+        }
+      }
+    }
+    div#timeline svg g.nineteenth{
+      circle.marker,
+      rect.marker{
+        fill: lighten($nineteenth-primary, 20);
+        &.active{
+          fill: $nineteenth-primary;
+        }
+      }
+      line.marker{
+        stroke: $nineteenth-primary;
+      }
+    }
+    div.annotation.nineteenth span.text{
+      background-color: $nineteenth-primary !important;
+    }
+    div.marker-popup.nineteenth{
+      div.icon,
+      div.connector,
+      div.dot{
+        background-color: $nineteenth-primary !important;
+      }
+    }
+
+    $modernism-primary: #594fc2;
+    $modernism-secondary: #fa0a0a;
 
     .app.modernism{
       background: $modernism-primary;
@@ -614,7 +672,7 @@ body {
     }
     .app.modernism div#sidepane div#eventpane,
     div#eventspane .event.modernism{
-      background: #fcf6ed url(/static/img/modernism_tex.svg);
+      background: #fff url(/static/img/modernism_tex.svg);
       div.content,
       div.event-data{
         color: $modernism-secondary;

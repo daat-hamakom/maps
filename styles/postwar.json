@@ -2,7 +2,7 @@
     "version": 8,
     "name": "postwar",
     "metadata": {
-        "mapbox:autocomposite": true,
+        "mapbox:autocomposite": false,
         "mapbox:groups": {
             "1444850762048.5845": {
                 "name": "Water labels",
@@ -1435,7 +1435,7 @@
     ],
     "created": "2016-04-18T14:32:30.945Z",
     "id": "cin63p0wn0092d4nko4s7508y",
-    "modified": "2016-07-03T13:26:08.890Z",
+    "modified": "2016-07-21T09:16:36.657Z",
     "owner": "mushon",
     "draft": false
 }

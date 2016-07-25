@@ -317,8 +317,13 @@ class GLMap extends React.Component {
           this.props.selectEvent(this.props.events.filter(
             (ev) => featureIds.includes(ev.id)
           ))
-          if (featureIds.length == 1)
-            router.push('/event/' + featureIds[0])
+          if (featureIds.length == 1) {
+            let url = 'event/' + featureIds[0]
+            if (this.props.proj) {
+              url = 'project/' + this.props.proj + '/' + url
+            }
+            router.push(url)
+          }
           this.props.hoverExitEvent()
         }
       }

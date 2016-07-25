@@ -138,7 +138,11 @@ class EventsPane extends React.Component {
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
       {evs.map((e) => <div key={'list-event-' + e.id} className={'event ' + getEventStyle(e)} onClick={() => {
         this.props.selectEvent([e])
-        this.context.router.push('/event/' + e.id)
+        let url = 'event/' + e.id
+        if (this.props.proj) {
+          url = 'project/' + this.props.proj + '/' + url
+        }
+        this.context.router.push(url)
       }}>
         <span className="event-icon">
           <img src={e.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>

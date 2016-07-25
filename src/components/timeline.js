@@ -123,7 +123,11 @@ class MarkerData extends React.Component {
 
         return <g className={evstyle} ref={'marker-' + d.id} key={d.id} onClick={(e) => {
           this.props.openEventSidepane([d])
-          this.context.router.push('/event/' + d.id)
+          let url = 'event/' + d.id
+          if (this.props.proj) {
+            url = 'project/' + this.props.proj + '/' + url
+          }
+          this.context.router.push(url)
           this.props.hoverExitEvent()
         }} onMouseEnter={(e) => {
           this.props.hoverEnterEvent([d])
@@ -304,7 +308,8 @@ class D3Timeline extends React.Component {
         onMouseUp={this.endDragHandler}
         onMouseMove={this.onDragHandler}>
         <YearAxis x={this.x} width={this.props.width} height={this.props.height} />
-        <MarkerData ref='marker-data' x={this.x} data={this.props.data} app={this.props.app} timeline={this.props.timeline} openEventSidepane={this.props.openEventSidepane}
+        <MarkerData ref='marker-data' x={this.x} data={this.props.data} app={this.props.app} proj={this.props.proj}
+          timeline={this.props.timeline} openEventSidepane={this.props.openEventSidepane}
           hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent} />
       </svg>
       <AnnotationLabel data={this.props.data} app={this.props.app} x={this.x} />
@@ -399,7 +404,7 @@ class Timeline extends React.Component {
       <FilterBar project={research} projects={this.props.projects.items} />
       <TimelineMetadata project={research} app={this.props.app} />
       <D3Timeline width={document.body.offsetWidth} height={120} data={this.props.events}
-        app={this.props.app} timeline={this.props.timeline}
+        app={this.props.app} timeline={this.props.timeline} proj={this.props.proj}
         startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
         onZoom={this.props.onZoom}
         dragStart={this.props.dragStart}

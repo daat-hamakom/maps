@@ -76,7 +76,10 @@ class EventPane extends React.Component {
         })
       }</div>
 
-      <span className='close' onClick={this.props.closeSidepane}>✖</span>
+      <span className='close' onClick={() => {
+        this.props.closeSidepane()
+        this.context.router.goBack()
+      }}>✖</span>
 
       {medias.length ?
         m.type == 'image' ?
@@ -113,6 +116,10 @@ class EventPane extends React.Component {
   }
 }
 
+EventPane.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
+
 class EventsPane extends React.Component {
 
   handleClick = (e) => {
@@ -131,6 +138,7 @@ class EventsPane extends React.Component {
       <span className='close' onClick={this.props.closeSidepane}>✖</span>
       {evs.map((e) => <div key={'list-event-' + e.id} className={'event ' + getEventStyle(e)} onClick={() => {
         this.props.selectEvent([e])
+        this.context.router.push('/event/' + e.id)
       }}>
         <span className="event-icon">
           <img src={e.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
@@ -145,6 +153,11 @@ class EventsPane extends React.Component {
     </div>
   }
 }
+
+EventsPane.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
+
 
 class Sidepane extends React.Component {
 

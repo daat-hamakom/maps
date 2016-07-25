@@ -123,6 +123,7 @@ class MarkerData extends React.Component {
 
         return <g className={evstyle} ref={'marker-' + d.id} key={d.id} onClick={(e) => {
           this.props.openEventSidepane([d])
+          this.context.router.push('/event/' + d.id)
           this.props.hoverExitEvent()
         }} onMouseEnter={(e) => {
           this.props.hoverEnterEvent([d])
@@ -137,6 +138,11 @@ class MarkerData extends React.Component {
     </g>
   }
 }
+
+MarkerData.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
+
 
 class AnnotationLabel extends React.Component {
 

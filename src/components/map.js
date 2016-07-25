@@ -20,9 +20,6 @@ const OPACITY_DICT = {
 
 class GLMap extends React.Component {
 
-  // Adapted from Tim Welch's code that can be found at
-  // https://github.com/twelch/react-mapbox-gl-seed/blob/4d78eb0/src/components/GLMap.js
-
   componentWillMount () {
     this.setState({
       rectzoom : false,
@@ -313,11 +310,15 @@ class GLMap extends React.Component {
           (ev) => featureIds.includes(ev.id)
         ))
 
+        const router = this.context.router
+
         // fugly hack to grab the click on the popup
         this.hover_popup._content.onclick = (_e) => {
           this.props.selectEvent(this.props.events.filter(
             (ev) => featureIds.includes(ev.id)
           ))
+          if (featureIds.length == 1)
+            router.push('/event/' + featureIds[0])
           this.props.hoverExitEvent()
         }
       }
@@ -482,7 +483,12 @@ class GLMap extends React.Component {
 
 }
 
+GLMap.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
+
 class Map extends React.Component {
+
   render () {
     const view = { style: 'mapbox://styles/mushon/ciqg8f3lv000re0nfv8j3hxjd', center: [35, 31], zoom: 3, container: 'map' }
     return <GLMap view={view} token={appconf.token.map} app={this.props.app} proj={this.props.proj}
@@ -492,5 +498,7 @@ class Map extends React.Component {
       toggleProj={this.props.toggleProj} />
   }
 }
+
+
 
 export default Map

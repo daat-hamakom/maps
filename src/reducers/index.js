@@ -5,6 +5,8 @@ import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS,
   REQUEST_PROJECTS, REQUEST_PROJECTS_FAIL, REQUEST_PROJECTS_SUCCESS,
   REQUEST_ANNOTATIONS, REQUEST_ANNOTATIONS_FAIL, REQUEST_ANNOTATIONS_SUCCESS,
   REQUEST_PLACES, REQUEST_PLACES_FAIL, REQUEST_PLACES_SUCCESS,
+  REQUEST_PEOPLE, REQUEST_PEOPLE_FAIL, REQUEST_PEOPLE_SUCCESS,
+  REQUEST_ORGANIZATIONS, REQUEST_ORGANIZATIONS_FAIL, REQUEST_ORGANIZATIONS_SUCCESS,
   ZOOM_TIMELINE, START_DRAG_TIMELINE, ON_DRAG_TIMELINE, END_DRAG_TIMELINE, SHIFT_TIMELINE,
   HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT, SET_APP_STYLE, TOGGLE_PROJ,
   OPEN_LIGHTBOX, CLOSE_LIGHTBOX } from '../actions'
@@ -80,6 +82,32 @@ function places(state = { fetching: false, items: [] }, action) {
   }
 }
 
+function people(state = { fetching: false, items: [] }, action) {
+  switch (action.type) {
+    case REQUEST_PEOPLE:
+      return Object.assign({}, state, { fetching: true })
+    case REQUEST_PEOPLE_FAIL:
+      return Object.assign({}, state, { fetching: false })
+    case REQUEST_PEOPLE_SUCCESS:
+      return Object.assign({}, state, { fetching: false, items: action.items })
+    default:
+      return state
+  }
+}
+
+function organizations(state = { fetching: false, items: [] }, action) {
+  switch (action.type) {
+    case REQUEST_ORGANIZATIONS:
+      return Object.assign({}, state, { fetching: true })
+    case REQUEST_ORGANIZATIONS_FAIL:
+      return Object.assign({}, state, { fetching: false })
+    case REQUEST_ORGANIZATIONS_SUCCESS:
+      return Object.assign({}, state, { fetching: false, items: action.items })
+    default:
+      return state
+  }
+}
+
 const timelineState = {
   startDate: new Date(1500, 1, 1),
   endDate: new Date(2050, 1, 1),
@@ -147,6 +175,8 @@ const rootReducer = combineReducers({
   projects,
   annotations,
   places,
+  people,
+  organizations,
   timeline,
   sidepane,
   lightbox

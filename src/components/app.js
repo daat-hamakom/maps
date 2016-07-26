@@ -5,7 +5,8 @@ import Lightbox from './lightbox'
 import Map from './map'
 import Sidepane from './sidepane'
 import Timeline from './timeline'
-import { fetchEvents, fetchProjects, fetchAnnotations, fetchPlaces, zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline, shiftTimeline,
+import { fetchEvents, fetchProjects, fetchAnnotations, fetchPlaces, fetchPeople, fetchOrganizations,
+  zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline, shiftTimeline,
   hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent, closeLightbox, openLightbox, setAppStyle, toggleProj } from '../actions'
 
 import '../styles/app.scss'
@@ -23,6 +24,8 @@ class App extends React.Component {
     dispatch(fetchProjects())
     dispatch(fetchAnnotations())
     dispatch(fetchPlaces())
+    dispatch(fetchPeople())
+    dispatch(fetchOrganizations())
   }
 
   finishedLoading () {
@@ -93,6 +96,8 @@ function select(state) {
     projects: state.projects,
     annotations: state.annotations,
     places: state.places,
+    people: state.people,
+    organizations: state.organizations,
     timeline: state.timeline,
     sidepane: state.sidepane,
     lightbox: state.lightbox

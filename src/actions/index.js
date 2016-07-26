@@ -16,6 +16,14 @@ export const REQUEST_PLACES = 'REQUEST_PLACES'
 export const REQUEST_PLACES_FAIL = 'REQUEST_PLACES_FAIL'
 export const REQUEST_PLACES_SUCCESS = 'REQUEST_PLACES_SUCCESS'
 
+export const REQUEST_PEOPLE = 'REQUEST_PEOPLE'
+export const REQUEST_PEOPLE_FAIL = 'REQUEST_PEOPLE_FAIL'
+export const REQUEST_PEOPLE_SUCCESS = 'REQUEST_PEOPLE_SUCCESS'
+
+export const REQUEST_ORGANIZATIONS = 'REQUEST_ORGANIZATIONS'
+export const REQUEST_ORGANIZATIONS_FAIL = 'REQUEST_ORGANIZATIONS_FAIL'
+export const REQUEST_ORGANIZATIONS_SUCCESS = 'REQUEST_ORGANIZATIONS_SUCCESS'
+
 export const ZOOM_TIMELINE = 'ZOOM_TIMELINE'
 
 export const START_DRAG_TIMELINE = 'START_DRAG_TIMELINE'
@@ -146,6 +154,62 @@ export function fetchPlaces() {
       )
       .catch(ex =>
         dispatch(requestPlacesFail())
+      )
+  }
+}
+
+export function requestPeople() {
+  return { type: REQUEST_PEOPLE }
+}
+
+export function requestPeopleFail() {
+  return { type: REQUEST_PEOPLE_FAIL }
+}
+
+export function requestPeopleSuccess(items) {
+  return { type: REQUEST_PEOPLE_SUCCESS, items: items }
+}
+
+export function fetchPeople() {
+  return dispatch => {
+    dispatch(requestPlaces())
+    return fetch('https://daat-hamakom-data.herokuapp.com/api/people/')
+      .then(response =>
+        response.json()
+      )
+      .then(json =>
+        dispatch(requestPeopleSuccess(json))
+      )
+      .catch(ex =>
+        dispatch(requestPeopleFail())
+      )
+  }
+}
+
+export function requestOrganizations() {
+  return { type: REQUEST_ORGANIZATIONS }
+}
+
+export function requestOrganizationsFail() {
+  return { type: REQUEST_ORGANIZATIONS_FAIL }
+}
+
+export function requestOrganizationsSuccess(items) {
+  return { type: REQUEST_ORGANIZATIONS_SUCCESS, items: items }
+}
+
+export function fetchOrganizations() {
+  return dispatch => {
+    dispatch(requestPlaces())
+    return fetch('https://daat-hamakom-data.herokuapp.com/api/organizations/')
+      .then(response =>
+        response.json()
+      )
+      .then(json =>
+        dispatch(requestOrganizationsSuccess(json))
+      )
+      .catch(ex =>
+        dispatch(requestOrganizationsFail())
       )
   }
 }

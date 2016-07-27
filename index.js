@@ -24,9 +24,13 @@ ReactDOM.render((
   <Provider store={store}>
     <Router>
       <Route path='/' component={App}>
+        <Route path='/event/:eventId' component={App}/>
         <Route path='/project/:projId' component={App}/>
         <Route path='/project/:projId/event/:eventId' component={App}/>
-        <Route path='/event/:eventId' component={App}/>
+        <Route path='/person/:personId' component={App}/>
+        <Route path='/person/:personId/event/:eventId' component={App}/>
+        <Route path='/organization/:orgId' component={App}/>
+        <Route path='/organization/:orgId/event/:eventId' component={App}/>
       </Route>
       <Route path='about' component={About}/>
     </Router>

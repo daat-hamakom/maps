@@ -50,6 +50,12 @@ class App extends React.Component {
     if (this.props.params.projId) {
       events = this.props.events.items.filter(e => e.project == this.props.params.projId)
     }
+    if (this.props.params.personId) {
+      events = this.props.events.items.filter(e => e.people.map(p => p.id).indexOf(+this.props.params.personId) != -1)
+    }
+    if (this.props.params.orgId) {
+      events = this.props.events.items.filter(e => e.organizations.map(p => p.id).indexOf(+this.props.params.orgId) != -1)
+    }
 
     return <div className={'app ' + this.props.app.style}>
 

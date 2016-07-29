@@ -8,10 +8,10 @@ import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS,
   REQUEST_PEOPLE, REQUEST_PEOPLE_FAIL, REQUEST_PEOPLE_SUCCESS,
   REQUEST_ORGANIZATIONS, REQUEST_ORGANIZATIONS_FAIL, REQUEST_ORGANIZATIONS_SUCCESS,
   ZOOM_TIMELINE, START_DRAG_TIMELINE, ON_DRAG_TIMELINE, END_DRAG_TIMELINE, SHIFT_TIMELINE,
-  HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT, SET_APP_STYLE, TOGGLE_PROJ,
+  HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT, SET_APP_STYLE, TOGGLE_DRAWER,
   OPEN_LIGHTBOX, CLOSE_LIGHTBOX } from '../actions'
 
-function app(state = { hover: [], selected: [], origin: null, style: 'default', proj: true }, action) {
+function app(state = { hover: [], selected: [], origin: null, style: 'default', drawer: true }, action) {
   switch (action.type) {
     case HOVER_ENTER_EVENT:
       return Object.assign({}, state, { hover: action.ev, origin: action.origin })
@@ -23,8 +23,8 @@ function app(state = { hover: [], selected: [], origin: null, style: 'default', 
       return Object.assign({}, state, { selected: [], origin: null })
     case SET_APP_STYLE:
       return Object.assign({}, state, { style: action.style })
-    case TOGGLE_PROJ:
-      return Object.assign({}, state, { proj: !state.proj })
+    case TOGGLE_DRAWER:
+      return Object.assign({}, state, { drawer: !state.drawer })
     default:
       return state
   }

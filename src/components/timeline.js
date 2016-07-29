@@ -344,11 +344,53 @@ class ProjectMetadata extends React.Component {
   }
 }
 
+class PersonMetadata extends React.Component {
+  render () {
+    const p = this.props.person
+    return <div className='project'>
+      <div className='titles'>
+        <h2>{p.title}</h2>
+        <h3>{p.subtitle}</h3>
+        <p>{p.researchers.join(', ')}</p>
+      </div>
+      <div className='description' dangerouslySetInnerHTML={{__html: p.synopsis.replace(/a href/g, 'a target="_blank" href')}}></div>
+      <div className='image'>
+        <img src={p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+      </div>
+    </div>
+  }
+}
+
+class OrganizationMetadata extends React.Component {
+  render () {
+    const p = this.props.organization
+    return <div className='project'>
+      <div className='titles'>
+        <h2>{p.title}</h2>
+        <h3>{p.subtitle}</h3>
+        <p>{p.researchers.join(', ')}</p>
+      </div>
+      <div className='description' dangerouslySetInnerHTML={{__html: p.synopsis.replace(/a href/g, 'a target="_blank" href')}}></div>
+      <div className='image'>
+        <img src={p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+      </div>
+    </div>
+  }
+}
+
 class TimelineMetadata extends React.Component {
   render () {
-    if (this.props.project && this.props.app.proj)
+    if (this.props.drawerData && this.props.params.projId && this.props.app.drawer)
       return <div id='metadata'>
-        <ProjectMetadata project={this.props.project} />
+        <ProjectMetadata project={this.props.drawerData} />
+      </div>
+    else if (this.props.params.personId && this.props.app.drawer)
+      return <div id='metadata'>
+        <PersonMetadata person={this.props.drawerData} />
+      </div>
+    else if (this.props.params.orgId && this.props.app.drawer)
+      return <div id='metadata'>
+        <OrganizationMetadata org={this.props.drawerData} />
       </div>
     else
       return <div id='metadata'></div>
@@ -364,8 +406,7 @@ class Timeline extends React.Component {
 
   componentDidUpdate () {
     if (!this.resized && this.props.events.length) {
-      const research = this.props.proj ? this.props.projects.items.find((p) => { return p.id == this.props.proj }) : null
-      if (research) {
+      if (this.props.params.projId && this.props.drawerData) {
         let startDate = this.props.events.map(e => e.start_date).reduce((prev, cur, curind, ar) => {
           return cur < prev ? cur : prev
         })
@@ -392,19 +433,19 @@ class Timeline extends React.Component {
 
   render () {
     let { startDate, endDate } = this.props.timeline
-    const research = this.props.proj ? this.props.projects.items.find((p) => { return p.id == this.props.proj }) : null
+    const research = this.props.params.projId ? this.props.drawerData : null
 
     let height = 46 + 120; // search + timeline
-    if (research && this.props.app.proj) {
+    if (this.props.app.drawer && this.props.drawerData) {
       height = height + 200;
     }
 
     return <div id='timeline' style={{height: height + 'px'}}>
-      <div className='handle-container'><div className='handle' onClick={(e) => { this.props.toggleProj() }}></div></div>
+      <div className='handle-container'><div className='handle' onClick={(e) => { this.props.toggleDrawer() }}></div></div>
       <FilterBar project={research} projects={this.props.projects.items} />
-      <TimelineMetadata project={research} app={this.props.app} />
+      <TimelineMetadata drawerData={this.props.drawerData} app={this.props.app} params={this.props.params} />
       <D3Timeline width={document.body.offsetWidth} height={120} data={this.props.events}
-        app={this.props.app} timeline={this.props.timeline} proj={this.props.proj}
+        app={this.props.app} timeline={this.props.timeline} drawer={this.props.drawer}
         startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
         onZoom={this.props.onZoom}
         dragStart={this.props.dragStart}

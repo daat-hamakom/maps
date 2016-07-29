@@ -7,7 +7,7 @@ import Sidepane from './sidepane'
 import Timeline from './timeline'
 import { fetchEvents, fetchProjects, fetchAnnotations, fetchPlaces, fetchPeople, fetchOrganizations,
   zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline, shiftTimeline,
-  hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent, closeLightbox, openLightbox, setAppStyle, toggleProj } from '../actions'
+  hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent, closeLightbox, openLightbox, setAppStyle, toggleDrawer } from '../actions'
 
 import '../styles/app.scss'
 
@@ -47,19 +47,24 @@ class App extends React.Component {
     const { dispatch } = this.props
 
     let events = this.props.events.items
+    let drawerData = null
+
     if (this.props.params.projId) {
-      events = this.props.events.items.filter(e => e.project == this.props.params.projId)
+      events = this.props.events.items.filter(e => e.project == +this.props.params.projId)
+      drawerData = this.props.projects.items.find(p => p.id == +this.props.params.projId)
     }
     if (this.props.params.personId) {
       events = this.props.events.items.filter(e => e.people.map(p => p.id).indexOf(+this.props.params.personId) != -1)
+      drawerData = this.props.people.items.find(p => p.id == +this.props.params.personId)
     }
     if (this.props.params.orgId) {
       events = this.props.events.items.filter(e => e.organizations.map(p => p.id).indexOf(+this.props.params.orgId) != -1)
+      drawerData = this.props.organizations.items.find(o => o.id == +this.props.params.orgId)
     }
 
     return <div className={'app ' + this.props.app.style}>
 
-      <Map app={this.props.app} events={events} proj={this.props.params.projId}
+      <Map app={this.props.app} events={events} params={this.props.params}
         annotations={this.props.annotations} places={this.props.places}
         openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'map')) }}
@@ -67,10 +72,11 @@ class App extends React.Component {
         selectEvent={(ev) => { dispatch(selectEvent(ev, 'map')) }}
         deselectEvent={() => { dispatch(deselectEvent()) }}
         setAppStyle={(s) => { dispatch(setAppStyle(s)) }}
-        toggleProj={() => { dispatch(toggleProj()) }} />
+        toggleDrawer={() => { dispatch(toggleDrawer()) }} />
 
-      <Timeline proj={this.props.params.projId} projects={this.props.projects} app={this.props.app}
+      <Timeline params={this.props.params} app={this.props.app} drawerData={drawerData}
         events={events} timeline={this.props.timeline}
+        projects={this.props.projects} people={this.props.people} organizations={this.props.organizations}
         onZoom={(b, e) => { dispatch(zoomTimeline(b, e)) }}
         dragStart={(x, w) => { dispatch(startDragTimeline(x, w)) }}
         drag={(x) => { dispatch(onDragTimeline(x)) }}
@@ -79,10 +85,10 @@ class App extends React.Component {
         openEventSidepane={(ev) => { dispatch(selectEvent(ev, 'timeline')) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'timeline')) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
-        toggleProj={() => { dispatch(toggleProj()) }} />
+        toggleDrawer={() => { dispatch(toggleDrawer()) }} />
 
       <Sidepane app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane}
-        proj={this.props.params.projId}
+        params={this.props.params}
         closeSidepane={() => { dispatch(deselectEvent()) }}
         selectEvent={(ev) => { dispatch(selectEvent(ev, 'sidepane')) }}
         openEventsSidepane={() => { dispatch(selectEvent(events, 'sidepane')) }}

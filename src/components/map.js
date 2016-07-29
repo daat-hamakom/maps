@@ -330,8 +330,8 @@ class GLMap extends React.Component {
     })
 
     this.map.on('mousedown', (e) => {
-      if (this.props.app.proj && this.props.proj) {
-        this.props.toggleProj()
+      if (this.props.app.drawer && this.props.proj) {
+        this.props.toggleDrawer()
       }
     })
 
@@ -496,11 +496,11 @@ class Map extends React.Component {
 
   render () {
     const view = { style: 'mapbox://styles/mushon/ciqg8f3lv000re0nfv8j3hxjd', center: [35, 31], zoom: 3, container: 'map' }
-    return <GLMap view={view} token={appconf.token.map} app={this.props.app} proj={this.props.proj}
+    return <GLMap view={view} token={appconf.token.map} app={this.props.app} params={this.props.params}
       events={this.props.events} annotations={this.props.annotations} places={this.props.places}
       hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent}
       selectEvent={this.props.selectEvent} deselectEvent={this.props.deselectEvent} setAppStyle={this.props.setAppStyle}
-      toggleProj={this.props.toggleProj} />
+      toggleDrawer={this.props.toggleDrawer} />
   }
 }
 

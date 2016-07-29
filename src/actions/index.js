@@ -40,7 +40,7 @@ export const OPEN_LIGHTBOX = 'OPEN_LIGHTBOX'
 export const CLOSE_LIGHTBOX = 'CLOSE_LIGHTBOX'
 
 export const SET_APP_STYLE = 'SET_APP_STYLE'
-export const TOGGLE_PROJ = 'TOGGLE_PROJ'
+export const TOGGLE_DRAWER = 'TOGGLE_DRAWER'
 
 export function requestEvents() {
   return { type: REQUEST_EVENTS }
@@ -270,6 +270,6 @@ export function setAppStyle(style) {
   return { type: SET_APP_STYLE, style: style }
 }
 
-export function toggleProj() {
-  return { type: TOGGLE_PROJ }
+export function toggleDrawer() {
+  return { type: TOGGLE_DRAWER }
 }

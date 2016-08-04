@@ -364,15 +364,14 @@ class PersonMetadata extends React.Component {
 class OrganizationMetadata extends React.Component {
   render () {
     const p = this.props.organization
+    const cover = p.cover_image ? p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
     return <div className='project'>
       <div className='titles'>
-        <h2>{p.title}</h2>
-        <h3>{p.subtitle}</h3>
-        <p>{p.researchers.join(', ')}</p>
+        <h2>{p.name}</h2>
       </div>
-      <div className='description' dangerouslySetInnerHTML={{__html: p.synopsis.replace(/a href/g, 'a target="_blank" href')}}></div>
+      <div className='description' dangerouslySetInnerHTML={{__html: p.description.replace(/a href/g, 'a target="_blank" href')}}></div>
       <div className='image'>
-        <img src={p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+        <img src={cover}></img>
       </div>
     </div>
   }
@@ -390,7 +389,7 @@ class TimelineMetadata extends React.Component {
       </div>
     else if (this.props.drawerData && this.props.params.orgId && this.props.app.drawer)
       return <div id='metadata'>
-        <OrganizationMetadata org={this.props.drawerData} />
+        <OrganizationMetadata organization={this.props.drawerData} />
       </div>
     else
       return <div id='metadata'></div>

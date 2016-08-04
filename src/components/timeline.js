@@ -347,15 +347,15 @@ class ProjectMetadata extends React.Component {
 class PersonMetadata extends React.Component {
   render () {
     const p = this.props.person
+    const profile = p.profile_image ? p.profile_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
     return <div className='project'>
       <div className='titles'>
-        <h2>{p.title}</h2>
-        <h3>{p.subtitle}</h3>
-        <p>{p.researchers.join(', ')}</p>
+        <h2>{p.last_name}</h2>
+        <h3>{p.first_name} {p.middle_name}</h3>
       </div>
-      <div className='description' dangerouslySetInnerHTML={{__html: p.synopsis.replace(/a href/g, 'a target="_blank" href')}}></div>
+      <div className='description' dangerouslySetInnerHTML={{__html: p.biography.replace(/a href/g, 'a target="_blank" href')}}></div>
       <div className='image'>
-        <img src={p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+        <img src={profile}></img>
       </div>
     </div>
   }
@@ -384,11 +384,11 @@ class TimelineMetadata extends React.Component {
       return <div id='metadata'>
         <ProjectMetadata project={this.props.drawerData} />
       </div>
-    else if (this.props.params.personId && this.props.app.drawer)
+    else if (this.props.drawerData && this.props.params.personId && this.props.app.drawer)
       return <div id='metadata'>
         <PersonMetadata person={this.props.drawerData} />
       </div>
-    else if (this.props.params.orgId && this.props.app.drawer)
+    else if (this.props.drawerData && this.props.params.orgId && this.props.app.drawer)
       return <div id='metadata'>
         <OrganizationMetadata org={this.props.drawerData} />
       </div>

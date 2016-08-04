@@ -336,7 +336,8 @@ class GLMap extends React.Component {
     })
 
     this.map.on('mousedown', (e) => {
-      if (this.props.app.drawer && this.props.proj) {
+      if (this.props.app.drawer && (this.props.params.projectId ||
+          this.props.params.personId || this.props.params.orgId)) {
         this.props.toggleDrawer()
       }
     })

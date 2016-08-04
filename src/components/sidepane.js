@@ -139,8 +139,14 @@ class EventsPane extends React.Component {
       {evs.map((e) => <div key={'list-event-' + e.id} className={'event ' + getEventStyle(e)} onClick={() => {
         this.props.selectEvent([e])
         let url = 'event/' + e.id
-        if (this.props.proj) {
-          url = 'project/' + this.props.proj + '/' + url
+        if (this.props.params.projId) {
+          url = 'project/' + this.props.params.projId + '/' + url
+        }
+        else if (this.props.params.personId) {
+          url = 'person/' + this.props.params.personId + '/' + url
+        }
+        else if (this.props.params.orgId) {
+          url = 'organization/' + this.props.params.orgId + '/' + url
         }
         this.context.router.push(url)
       }}>
@@ -170,8 +176,8 @@ class Sidepane extends React.Component {
     return <div id='sidepane' className={evs.length > 0 ? 'open' : 'closed'}>
       <SidepaneButton openEventsSidepane={this.props.openEventsSidepane} />
       {evs.length == 1
-        ? <EventPane  app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane} proj={this.props.proj} closeSidepane={this.props.closeSidepane} selectMedia={this.props.selectMedia} />
-        : <EventsPane app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane} proj={this.props.proj} selectEvent={this.props.selectEvent} closeSidepane={this.props.closeSidepane} />
+        ? <EventPane  app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane} params={this.props.params} closeSidepane={this.props.closeSidepane} selectMedia={this.props.selectMedia} />
+        : <EventsPane app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane} params={this.props.params} selectEvent={this.props.selectEvent} closeSidepane={this.props.closeSidepane} />
       }
     </div>
   }

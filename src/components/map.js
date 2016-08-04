@@ -319,8 +319,14 @@ class GLMap extends React.Component {
           ))
           if (featureIds.length == 1) {
             let url = 'event/' + featureIds[0]
-            if (this.props.proj) {
-              url = 'project/' + this.props.proj + '/' + url
+            if (this.props.params.projId) {
+              url = 'project/' + this.props.params.projId + '/' + url
+            }
+            else if (this.props.params.personId) {
+              url = 'person/' + this.props.params.personId + '/' + url
+            }
+            else if (this.props.params.orgId) {
+              url = 'organization/' + this.props.params.orgId + '/' + url
             }
             router.push(url)
           }

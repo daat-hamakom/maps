@@ -124,8 +124,14 @@ class MarkerData extends React.Component {
         return <g className={evstyle} ref={'marker-' + d.id} key={d.id} onClick={(e) => {
           this.props.openEventSidepane([d])
           let url = 'event/' + d.id
-          if (this.props.proj) {
-            url = 'project/' + this.props.proj + '/' + url
+          if (this.props.params.projId) {
+            url = 'project/' + this.props.params.projId + '/' + url
+          }
+          else if (this.props.params.personId) {
+            url = 'person/' + this.props.params.personId + '/' + url
+          }
+          else if (this.props.params.orgId) {
+            url = 'organization/' + this.props.params.orgId + '/' + url
           }
           this.context.router.push(url)
           this.props.hoverExitEvent()
@@ -308,7 +314,7 @@ class D3Timeline extends React.Component {
         onMouseUp={this.endDragHandler}
         onMouseMove={this.onDragHandler}>
         <YearAxis x={this.x} width={this.props.width} height={this.props.height} />
-        <MarkerData ref='marker-data' x={this.x} data={this.props.data} app={this.props.app} proj={this.props.proj}
+        <MarkerData ref='marker-data' x={this.x} data={this.props.data} app={this.props.app} params={this.props.params}
           timeline={this.props.timeline} openEventSidepane={this.props.openEventSidepane}
           hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent} />
       </svg>
@@ -443,17 +449,12 @@ class Timeline extends React.Component {
       <div className='handle-container'><div className='handle' onClick={(e) => { this.props.toggleDrawer() }}></div></div>
       <FilterBar project={research} projects={this.props.projects.items} />
       <TimelineMetadata drawerData={this.props.drawerData} app={this.props.app} params={this.props.params} />
-      <D3Timeline width={document.body.offsetWidth} height={120} data={this.props.events}
+      <D3Timeline width={document.body.offsetWidth} height={120} data={this.props.events} params={this.props.params}
         app={this.props.app} timeline={this.props.timeline} drawer={this.props.drawer}
         startDate={startDate} endDate={endDate} dragging={this.props.timeline.drag.active}
-        onZoom={this.props.onZoom}
-        dragStart={this.props.dragStart}
-        drag={this.props.drag}
-        dragEnd={this.props.dragEnd}
-        shiftTimeline={this.props.shiftTimeline}
-        openEventSidepane={this.props.openEventSidepane}
-        hoverEnterEvent={this.props.hoverEnterEvent}
-        hoverExitEvent={this.props.hoverExitEvent} />
+        onZoom={this.props.onZoom} dragStart={this.props.dragStart} drag={this.props.drag} dragEnd={this.props.dragEnd}
+        shiftTimeline={this.props.shiftTimeline} openEventSidepane={this.props.openEventSidepane}
+        hoverEnterEvent={this.props.hoverEnterEvent} hoverExitEvent={this.props.hoverExitEvent} />
     </div>
   }
 }

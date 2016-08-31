@@ -326,10 +326,24 @@ class D3Timeline extends React.Component {
 class FilterBar extends React.Component {
 
   handleChange (val) {
-    this.context.router.push('/' + val.type + '/' + val.value)
+    if (val)
+      this.context.router.push('/' + val.type + '/' + val.value)
+    else
+      this.context.router.push('/')
   }
 
   render () {
+    let val = null
+    if (this.props.drawerData && this.props.params.personId) {
+      val = +this.props.params.personId
+    }
+    else if (this.props.drawerData && this.props.params.projId) {
+      val = +this.props.params.projId
+    }
+    else if (this.props.drawerData && this.props.params.orgId) {
+      val = +this.props.params.orgId
+    }
+
     const options = this.props.projects.map((p) => { return { type: 'project', value: p.id, label: p.title }} ).concat(
       this.props.people.map((p) => { return { type: 'person', value: p.id, label: p.first_name + ' ' + p.last_name }} )
     ).concat(
@@ -339,8 +353,9 @@ class FilterBar extends React.Component {
       if (a.label < b.label) return -1
       return 0
     })
+
     return <div id='filter'>
-      <Select name="search-bar" placeholder='Filter by research, person, organization' disabled={false} value={this.props.project ? this.props.project.id : null}
+      <Select name="search-bar" placeholder='Filter by research, person, organization' disabled={false} value={val}
     options={options} multi={false} onChange={(v) => {this.handleChange(v)}} />
     </div>
   }
@@ -464,7 +479,7 @@ class Timeline extends React.Component {
 
     return <div id='timeline' style={{height: height + 'px'}}>
       <div className='handle-container'><div className='handle' onClick={(e) => { this.props.toggleDrawer() }}></div></div>
-      <FilterBar project={research} projects={this.props.projects.items}
+      <FilterBar params={this.props.params} drawerData={this.props.drawerData} projects={this.props.projects.items}
         people={this.props.people.items} organizations={this.props.organizations.items}/>
       <TimelineMetadata drawerData={this.props.drawerData} app={this.props.app} params={this.props.params} />
       <D3Timeline width={document.body.offsetWidth} height={120} data={this.props.events} params={this.props.params}

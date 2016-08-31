@@ -344,10 +344,10 @@ class FilterBar extends React.Component {
       val = 'org-' + this.props.params.orgId
     }
 
-    const options = this.props.projects.map((p) => { return { type: 'project', value: 'proj-' + p.id, id: p.id, label: p.title }} ).concat(
-      this.props.people.map((p) => { return { type: 'person', value: 'person-' + p.id, id: p.id, label: p.first_name + ' ' + p.last_name }} )
+    const options = this.props.projects.map((p) => { return { type: 'project', value: 'proj-' + p.id, id: p.id, label: p.title + ' (Project)'}} ).concat(
+      this.props.people.map((p) => { return { type: 'person', value: 'person-' + p.id, id: p.id, label: p.first_name + ' ' + p.last_name + ' (Person)' }} )
     ).concat(
-      this.props.organizations.map((o) => { return { type: 'organization', value: 'org-' + o.id, id: o.id, label: o.name }} )
+      this.props.organizations.map((o) => { return { type: 'organization', value: 'org-' + o.id, id: o.id, label: o.name + ' (Organization)' }} )
     ).sort((a, b) => {
       if (a.label > b.label) return 1
       if (a.label < b.label) return -1
@@ -355,7 +355,7 @@ class FilterBar extends React.Component {
     })
 
     return <div id='filter'>
-      <Select name="search-bar" placeholder='Filter by research, person, organization' disabled={false} value={val}
+      <Select name="search-bar" placeholder='Filter by project, person or organization' disabled={false} value={val}
     options={options} multi={false} onChange={(v) => {this.handleChange(v)}} onOpen={this.props.closeEventSidepane} />
     </div>
   }

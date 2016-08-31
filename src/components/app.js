@@ -83,6 +83,7 @@ class App extends React.Component {
         dragEnd={() => { dispatch(endDragTimeline()) }}
         shiftTimeline={(b, e) => { dispatch(shiftTimeline(b, e)) }}
         openEventSidepane={(ev) => { dispatch(selectEvent(ev, 'timeline')) }}
+        closeEventSidepane={() => { dispatch(deselectEvent()) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'timeline')) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
         toggleDrawer={() => { dispatch(toggleDrawer()) }} />

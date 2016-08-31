@@ -324,14 +324,31 @@ class D3Timeline extends React.Component {
 }
 
 class FilterBar extends React.Component {
+
+  handleChange (val) {
+    this.context.router.push('/' + val.type + '/' + val.value)
+  }
+
   render () {
-    const options = this.props.projects.map((p) => { return { value: p.id, label: p.title }} )
+    const options = this.props.projects.map((p) => { return { type: 'project', value: p.id, label: p.title }} ).concat(
+      this.props.people.map((p) => { return { type: 'person', value: p.id, label: p.first_name + ' ' + p.last_name }} )
+    ).concat(
+      this.props.organizations.map((o) => { return { type: 'organization', value: o.id, label: o.name }} )
+    ).sort((a, b) => {
+      if (a.label > b.label) return 1
+      if (a.label < b.label) return -1
+      return 0
+    })
     return <div id='filter'>
-      <Select name="search-bar" placeholder='Filter by research, person, organization, place, tag or free text' disabled={true} value={this.props.project ? this.props.project.id : null}
-        options={options} multi={true} />
+      <Select name="search-bar" placeholder='Filter by research, person, organization' disabled={false} value={this.props.project ? this.props.project.id : null}
+    options={options} multi={false} onChange={(v) => {this.handleChange(v)}} />
     </div>
   }
 }
+
+FilterBar.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
 
 class ProjectMetadata extends React.Component {
   render () {
@@ -447,7 +464,8 @@ class Timeline extends React.Component {
 
     return <div id='timeline' style={{height: height + 'px'}}>
       <div className='handle-container'><div className='handle' onClick={(e) => { this.props.toggleDrawer() }}></div></div>
-      <FilterBar project={research} projects={this.props.projects.items} />
+      <FilterBar project={research} projects={this.props.projects.items}
+        people={this.props.people.items} organizations={this.props.organizations.items}/>
       <TimelineMetadata drawerData={this.props.drawerData} app={this.props.app} params={this.props.params} />
       <D3Timeline width={document.body.offsetWidth} height={120} data={this.props.events} params={this.props.params}
         app={this.props.app} timeline={this.props.timeline} drawer={this.props.drawer}

@@ -1,5 +1,6 @@
 import moment from 'moment'
 import React from 'react'
+import { Link } from 'react-router'
 
 import { AudioComponent, getEventStyle } from './utils'
 
@@ -111,7 +112,13 @@ class EventPane extends React.Component {
             </div>
           }
         )}
+        <hr/>
+        <div className='links'>
+          {ev.people.map((p) => <Link to={`/person/${p.id}`} className='person-link'>{p.first_name + ' ' + p.last_name}</Link>)}
+          {ev.people.map((o) => <Link to={`/organization/${o.id}`} className='org-link'>{o.name}</Link>)}
+        </div>
       </div>
+
     </div>
   }
 }

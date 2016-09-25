@@ -118,13 +118,13 @@ body {
                     left: 26px;
                 }
                 div.dot {
-                    width: 9px;
-                    height: 9px;
+                    width: 7px;
+                    height: 7px;
                     background-color: #19d1e7;
                     border-radius: 50%;
                     position: absolute;
-                    top: 61px;
-                    left: 22px;
+                    top: 62px;
+                    left: 23px;
                 }
             }
         }
@@ -239,24 +239,30 @@ body {
           }
           .tick text {
               fill: rgba(162, 179, 183, 1);
-              stroke: rgba(162, 179, 183, 0.6);
+              stroke: transparent;
               font-size: 0.8em;
           }
           rect.marker, circle.marker {
               // fill: rgba(209, 209, 209, 0.7);
-              r: 3px;
+              r: 2px;
               stroke-width: 4px;
               stroke: transparent;
+              stroke-opacity: 0.2;
               cursor: pointer;
               &.active {
                   // fill: rgba(45, 198, 224, 0.7);
-                  r: 5px;
-                  stroke-width: 0;
+                  // r: 4px;
+                  stroke-opacity: 1;
               }
           }
           rect.marker {
-            opacity: 0.5;
-            height: 2px
+            opacity: 0.2;
+            height: 3px;
+            stroke-width: 2px;
+            stroke: transparent;
+            &.active {
+              opacity: 0.5;
+            }
           }
           line.marker {
               stroke: #2dc6e0;
@@ -598,9 +604,12 @@ body {
     div#timeline svg g.preindustrial{
       circle.marker,
       rect.marker{
-        fill: lighten($preindustrial-primary, 20);
+        fill: lighten($preindustrial-primary, 10);
+        stroke: lighten($preindustrial-primary, 10);
         &.active{
           fill: $preindustrial-primary;
+          stroke: $preindustrial-primary;
+          stroke: $preindustrial-primary;
         }
       }
       line.marker{
@@ -648,9 +657,11 @@ body {
     div#timeline svg g.nineteenth{
       circle.marker,
       rect.marker{
-        fill: lighten($nineteenth-primary, 20);
+        fill: lighten($nineteenth-primary, 10);
+        stroke: lighten($nineteenth-primary, 10);
         &.active{
           fill: $nineteenth-primary;
+          stroke: $nineteenth-primary;
         }
       }
       line.marker{
@@ -706,9 +717,11 @@ body {
     div#timeline svg g.modernism{
       circle.marker,
       rect.marker{
-        fill: lighten($modernism-primary, 20);
+        fill: lighten($modernism-primary, 10);
+        stroke: lighten($modernism-primary, 10);
         &.active{
           fill: $modernism-primary;
+          stroke: $modernism-primary;
         }
       }
       line.marker{
@@ -769,9 +782,11 @@ body {
     div#timeline svg g.darktimes{
       circle.marker,
       rect.marker{
-        fill: lighten($darktimes-primary, 20);
+        fill: lighten($darktimes-primary, 10);
+        stroke: lighten($darktimes-primary, 10);
         &.active{
           fill: $darktimes-primary;
+          stroke: $darktimes-primary;
         }
       }
       line.marker{
@@ -825,8 +840,10 @@ body {
       circle.marker,
       rect.marker{
         fill: lighten($postwar-secondary, 20);
+        stroke: lighten($postwar-secondary, 20);
         &.active{
           fill: $postwar-secondary;
+          stroke: $postwar-secondary;
         }
       }
       line.marker{

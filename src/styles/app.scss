@@ -142,6 +142,9 @@ body {
             border-color: #AEC2CC;
             border-width: 1px 0px 0px 0px;
             border-style: solid;
+            .Select {
+                z-index: 20;
+            }
             .Select-control{
               border: none;
               background-color: #fff;

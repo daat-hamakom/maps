@@ -401,6 +401,12 @@ body {
             div.content,
             div.event {
                 padding: 25px;
+                a {
+                  text-decoration: none;
+                  border-radius: 5px;
+                  display: inline-block;
+                  padding: 0 3px;
+                }
                 .project {
                     color: #5D8599;
                     font-size: 14px;
@@ -581,6 +587,10 @@ body {
       div.content,
       div.event-data{
         color: $preindustrial-secondary;
+        a {
+          color: $preindustrial-primary;
+          background: fade-out($preindustrial-primary, 0.75);
+        }
         h2,
         div.title{
           color: $preindustrial-secondary;
@@ -636,6 +646,10 @@ body {
       div.content,
       div.event-data{
         color: $nineteenth-secondary;
+        a {
+          color: $nineteenth-primary;
+          background: fade-out($nineteenth-primary, 0.75);
+        }
         h2,
         div.title,
         div.place{
@@ -698,6 +712,10 @@ body {
       div.content,
       div.event-data{
         color: $modernism-secondary;
+        a {
+          color: $modernism-primary;
+          background: fade-out($modernism-primary, 0.75);
+        }
         h2,
         div.title{
           color: $modernism-secondary;
@@ -759,6 +777,10 @@ body {
       div.content,
       div.event-data{
         color: $darktimes-secondary;
+        a {
+          color: $darktimes-primary;
+          background: fade-out($darktimes-primary, 0.75);
+        }
         h2,
         div.title{
           color: $darktimes-primary;
@@ -824,6 +846,10 @@ body {
       div.content,
       div.event-data{
         color: $postwar-primary;
+        a {
+          color: $postwar-primary;
+          background: fade-out($postwar-primary, 0.75);
+        }
         h2,
         div.title{
           color: $postwar-primary;

@@ -115,7 +115,7 @@ class EventPane extends React.Component {
         <hr/>
         <div className='links'>
           {ev.people.map((p) => <Link to={`/person/${p.id}`} className='person-link'>{p.first_name + ' ' + p.last_name}</Link>)}
-          {ev.people.map((o) => <Link to={`/organization/${o.id}`} className='org-link'>{o.name}</Link>)}
+          {ev.organizations.map((o) => <Link to={`/organization/${o.id}`} className='org-link'>{o.name}</Link>)}
         </div>
       </div>
 

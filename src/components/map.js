@@ -170,18 +170,28 @@ class GLMap extends React.Component {
   }
 
   addPlaceMarkers () {
-    const places = this.props.events.map(e => { return {
-      'type': 'Feature',
-      'properties': {
-        'title': e.place.name.split(',')[0],
-        'zoomlevel': e.place.zoomlevel,
-        'period': getEventStyle(e)
-      },
-      'geometry': {
-        'type': 'Point',
-        'coordinates': e.place.position.split(',').map(x => +x).reverse()
+    let _uniq_cache = []
+    const places = this.props.events.map(e => {
+      const cacheName = e.place.name.split(',')[0] + ' ' + getEventStyle(e)
+      if (_uniq_cache.indexOf(cacheName) > -1)
+        return null
+      else
+        _uniq_cache.push(cacheName)
+
+      return {
+        'type': 'Feature',
+        'properties': {
+            'title': e.place.name.split(',')[0],
+            'zoomlevel': e.place.zoomlevel,
+            'period': getEventStyle(e)
+        },
+        'geometry': {
+            'type': 'Point',
+            'coordinates': e.place.position.split(',').map(x => +x).reverse()
+        }
       }
-    }})
+    }).filter(e => e != null)
+
     const data = {
       'type': 'FeatureCollection',
       'features': places

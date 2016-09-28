@@ -49,20 +49,25 @@ class App extends React.Component {
     let events = this.props.events.items
     let drawerData = null
 
+    let classes = 'app ' + this.props.app.style
+
     if (this.props.params.projId) {
       events = this.props.events.items.filter(e => e.project == +this.props.params.projId)
       drawerData = this.props.projects.items.find(p => p.id == +this.props.params.projId)
+      classes = classes + ' card project'
     }
     if (this.props.params.personId) {
       events = this.props.events.items.filter(e => e.people.map(p => p.id).indexOf(+this.props.params.personId) != -1)
       drawerData = this.props.people.items.find(p => p.id == +this.props.params.personId)
+      classes = classes + ' card person'
     }
     if (this.props.params.orgId) {
       events = this.props.events.items.filter(e => e.organizations.map(p => p.id).indexOf(+this.props.params.orgId) != -1)
       drawerData = this.props.organizations.items.find(o => o.id == +this.props.params.orgId)
+      classes = classes + ' card organization'
     }
 
-    return <div className={'app ' + this.props.app.style}>
+    return <div className={classes}>
 
       <Map app={this.props.app} events={events} params={this.props.params}
         annotations={this.props.annotations} places={this.props.places}

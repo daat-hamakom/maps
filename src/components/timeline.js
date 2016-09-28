@@ -370,6 +370,7 @@ class ProjectMetadata extends React.Component {
     const p = this.props.project
     return <div className='project'>
       <div className='titles'>
+        <h3>Project</h3>
         <h2>{p.title}</h2>
         <h3>{p.subtitle}</h3>
         <p>{p.researchers.join(', ')}</p>
@@ -388,8 +389,8 @@ class PersonMetadata extends React.Component {
     const profile = p.profile_image ? p.profile_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
     return <div className='project'>
       <div className='titles'>
-        <h2>{p.last_name}</h2>
-        <h3>{p.first_name} {p.middle_name}</h3>
+        <h3>Person</h3>
+        <h2>{p.first_name} {p.middle_name} {p.last_name}</h2>
       </div>
       <div className='description' dangerouslySetInnerHTML={{__html: p.biography.replace(/a href/g, 'a target="_blank" href')}}></div>
       <div className='image'>
@@ -405,6 +406,7 @@ class OrganizationMetadata extends React.Component {
     const cover = p.cover_image ? p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
     return <div className='project'>
       <div className='titles'>
+        <h3>Organization</h3>
         <h2>{p.name}</h2>
       </div>
       <div className='description' dangerouslySetInnerHTML={{__html: p.description.replace(/a href/g, 'a target="_blank" href')}}></div>

@@ -394,7 +394,7 @@ class PersonMetadata extends React.Component {
       </div>
       <div className='description' dangerouslySetInnerHTML={{__html: p.biography.replace(/a href/g, 'a target="_blank" href')}}></div>
       <div className='image'>
-        <img src={profile}></img>
+        {profile && <img src={profile}></img>}
       </div>
     </div>
   }
@@ -411,7 +411,7 @@ class OrganizationMetadata extends React.Component {
       </div>
       <div className='description' dangerouslySetInnerHTML={{__html: p.description.replace(/a href/g, 'a target="_blank" href')}}></div>
       <div className='image'>
-        <img src={cover}></img>
+        {cover && <img src={cover}></img>}
       </div>
     </div>
   }

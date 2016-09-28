@@ -161,7 +161,31 @@ body {
             div.Select-value {
                 background-color: #5D8599;
                 border-radius: 5px;
-                color: #fff;
+                top: 3px;
+                bottom: 3px;
+                left: 3px;
+                right: auto;
+                line-height: 30px;
+                padding-left: 30px;
+                span{
+                  color: #fff !important;
+                }
+            }
+            span.Select-clear-zone{
+              width: 25px;
+              display: inline-block;
+              margin-left: -22px;
+              color: #044261;
+              height: 30px;
+              // border-right: #044261 solid 1px;
+              padding: 5px;
+              top: 1px;
+              border-radius: 5px 0 0 5px;
+
+              &:hover {
+                background: #044261;
+                color: #fff
+              }
             }
         }
         div#metadata {

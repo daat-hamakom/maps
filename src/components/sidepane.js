@@ -57,6 +57,11 @@ class EventPane extends React.Component {
     }
   }
 
+  closePane () {
+    this.props.closeSidepane()
+    this.context.router.goBack()
+  }
+
   render () {
     const evs = this.props.app.selected
     const ev = evs[0]
@@ -77,10 +82,7 @@ class EventPane extends React.Component {
         })
       }</div>
 
-      <span className='close' onClick={() => {
-        this.props.closeSidepane()
-        this.context.router.goBack()
-      }}>✖</span>
+      <span className='close' onClick={() => {this.closePane()}}>✖</span>
 
       {medias.length ?
         m.type == 'image' ?
@@ -94,7 +96,7 @@ class EventPane extends React.Component {
       }
 
       <div className='content'>
-        <h3 className='project'>{this.props.projects.items.find((p) => p.id == ev.project).title}</h3>
+      <Link to={`/project/${this.props.projects.items.find((p) => p.id == ev.project).id}`} className='project' onClick={() =>  {this.props.closeSidepane()}}>{this.props.projects.items.find((p) => p.id == ev.project).title}</Link>
         <h2 className='title'>{ev.title}</h2>
         <div className='place'>{ev.place.name}</div>
         <div className='date'>{_cleanDates(ev.start_date, ev.end_date)}</div>
@@ -114,8 +116,8 @@ class EventPane extends React.Component {
         )}
         <hr/>
         <div className='links'>
-          {ev.people.map((p) => <Link to={`/person/${p.id}`} className='person-link'>{p.first_name + ' ' + p.last_name}</Link>)}
-          {ev.organizations.map((o) => <Link to={`/organization/${o.id}`} className='org-link'>{o.name}</Link>)}
+          {ev.people.map((p) => <Link to={`/person/${p.id}`} onClick={() => {this.props.closeSidepane()}} className='person-link'>{p.first_name + ' ' + p.last_name}</Link>)}
+          {ev.organizations.map((o) => <Link to={`/organization/${o.id}`} onClick={() => {this.props.closeSidepane()}} className='org-link'>{o.name}</Link>)}
         </div>
       </div>
 

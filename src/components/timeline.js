@@ -421,9 +421,9 @@ class PersonMetadata extends React.Component {
       <div className='titles'>
         <h3>Person</h3>
         <h2>{p.first_name} {p.middle_name} {p.last_name}</h2>
-        <h4>{p.alt_name.join(', ')}</h4>
+        {p.alt_name.length && <h4>{p.alt_name.join(', ')}</h4>}
         <h5>{bd}</h5>
-        <h5>{p.places.join(', ')}</h5>
+        {p.places.length && <h5>{p.places.join(', ')}</h5>}
       </div>
       <div className='description' dangerouslySetInnerHTML={{__html: p.biography.replace(/a href/g, 'a target="_blank" href')}}></div>
       <div className='image'>
@@ -437,10 +437,13 @@ class OrganizationMetadata extends React.Component {
   render () {
     const p = this.props.organization
     const cover = p.cover_image ? p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
+    const d = _cleanBirthDates(p.start_date, p.end_date)
     return <div className='project'>
       <div className='titles'>
         <h3>Organization</h3>
-        <h2>{p.name}</h2>
+        <h2>{p.name}{p.type && ` (${p.type})`}</h2>
+        <h5>{d}</h5>
+        {p.places.length && <h5>{p.places.join(', ')}</h5>}
       </div>
       <div className='description' dangerouslySetInnerHTML={{__html: p.description.replace(/a href/g, 'a target="_blank" href')}}></div>
       <div className='image'>

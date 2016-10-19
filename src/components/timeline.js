@@ -423,6 +423,7 @@ class PersonMetadata extends React.Component {
         <h2>{p.first_name} {p.middle_name} {p.last_name}</h2>
         <h4>{p.alt_name.join(', ')}</h4>
         <h5>{bd}</h5>
+        <h5>{p.places.join(', ')}</h5>
       </div>
       <div className='description' dangerouslySetInnerHTML={{__html: p.biography.replace(/a href/g, 'a target="_blank" href')}}></div>
       <div className='image'>

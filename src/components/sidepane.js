@@ -99,7 +99,7 @@ class EventPane extends React.Component {
       <Link to={`/project/${this.props.projects.items.find((p) => p.id == ev.project).id}`} className='project' onClick={() =>  {this.props.closeSidepane()}}>{this.props.projects.items.find((p) => p.id == ev.project).title}</Link>
         <h2 className='title'>{ev.title}</h2>
         <div className='place'>{ev.place.name}</div>
-        <div className='date'>{_cleanDates(ev.start_date, ev.end_date)}</div>
+        <div className='date'>{_cleanDates(ev.start_date_orig, ev.end_date_orig)}</div>
         <hr/>
         {ev.media.filter((m) => m.type == 'sound').map((m) => <div className="audio-container">
             <AudioComponent src={m.file} type='audio/mpeg' key={'audio-' + m.id} />
@@ -165,7 +165,7 @@ class EventsPane extends React.Component {
         <div className="event-data">
           <div className='project'>{this.props.projects.items.find((p) => p.id == e.project).title}</div>
           <div className='title'>{e.title}</div>
-          <div className='date'>{_cleanDates(e.start_date, e.end_date)}</div>
+          <div className='date'>{_cleanDates(e.start_date_orig, e.end_date_orig)}</div>
         </div>
         <div className='clear'></div>
       </div>)}

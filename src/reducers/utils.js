@@ -31,6 +31,9 @@ function _cleanDates (ds, de) {
 
 export function cleanDates (ev) {
   const res = _cleanDates(ev.start_date, ev.end_date)
+  ev.start_date_orig = ev.start_date
+  ev.end_date_orig = ev.end_date
+
   ev.start_date = res.sd
   ev.end_date = res.ed
   return ev

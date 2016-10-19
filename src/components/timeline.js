@@ -42,6 +42,35 @@ function _cleanDates (ds, de) {
   return { sd: sd, ed: ed }
 }
 
+function _cleanBirthDates (ds, de) {
+  let sd = moment(ds.replace('-00', '').replace('-00', ''), 'YYYY-MM-DD')
+  if (ds.includes('-00-')) {
+    sd = sd.format('YYYY')
+  }
+  else if (ds.includes('-00')) {
+    sd = sd.format('MMMM YYYY')
+  }
+  else {
+    sd = sd.format('MMMM D, YYYY')
+  }
+
+  let ed = ''
+  if (de != '') {
+    ed = moment(de.replace('-00', '').replace('-00', ''), 'YYYY-MM-DD')
+    if (de.includes('-00-')) {
+      ed = ed.format('YYYY')
+    }
+    else if (de.includes('-00')) {
+      ed = ed.format('MMMM YYYY')
+    }
+    else {
+      ed = ed.format('MMMM D, YYYY')
+    }
+    return sd + ' - ' + ed
+  }
+  return sd
+}
+
 class YearAxis extends React.Component {
 
   static propTypes = {
@@ -387,10 +416,12 @@ class PersonMetadata extends React.Component {
   render () {
     const p = this.props.person
     const profile = p.profile_image ? p.profile_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
+    const bd = _cleanBirthDates(p.birth_date, p.death_date)
     return <div className='project'>
       <div className='titles'>
         <h3>Person</h3>
         <h2>{p.first_name} {p.middle_name} {p.last_name}</h2>
+        <span>{bd}</span>
       </div>
       <div className='description' dangerouslySetInnerHTML={{__html: p.biography.replace(/a href/g, 'a target="_blank" href')}}></div>
       <div className='image'>

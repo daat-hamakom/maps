@@ -337,7 +337,10 @@ class D3Timeline extends React.Component {
           }}><img src="/static/img/zoom-out.png"></img></li>
         </ul>
       </div>
-      <svg width={this.props.width} height={this.props.height}
+      <svg
+        id="timeline-slider"
+        width={this.props.width} 
+        height={this.props.height}
         onWheel={this.onWheelHandler}
         onMouseDown={this.startDragHandler}
         onMouseUp={this.endDragHandler}
@@ -378,14 +381,22 @@ class FilterBar extends React.Component {
     ).concat(
       this.props.organizations.map((o) => { return { type: 'organization', value: 'org-' + o.id, id: o.id, label: o.name + ' (Organization)' }} )
     ).sort((a, b) => {
-      if (a.label > b.label) return 1
-      if (a.label < b.label) return -1
+      if (a.label > b.label) return 1;
+      if (a.label < b.label) return -1;
       return 0
     })
 
     return <div id='filter'>
-      <Select name="search-bar" placeholder='Filter by project, person or organization' disabled={false} value={val}
-    options={options} multi={false} onChange={(v) => {this.handleChange(v)}} onOpen={this.props.closeEventSidepane} />
+      <Select
+        name="search-bar"
+        placeholder='Filter by project, person or organization'
+        disabled={false}
+        value={val}
+        options={options}
+        multi={false}
+        onChange={(v) => {this.handleChange(v)}}
+        onOpen={this.props.closeEventSidepane}
+      />
     </div>
   }
 }

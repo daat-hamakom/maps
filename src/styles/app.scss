@@ -190,6 +190,11 @@ body {
                 color: #fff
               }
             }
+            .Select-input{
+              input {
+                width: 100% !important;
+              }
+            }
         }
         div#metadata {
             div.project {

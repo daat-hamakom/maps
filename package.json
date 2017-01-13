@@ -1,6 +1,6 @@
 {
   "name": "daat-hamakom",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Da'at Hamakom Maps",
   "main": "index.js",
   "scripts": {

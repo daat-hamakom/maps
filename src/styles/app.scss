@@ -191,8 +191,11 @@ body {
                 color: #fff
               }
             }
-            .Select-input{
-              input {
+            .is-open {
+              .Select-input{
+                input {
+                  min-width: 95vw !important;
+                }
               }
             }
         }

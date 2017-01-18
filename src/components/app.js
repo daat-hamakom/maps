@@ -66,6 +66,11 @@ class App extends React.Component {
       drawerData = this.props.organizations.items.find(o => o.id == +this.props.params.orgId)
       classes = classes + ' card organization'
     }
+    if (this.props.params.tagName) {
+      events = this.props.events.items.filter(e => e.tags && e.tags.indexOf(this.props.params.tagName) != -1)
+      drawerData = this.props.events.items.filter(e => e.tags && e.tags.indexOf(this.props.params.tagName) != -1)
+      classes = classes + ' card tag'
+    }
 
     return <div className={classes}>
 
@@ -79,9 +84,16 @@ class App extends React.Component {
         setAppStyle={(s) => { dispatch(setAppStyle(s)) }}
         toggleDrawer={() => { dispatch(toggleDrawer()) }} />
 
-      <Timeline params={this.props.params} app={this.props.app} drawerData={drawerData}
-        events={events} timeline={this.props.timeline}
-        projects={this.props.projects} people={this.props.people} organizations={this.props.organizations}
+      <Timeline
+        params={this.props.params}
+        app={this.props.app}
+        drawerData={drawerData}
+        events={events}
+        timeline={this.props.timeline}
+        allEvents={this.props.events.items}
+        projects={this.props.projects}
+        people={this.props.people}
+        organizations={this.props.organizations}
         onZoom={(b, e) => { dispatch(zoomTimeline(b, e)) }}
         dragStart={(x, w) => { dispatch(startDragTimeline(x, w)) }}
         drag={(x) => { dispatch(onDragTimeline(x)) }}
@@ -91,7 +103,8 @@ class App extends React.Component {
         closeEventSidepane={() => { dispatch(deselectEvent()) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'timeline')) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
-        toggleDrawer={() => { dispatch(toggleDrawer()) }} />
+        toggleDrawer={() => { dispatch(toggleDrawer()) }}
+      />
 
       <Sidepane app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane}
         params={this.props.params}

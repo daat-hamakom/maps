@@ -162,6 +162,9 @@ class MarkerData extends React.Component {
           else if (this.props.params.orgId) {
             url = 'organization/' + this.props.params.orgId + '/' + url
           }
+          else if (this.props.params.tagName) {
+            url = 'tag/' + encodeURIComponent(this.props.params.tagName) + '/' + url
+          }
           this.context.router.push(url)
           this.props.hoverExitEvent()
         }} onMouseEnter={(e) => {
@@ -339,7 +342,7 @@ class D3Timeline extends React.Component {
       </div>
       <svg
         id="timeline-slider"
-        width={this.props.width} 
+        width={this.props.width}
         height={this.props.height}
         onWheel={this.onWheelHandler}
         onMouseDown={this.startDragHandler}
@@ -365,26 +368,47 @@ class FilterBar extends React.Component {
   }
 
   render () {
-    let val = null
-    if (this.props.drawerData && this.props.params.personId) {
-      val = 'person-' + this.props.params.personId
+    const { projects, people, organizations, events, ...props } = this.props;
+    let tagsEventsMap = {};
+    let tags = [];
+
+    let val = null;
+    if (props.drawerData && props.params.personId) {
+      val = 'person-' + props.params.personId
     }
-    else if (this.props.drawerData && this.props.params.projId) {
-      val = 'proj-' + this.props.params.projId
+    else if (props.drawerData && props.params.projId) {
+      val = 'proj-' + props.params.projId
     }
-    else if (this.props.drawerData && this.props.params.orgId) {
-      val = 'org-' + this.props.params.orgId
+    else if (props.drawerData && props.params.orgId) {
+      val = 'org-' + props.params.orgId
+    }
+    else if (props.drawerData && props.params.tagName) {
+      val = 'tag-' + props.params.tagName
     }
 
-    const options = this.props.projects.map((p) => { return { type: 'project', value: 'proj-' + p.id, id: p.id, label: p.title + ' (Project)'}} ).concat(
-      this.props.people.map((p) => { return { type: 'person', value: 'person-' + p.id, id: p.id, label: p.first_name + ' ' + p.last_name + ' (Person)' }} )
-    ).concat(
-      this.props.organizations.map((o) => { return { type: 'organization', value: 'org-' + o.id, id: o.id, label: o.name + ' (Organization)' }} )
-    ).sort((a, b) => {
-      if (a.label > b.label) return 1;
-      if (a.label < b.label) return -1;
-      return 0
-    })
+    events && events.map((e) => {
+      e.tags && e.tags.map((t) => {
+        if (!(t in tagsEventsMap)) tagsEventsMap[t] = [];
+        tagsEventsMap[t].push(e.id)
+      })
+    });
+
+    for (var key in tagsEventsMap) {
+      if (tagsEventsMap.hasOwnProperty(key)) {
+        tags.push({ type: 'tag', value: `tag-${key}`, id: encodeURIComponent(key), label: key + ' (Tag)'});
+      }
+    }
+    
+
+    const options = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title + ' (Project)'}))
+      .concat(people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: p.first_name + ' ' + p.last_name + ' (Person)' })))
+      .concat(organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name + ' (Organization)' })))
+      .concat(tags)
+      .sort((a, b) => {
+        if (a.label > b.label) return 1;
+        if (a.label < b.label) return -1;
+        return 0
+      });
 
     return <div id='filter'>
       <Select
@@ -395,7 +419,7 @@ class FilterBar extends React.Component {
         options={options}
         multi={false}
         onChange={(v) => {this.handleChange(v)}}
-        onOpen={this.props.closeEventSidepane}
+        onOpen={props.closeEventSidepane}
       />
     </div>
   }
@@ -518,50 +542,52 @@ class Timeline extends React.Component {
   }
 
   render () {
-    let { startDate, endDate } = this.props.timeline
-    const research = this.props.params.projId ? this.props.drawerData : null
+    const { timeline, params, ...props } = this.props;
+    let { startDate, endDate } = timeline;
+    const research = params.projId ? props.drawerData : null
 
     let height = 46 + 120; // search + timeline
-    if (this.props.app.drawer && this.props.drawerData) {
+    if (props.app.drawer && props.drawerData) {
       height = height + 200;
     }
 
     return <div id='timeline' style={{height: height + 'px'}}>
       <div className='handle-container'>
-        <div className='handle' onClick={(e) => { this.props.toggleDrawer() }}></div>
+        <div className='handle' onClick={(e) => { props.toggleDrawer() }}></div>
       </div>
       <FilterBar
-        params={this.props.params}
-        drawerData={this.props.drawerData}
-        projects={this.props.projects.items}
-        people={this.props.people.items}
-        organizations={this.props.organizations.items}
-        closeEventSidepane={this.props.closeEventSidepane}
+        params={params}
+        drawerData={props.drawerData}
+        projects={props.projects.items}
+        people={props.people.items}
+        events={props.allEvents}
+        organizations={props.organizations.items}
+        closeEventSidepane={props.closeEventSidepane}
       />
       <TimelineMetadata
-        drawerData={this.props.drawerData}
-        app={this.props.app}
-        params={this.props.params}
+        drawerData={props.drawerData}
+        app={props.app}
+        params={params}
       />
       <D3Timeline
         width={document.body.offsetWidth}
         height={120}
-        data={this.props.events}
-        params={this.props.params}
-        app={this.props.app}
-        timeline={this.props.timeline}
-        drawer={this.props.drawer}
+        data={props.events}
+        params={params}
+        app={props.app}
+        timeline={timeline}
+        drawer={props.drawer}
         startDate={startDate}
         endDate={endDate}
-        dragging={this.props.timeline.drag.active}
-        onZoom={this.props.onZoom}
-        dragStart={this.props.dragStart}
-        drag={this.props.drag}
-        dragEnd={this.props.dragEnd}
-        shiftTimeline={this.props.shiftTimeline}
-        openEventSidepane={this.props.openEventSidepane}
-        hoverEnterEvent={this.props.hoverEnterEvent}
-        hoverExitEvent={this.props.hoverExitEvent}
+        dragging={timeline.drag.active}
+        onZoom={props.onZoom}
+        dragStart={props.dragStart}
+        drag={props.drag}
+        dragEnd={props.dragEnd}
+        shiftTimeline={props.shiftTimeline}
+        openEventSidepane={props.openEventSidepane}
+        hoverEnterEvent={props.hoverEnterEvent}
+        hoverExitEvent={props.hoverExitEvent}
       />
     </div>
   }

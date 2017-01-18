@@ -547,7 +547,7 @@ class Timeline extends React.Component {
     const research = params.projId ? props.drawerData : null
 
     let height = 46 + 120; // search + timeline
-    if (props.app.drawer && props.drawerData) {
+    if (props.app.drawer && props.drawerData && !params.tagName) {
       height = height + 200;
     }
 

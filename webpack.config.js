@@ -1,5 +1,5 @@
-var bourbon = require('node-bourbon').includePaths
-var webpack = require('webpack')
+var bourbon = require('node-bourbon').includePaths;
+var webpack = require('webpack');
 
 module.exports = {
     entry: './index.js',
@@ -18,5 +18,6 @@ module.exports = {
         new webpack.ProvidePlugin({
             'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
         })
-    ]
+    ],
+    devtool: 'source-map',
 }

@@ -341,6 +341,9 @@ class GLMap extends React.Component {
             else if (this.props.params.tagName) {
               url = 'tag/' + encodeURIComponent(this.props.params.tagName) + '/' + url
             }
+            else if (this.props.params.placeId) {
+              url = 'place/' + encodeURIComponent(this.props.params.placeId) + '/' + url
+            }
             router.push(url)
           }
           this.props.hoverExitEvent()

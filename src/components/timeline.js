@@ -165,6 +165,9 @@ class MarkerData extends React.Component {
           else if (this.props.params.tagName) {
             url = 'tag/' + encodeURIComponent(this.props.params.tagName) + '/' + url
           }
+          else if (this.props.params.placeId) {
+            url = 'place/' + encodeURIComponent(this.props.params.placeId) + '/' + url
+          }
           this.context.router.push(url)
           this.props.hoverExitEvent()
         }} onMouseEnter={(e) => {
@@ -368,7 +371,7 @@ class FilterBar extends React.Component {
   }
 
   render () {
-    const { projects, people, organizations, events, ...props } = this.props;
+    const { projects, people, organizations, events, places, ...props } = this.props;
     let tagsEventsMap = {};
     let tags = [];
 
@@ -385,6 +388,12 @@ class FilterBar extends React.Component {
     else if (props.drawerData && props.params.tagName) {
       val = 'tag-' + props.params.tagName
     }
+    else if (props.drawerData && props.params.placeId) {
+      val = 'place-' + props.params.placeId
+    }
+    else if (props.drawerData && props.params.eventId) {
+      val = 'event-' + props.params.eventId
+    }
 
     events && events.map((e) => {
       e.tags && e.tags.map((t) => {
@@ -399,10 +408,11 @@ class FilterBar extends React.Component {
       }
     }
     
-
     const options = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title + ' (Project)'}))
       .concat(people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: p.first_name + ' ' + p.last_name + ' (Person)' })))
       .concat(organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name + ' (Organization)' })))
+      .concat(events.map((e) => ({ type: 'event', value: `event-${e.id}`, id: e.id, label: e.title + ' (Event)' })))
+      .concat(places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name + ' (Place)' })))
       .concat(tags)
       .sort((a, b) => {
         if (a.label > b.label) return 1;
@@ -547,7 +557,7 @@ class Timeline extends React.Component {
     const research = params.projId ? props.drawerData : null
 
     let height = 46 + 120; // search + timeline
-    if (props.app.drawer && props.drawerData && !params.tagName) {
+    if (props.app.drawer && props.drawerData && (params.projId || params.personId || params.orgId)) {
       height = height + 200;
     }
 
@@ -561,6 +571,7 @@ class Timeline extends React.Component {
         projects={props.projects.items}
         people={props.people.items}
         events={props.allEvents}
+        places={props.places.items}
         organizations={props.organizations.items}
         closeEventSidepane={props.closeEventSidepane}
       />

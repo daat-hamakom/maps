@@ -33,6 +33,8 @@ ReactDOM.render((
         <Route path='/organization/:orgId/event/:eventId' component={App}/>
         <Route path='/tag/:tagName' component={App}/>
         <Route path='/tag/:tagName/event/:eventId' component={App}/>
+        <Route path='/place/:placeId' component={App}/>
+        <Route path='/place/:placeId/event/:eventId' component={App}/>
       </Route>
       <Route path='about' component={About}/>
     </Router>

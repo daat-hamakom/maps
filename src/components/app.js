@@ -44,10 +44,10 @@ class App extends React.Component {
   }
 
   render () {
-    const { dispatch } = this.props
+    const { dispatch } = this.props;
 
-    let events = this.props.events.items
-    let drawerData = null
+    let events = this.props.events.items;
+    let drawerData = null;
 
     let classes = 'app ' + this.props.app.style
 
@@ -62,14 +62,23 @@ class App extends React.Component {
       classes = classes + ' card person'
     }
     if (this.props.params.orgId) {
-      events = this.props.events.items.filter(e => e.organizations.map(p => p.id).indexOf(+this.props.params.orgId) != -1)
-      drawerData = this.props.organizations.items.find(o => o.id == +this.props.params.orgId)
+      events = this.props.events.items.filter(e => e.organizations.map(p => p.id).indexOf(+this.props.params.orgId) != -1);
+      drawerData = this.props.organizations.items.find(o => o.id == +this.props.params.orgId);
       classes = classes + ' card organization'
     }
     if (this.props.params.tagName) {
-      events = this.props.events.items.filter(e => e.tags && e.tags.indexOf(this.props.params.tagName) != -1)
-      drawerData = this.props.events.items.filter(e => e.tags && e.tags.indexOf(this.props.params.tagName) != -1)
+      events = this.props.events.items.filter(e => e.tags && e.tags.indexOf(this.props.params.tagName) != -1);
+      drawerData = this.props.events.items.filter(e => e.tags && e.tags.indexOf(this.props.params.tagName) != -1);
       classes = classes + ' card tag'
+    }
+    if (this.props.params.placeId) {
+      events = this.props.events.items.filter(e => e.place && e.place.id == +this.props.params.placeId );
+      drawerData = this.props.places.items.find(p => p.id == +this.props.params.placeId);
+      classes = classes + ' card place'
+    }
+    if (this.props.params.eventId) {
+      events = drawerData = this.props.events.items.filter(e => e.id == this.props.params.eventId);
+      classes = classes + ' card event'
     }
 
     return <div className={classes}>
@@ -93,6 +102,7 @@ class App extends React.Component {
         allEvents={this.props.events.items}
         projects={this.props.projects}
         people={this.props.people}
+        places={this.props.places}
         organizations={this.props.organizations}
         onZoom={(b, e) => { dispatch(zoomTimeline(b, e)) }}
         dragStart={(x, w) => { dispatch(startDragTimeline(x, w)) }}

@@ -551,7 +551,7 @@ class Timeline extends React.Component {
       height = height + 200;
     }
 
-    return <div id='timeline' style={{height: height + 'px'}}>
+    return <div id='timeline' style={{height: height}}>
       <div className='handle-container'>
         <div className='handle' onClick={(e) => { props.toggleDrawer() }}></div>
       </div>

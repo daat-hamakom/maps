@@ -443,7 +443,7 @@ class GLMap extends React.Component {
     this.setState(Object.assign({}, this.state, { hshrink: hshrink }))
 
     let vshrink = 'novshrink'
-    if ((props.params.projId || props.params.personId || props.params.orgId ) && props.app.drawer) {
+    if ((props.params.projId || props.params.personId || props.params.orgId || props.params.tagName ) && props.app.drawer) {
       vshrink = 'vshrink'
     }
     this.setState(Object.assign({}, this.state, { vshrink: vshrink }))

@@ -192,9 +192,11 @@ body {
               }
             }
             .is-open {
-              .Select-input{
-                input {
-                  min-width: 95vw !important;
+              .Select.has-value:not(.is-open){
+                .Select-input {
+                  input {
+                    min-width: 95vw !important;
+                  }
                 }
               }
             }

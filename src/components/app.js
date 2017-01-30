@@ -76,10 +76,6 @@ class App extends React.Component {
       drawerData = this.props.places.items.find(p => p.id == +this.props.params.placeId);
       classes = classes + ' card place'
     }
-    if (this.props.params.eventId) {
-      events = drawerData = this.props.events.items.filter(e => e.id == this.props.params.eventId);
-      classes = classes + ' card event'
-    }
 
     return <div className={classes}>
 

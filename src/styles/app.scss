@@ -175,7 +175,7 @@ body {
                   color: #fff !important;
                 }
             }
-            span.Select-clear-zone{
+            span.Select-clear-zone {
               width: 25px;
               display: inline-block;
               margin-left: -22px;
@@ -191,17 +191,51 @@ body {
                 color: #fff
               }
             }
-            .is-open {
-              .Select.has-value:not(.is-open){
+            .is-open:not(.has-value) {
                 .Select-input {
-                  input {
-                    min-width: 95vw !important;
-                  }
+                    input {
+                        min-width: 95vw !important;
+                    }
                 }
-              }
             }
         }
         div#metadata {
+            div.place {
+                height: 200px;
+                background: #d0dce2;
+                box-shadow: 0 0px 3px 0px #5D8599 inset;
+                overflow-y: scroll;
+                div.titles {
+                    width: 20%;
+                    float: left;
+                    padding-top: 10px;
+                    position: absolute;
+                    > * {
+                        margin-left: 10px;
+                        margin-right: 10px;
+                    }
+                    h2 {
+                        font-size: 16px;
+                        font-weight: 800;
+                    }
+                    h3 {
+                        font-size: 1em;
+                        color: #92ADBA;
+                    }
+                    p {
+                        margin-top: 0.5em;
+                    }
+                }
+                div.image {
+                    height: 214px;
+                    width: 40%;
+                    float: left;
+                    text-align: right;
+                    img {
+                        margin: 10px;
+                    }
+                }
+            }
             div.project {
                 height: 200px;
                 background: #d0dce2;

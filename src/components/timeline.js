@@ -498,6 +498,26 @@ class OrganizationMetadata extends React.Component {
   }
 }
 
+class PlaceMetadata extends React.Component {
+  render () {
+    const p = this.props.place
+    const cover = p.cover_image ? p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
+    return <div className='place'>
+      <div className='titles'>
+        <h3>Place</h3>
+        <h2>{p.name}</h2>
+        <h3>Zoom level</h3>
+        <h5>{p.zoomlevel}</h5>
+        <h3>Position</h3>
+        <h5>{p.position}</h5>
+      </div>
+      <div className='image'>
+        {cover && <img src={cover}></img>}
+      </div>
+    </div>
+  }
+}
+
 class TimelineMetadata extends React.Component {
   render () {
     if (this.props.drawerData && this.props.params.projId && this.props.app.drawer)
@@ -511,6 +531,10 @@ class TimelineMetadata extends React.Component {
     else if (this.props.drawerData && this.props.params.orgId && this.props.app.drawer)
       return <div id='metadata'>
         <OrganizationMetadata organization={this.props.drawerData} />
+      </div>
+    else if (this.props.drawerData && this.props.params.placeId && this.props.app.drawer)
+      return <div id='metadata'>
+        <PlaceMetadata place={this.props.drawerData} />
       </div>
     else
       return <div id='metadata'></div>
@@ -557,7 +581,7 @@ class Timeline extends React.Component {
     const research = params.projId ? props.drawerData : null
 
     let height = 46 + 120; // search + timeline
-    if (props.app.drawer && props.drawerData && (params.projId || params.personId || params.orgId)) {
+    if (props.app.drawer && props.drawerData && (params.projId || params.personId || params.orgId || params.placeId)) {
       height = height + 200;
     }
 

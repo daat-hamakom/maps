@@ -389,7 +389,7 @@ class FilterBar extends Component {
   }
 
   handleChange (val) {
-    this.context.router.push(`/${val && [val.type, val.id].join('/') }`);
+    this.context.router.push(`/${(val ? [val.type, val.id].join('/') : '')}`);
   }
 
   render () {

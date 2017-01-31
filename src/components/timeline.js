@@ -1,6 +1,6 @@
 import d3 from 'd3'
 import moment from 'moment'
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import ReactFauxDOM from 'react-faux-dom'
 import Select from 'react-select';
@@ -71,12 +71,12 @@ function _cleanBirthDates (ds, de) {
   return sd
 }
 
-class YearAxis extends React.Component {
+class YearAxis extends Component {
 
   static propTypes = {
-    x: React.PropTypes.func,
-    width: React.PropTypes.number,
-    height: React.PropTypes.number
+    x: PropTypes.func,
+    width: PropTypes.number,
+    height: PropTypes.number
   };
 
   constructor (props) {
@@ -124,10 +124,10 @@ class YearAxis extends React.Component {
   }
 }
 
-class MarkerData extends React.Component {
+class MarkerData extends Component {
   static propTypes = {
-    x: React.PropTypes.func,
-    data: React.PropTypes.array
+    x: PropTypes.func,
+    data: PropTypes.array
   };
 
   render () {
@@ -185,11 +185,11 @@ class MarkerData extends React.Component {
 }
 
 MarkerData.contextTypes = {
-  router: React.PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
 };
 
 
-class AnnotationLabel extends React.Component {
+class AnnotationLabel extends Component {
 
   render () {
     let ev = this.props.data.find(
@@ -217,14 +217,14 @@ class AnnotationLabel extends React.Component {
   }
 }
 
-class D3Timeline extends React.Component {
+class D3Timeline extends Component {
   static propTypes = {
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    data: React.PropTypes.array,
-    startDate: React.PropTypes.object,
-    endDate: React.PropTypes.object,
-    onZoom: React.PropTypes.func
+    width: PropTypes.number,
+    height: PropTypes.number,
+    data: PropTypes.array,
+    startDate: PropTypes.object,
+    endDate: PropTypes.object,
+    onZoom: PropTypes.func
   };
 
   constructor (props) {
@@ -361,13 +361,35 @@ class D3Timeline extends React.Component {
   }
 }
 
-class FilterBar extends React.Component {
+class FilterBar extends Component {
+  constructor (props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  optionRenderer (option, i) {
+    const typeCapitalized = option.type.charAt(0).toUpperCase() + option.type.slice(1);
+
+    // option.label, option.type
+    return (<span id={'option-' + option.value}>
+      {option.label}
+      <span style={{ float: 'right' }}>
+        {typeCapitalized}
+      </span>
+    </span>)
+  }
+
+  valueRenderer (option, i) {
+    const typeCapitalized = option.type.charAt(0).toUpperCase() + option.type.slice(1);
+
+    // option.label, option.type
+    return (<span id={'option-' + option.value}>
+      {option.label} ({typeCapitalized})
+    </span>)
+  }
 
   handleChange (val) {
-    if (val)
-      this.context.router.push('/' + val.type + '/' + val.id)
-    else
-      this.context.router.push('/')
+    this.context.router.push(`/${val && [val.type, val.id].join('/') }`);
   }
 
   render () {
@@ -404,15 +426,15 @@ class FilterBar extends React.Component {
 
     for (var key in tagsEventsMap) {
       if (tagsEventsMap.hasOwnProperty(key)) {
-        tags.push({ type: 'tag', value: `tag-${key}`, id: encodeURIComponent(key), label: key + ' (Tag)'});
+        tags.push({ type: 'tag', value: `tag-${key}`, id: encodeURIComponent(key), label: key});
       }
     }
-    
-    const options = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title + ' (Project)'}))
-      .concat(people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: p.first_name + ' ' + p.last_name + ' (Person)' })))
-      .concat(organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name + ' (Organization)' })))
-      .concat(events.map((e) => ({ type: 'event', value: `event-${e.id}`, id: e.id, label: e.title + ' (Event)' })))
-      .concat(places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name + ' (Place)' })))
+
+    const options = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title }))
+      .concat(people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: p.first_name })))
+      .concat(organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name })))
+      .concat(events.map((e) => ({ type: 'event', value: `event-${e.id}`, id: e.id, label: e.title })))
+      .concat(places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name })))
       .concat(tags)
       .sort((a, b) => {
         if (a.label > b.label) return 1;
@@ -428,7 +450,11 @@ class FilterBar extends React.Component {
         value={val}
         options={options}
         multi={false}
+        filterOption={(option, filter) => (filter.length > 2 && option.label.toLowerCase().indexOf(filter) !== -1)}
+        noResultsText="No results found or less then 3 characters in filter"
         onChange={(v) => {this.handleChange(v)}}
+        optionRenderer={this.optionRenderer}
+        valueRenderer={this.valueRenderer}
         onOpen={props.closeEventSidepane}
       />
     </div>
@@ -436,10 +462,10 @@ class FilterBar extends React.Component {
 }
 
 FilterBar.contextTypes = {
-  router: React.PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
 };
 
-class ProjectMetadata extends React.Component {
+class ProjectMetadata extends Component {
   render () {
     const p = this.props.project
     return <div className='project'>
@@ -457,7 +483,7 @@ class ProjectMetadata extends React.Component {
   }
 }
 
-class PersonMetadata extends React.Component {
+class PersonMetadata extends Component {
   render () {
     const p = this.props.person
     const profile = p.profile_image ? p.profile_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
@@ -478,7 +504,7 @@ class PersonMetadata extends React.Component {
   }
 }
 
-class OrganizationMetadata extends React.Component {
+class OrganizationMetadata extends Component {
   render () {
     const p = this.props.organization
     const cover = p.cover_image ? p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
@@ -498,7 +524,7 @@ class OrganizationMetadata extends React.Component {
   }
 }
 
-class PlaceMetadata extends React.Component {
+class PlaceMetadata extends Component {
   render () {
     const p = this.props.place
     const cover = p.cover_image ? p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
@@ -506,9 +532,7 @@ class PlaceMetadata extends React.Component {
       <div className='titles'>
         <h3>Place</h3>
         <h2>{p.name}</h2>
-        <h3>Zoom level</h3>
         <h5>{p.zoomlevel}</h5>
-        <h3>Position</h3>
         <h5>{p.position}</h5>
       </div>
       <div className='image'>
@@ -518,7 +542,7 @@ class PlaceMetadata extends React.Component {
   }
 }
 
-class TimelineMetadata extends React.Component {
+class TimelineMetadata extends Component {
   render () {
     if (this.props.drawerData && this.props.params.projId && this.props.app.drawer)
       return <div id='metadata'>
@@ -541,7 +565,7 @@ class TimelineMetadata extends React.Component {
   }
 }
 
-class Timeline extends React.Component {
+class Timeline extends Component {
 
   constructor (props) {
     super(props)
@@ -598,6 +622,7 @@ class Timeline extends React.Component {
         places={props.places.items}
         organizations={props.organizations.items}
         closeEventSidepane={props.closeEventSidepane}
+        openEventSidepane={props.openEventSidepane}
       />
       <TimelineMetadata
         drawerData={props.drawerData}

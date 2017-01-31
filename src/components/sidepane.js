@@ -181,12 +181,14 @@ EventsPane.contextTypes = {
 class Sidepane extends React.Component {
 
   render () {
-    const evs = this.props.app.selected
+    const { app, projects, sidepane, params, ...props } = this.props;
+    const evs = app.selected;
+
     return <div id='sidepane' className={evs.length > 0 ? 'open' : 'closed'}>
       <SidepaneButton openEventsSidepane={this.props.openEventsSidepane} />
       {evs.length == 1
-        ? <EventPane  app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane} params={this.props.params} closeSidepane={this.props.closeSidepane} selectMedia={this.props.selectMedia} />
-        : <EventsPane app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane} params={this.props.params} selectEvent={this.props.selectEvent} closeSidepane={this.props.closeSidepane} />
+        ? <EventPane  app={app} projects={projects} sidepane={sidepane} params={params} closeSidepane={props.closeSidepane} selectMedia={props.selectMedia} />
+        : <EventsPane app={app} projects={projects} sidepane={sidepane} params={params} closeSidepane={props.closeSidepane} selectEvent={props.selectEvent} />
       }
     </div>
   }

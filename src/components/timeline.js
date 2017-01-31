@@ -364,7 +364,41 @@ class D3Timeline extends Component {
 class FilterBar extends Component {
   constructor (props) {
     super(props);
+    this.state = { filter: "" };
+
     this.handleChange = this.handleChange.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.optionRenderer = this.optionRenderer.bind(this);
+    this.boldHighlight = this.boldHighlight.bind(this);
+    this.valueRenderer = this.valueRenderer.bind(this);
+  }
+
+  onInputChange (value) {
+    this.setState({ filter: value });
+  }
+
+  boldHighlight (option, i) {
+    const filter = this.state.filter;
+    const filterRegex = new RegExp(filter.toLocaleLowerCase(), 'gi');
+
+    const label = option.label;
+
+    var labelParts = [];
+
+    let matchResult;
+    let lastIndex = 0;
+    let index;
+
+    while ((matchResult = filterRegex.exec(label)) != null) {
+      index = matchResult.index * 2;
+
+      labelParts.push(<span key={index}>{label.slice(lastIndex, matchResult.index)}</span>);
+      labelParts.push(<strong key={index+1}>{matchResult[0]}</strong>);
+      lastIndex = matchResult.index;
+    }
+    labelParts.push(<span key={index+2}>{label.slice(lastIndex+filter.length, label.length+1)}</span>);
+
+    return labelParts;
   }
 
   optionRenderer (option, i) {
@@ -372,8 +406,9 @@ class FilterBar extends Component {
 
     // option.label, option.type
     return (<span id={'option-' + option.value}>
-      {option.label}
-      <span style={{ float: 'right' }}>
+      {this.boldHighlight(option, i)}
+      <img className="image-select-options" src={option.img} />
+      <span style={{ float: 'right', marginRight: 5 }}>
         {typeCapitalized}
       </span>
     </span>)
@@ -430,11 +465,11 @@ class FilterBar extends Component {
       }
     }
 
-    const options = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title }))
-      .concat(people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: p.first_name })))
-      .concat(organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name })))
-      .concat(events.map((e) => ({ type: 'event', value: `event-${e.id}`, id: e.id, label: e.title })))
-      .concat(places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name })))
+    const options = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title, img: p.cover_image }))
+      .concat(people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: `${p.first_name} ${p.last_name}`, img: p.profile_image })))
+      .concat(organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name, img: o.cover_image })))
+      .concat(events.map((e) => ({ type: 'event', value: `event-${e.id}`, id: e.id, label: e.title, img: e.icon })))
+      .concat(places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name , img: null})))
       .concat(tags)
       .sort((a, b) => {
         if (a.label > b.label) return 1;
@@ -450,6 +485,7 @@ class FilterBar extends Component {
         value={val}
         options={options}
         multi={false}
+        onInputChange={this.onInputChange}
         filterOption={(option, filter) => (filter.length > 2 && option.label.toLowerCase().indexOf(filter) !== -1)}
         noResultsText="No results found or less then 3 characters in filter"
         onChange={(v) => {this.handleChange(v)}}

@@ -370,11 +370,27 @@ class FilterBar extends Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.optionRenderer = this.optionRenderer.bind(this);
     this.boldHighlight = this.boldHighlight.bind(this);
+    this.getOptionImage = this.getOptionImage.bind(this);
+
     this.valueRenderer = this.valueRenderer.bind(this);
   }
 
   onInputChange (value) {
     this.setState({ filter: value });
+  }
+
+
+  optionRenderer (option, i) {
+    const typeCapitalized = option.type.charAt(0).toUpperCase() + option.type.slice(1);
+
+    // option.label, option.type
+    return (<span id={'option-' + option.value}>
+      {this.boldHighlight(option, i)}
+      <img className="image-select-options" src={this.getOptionImage(option)} />
+      <span style={{ float: 'right', marginRight: 5 }}>
+        {typeCapitalized}
+      </span>
+    </span>)
   }
 
   boldHighlight (option, i) {
@@ -401,18 +417,27 @@ class FilterBar extends Component {
     return labelParts;
   }
 
-  optionRenderer (option, i) {
-    const typeCapitalized = option.type.charAt(0).toUpperCase() + option.type.slice(1);
+  getOptionImage (option) {
+    if (option.img) return option.img;
 
-    // option.label, option.type
-    return (<span id={'option-' + option.value}>
-      {this.boldHighlight(option, i)}
-      <img className="image-select-options" src={option.img} />
-      <span style={{ float: 'right', marginRight: 5 }}>
-        {typeCapitalized}
-      </span>
-    </span>)
+    switch (option.type) {
+      case 'project':
+        return 'http://help.zeald.com/site/zhelp/images/Design/Ecommerce_Icons/win_large.gif';
+      case 'person':
+        return 'https://cdn3.iconfinder.com/data/icons/token/128/People-MSN.png';
+      case 'organization':
+        return 'https://cdn3.iconfinder.com/data/icons/token/128/People-MSN.png';
+      case 'event':
+        return 'https://cdn3.iconfinder.com/data/icons/token/128/People-MSN.png';
+      case 'place':
+        return 'https://cdn3.iconfinder.com/data/icons/token/128/People-MSN.png';
+      case 'tag':
+        return 'https://cdn3.iconfinder.com/data/icons/token/128/People-MSN.png';
+      default:
+        return null;
+    }
   }
+
 
   valueRenderer (option, i) {
     const typeCapitalized = option.type.charAt(0).toUpperCase() + option.type.slice(1);
@@ -466,7 +491,7 @@ class FilterBar extends Component {
     }
 
     const options = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title, img: p.cover_image }))
-      .concat(people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: `${p.first_name} ${p.last_name}`, img: p.profile_image })))
+      .concat(people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: `${p.first_name} ${p.last_name}`, img: p.profile_image && p.profile_image.url })))
       .concat(organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name, img: o.cover_image })))
       .concat(events.map((e) => ({ type: 'event', value: `event-${e.id}`, id: e.id, label: e.title, img: e.icon })))
       .concat(places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name , img: null})))

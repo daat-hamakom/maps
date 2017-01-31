@@ -19,5 +19,4 @@ module.exports = {
             'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
         })
     ],
-    devtool: 'source-map',
-}
+};

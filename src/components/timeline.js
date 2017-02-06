@@ -422,17 +422,17 @@ class FilterBar extends Component {
 
     switch (option.type) {
       case 'project':
-        return 'http://help.zeald.com/site/zhelp/images/Design/Ecommerce_Icons/win_large.gif';
+        return '/static/img/project.png';
       case 'person':
-        return 'https://cdn3.iconfinder.com/data/icons/token/128/People-MSN.png';
+        return '/static/img/person.png';
       case 'organization':
-        return 'https://cdn3.iconfinder.com/data/icons/token/128/People-MSN.png';
+        return '/static/img/organization.png';
       case 'event':
-        return 'https://cdn3.iconfinder.com/data/icons/token/128/People-MSN.png';
+        return '/static/img/event.png';
       case 'place':
-        return 'https://cdn3.iconfinder.com/data/icons/token/128/People-MSN.png';
+        return '/static/img/place.png';
       case 'tag':
-        return 'https://cdn3.iconfinder.com/data/icons/token/128/People-MSN.png';
+        return '/static/img/tag.png';
       default:
         return null;
     }
@@ -492,7 +492,7 @@ class FilterBar extends Component {
 
     const typesOrder = {'project': 1, 'person': 2, 'organization': 3, 'tag': 4, 'place': 5, 'event': 6};
 
-    const options = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title, img: p.cover_image }))
+    const options = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title, img: p.cover_image && p.cover_image.file }))
       .concat(people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: `${p.first_name} ${p.last_name}`, img: p.profile_image && p.profile_image.url })))
       .concat(organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name, img: o.cover_image })))
       .concat(events.map((e) => ({ type: 'event', value: `event-${e.id}`, id: e.id, label: e.title, img: e.icon })))

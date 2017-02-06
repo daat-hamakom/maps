@@ -86,15 +86,20 @@ class App extends React.Component {
 
     return <div className={classes}>
 
-      <Map app={this.props.app} events={events} params={this.props.params}
-        annotations={this.props.annotations} places={this.props.places}
+      <Map
+        app={this.props.app}
+        events={events}
+        params={this.props.params}
+        annotations={this.props.annotations}
+        places={this.props.places}
         openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'map')) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
         selectEvent={(ev) => { dispatch(selectEvent(ev, 'map')) }}
         deselectEvent={() => { dispatch(deselectEvent()) }}
         setAppStyle={(s) => { dispatch(setAppStyle(s)) }}
-        toggleDrawer={() => { dispatch(toggleDrawer()) }} />
+        toggleDrawer={() => { dispatch(toggleDrawer()) }}
+      />
 
       <Timeline
         params={this.props.params}
@@ -119,15 +124,22 @@ class App extends React.Component {
         toggleDrawer={() => { dispatch(toggleDrawer()) }}
       />
 
-      <Sidepane app={this.props.app} projects={this.props.projects} sidepane={this.props.sidepane}
+      <Sidepane
+        app={this.props.app}
+        projects={this.props.projects}
+        sidepane={this.props.sidepane}
         params={this.props.params}
         closeSidepane={() => { dispatch(deselectEvent()) }}
         selectEvent={(ev) => { dispatch(selectEvent(ev, 'sidepane')) }}
         openEventsSidepane={() => { dispatch(selectEvent(events, 'sidepane')) }}
-        selectMedia={(t, m) => { dispatch(openLightbox(t, m)) }} />
+        selectMedia={(t, m) => { dispatch(openLightbox(t, m)) }}
+      />
 
-      <Lightbox lightbox={this.props.lightbox} closeLightbox={() => { dispatch(closeLightbox()) }}
-        selectMedia={(t, m) => { dispatch(openLightbox(t, m)) }} />
+      <Lightbox
+        lightbox={this.props.lightbox}
+        closeLightbox={() => { dispatch(closeLightbox()) }}
+        selectMedia={(t, m) => { dispatch(openLightbox(t, m)) }}
+      />
 
     </div>
   }

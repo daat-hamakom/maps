@@ -410,9 +410,9 @@ class FilterBar extends Component {
 
       labelParts.push(<span key={index}>{label.slice(lastIndex, matchResult.index)}</span>);
       labelParts.push(<strong key={index+1}>{matchResult[0]}</strong>);
-      lastIndex = matchResult.index;
+      lastIndex = matchResult.index + +filter.length;
     }
-    labelParts.push(<span key={index+2}>{label.slice(lastIndex+filter.length, label.length+1)}</span>);
+    labelParts.push(<span key={index+2}>{label.slice(lastIndex, label.length+1)}</span>);
 
     return labelParts;
   }
@@ -490,6 +490,8 @@ class FilterBar extends Component {
       }
     }
 
+    const typesOrder = {'project': 1, 'person': 2, 'organization': 3, 'tag': 4, 'place': 5, 'event': 6};
+
     const options = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title, img: p.cover_image }))
       .concat(people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: `${p.first_name} ${p.last_name}`, img: p.profile_image && p.profile_image.url })))
       .concat(organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name, img: o.cover_image })))
@@ -497,6 +499,10 @@ class FilterBar extends Component {
       .concat(places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name , img: null})))
       .concat(tags)
       .sort((a, b) => {
+
+        if (typesOrder[a.type] > typesOrder[b.type]) return 1;
+        if (typesOrder[a.type] < typesOrder[b.type]) return -1;
+
         if (a.label > b.label) return 1;
         if (a.label < b.label) return -1;
         return 0

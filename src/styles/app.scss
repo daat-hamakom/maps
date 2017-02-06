@@ -158,7 +158,10 @@ body {
             }
             .Select-menu-outer {
                 height: 120px;
-                overflow-y: scroll;
+                overflow-y: hidden;
+            }
+            .Select-menu {
+                max-height: 120px;
             }
             .Select-placeholder{
                 color: #B6C5CB;

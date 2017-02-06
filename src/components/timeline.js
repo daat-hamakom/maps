@@ -467,9 +467,6 @@ class FilterBar extends Component {
     else if (props.drawerData && props.params.orgId) {
       val = 'org-' + props.params.orgId
     }
-    else if (props.drawerData && props.params.tagName) {
-      val = 'tag-' + props.params.tagName
-    }
     else if (props.drawerData && props.params.placeId) {
       val = 'place-' + props.params.placeId
     }
@@ -477,6 +474,7 @@ class FilterBar extends Component {
       val = 'event-' + props.params.eventId
     }
 
+    // generate tags
     events && events.map((e) => {
       e.tags && e.tags.map((t) => {
         if (!(t in tagsEventsMap)) tagsEventsMap[t] = [];
@@ -489,6 +487,11 @@ class FilterBar extends Component {
         tags.push({ type: 'tag', value: `tag-${key}`, id: encodeURIComponent(key), label: key});
       }
     }
+
+    if (props.drawerData && tags.length && props.params.tagName ) {
+      val = 'tag-' + props.params.tagName
+    }
+
 
     const typesOrder = {'project': 1, 'person': 2, 'organization': 3, 'tag': 4, 'place': 5, 'event': 6};
 

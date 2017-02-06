@@ -36,17 +36,17 @@ class App extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { params, events, location, ...props } = this.props;
+    const { params, events, location, dispatch, ...props } = this.props;
 
     if (!this.loaded && params.eventId && this.finishedLoading()) {
       this.loaded = true;
       const ev = events.items.filter(e => e.id == params.eventId);
-      props.dispatch(selectEvent(ev, 'url'));
+      dispatch(selectEvent(ev, 'url'));
     }
 
     if (prevProps.location.pathname !== location.pathname && params.eventId && this.loaded ) {
       const ev = events.items.filter(e => e.id == params.eventId);
-      props.dispatch(selectEvent(ev, 'url'));
+      dispatch(selectEvent(ev, 'url'));
     }
   }
 

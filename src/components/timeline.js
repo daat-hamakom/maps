@@ -385,10 +385,10 @@ class FilterBar extends Component {
 
     // option.label, option.type
     return (<span id={'option-' + option.value}>
-      {this.boldHighlight(option, i)}
       <img className="image-select-options" src={this.getOptionImage(option)} />
-      <span style={{ float: 'right', marginRight: 5 }}>
-        {typeCapitalized}
+       <p className="label-select-options">{this.boldHighlight(option, i)}</p>
+      <span className="type-select-options" >
+        &middot; {typeCapitalized}
       </span>
     </span>)
   }

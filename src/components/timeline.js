@@ -422,17 +422,17 @@ class FilterBar extends Component {
 
     switch (option.type) {
       case 'project':
-        return '/static/img/project.png';
+        return '/static/img/project-icon.svg';
       case 'person':
-        return '/static/img/person.png';
+        return '/static/img/person-icon.svg';
       case 'organization':
-        return '/static/img/organization.png';
+        return '/static/img/organization-icon.svg';
       case 'event':
-        return '/static/img/event.png';
+        return '/static/img/event-icon.svg';
       case 'place':
-        return '/static/img/place.png';
+        return '/static/img/place-icon.svg';
       case 'tag':
-        return '/static/img/tag.png';
+        return '/static/img/tag-icon.svg';
       default:
         return null;
     }

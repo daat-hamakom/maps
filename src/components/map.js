@@ -381,7 +381,7 @@ class GLMap extends React.Component {
       this.switchLayers(getEventStyle(ev))
     }
 
-    const coords = ev.place.position.split(',').map(x => +x).reverse()
+    const coords = ev.place.position.split(',').map(x => +x).reverse();
     popup.setLngLat(coords)
       .setHTML('<div class="marker-popup ' + getEventStyle(ev) + '">' +
         '<div class="icon"><img src="' + ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_s.jpg' + '"></div>' +
@@ -396,7 +396,9 @@ class GLMap extends React.Component {
           'world': 1,
           'continent': 3,
           'country': 6,
+          'metropolis': 9,
           'province': 10,
+          'largecity': 11,
           'city': 12,
           'neighbourhood': 16
         }[ev.map_context]
@@ -437,16 +439,72 @@ class GLMap extends React.Component {
     }
   }
 
+  zoomMapByEvents (events) {
+    const places = events.map((e) => e.place ).filter(e => e != null);
+    if (!places.length) return;
+
+    let zoomMap = {
+      'world': 1,
+      'continent': 3,
+      'country': 6,
+      'metropolis': 9,
+      'province': 10,
+      'largecity': 11,
+      'city': 12,
+      'neighbourhood': 16
+    };
+
+    const lang = places.map((p) => p.position.split(',')[0]);
+    const lat = places.map((p) => p.position.split(',')[1]);
+    const minZoom = Math.min.apply(null, places.map((p) => zoomMap[p.zoomlevel]).filter(e => e != null));
+
+    const minLang = Math.min.apply(null, lang);
+    const maxLang = Math.max.apply(null, lang);
+    const centerLang = (maxLang + minLang) / 2;
+    const diffLang =  maxLang - minLang;
+
+    const minLat = Math.min.apply(null, lat);
+    const maxLat = Math.max.apply(null, lat);
+    const centerLat = (maxLat + minLat) / 2;
+    const diffLat =  maxLat - minLat;
+
+    const maxDiff = Math.min.apply(null, [diffLang, diffLat]);
+
+    let zoom = 16;
+    if (maxDiff > 5) {
+      zoom = 1;
+    }
+    else if (maxDiff > 1) {
+      zoom = 3;
+    }
+    else if (maxDiff > 0.5) {
+      zoom = 6;
+    }
+    else if (maxDiff > 0.3) {
+      zoom = 10;
+    }
+    else if (maxDiff > 0.1) {
+      zoom = 12;
+    }
+
+    zoom = Math.min(minZoom, zoom);
+    const center = [centerLang, centerLat].map(x => +x).reverse();
+
+    this.map.flyTo({ center: center, zoom: zoom })
+  }
+
   componentWillReceiveProps (props) {
     // check if an event is selected to we can shrink the map
+    const { app, params } = props;
+
     let hshrink = 'nohshrink'
-    if (props.app.selected.length > 0) {
+    if (app.selected.length > 0) {
       hshrink = 'hshrink'
     }
     this.setState(Object.assign({}, this.state, { hshrink: hshrink }))
 
     let vshrink = 'novshrink'
-    if ((props.params.projId || props.params.personId || props.params.orgId  || props.params.placeId ) && props.app.drawer) {
+    if ((params.projId || params.personId || params.orgId  || params.placeId ) && app.drawer) {
       vshrink = 'vshrink'
     }
     this.setState(Object.assign({}, this.state, { vshrink: vshrink }))
@@ -454,24 +512,32 @@ class GLMap extends React.Component {
   }
 
   componentDidUpdate (prevProps, _prevState) {
-    if (!this.markers && this.props.events.length > 0) {
+    const { app, params, events } = this.props;
+    const prevParams = prevProps.params;
+
+
+    if (!this.markers && events.length > 0) {
       this.initMap()
     }
 
-    if (this.markers && this.props.events.length != prevProps.events.length) {
+    if (this.markers && events.length != prevProps.events.length) {
       // for simplicity, we assume that length checks are enough here
       // if two prop updates actually happened and length are same then we'll skip an update and hit a bug
       this.updateMarkers()
     }
 
-    this.checkSelectAndHover('select', this.props.app.origin, prevProps.app.selected, this.props.app.selected)
-    this.checkSelectAndHover('hover', this.props.app.origin, prevProps.app.hover, this.props.app.hover)
+    this.checkSelectAndHover('select', app.origin, prevProps.app.selected, app.selected)
+    this.checkSelectAndHover('hover', app.origin, prevProps.app.hover, app.hover)
 
     if ((!this.resized && this.map) || this.triggerResize) {
       // trigger resize as long as we haven't completed map init yet
       this.map.resize()
       this.triggerResize = false
     }
+
+    let zoomCondition = (params.projId || params.personId || params.orgId  || params.placeId  || params.tagName );
+    zoomCondition = zoomCondition && (JSON.stringify(params) !== JSON.stringify(prevParams) );
+    if ( zoomCondition && app.drawer) this.zoomMapByEvents(events);
 
   }
 

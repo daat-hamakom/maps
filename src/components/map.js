@@ -535,9 +535,8 @@ class GLMap extends React.Component {
       this.triggerResize = false
     }
 
-    let zoomCondition = (params.projId || params.personId || params.orgId  || params.placeId  || params.tagName );
-    zoomCondition = zoomCondition && (JSON.stringify(params) !== JSON.stringify(prevParams) );
-    if ( zoomCondition && app.drawer) this.zoomMapByEvents(events);
+    let zoomCondition = (JSON.stringify(params) !== JSON.stringify(prevParams) ) && app.drawer;
+    if ( zoomCondition ) this.zoomMapByEvents(events);
 
   }
 

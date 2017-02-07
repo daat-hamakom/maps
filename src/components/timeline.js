@@ -642,31 +642,48 @@ class Timeline extends Component {
     this.resized = false
   }
 
-  componentDidUpdate () {
-    if (!this.resized && this.props.events.length) {
-      if (this.props.params.projId && this.props.drawerData) {
-        let startDate = this.props.events.map(e => e.start_date).reduce((prev, cur, curind, ar) => {
-          return cur < prev ? cur : prev
-        })
-        let endDate = this.props.events.map(e => e.end_date).reduce((prev, cur, curind, ar) => {
-          return cur > prev ? cur : prev
-        })
+  zoomTimelineByEvents () {
+    const { events, ...props } = this.props;
 
-        let ns = moment(startDate)
-        let ne = moment(endDate)
+    // min start date
+    let startDate = events.map(e => e.start_date).reduce((prev, cur, curind, ar) => {
+      return cur < prev ? cur : prev
+    });
 
-        const padding = (ne - ns) / 20
+    // max end date
+    let endDate = events.map(e => e.end_date).reduce((prev, cur, curind, ar) => {
+      return cur > prev ? cur : prev
+    });
 
-        ns.subtract(padding)
-        ne.add(padding)
+    let ns = moment(startDate);
+    let ne = moment(endDate);
 
-        this.resized = true
-        this.props.shiftTimeline(ns, ne)
+    const padding = (ne - ns) / 20;
+
+    ns.subtract(padding);
+    ne.add(padding);
+
+    this.resized = true;
+    props.shiftTimeline(ns, ne);
+  }
+
+  componentDidUpdate (prevProps, _prevState) {
+    const { params, events, drawerData } = this.props;
+    const prevParams = prevProps.params;
+
+    // todo - understand why this is here
+    if (!this.resized && events.length) {
+      if (params.projId && drawerData) {
+        this.zoomTimelineByEvents(events)
       }
       else {
         this.resized = true
       }
     }
+
+    let zoomCondition = (JSON.stringify(params) !== JSON.stringify(prevParams) );
+    if ( zoomCondition ) this.zoomTimelineByEvents(events);
+
   }
 
   render () {

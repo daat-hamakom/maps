@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="9px" height="9px" viewBox="0 0 9 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>type-icon/event</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="assets" transform="translate(-247.000000, -47.000000)" fill-rule="nonzero" fill="#343434">
+            <g id="type-icon/event" transform="translate(236.000000, 36.000000)">
+                <path d="M15,13 C16.104,13 17,13.897 17,15 C17,16.104 16.104,17 15,17 C13.897,17 13,16.104 13,15 C13,13.897 13.897,13 15,13 L15,13 L15,13 Z" id="Combined-Shape"></path>
+                <path d="M15.083,11 C17.334,11 19.166,12.876 19.166,15.181 C19.166,17.486 17.334,19.363 15.083,19.363 C12.832,19.363 11,17.486 11,15.181 C11,12.876 12.832,11 15.083,11 L15.083,11 L15.083,11 Z" id="Combined-Shape_1_" opacity="0.1"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -456,7 +456,6 @@ class GLMap extends React.Component {
 
     const lang = places.map((p) => p.position.split(',')[0]);
     const lat = places.map((p) => p.position.split(',')[1]);
-    const minZoom = Math.min.apply(null, places.map((p) => zoomMap[p.zoomlevel]).filter(e => e != null));
 
     const minLang = Math.min.apply(null, lang);
     const maxLang = Math.max.apply(null, lang);
@@ -487,7 +486,10 @@ class GLMap extends React.Component {
       zoom = 12;
     }
 
-    zoom = Math.min(minZoom, zoom);
+    if (places.length === 1) {
+      const minZoom = Math.min.apply(null, places.map((p) => zoomMap[p.zoomlevel]).filter(e => e != null));
+      zoom = Math.min(minZoom, zoom);
+    }
     const center = [centerLang, centerLat].map(x => +x).reverse();
 
     this.map.flyTo({ center: center, zoom: zoom })

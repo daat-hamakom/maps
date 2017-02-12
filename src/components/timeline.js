@@ -658,7 +658,10 @@ class Timeline extends Component {
     let ns = moment(startDate);
     let ne = moment(endDate);
 
-    const padding = (ne - ns) / 20;
+    let padding = (ne - ns) / 20;
+
+    // minimum 2 years gap
+    if  (ne - ns < 700)  padding = 300;
 
     ns.subtract(padding);
     ne.add(padding);

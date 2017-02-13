@@ -492,6 +492,12 @@ class GLMap extends React.Component {
     else if (maxDiff > 5) {
       zoom = 8;
     }
+    else if (maxDiff > 1) {
+      zoom = 9;
+    }
+    else if (maxDiff > 0.4) {
+      zoom = 10;
+    }
     else if (maxDiff > 0.1) {
       zoom = 12;
     }

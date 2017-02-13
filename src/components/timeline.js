@@ -661,9 +661,8 @@ class Timeline extends Component {
     let padding = (ne - ns) / 20;
 
     // minimum 10 years gap
-    if  (ne.diff(ns, 'years') < 10)  {
-
-      // padding = moment.duration(10, 'years');
+    if  (ne.diff(ns, 'years') < 20)  {
+      padding = moment.duration(10, 'years').asMilliseconds();
     }
 
     ns.subtract(padding);

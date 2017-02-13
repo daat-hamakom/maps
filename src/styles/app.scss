@@ -203,7 +203,7 @@ body {
             .is-open:not(.has-value) {
                 .Select-input {
                     input {
-                        min-width: 95vw !important;
+                        min-width: calc(100vw - 65px) !important;
                     }
                 }
             }

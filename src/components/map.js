@@ -443,6 +443,9 @@ class GLMap extends React.Component {
     const places = events.map((e) => e.place ).filter(e => e != null);
     if (!places.length) return;
 
+    let placesIds = places.map((p) => p.id );
+    placesIds = placesIds.filter((pid, i) => placesIds.indexOf(pid) === i);
+
     let zoomMap = {
       'world': 1,
       'continent': 3,
@@ -467,26 +470,33 @@ class GLMap extends React.Component {
     const centerLat = (maxLat + minLat) / 2;
     const diffLat =  maxLat - minLat;
 
-    const maxDiff = Math.min.apply(null, [diffLang, diffLat]);
+    const maxDiff = Math.max.apply(null, [diffLang, diffLat]);
 
+    console.log('diff' ,maxDiff);
     let zoom = 16;
-    if (maxDiff > 5) {
+    if (maxDiff > 200) {
       zoom = 1;
     }
-    else if (maxDiff > 1) {
+    else if (maxDiff > 100) {
+      zoom = 2;
+    }
+    else if (maxDiff > 20) {
       zoom = 3;
     }
-    else if (maxDiff > 0.5) {
+    else if (maxDiff > 15) {
+      zoom = 4;
+    }
+    else if (maxDiff > 10) {
       zoom = 6;
     }
-    else if (maxDiff > 0.3) {
-      zoom = 10;
+    else if (maxDiff > 5) {
+      zoom = 8;
     }
     else if (maxDiff > 0.1) {
       zoom = 12;
     }
 
-    if (places.length === 1) {
+    if (placesIds.length === 1) {
       const minZoom = Math.min.apply(null, places.map((p) => zoomMap[p.zoomlevel]).filter(e => e != null));
       zoom = Math.min(minZoom, zoom);
     }
@@ -537,7 +547,7 @@ class GLMap extends React.Component {
       this.triggerResize = false
     }
 
-    let zoomCondition = (JSON.stringify(params) !== JSON.stringify(prevParams) ) && app.drawer;
+    let zoomCondition = (JSON.stringify(params) !== JSON.stringify(prevParams) );
     if ( zoomCondition ) this.zoomMapByEvents(events);
 
   }

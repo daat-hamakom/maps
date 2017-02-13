@@ -185,14 +185,15 @@ body {
                 }
             }
             span.Select-clear-zone {
+                position: absolute;
+                left: 50px;
                 width: 25px;
+                top: 1px;
                 display: inline-block;
-                margin-left: -7px;
                 margin-top: 2px;
                 color: #044261;
                 height: 34px;
                 line-height: 35px;
-                top: 1px;
                 border-radius: 5px 0 0 5px;
 
                 &:hover {

@@ -201,7 +201,12 @@ body {
                     color: #fff
                 }
             }
-            .is-open:not(.has-value) {
+            .is-open.is-searchable.is-focused span.Select-clear-zone,
+            .is-open.is-searchable.is-focused .Select-value{
+                display: none;
+            }
+            .is-open:not(.has-value),
+            .is-open.is-searchable.is-focused {
                 .Select-input {
                     input {
                         min-width: calc(100vw - 65px) !important;

@@ -101,15 +101,15 @@ class EventPane extends React.Component {
         <div className='place'>{ev.place.name}</div>
         <div className='date'>{_cleanDates(ev.start_date_orig, ev.end_date_orig)}</div>
         <hr/>
-        {ev.media.filter((m) => m.type == 'sound').map((m) => <div className="audio-container">
+        {ev.media.filter((m) => m.type == 'sound').map((m, i) => <div className="audio-container" key={i}>
             <AudioComponent src={m.file} type='audio/mpeg' key={'audio-' + m.id} />
             <p>{m.title}</p>
           </div>
         )}
 
         <div className='description' dangerouslySetInnerHTML={{__html: ev.description.replace(/a href/g, 'a target="_blank" href')}}></div>
-        {ev.media.filter((m) => m.type == 'document').map((m) => {
-            return <div className='doc'>
+        {ev.media.filter((m) => m.type == 'document').map((m, i) => {
+            return <div className='doc' key={i}>
               <a href={m.file} target='_blank'>{m.title}</a>
             </div>
           }

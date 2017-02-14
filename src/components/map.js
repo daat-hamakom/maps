@@ -392,7 +392,8 @@ class GLMap extends React.Component {
 
     if (t == 'select') {
       if (ev.map_context) {
-        let zoom = {
+        const zoomLevel = ev.place && ev.place.zoomlevel;
+        let zoomMap = {
           'world': 1,
           'continent': 3,
           'country': 6,
@@ -400,9 +401,13 @@ class GLMap extends React.Component {
           'province': 10,
           'largecity': 11,
           'city': 12,
+          'site': 14,
           'neighbourhood': 16
-        }[ev.map_context]
+        }
 
+        let zoom = zoomMap[zoomLevel] || zoomMap[ev.map_context]
+
+        console.log("zoom-yuval", zoom)
         this.map.resize()
         this.map.flyTo({ center: coords, zoom: zoom })
       }
@@ -439,12 +444,21 @@ class GLMap extends React.Component {
     }
   }
 
-  zoomMapByEvents (events) {
-    const places = events.map((e) => e.place ).filter(e => e != null);
+  zoomMapByEvents (events, params) {
+    // handle case of single event
+    if (params.eventId) events = events.filter(e => e.id == params.eventId);
+    if (!events.length) return;
+    if (events.length > 500) {
+      this.map.flyTo({ zoom: 2 });
+      return;
+    }
+
+    let places = events.map((e) => e.place ).filter(p => p != null);
+    const placesIds = places.map((p) => p.id );
+    places = places.filter((p, i) => placesIds.indexOf(p.id) === i);
+
     if (!places.length) return;
 
-    let placesIds = places.map((p) => p.id );
-    placesIds = placesIds.filter((pid, i) => placesIds.indexOf(pid) === i);
 
     let zoomMap = {
       'world': 1,
@@ -454,21 +468,18 @@ class GLMap extends React.Component {
       'province': 10,
       'largecity': 11,
       'city': 12,
+      'site': 14,
       'neighbourhood': 16
     };
 
-    const lang = places.map((p) => p.position.split(',')[0]);
-    const lat = places.map((p) => p.position.split(',')[1]);
+    const lang = places.map((p) => p.position.split(',')[0]).sort((a,b) => a - b);
+    const lat = places.map((p) => p.position.split(',')[1]).sort((a,b) => a - b);
 
-    const minLang = Math.min.apply(null, lang);
-    const maxLang = Math.max.apply(null, lang);
-    const centerLang = (maxLang + minLang) / 2;
-    const diffLang =  maxLang - minLang;
+    const centerLang = lang.length > 2 ? lang[Math.floor(lang.length/2)] : (parseFloat(lang[lang.length-1]) + parseFloat(lang[0])) / 2;
+    const diffLang =  lang[lang.length-1] - lang[0];
 
-    const minLat = Math.min.apply(null, lat);
-    const maxLat = Math.max.apply(null, lat);
-    const centerLat = (maxLat + minLat) / 2;
-    const diffLat =  maxLat - minLat;
+    const centerLat = lat.length > 2 ? lat[Math.floor(lat.length/2)] : (parseFloat(lat[lat.length-1]) + parseFloat(lat[0])) / 2;
+    const diffLat = lat[lat.length-1] - lat[0];
 
     const maxDiff = Math.max.apply(null, [diffLang, diffLat]);
 
@@ -502,12 +513,14 @@ class GLMap extends React.Component {
       zoom = 12;
     }
 
-    if (placesIds.length === 1) {
+    if (places.length === 1) {
       const minZoom = Math.min.apply(null, places.map((p) => zoomMap[p.zoomlevel]).filter(e => e != null));
+      console.log("zoom-tal", minZoom, zoom);
       zoom = Math.min(minZoom, zoom);
     }
     const center = [centerLang, centerLat].map(x => +x).reverse();
 
+    this.map.resize()
     this.map.flyTo({ center: center, zoom: zoom })
   }
 
@@ -544,17 +557,17 @@ class GLMap extends React.Component {
       this.updateMarkers()
     }
 
-    this.checkSelectAndHover('select', app.origin, prevProps.app.selected, app.selected)
-    this.checkSelectAndHover('hover', app.origin, prevProps.app.hover, app.hover)
+    this.checkSelectAndHover('select', app.origin, prevProps.app.selected, app.selected);
+    this.checkSelectAndHover('hover', app.origin, prevProps.app.hover, app.hover);
 
     if ((!this.resized && this.map) || this.triggerResize) {
       // trigger resize as long as we haven't completed map init yet
-      this.map.resize()
+      this.map.resize();
       this.triggerResize = false
     }
 
     let zoomCondition = (JSON.stringify(params) !== JSON.stringify(prevParams) );
-    if ( zoomCondition ) this.zoomMapByEvents(events);
+    if ( zoomCondition ) this.zoomMapByEvents(events, params);
 
   }
 

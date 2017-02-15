@@ -737,7 +737,7 @@ body {
     div.annotation.preindustrial span.text{
       background-color: $preindustrial-primary !important;
     }
-    div#timeline svg g.preindustrial{
+    div#timeline svg#timeline-slider g.preindustrial{
       circle.marker,
       rect.marker{
         fill: lighten($preindustrial-primary, 10);
@@ -794,7 +794,7 @@ body {
         }
       }
     }
-    div#timeline svg g.nineteenth{
+    div#timeline svg#timeline-slider g.nineteenth{
       circle.marker,
       rect.marker{
         fill: lighten($nineteenth-primary, 10);
@@ -858,7 +858,7 @@ body {
         }
       }
     }
-    div#timeline svg g.modernism{
+    div#timeline svg#timeline-slider g.modernism{
       circle.marker,
       rect.marker{
         fill: lighten($modernism-primary, 10);
@@ -927,7 +927,7 @@ body {
         font-size: 1.4em !important;
       }
     }
-    div#timeline svg g.darktimes{
+    div#timeline svg#timeline-slider g.darktimes{
       circle.marker,
       rect.marker{
         fill: lighten($darktimes-primary, 10);
@@ -988,7 +988,7 @@ body {
         }
       }
     }
-    div#timeline svg g.postwar{
+    div#timeline svg#timeline-slider g.postwar{
       circle.marker,
       rect.marker{
         fill: lighten($postwar-secondary, 20);

@@ -391,28 +391,33 @@ class GLMap extends React.Component {
       .addTo(this.map)
 
     if (t == 'select') {
+      const zoomMap = {
+        'world': 1,
+        'continent': 3,
+        'country': 6,
+        'metropolis': 9,
+        'province': 10,
+        'largecity': 11,
+        'city': 12,
+        'site': 14,
+        'neighbourhood': 16
+      };
+      let zoom;
+
       if (ev.map_context) {
-        const zoomLevel = ev.place && ev.place.zoomlevel;
-        let zoomMap = {
-          'world': 1,
-          'continent': 3,
-          'country': 6,
-          'metropolis': 9,
-          'province': 10,
-          'largecity': 11,
-          'city': 12,
-          'site': 14,
-          'neighbourhood': 16
-        }
+        zoom = zoomMap[ev.map_context] ;
 
-        let zoom = zoomMap[zoomLevel] || zoomMap[ev.map_context]
+        this.map.resize();
+        this.map.flyTo({ center: coords, zoom: zoom });
+      }
+      else if (ev.place && ev.place.zoomlevel){
+        zoom = zoomMap[ev.place.zoomlevel] ;
 
-        console.log("zoom-yuval", zoom)
-        this.map.resize()
-        this.map.flyTo({ center: coords, zoom: zoom })
+        this.map.resize();
+        this.map.flyTo({ center: coords, zoom: zoom });
       }
       else {
-       this.map.flyTo({ center: coords })
+        this.map.flyTo({ center: coords })
       }
       this.addAnnotations(ev.id, getEventStyle(ev))
     }
@@ -445,22 +450,7 @@ class GLMap extends React.Component {
   }
 
   zoomMapByEvents (events, params) {
-    // handle case of single event
-    if (params.eventId) events = events.filter(e => e.id == params.eventId);
-    if (!events.length) return;
-    if (events.length > 500) {
-      this.map.flyTo({ zoom: 2 });
-      return;
-    }
-
-    let places = events.map((e) => e.place ).filter(p => p != null);
-    const placesIds = places.map((p) => p.id );
-    places = places.filter((p, i) => placesIds.indexOf(p.id) === i);
-
-    if (!places.length) return;
-
-
-    let zoomMap = {
+    const zoomMap = {
       'world': 1,
       'continent': 3,
       'country': 6,
@@ -471,6 +461,21 @@ class GLMap extends React.Component {
       'site': 14,
       'neighbourhood': 16
     };
+
+    // handle case of single event
+    if (params.eventId) {
+      events = events.filter(e => e.id == params.eventId);
+      if (!events.length) return;
+    } else {
+      if (events.length > 500) {
+        this.map.flyTo({ zoom: 2 });
+        return;
+      }
+    }
+
+    let places = events.map((e) => e.place ).filter(p => p != null);
+    if (!places.length) return;
+    const placesIds = places.map((p) => p.id );
 
     const lang = places.map((p) => p.position.split(',')[0]).sort((a,b) => a - b);
     const lat = places.map((p) => p.position.split(',')[1]).sort((a,b) => a - b);
@@ -513,14 +518,15 @@ class GLMap extends React.Component {
       zoom = 12;
     }
 
-    if (places.length === 1) {
-      const minZoom = Math.min.apply(null, places.map((p) => zoomMap[p.zoomlevel]).filter(e => e != null));
-      console.log("zoom-tal", minZoom, zoom);
+    if (placesIds.length === 1) {
+      const eventZoom = params.eventId && events[0].map_context;
+      const minZoom = zoomMap[ eventZoom || places[0].zoomlevel];
       zoom = Math.min(minZoom, zoom);
     }
+
     const center = [centerLang, centerLat].map(x => +x).reverse();
 
-    this.map.resize()
+    this.map.resize();
     this.map.flyTo({ center: center, zoom: zoom })
   }
 

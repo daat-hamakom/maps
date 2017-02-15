@@ -418,7 +418,7 @@ class FilterBar extends Component {
   }
 
   getOptionImage (option) {
-    if (option.img) return option.img;
+    if (option.img) return option.img.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_s.jpg' ;
 
     switch (option.type) {
       case 'project':
@@ -497,7 +497,7 @@ class FilterBar extends Component {
 
     const options = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title, img: p.cover_image && p.cover_image.file }))
       .concat(people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: `${p.first_name} ${p.last_name}`, img: p.profile_image && p.profile_image.url })))
-      .concat(organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name, img: o.cover_image })))
+      .concat(organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name, img: o.cover_image && o.cover_image.file })))
       .concat(events.map((e) => ({ type: 'event', value: `event-${e.id}`, id: e.id, label: e.title, img: e.icon })))
       .concat(places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name , img: null})))
       .concat(tags)
@@ -643,26 +643,43 @@ class Timeline extends Component {
   }
 
   zoomTimelineByEvents () {
-    const { events, ...props } = this.props;
+    const { events, params, timeline, ...props } = this.props;
+    const currentTimelineDiff = timeline.endDate  - timeline.startDate;
 
-    // min start date
-    let startDate = events.map(e => e.start_date).reduce((prev, cur, curind, ar) => {
-      return cur < prev ? cur : prev
-    });
+    let startDate;
+    let endDate;
 
-    // max end date
-    let endDate = events.map(e => e.end_date).reduce((prev, cur, curind, ar) => {
-      return cur > prev ? cur : prev
-    });
+    if (params.eventId){
+      const event = events.filter(e => e.id == params.eventId);
+      if (!event.length) return;
+
+      startDate = event[0].start_date;
+      endDate = event[0].end_date;
+    } else {
+      // min start date
+      startDate = events.map(e => e.start_date).reduce((prev, cur, curind, ar) => {
+        return cur < prev ? cur : prev
+      });
+
+      // max end date
+      endDate = events.map(e => e.end_date).reduce((prev, cur, curind, ar) => {
+        return cur > prev ? cur : prev
+      });
+    }
 
     let ns = moment(startDate);
     let ne = moment(endDate);
+    let padding;
 
-    let padding = (ne - ns) / 20;
-
-    // minimum 10 years gap
-    if  (ne.diff(ns, 'years') < 20)  {
-      padding = moment.duration(10, 'years').asMilliseconds();
+    if (params.eventId) {
+      padding = currentTimelineDiff / 2;
+    } else {
+      // minimum 10 years gap
+      if  (ne.diff(ns, 'years') < 20)  {
+        padding = moment.duration(10, 'years').asMilliseconds();
+      } else {
+        padding =  (ne - ns) / 20;
+      }
     }
 
     ns.subtract(padding);

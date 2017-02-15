@@ -58,8 +58,15 @@ class EventPane extends React.Component {
   }
 
   closePane () {
-    this.props.closeSidepane()
-    this.context.router.goBack()
+    const { params, ...props } = this.props;
+    props.closeSidepane();
+
+    if ((params.projId || params.personId || params.orgId || params.placeId) && params.eventId ) {
+      this.context.router.goBack();
+    } else {
+      this.context.router.push('/');
+    }
+
   }
 
   render () {

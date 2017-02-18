@@ -61,12 +61,18 @@ class EventPane extends React.Component {
     const { params, ...props } = this.props;
     props.closeSidepane();
 
-    if (params.projId || params.personId || params.orgId || params.placeId) {
-      this.context.router.goBack();
-    } else {
-      this.context.router.push('/');
+    let url = '/';
+    if (params.projId) {
+      url = `/project/${params.projId}`
+    } else if (params.personId) {
+      url = `/person/${params.personId}`
+    } else if (params.orgId) {
+      url = `/organization/${params.orgId}`
+    } else if (params.placeId) {
+      url = `/place/${params.placeId}`
     }
 
+    this.context.router.push(url);
   }
 
   render () {

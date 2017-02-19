@@ -70,6 +70,8 @@ class EventPane extends React.Component {
       url = `/organization/${params.orgId}`
     } else if (params.placeId) {
       url = `/place/${params.placeId}`
+    } else if (params.tagName) {
+      url = `/tag/${params.tagName}`
     }
 
     this.context.router.push(url);
@@ -169,6 +171,9 @@ class EventsPane extends React.Component {
         }
         else if (this.props.params.orgId) {
           url = 'organization/' + this.props.params.orgId + '/' + url
+        }
+        else if (this.props.params.tagName) {
+          url = 'tag/' + this.props.params.tagName + '/' + url
         }
         this.context.router.push(url)
       }}>

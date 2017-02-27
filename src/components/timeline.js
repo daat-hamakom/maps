@@ -138,7 +138,7 @@ class MarkerData extends Component {
 
         const x = this.props.x(sd.toDate())
         const y = 20+(d.id%10)*10
-        const width = this.props.x(ed.toDate()) - this.props.x(sd.toDate())
+        const width = Math.max(this.props.x(ed.toDate()) - this.props.x(sd.toDate()), 1);
         const height = 2
         const r = height + 1
         const evstyle = getEventStyle(d)

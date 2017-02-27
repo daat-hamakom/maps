@@ -385,7 +385,9 @@ class FilterBar extends Component {
 
     // option.label, option.type
     return (<span id={'option-' + option.value}>
-      <img className="image-select-options" src={this.getOptionImage(option)} />
+      <div className="image-wrapper-select-options" >
+        <img className="image-select-options" src={this.getOptionImage(option)} />
+      </div>
        <p className="label-select-options">{this.boldHighlight(option, i)}</p>
       <span className="type-select-options" >
         &middot; {typeCapitalized}

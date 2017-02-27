@@ -227,13 +227,19 @@ body {
                 color: #343434;
                 display: inline-block;
             }
-            .image-select-options {
+            .image-wrapper-select-options {
                 float: left;
                 margin: 6px 15px 0 30px;
-                border-radius: 50%;
                 width: 25px;
                 height: 25px;
-                line-height: 40px;
+                text-align: center;
+                border-radius: 50%;
+                background-color: #FAFAFA;
+                line-height: 25px;
+            }
+            .image-select-options {
+                max-width: 100%;
+                border-radius: 50%;
             }
             .type-select-options {
                 padding: 0 5px;

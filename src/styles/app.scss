@@ -240,6 +240,8 @@ body {
             .image-select-options {
                 max-width: 100%;
                 border-radius: 50%;
+                min-width: 13px;
+                min-height: 13px;
             }
             .type-select-options {
                 padding: 0 5px;

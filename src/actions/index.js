@@ -1,5 +1,7 @@
 import 'babel-polyfill'
 
+// todo - split to constants
+// todo break to files
 export const REQUEST_EVENTS = 'REQUEST_EVENTS';
 export const REQUEST_EVENTS_FAIL = 'REQUEST_EVENTS_FAIL';
 export const REQUEST_EVENTS_SUCCESS = 'REQUEST_EVENTS_SUCCESS';
@@ -39,9 +41,16 @@ export const DESELECT_EVENT = 'DESELECT_EVENT';
 export const OPEN_LIGHTBOX = 'OPEN_LIGHTBOX';
 export const CLOSE_LIGHTBOX = 'CLOSE_LIGHTBOX';
 
+export const OPEN_HELP_MODAL = 'OPEN_HELP_MODAL';
+export const CLOSE_HELP_MODAL = 'CLOSE_HELP_MODAL';
+
+export const OPEN_ABOUT_MODAL = 'OPEN_ABOUT_MODAL';
+export const CLOSE_ABOUT_MODAL = 'CLOSE_ABOUT_MODAL';
+
 export const SET_APP_STYLE = 'SET_APP_STYLE';
 export const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
 
+// todo break to files
 export function requestEvents() {
   return { type: REQUEST_EVENTS }
 }
@@ -264,6 +273,23 @@ export function openLightbox(ev, selected) {
 
 export function closeLightbox() {
   return { type: CLOSE_LIGHTBOX }
+}
+
+export function openHelpModal(ev, selected) {
+  return { type: OPEN_HELP_MODAL }
+}
+
+export function closeHelpModal() {
+  return { type: CLOSE_HELP_MODAL }
+}
+
+
+export function openAboutModal(ev, selected) {
+  return { type: OPEN_ABOUT_MODAL }
+}
+
+export function closeAboutModal() {
+  return { type: CLOSE_ABOUT_MODAL }
 }
 
 export function setAppStyle(style) {

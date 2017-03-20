@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import { Router, Route } from 'react-router'
+import { Router, Route, hashHistory } from 'react-router'
 import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 
@@ -18,11 +18,13 @@ const createStoreWithMiddleware = applyMiddleware(
   //loggerMiddleware
 )(createStore);
 
-const store = createStoreWithMiddleware(rootReducer);
+// added redux devtools
+const store = createStoreWithMiddleware(rootReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render((
   <Provider store={store}>
-    <Router>
+    <Router history={hashHistory}>
       <Route path='/' component={App}>
         <Route path='/event/:eventId' component={App}/>
         <Route path='/project/:projId' component={App}/>
@@ -39,4 +41,4 @@ ReactDOM.render((
       <Route path='about' component={About}/>
     </Router>
   </Provider>
-), document.getElementById('root'))
+), document.getElementById('root'));

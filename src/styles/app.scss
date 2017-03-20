@@ -26,6 +26,32 @@ body {
       height: 100%;
       width: 100%;
     }
+    div#aboutButton {
+        position: absolute;
+        top: 10px;
+        right: 100px;
+        cursor: pointer;
+        overflow: hidden;
+        width: 41px;
+        height: 24px;
+        font-family: "Merriweather Sans", sans-serif;
+        font-size: 14px;
+        line-height: 24px;
+        color: #47525D;
+    }
+    div#helpButton {
+        position: absolute;
+        top: 10px;
+        right: 50px;
+        cursor: pointer;
+        overflow: hidden;
+        width: 31px;
+        height: 24px;
+        font-family: "Merriweather Sans", sans-serif;
+        font-size: 14px;
+        line-height: 24px;
+        color: #47525D;
+    }
 
     div#map-container {
         position: absolute;

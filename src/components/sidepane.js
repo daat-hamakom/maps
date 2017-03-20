@@ -203,7 +203,7 @@ class Sidepane extends React.Component {
     const evs = app.selected;
 
     return <div id='sidepane' className={evs.length > 0 ? 'open' : 'closed'}>
-      <SidepaneButton openEventsSidepane={this.props.openEventsSidepane} />
+      <SidepaneButton openEventsSidepane={props.openEventsSidepane} />
       {evs.length == 1
         ? <EventPane  app={app} projects={projects} sidepane={sidepane} params={params} closeSidepane={props.closeSidepane} selectMedia={props.selectMedia} />
         : <EventsPane app={app} projects={projects} sidepane={sidepane} params={params} closeSidepane={props.closeSidepane} selectEvent={props.selectEvent} />

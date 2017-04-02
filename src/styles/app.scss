@@ -492,6 +492,7 @@ body {
             width: 320px;
             overflow-y: scroll;
             box-shadow: -2px 2px 4px rgba(94, 94, 94, 0.29);
+            z-index: 5;
             &.vshrink {
                 bottom: 266px;
             }

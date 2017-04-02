@@ -171,19 +171,12 @@ function lightbox(state = { ev: null, selected: null }, action) {
   }
 }
 
-function helpModal(state = { show: false }, action) {
+function toolbar(state = { show: false }, action) {
   switch (action.type) {
     case OPEN_HELP_MODAL:
       return Object.assign({}, state, { show: true });
     case CLOSE_HELP_MODAL:
       return Object.assign({}, state, { show: false });
-    default:
-      return state
-  }
-}
-
-function aboutModal(state = { show: false }, action) {
-  switch (action.type) {
     case OPEN_ABOUT_MODAL:
       return Object.assign({}, state, { show: true });
     case CLOSE_ABOUT_MODAL:
@@ -192,6 +185,7 @@ function aboutModal(state = { show: false }, action) {
       return state
   }
 }
+
 
 const rootReducer = combineReducers({
   app,
@@ -204,8 +198,7 @@ const rootReducer = combineReducers({
   timeline,
   sidepane,
   lightbox,
-  helpModal,
-  aboutModal,
+  toolbar,
 })
 
 export default rootReducer

@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { Modal } from 'react-bootstrap';
 
 import Lightbox from './lightbox'
 import Map from './map'
 import Sidepane from './sidepane'
 import Timeline from './timeline'
+import { ToolbarButtons, AboutModal, HelpModal } from './toolbar'
 import { fetchEvents, fetchProjects, fetchAnnotations, fetchPlaces, fetchPeople, fetchOrganizations,
   zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline, shiftTimeline,
   hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent, closeLightbox, openLightbox, setAppStyle, toggleDrawer,
@@ -15,22 +15,6 @@ import { fetchEvents, fetchProjects, fetchAnnotations, fetchPlaces, fetchPeople,
 
 import '../styles/app.scss'
 
-class AboutButton extends React.Component {
-  render () {
-    return <div id='aboutButton' onClick={this.props.onClick}>
-      About
-    </div>
-  }
-}
-
-
-class HelpButton extends React.Component {
-  render () {
-    return <div id='helpButton' onClick={this.props.onClick}>
-      Help
-    </div>
-  }
-}
 
 class App extends React.Component {
 
@@ -166,18 +150,9 @@ class App extends React.Component {
         selectMedia={(t, m) => { dispatch(openLightbox(t, m)) }}
       />
 
-      <AboutButton onClick={props.openAboutModal} />
-      <HelpButton onClick={props.openHelpModal} />
-      <Modal show={props.aboutModal.show} onHide={props.closeAboutModal}>
-        <Modal.Body>
-          <h4>About</h4>
-        </Modal.Body>
-      </Modal>
-      <Modal show={props.helpModal.show} onHide={props.closeHelpModal}>
-        <Modal.Body>
-          <h4>Help</h4>
-        </Modal.Body>
-      </Modal>
+      <ToolbarButtons openAboutModal={props.openAboutModal} openHelpModal={props.openHelpModal} />
+      <AboutModal onHide={props.closeAboutModal} show={props.aboutModal.show} />
+      <HelpModal onHide={props.closeHelpModal} show={props.helpModal.show} />
     </div>
   }
 }

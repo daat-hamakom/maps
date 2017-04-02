@@ -26,7 +26,18 @@ body {
       height: 100%;
       width: 100%;
     }
-
+    div#toolbarButtons {
+        position: absolute;
+        top: 10px;
+        right: 60px;
+        cursor: pointer;
+        overflow: hidden;
+        height: 24px;
+        font-family: "Merriweather Sans", sans-serif;
+        font-size: 14px;
+        line-height: 24px;
+        color: #47525D;
+    }
     div#map-container {
         position: absolute;
         // top: 50px;
@@ -1020,4 +1031,127 @@ body {
         background-color: $postwar-secondary !important;
       }
     }
+    .daat-modal {
+        font-family: "Merriweather", sans-serif;
+        .modal-dialog {
+            margin: 130px auto;
+        }
+        @media (min-width: 768px) {
+            .modal-dialog {
+                width: 700px;
+            }
+        }
+        .modal-close-button {
+            border-radius: 50%;
+            border: none;
+            outline: none !important;
+            background: none;
+        }
+        .modal-header {
+            padding: 30px;
+            border-bottom: none;
+        }
+        .modal-content {
+            border-radius: 0 !important;
+        }
+        .modal-body {
+            padding: 0 80px 15px 80px;
+        }
+        .modal-title {
+            padding-bottom: 14px;
+            font-size: 20px;
+            font-weight: 900;
+            line-height: 28px;
+            color: #47525D;
+        }
+        .modal-tab-nav a {
+            padding: 0;
+            text-decoration: underline;
+            font-size: 14px;
+            line-height: 28px;
+            color: #A6A6A6;
+        }
+        .modal-tab-nav a:hover,
+        .modal-tab-nav a:focus {
+            background-color: inherit;
+            outline: none;
+        }
+        .modal-subtitle {
+            padding-top: 10px;
+            font-size: 14px;
+            font-weight: 900;
+            line-height: 25px;
+            color: #47525D;
+        }
+        .modal-video {
+            margin-top: 10px;
+        }
+    }
+    .about-modal{
+        .modal-tab-nav {
+            display: inline-block;
+        }
+        .modal-tab-nav a {
+            display: inline-block;
+        }
+        .modal-tab-nav + .modal-tab-nav:before {
+            content: "|";
+            color: #E8E8E8;
+            margin: 0 5px;
+            font-size: 20px;
+            font-weight: lighter;
+            position: relative;
+            top: 4px;
+        }
+    }
+}
+
+
+/* cyrillic-ext */
+@font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Merriweather'), local('Merriweather-Regular'), url(http://fonts.gstatic.com/s/merriweather/v15/RFda8w1V0eDZheqfcyQ4EK-j2U0lmluP9RWlSytm3ho.woff2) format('woff2');
+    unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+}
+/* cyrillic */
+@font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Merriweather'), local('Merriweather-Regular'), url(http://fonts.gstatic.com/s/merriweather/v15/RFda8w1V0eDZheqfcyQ4EJX5f-9o1vgP2EXwfjgl7AY.woff2) format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Merriweather'), local('Merriweather-Regular'), url(http://fonts.gstatic.com/s/merriweather/v15/RFda8w1V0eDZheqfcyQ4ED0LW-43aMEzIO6XUTLjad8.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Merriweather'), local('Merriweather-Regular'), url(http://fonts.gstatic.com/s/merriweather/v15/RFda8w1V0eDZheqfcyQ4EOgdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Merriweather Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Merriweather Sans'), local('MerriweatherSans-Regular'), url(http://fonts.gstatic.com/s/merriweathersans/v8/AKu1CjQ4qnV8MUltkAX3sD48MEBspdEKklcQvcIk8pU.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Merriweather Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Merriweather Sans'), local('MerriweatherSans-Regular'), url(http://fonts.gstatic.com/s/merriweathersans/v8/AKu1CjQ4qnV8MUltkAX3sMZ4HySTEWshgORbPp2tk8k.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }

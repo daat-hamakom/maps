@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 
 import Lightbox from './lightbox'
 import Map from './map'
 import Sidepane from './sidepane'
 import Timeline from './timeline'
+import { ToolbarButtons, AboutModal, HelpModal } from './toolbar'
 import { fetchEvents, fetchProjects, fetchAnnotations, fetchPlaces, fetchPeople, fetchOrganizations,
   zoomTimeline, startDragTimeline, onDragTimeline, endDragTimeline, shiftTimeline,
-  hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent, closeLightbox, openLightbox, setAppStyle, toggleDrawer } from '../actions'
+  hoverEnterEvent, hoverExitEvent, selectEvent, deselectEvent, closeLightbox, openLightbox, setAppStyle, toggleDrawer,
+  openAboutModal, closeAboutModal, openHelpModal, closeHelpModal
+} from '../actions'
 
 import '../styles/app.scss'
+
 
 class App extends React.Component {
 
@@ -19,20 +24,24 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    const { dispatch } = this.props
-    dispatch(fetchEvents())
-    dispatch(fetchProjects())
-    dispatch(fetchAnnotations())
-    dispatch(fetchPlaces())
-    dispatch(fetchPeople())
-    dispatch(fetchOrganizations())
+    const props = this.props;
+
+    props.fetchEvents();
+    props.fetchProjects();
+    props.fetchAnnotations();
+    props.fetchPlaces();
+    props.fetchPeople();
+    props.fetchOrganizations();
   }
 
   finishedLoading () {
-    return (!this.props.events.fetching && this.props.events.items.length > 0) &&
-      (!this.props.projects.fetching && this.props.projects.items.length > 0) &&
-      (!this.props.annotations.fetching && this.props.annotations.items.length > 0) &&
-      (!this.props.places.fetching && this.props.places.items.length > 0)
+    const props = this.props;
+    const { events, projects, annotations, places } = props;
+
+    return (!events.fetching && events.items.length > 0) &&
+      (!projects.fetching && projects.items.length > 0) &&
+      (!annotations.fetching && annotations.items.length > 0) &&
+      (!places.fetching && places.items.length > 0)
   }
 
   componentDidUpdate (prevProps) {
@@ -51,47 +60,47 @@ class App extends React.Component {
   }
 
   render () {
-    const { dispatch } = this.props;
+    const { dispatch, ...props } = this.props;
 
-    let events = this.props.events.items;
+    let events = props.events.items;
     let drawerData = null;
 
-    let classes = 'app ' + this.props.app.style
+    let classes = 'app ' + props.app.style
 
-    if (this.props.params.projId) {
-      events = this.props.events.items.filter(e => e.project == +this.props.params.projId)
-      drawerData = this.props.projects.items.find(p => p.id == +this.props.params.projId)
+    if (props.params.projId) {
+      events = props.events.items.filter(e => e.project == +props.params.projId)
+      drawerData = props.projects.items.find(p => p.id == +props.params.projId)
       classes = classes + ' card project'
     }
-    if (this.props.params.personId) {
-      events = this.props.events.items.filter(e => e.people.map(p => p.id).indexOf(+this.props.params.personId) != -1)
-      drawerData = this.props.people.items.find(p => p.id == +this.props.params.personId)
+    if (props.params.personId) {
+      events = props.events.items.filter(e => e.people.map(p => p.id).indexOf(+props.params.personId) != -1)
+      drawerData = props.people.items.find(p => p.id == +props.params.personId)
       classes = classes + ' card person'
     }
-    if (this.props.params.orgId) {
-      events = this.props.events.items.filter(e => e.organizations.map(p => p.id).indexOf(+this.props.params.orgId) != -1);
-      drawerData = this.props.organizations.items.find(o => o.id == +this.props.params.orgId);
+    if (props.params.orgId) {
+      events = props.events.items.filter(e => e.organizations.map(p => p.id).indexOf(+props.params.orgId) != -1);
+      drawerData = props.organizations.items.find(o => o.id == +props.params.orgId);
       classes = classes + ' card organization'
     }
-    if (this.props.params.tagName) {
-      events = this.props.events.items.filter(e => e.tags && e.tags.indexOf(this.props.params.tagName) != -1);
-      drawerData = this.props.events.items.filter(e => e.tags && e.tags.indexOf(this.props.params.tagName) != -1);
+    if (props.params.tagName) {
+      events = props.events.items.filter(e => e.tags && e.tags.indexOf(props.params.tagName) != -1);
+      drawerData = props.events.items.filter(e => e.tags && e.tags.indexOf(props.params.tagName) != -1);
       classes = classes + ' card tag'
     }
-    if (this.props.params.placeId) {
-      events = this.props.events.items.filter(e => e.place && e.place.id == +this.props.params.placeId );
-      drawerData = this.props.places.items.find(p => p.id == +this.props.params.placeId);
+    if (props.params.placeId) {
+      events = props.events.items.filter(e => e.place && e.place.id == +props.params.placeId );
+      drawerData = props.places.items.find(p => p.id == +props.params.placeId);
       classes = classes + ' card place'
     }
 
     return <div className={classes}>
 
       <Map
-        app={this.props.app}
+        app={props.app}
         events={events}
-        params={this.props.params}
-        annotations={this.props.annotations}
-        places={this.props.places}
+        params={props.params}
+        annotations={props.annotations}
+        places={props.places}
         openEventSidepane={(ev) => { dispatch(openEventSidepane(ev)) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'map')) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
@@ -102,16 +111,16 @@ class App extends React.Component {
       />
 
       <Timeline
-        params={this.props.params}
-        app={this.props.app}
+        params={props.params}
+        app={props.app}
         drawerData={drawerData}
         events={events}
-        timeline={this.props.timeline}
-        allEvents={this.props.events.items}
-        projects={this.props.projects}
-        people={this.props.people}
-        places={this.props.places}
-        organizations={this.props.organizations}
+        timeline={props.timeline}
+        allEvents={props.events.items}
+        projects={props.projects}
+        people={props.people}
+        places={props.places}
+        organizations={props.organizations}
         onZoom={(b, e) => { dispatch(zoomTimeline(b, e)) }}
         dragStart={(x, w) => { dispatch(startDragTimeline(x, w)) }}
         drag={(x) => { dispatch(onDragTimeline(x)) }}
@@ -125,10 +134,10 @@ class App extends React.Component {
       />
 
       <Sidepane
-        app={this.props.app}
-        projects={this.props.projects}
-        sidepane={this.props.sidepane}
-        params={this.props.params}
+        app={props.app}
+        projects={props.projects}
+        sidepane={props.sidepane}
+        params={props.params}
         closeSidepane={() => { dispatch(deselectEvent()) }}
         selectEvent={(ev) => { dispatch(selectEvent(ev, 'sidepane')) }}
         openEventsSidepane={() => { dispatch(selectEvent(events, 'sidepane')) }}
@@ -136,15 +145,19 @@ class App extends React.Component {
       />
 
       <Lightbox
-        lightbox={this.props.lightbox}
+        lightbox={props.lightbox}
         closeLightbox={() => { dispatch(closeLightbox()) }}
         selectMedia={(t, m) => { dispatch(openLightbox(t, m)) }}
       />
 
+      <ToolbarButtons openAboutModal={props.openAboutModal} openHelpModal={props.openHelpModal} />
+      <AboutModal onHide={props.closeAboutModal} show={props.aboutModal.show} />
+      <HelpModal onHide={props.closeHelpModal} show={props.helpModal.show} />
     </div>
   }
 }
 
+// todo change to selectors
 function select(state) {
   return {
     app: state.app,
@@ -156,8 +169,30 @@ function select(state) {
     organizations: state.organizations,
     timeline: state.timeline,
     sidepane: state.sidepane,
-    lightbox: state.lightbox
+    lightbox: state.lightbox,
+    helpModal: state.helpModal,
+    aboutModal: state.aboutModal,
   }
 }
 
-export default connect(select)(App)
+function mapDispatchToProps(dispatch) {
+  const actionCreators =  bindActionCreators({
+    fetchEvents,
+    fetchProjects,
+    fetchAnnotations,
+    fetchPlaces,
+    fetchPeople,
+    fetchOrganizations,
+    openAboutModal,
+    closeAboutModal,
+    openHelpModal,
+    closeHelpModal
+  }, dispatch);
+
+  return {
+      ...actionCreators,
+    dispatch,
+  }
+}
+
+export default connect(select, mapDispatchToProps)(App)

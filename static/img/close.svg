@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>close</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="28" height="28"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="28" height="28" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="new-timeline-help" transform="translate(-804.000000, -123.000000)" stroke="#A6A6A6">
+            <g id="close" transform="translate(804.000000, 123.000000)">
+                <g>
+                    <use id="Rectangle" mask="url(#mask-2)" stroke-width="2" opacity="0.899999976" xlink:href="#path-1"></use>
+                    <path d="M17.3332924,10.6666585 L10.6667076,17.3332433 M10.6666599,10.6667497 L17.3333401,17.3332672" id="Combined-Shape-Copy" stroke-linecap="square"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

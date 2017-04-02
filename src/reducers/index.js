@@ -171,16 +171,16 @@ function lightbox(state = { ev: null, selected: null }, action) {
   }
 }
 
-function toolbar(state = { show: false }, action) {
+function toolbar(state = { showHelp: false, showAbout: false }, action) {
   switch (action.type) {
     case OPEN_HELP_MODAL:
-      return Object.assign({}, state, { show: true });
+      return Object.assign({}, state, { showHelp: true });
     case CLOSE_HELP_MODAL:
-      return Object.assign({}, state, { show: false });
+      return Object.assign({}, state, { showHelp: false });
     case OPEN_ABOUT_MODAL:
-      return Object.assign({}, state, { show: true });
+      return Object.assign({}, state, { showAbout: true });
     case CLOSE_ABOUT_MODAL:
-      return Object.assign({}, state, { show: false });
+      return Object.assign({}, state, { showAbout: false });
     default:
       return state
   }

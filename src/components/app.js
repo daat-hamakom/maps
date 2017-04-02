@@ -151,8 +151,8 @@ class App extends React.Component {
       />
 
       <ToolbarButtons openAboutModal={props.openAboutModal} openHelpModal={props.openHelpModal} />
-      <AboutModal onHide={props.closeAboutModal} show={props.aboutModal.show} />
-      <HelpModal onHide={props.closeHelpModal} show={props.helpModal.show} />
+      <AboutModal onHide={props.closeAboutModal} show={props.toolbar.showAbout} />
+      <HelpModal onHide={props.closeHelpModal} show={props.toolbar.showHelp} />
     </div>
   }
 }
@@ -170,8 +170,7 @@ function select(state) {
     timeline: state.timeline,
     sidepane: state.sidepane,
     lightbox: state.lightbox,
-    helpModal: state.helpModal,
-    aboutModal: state.aboutModal,
+    toolbar: state.toolbar,
   }
 }
 

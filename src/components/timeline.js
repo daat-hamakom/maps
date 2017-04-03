@@ -335,12 +335,12 @@ class D3Timeline extends Component {
     return <div ref='timeline'>
       <div className='controls'>
         <ul>
-          <li onClick={(e) => {
-            this.doZoom(1, 0.5)
-          }}><img src="/static/img/zoom-in.png"></img></li>
-          <li onClick={(e) => {
-            this.doZoom(-1, 0.5)
-          }}><img src="/static/img/zoom-out.png"></img></li>
+          <li onClick={(e) => { this.doZoom(1, 0.5) }} >
+            +
+          </li>
+          <li onClick={(e) => {this.doZoom(-1, 0.5)}} >
+            &ndash;
+          </li>
         </ul>
       </div>
       <svg

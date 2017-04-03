@@ -19,7 +19,7 @@ export class AboutModal extends Component {
           className="pull-right modal-close-button"
           onClick={this.props.onHide}
         >
-          <img className="image-select-options" src='/static/img/close.svg' />
+          <img className="image-select-options" src='/static/img/close-group.svg' />
         </button>
       </Modal.Header>
       <Modal.Body>
@@ -59,7 +59,7 @@ export class HelpModal extends Component {
           className="pull-right modal-close-button"
           onClick={this.props.onHide}
         >
-          <img className="image-select-options" src='/static/img/close.svg' />
+          <img className="image-select-options" src='/static/img/close-group.svg' />
         </button>
       </Modal.Header>
       <Modal.Body>

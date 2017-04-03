@@ -596,15 +596,15 @@ class GLMap extends React.Component {
       }}></div>
       <div id='map-controls'>
         <ul>
-          <li onClick={(e) => {
-            this.map.flyTo({zoom: this.map.getZoom() + 1})
-          }}><img src="/static/img/zoom-in.png"></img></li>
-          <li onClick={(e) => {
-            this.map.flyTo({zoom: this.map.getZoom() - 1})
-          }}><img src="/static/img/zoom-out.png"></img></li>
-          <li onClick={(e) => {
-            this.map.setBearing(0)
-          }}><img src="/static/img/orient-map.png"></img></li>
+          <li onClick={(e) => { this.map.flyTo({zoom: this.map.getZoom() + 1}) }} className="control-container" >
+            +
+          </li>
+          <li onClick={(e) => { this.map.flyTo({zoom: this.map.getZoom() - 1}) }} className="control-container" >
+            &ndash;
+          </li>
+          <li onClick={(e) => { this.map.setBearing(0) }}>
+            &#10147;
+          </li>
         </ul>
       </div>
       <div id='map-credit'>

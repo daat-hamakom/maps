@@ -17,36 +17,42 @@ class Lightbox extends React.Component {
 
   goLeft () {
     --this.props.lightbox.selected;
+    const media = this.props.lightbox.ev.media.filter((m) => m.type != 'sound' );
     if (this.props.lightbox.selected < 0) {
-      this.props.lightbox.selected = this.props.lightbox.ev.media.length - 1;
+      this.props.lightbox.selected = media.length - 1;
     }
     this.props.selectMedia(this.props.lightbox.ev, this.props.lightbox.selected)
   }
 
   goRight () {
     ++this.props.lightbox.selected;
-    if (this.props.lightbox.selected > this.props.lightbox.ev.media.length - 1) {
+    const media = this.props.lightbox.ev.media.filter((m) => m.type != 'sound' );
+
+    if (this.props.lightbox.selected > media.length - 1) {
       this.props.lightbox.selected = 0;
     }
     this.props.selectMedia(this.props.lightbox.ev, this.props.lightbox.selected)
   }
 
   render () {
-    let active = <div></div>
+    let active = <div></div>;
+    let media = null;
 
     if (this.props.lightbox.ev) {
-      const m = this.props.lightbox.ev.media[this.props.lightbox.selected]
+      media = this.props.lightbox.ev.media.filter((m) => m.type != 'sound' );
+      const m = media[this.props.lightbox.selected];
       switch (m.type) {
         case 'image':
-          active = <LightboxImage src={m.file}/>
-          break
+          active = <LightboxImage src={m.file}/>;
+          break;
         case 'link':
-          active = <LightboxYoutubeVideo src={m.url}/>
-          break
+          active = <LightboxYoutubeVideo src={m.url}/>;
+          break;
         default:
           break
       }
     }
+    const selectedMedia = this.props.lightbox.ev && media && media[this.props.lightbox.selected];
 
     return <div id='lightbox' className={this.props.lightbox.ev ? 'active' : 'inactive'}
       onClick={() => { this.props.closeLightbox() }}
@@ -57,38 +63,40 @@ class Lightbox extends React.Component {
       }}>
 
       <div id='media-container'>
-        <div id='media'>
-          {active}
-        </div>
-      </div>
-
-      <div id='lightbox-controls'>
         <span className="prev-media" onClick={(e) => {
           this.goLeft()
           e.preventDefault()
           e.stopPropagation()
         }}>‹</span>
-
-        <div className='center'>
-          <div className='title'>
-            {this.props.lightbox.ev ? this.props.lightbox.ev.media[this.props.lightbox.selected].title : ''}
-          </div>
-          <div className="media-dots">{this.props.lightbox.ev ? (this.props.lightbox.ev.media.map((m, i) => {
-              return <span className={this.props.lightbox.selected == i ? 'media-dot selected' : 'media-dot'} key={i} onClick={(e) => {
-                this.props.selectMedia(this.props.lightbox.ev, i)
-                e.preventDefault()
-                e.stopPropagation()
-              }}>{this.props.lightbox.selected == i ? '●' : '○' }</span>
-            })) : <span></span>
-          }</div>
+        <div id='media'>
+          {active}
+          <span className="media-mask">
+            <span className="media-description">
+                {selectedMedia ? selectedMedia.title : ''}
+            </span>
+          </span>
+          <span className="media-copyrights">
+              {selectedMedia ? `${selectedMedia.source} ${selectedMedia.source_url} ${selectedMedia.copyrights}`: ''}
+          </span>
         </div>
-
-
-        <span className="next-media"onClick={(e) => {
+        <span className="next-media" onClick={(e) => {
           this.goRight()
           e.preventDefault()
           e.stopPropagation()
         }}>›</span>
+      </div>
+
+      <div id='lightbox-controls'>
+        <div className='center'>
+          <div className="media-dots">{this.props.lightbox.ev ? (media.map((m, i) => {
+              return <span className={this.props.lightbox.selected == i ? 'media-dot selected' : 'media-dot'} key={i} onClick={(e) => {
+                this.props.selectMedia(this.props.lightbox.ev, i);
+                e.preventDefault();
+                e.stopPropagation();
+              }}>{this.props.lightbox.selected == i ? '●' : '○' }</span>
+            })) : <span></span>
+          }</div>
+        </div>
       </div>
     </div>
   }

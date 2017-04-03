@@ -715,6 +715,16 @@ body {
                     font-size: 14px;
                     line-height: 16px;
                     text-align: right;
+                    .copyright-source,
+                    .copyright-source:focus{
+                        border-bottom: 1px dotted #808080;
+                        color: #808080;
+                        font-family: "Arial Cyr MT";
+                        font-size: 14px;
+                    }
+                    .copyright-source:hover {
+                        text-decoration: none;
+                    }
                 }
             }
             span.prev-media {

@@ -34,6 +34,13 @@ class Lightbox extends React.Component {
     this.props.selectMedia(this.props.lightbox.ev, this.props.lightbox.selected)
   }
 
+  getCopyright (media) {
+    debugger;
+    return <span>
+      &copy; {media.copyrights} (<a target="_blank" title={media.source} href={media.source_url} className="copyright-source">source</a>)
+    </span>
+  }
+
   render () {
     let active = <div></div>;
     let media = null;
@@ -76,7 +83,7 @@ class Lightbox extends React.Component {
             </span>
           </span>
           <span className="media-copyrights">
-              {selectedMedia ? `${selectedMedia.source} ${selectedMedia.source_url} ${selectedMedia.copyrights}`: ''}
+              {selectedMedia ? this.getCopyright(selectedMedia) : ''}
           </span>
         </div>
         <span className="next-media" onClick={(e) => {

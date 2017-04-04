@@ -35,7 +35,10 @@ class Lightbox extends React.Component {
   }
 
   getCopyright (media) {
-    debugger;
+    if (!media.source_url) return <span>
+        &copy; {media.copyrights} (<div title={media.source} className="copyright-source">source</div>)
+      </span>;
+
     return <span>
       &copy; {media.copyrights} (<a target="_blank" title={media.source} href={media.source_url} className="copyright-source">source</a>)
     </span>
@@ -70,11 +73,11 @@ class Lightbox extends React.Component {
       }}>
 
       <div id='media-container'>
-        <span className="prev-media" onClick={(e) => {
+        {media && media.length > 1 ? <span className="prev-media" onClick={(e) => {
           this.goLeft()
           e.preventDefault()
           e.stopPropagation()
-        }}>‹</span>
+        }}>‹</span> : null}
         <div id='media'>
           {active}
           <span className="media-mask">
@@ -86,11 +89,11 @@ class Lightbox extends React.Component {
               {selectedMedia ? this.getCopyright(selectedMedia) : ''}
           </span>
         </div>
-        <span className="next-media" onClick={(e) => {
+        {media && media.length > 1 ? <span className="next-media" onClick={(e) => {
           this.goRight()
           e.preventDefault()
           e.stopPropagation()
-        }}>›</span>
+        }}>›</span> : null}
       </div>
 
       <div id='lightbox-controls'>

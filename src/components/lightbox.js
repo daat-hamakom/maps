@@ -36,7 +36,7 @@ class Lightbox extends React.Component {
 
   getCopyright (media) {
     if (!media.source_url) return <span>
-        &copy; {media.copyrights} (<div title={media.source} className="copyright-source">source</div>)
+        &copy; {media.copyrights} (<span title={media.source} className="copyright-source">source</span>)
       </span>;
 
     return <span>

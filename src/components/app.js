@@ -110,6 +110,20 @@ class App extends React.Component {
         toggleDrawer={() => { dispatch(toggleDrawer()) }}
       />
 
+      <Sidepane
+        app={props.app}
+        projects={props.projects}
+        places={props.places}
+        organizations={props.organizations}
+        people={props.people}
+        sidepane={props.sidepane}
+        params={props.params}
+        closeSidepane={() => { dispatch(deselectEvent()) }}
+        selectEvent={(ev) => { dispatch(selectEvent(ev, 'sidepane')) }}
+        openEventsSidepane={() => { dispatch(selectEvent(events, 'sidepane')) }}
+        selectMedia={(t, m) => { dispatch(openLightbox(t, m)) }}
+      />
+
       <Timeline
         params={props.params}
         app={props.app}
@@ -131,20 +145,6 @@ class App extends React.Component {
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'timeline')) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
         toggleDrawer={() => { dispatch(toggleDrawer()) }}
-      />
-
-      <Sidepane
-        app={props.app}
-        projects={props.projects}
-        places={props.places}
-        organizations={props.organizations}
-        people={props.people}
-        sidepane={props.sidepane}
-        params={props.params}
-        closeSidepane={() => { dispatch(deselectEvent()) }}
-        selectEvent={(ev) => { dispatch(selectEvent(ev, 'sidepane')) }}
-        openEventsSidepane={() => { dispatch(selectEvent(events, 'sidepane')) }}
-        selectMedia={(t, m) => { dispatch(openLightbox(t, m)) }}
       />
 
       <Lightbox

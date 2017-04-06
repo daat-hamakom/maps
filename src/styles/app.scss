@@ -54,6 +54,9 @@ body {
         // border-width: 2px 0 0 2px;
         &.vshrink {
             bottom: 366px;
+            + div#sidepane {
+                bottom: 366px;
+            }
         }
         &.hshrink {
             right: 327px;
@@ -717,9 +720,7 @@ body {
             position: absolute;
             top: 0;
             bottom: 0;
-        }
-        div#map-container.vshrink ~ div#sidepane {
-            bottom: 366px;
+            overflow-y: scroll;
         }
     }
 

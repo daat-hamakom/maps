@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 
 import { AudioComponent, getEventStyle } from './utils'
 
-function _cleanDates (ds, de) {
+function _cleanDates (ds, de, circa_date=false) {
     let sd = moment(ds.replace('-00', '').replace('-00', ''), 'YYYY-MM-DD')
     if (ds.includes('-00-')) {
       sd = sd.format('YYYY')
@@ -28,7 +28,7 @@ function _cleanDates (ds, de) {
       else {
         ed = ed.format('MMMM D, YYYY')
       }
-      return sd + ' - ' + ed
+      return circa_date ? sd + ' ~ ' + ed : sd + ' - ' + ed
     }
     return sd
   }
@@ -125,7 +125,7 @@ class EventPane extends React.Component {
       <Link to={`/project/${this.props.projects.items.find((p) => p.id == ev.project).id}`} className='project' onClick={() =>  {this.props.closeSidepane()}}>{this.props.projects.items.find((p) => p.id == ev.project).title}</Link>
         <h2 className='title'>{ev.title}</h2>
         <div className='place'>{ev.place.name}</div>
-        <div className='date'>{_cleanDates(ev.start_date_orig, ev.end_date_orig)}</div>
+        <div className='date'>{_cleanDates(ev.start_date_orig, ev.end_date_orig, ev.circa_date)}</div>
         <hr/>
         {ev.media.filter((m) => m.type == 'sound').map((m, i) => <div className="audio-container" key={i}>
             <div className="audio-box">
@@ -197,7 +197,7 @@ class EventsPane extends React.Component {
         <div className="event-data">
           <div className='project'>{this.props.projects.items.find((p) => p.id == e.project).title}</div>
           <div className='title'>{e.title}</div>
-          <div className='date'>{_cleanDates(e.start_date_orig, e.end_date_orig)}</div>
+          <div className='date'>{_cleanDates(e.start_date_orig, e.end_date_orig, ev.circa_date)}</div>
         </div>
         <div className='clear'></div>
       </div>)}

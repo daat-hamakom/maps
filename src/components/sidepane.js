@@ -77,6 +77,7 @@ class EventPane extends Component {
     this.context.router.push(url);
   }
 
+  // todo - use utils
   getCopyright (media) {
     if (!media.source_url) return <div className="audio-copyright">
         &copy; {media.copyrights} (<span title={media.source} className="copyright-source">source</span>)
@@ -85,6 +86,28 @@ class EventPane extends Component {
     return <div className="audio-copyright">
       &copy; {media.copyrights} (<a target="_blank" title={media.source} href={media.source_url} className="copyright-source">source</a>)
     </div>
+  }
+
+  // todo - use utils
+  getOptionImage (option) {
+    if (option.img) return option.img.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_s.jpg' ;
+
+    switch (option.type) {
+      case 'project':
+        return '/static/img/project-icon.svg';
+      case 'person':
+        return '/static/img/person-icon.svg';
+      case 'organization':
+        return '/static/img/organization-icon.svg';
+      case 'event':
+        return '/static/img/event-icon.svg';
+      case 'place':
+        return '/static/img/place-icon.svg';
+      case 'tag':
+        return '/static/img/tag-icon.svg';
+      default:
+        return null;
+    }
   }
 
 
@@ -145,8 +168,18 @@ class EventPane extends Component {
         )}
         <hr/>
         <div className='links'>
-          {ev.people.map((p) => <Link to={`/person/${p.id}`} onClick={() => {this.props.closeSidepane()}} className='person-link'>{p.first_name + ' ' + p.last_name}</Link>)}
-          {ev.organizations.map((o) => <Link to={`/organization/${o.id}`} onClick={() => {this.props.closeSidepane()}} className='org-link'>{o.name}</Link>)}
+          {ev.people.map((p) => <Link to={`/person/${p.id}`} onClick={() => {this.props.closeSidepane()}} className='person-link'>
+            <div className="link-image-wrapper" >
+              <img className="link-image" src={this.getOptionImage({ img: p.profile_image && p.profile_image.url, type:'person' })} />
+            </div>
+            {p.first_name + ' ' + p.last_name}
+          </Link>)}
+          {ev.organizations.map((o) => <Link to={`/organization/${o.id}`} onClick={() => {this.props.closeSidepane()}} className='org-link'>
+            <div className="link-image-wrapper" >
+              <img className="link-image" src={this.getOptionImage({ img: o.cover_image && o.cover_image.file, type:'organization' })} />
+            </div>
+            {o.name}
+          </Link>)}
         </div>
       </div>
 

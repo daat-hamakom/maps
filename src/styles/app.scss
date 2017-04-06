@@ -721,6 +721,22 @@ body {
             top: 0;
             bottom: 0;
             overflow-y: scroll;
+            .link-image-wrapper {
+                float: left;
+                width: 25px;
+                height: 25px;
+                text-align: center;
+                border-radius: 50%;
+                background-color: fade-out(#FAFAFA, 0.5);
+                line-height: 20px;
+                margin-right: 5px;
+            }
+            .link-image {
+                max-width: 100%;
+                border-radius: 50%;
+                min-width: 13px;
+                min-height: 13px;
+            }
         }
     }
 

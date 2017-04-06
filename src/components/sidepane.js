@@ -197,7 +197,7 @@ class EventsPane extends React.Component {
         <div className="event-data">
           <div className='project'>{this.props.projects.items.find((p) => p.id == e.project).title}</div>
           <div className='title'>{e.title}</div>
-          <div className='date'>{_cleanDates(e.start_date_orig, e.end_date_orig, ev.circa_date)}</div>
+          <div className='date'>{_cleanDates(e.start_date_orig, e.end_date_orig, e.circa_date)}</div>
         </div>
         <div className='clear'></div>
       </div>)}

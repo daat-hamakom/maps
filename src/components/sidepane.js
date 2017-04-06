@@ -77,6 +77,17 @@ class EventPane extends React.Component {
     this.context.router.push(url);
   }
 
+  getCopyright (media) {
+    if (!media.source_url) return <div className="audio-copyright">
+        &copy; {media.copyrights} (<span title={media.source} className="copyright-source">source</span>)
+      </div>;
+
+    return <div className="audio-copyright">
+      &copy; {media.copyrights} (<a target="_blank" title={media.source} href={media.source_url} className="copyright-source">source</a>)
+    </div>
+  }
+
+
   render () {
     const evs = this.props.app.selected
     const ev = evs[0]
@@ -117,8 +128,11 @@ class EventPane extends React.Component {
         <div className='date'>{_cleanDates(ev.start_date_orig, ev.end_date_orig)}</div>
         <hr/>
         {ev.media.filter((m) => m.type == 'sound').map((m, i) => <div className="audio-container" key={i}>
-            <AudioComponent src={m.file} type='audio/mpeg' key={'audio-' + m.id} />
-            <p>{m.title}</p>
+            <div className="audio-box">
+              <p>{m.title}</p>
+              <AudioComponent src={m.file} type='audio/mpeg' key={'audio-' + m.id} />
+            </div>
+            {this.getCopyright(m)}
           </div>
         )}
 

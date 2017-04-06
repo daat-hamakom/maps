@@ -602,11 +602,28 @@ body {
                     padding: 0;
                 }
                 div.audio-container {
-                    audio {
-                        width: 100%;
+                    margin-bottom: 10px;
+                    .audio-box {
+                        background-color: white;
+                        border-radius: 3px;
+                        margin-bottom: 5px;
+                        audio {
+                            width: 100%;
+                        }
+                        p {
+                            padding: 10px;
+                            font-family: "Merriweather Sans", sans-serif;
+                            font-size: 14px;
+                            font-weight: bold;
+                            line-height: 18px;
+                        }
                     }
-                    p {
-                        font-size: 0.7em;
+                    .audio-copyright {
+                        opacity: 0.5;
+                        font-family: "CC Icons";
+                        font-size: 12px;
+                        line-height: 11px;
+                        text-align: right;
                     }
                 }
                 div.doc {
@@ -811,6 +828,9 @@ body {
         hr {
           border-color: $preindustrial-primary;
         }
+        .audio-box {
+          //background: fade-out($preindustrial-secondary, 0.9);
+        }
       }
     }
     div.marker-popup.preindustrial{
@@ -878,6 +898,9 @@ body {
         hr {
           border-top: 3px solid $nineteenth-secondary;
         }
+        .audio-box {
+          //background: fade-out($nineteenth-secondary, 0.9);
+        }
       }
     }
     div#timeline svg#timeline-slider g.nineteenth{
@@ -941,6 +964,9 @@ body {
         }
         hr {
           border-top: 3px solid $modernism-secondary;
+        }
+        .audio-box {
+          //background: fade-out($modernism-secondary, 0.9);
         }
       }
     }
@@ -1008,6 +1034,9 @@ body {
         hr {
           border-top: 3px solid $darktimes-primary;
         }
+        .audio-box {
+          //background: fade-out($darktimes-secondary, 0.9);
+        }
       }
       div.event-data div.title{
         font-size: 1.4em !important;
@@ -1071,6 +1100,9 @@ body {
         }
         hr {
           border-top: 3px solid $postwar-primary;
+        }
+        .audio-box {
+          //background: fade-out($postwar-secondary, 0.9);
         }
       }
     }

@@ -493,6 +493,12 @@ body {
         }
     }
     div#sidepane {
+        position: absolute;
+        top: 0;
+        right: 5px;
+        bottom: 166px;
+        width: 320px;
+        z-index: 5;
         div#sidepaneButton {
             height: 32px;
             width: 32px;
@@ -503,47 +509,73 @@ body {
             cursor: pointer;
             overflow: hidden;
             text-indent: -999999em;
+            display: none;
+        }
+        &.closed {
+            div#eventpane, div#eventspane {
+                display: none;
+            }
+            div#sidepaneButton {
+                display: block;
+            }
         }
         div#eventpane, div#eventspane {
-            position: absolute;
-            top: 10px;
-            right: 5px;
-            bottom: 166px;
-            border: 2px solid $frameBorder;
-            border-width: 2px 2px 0 0;
             background: #ffffff;
-            width: 320px;
-            overflow-y: scroll;
             box-shadow: -2px 2px 4px rgba(94, 94, 94, 0.29);
-            z-index: 5;
             &.vshrink {
                 bottom: 266px;
             }
-            &.closed {
-                display: none;
+            .eventspane-header{
+                height: 60px;
+                line-height: 60px;
+                background-color: #FFFFFF;
+                box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
+                font-family: "Merriweather Sans", sans-serif;
+                font-size: 14px;
+                padding-left: 25px;
+                .title {
+                    color: #47525D;
+                    font-weight: bold;
+                    max-width: 50%;
+                    float: left;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    line-height: 60px;
+                    white-space: nowrap;
+                }
+                .events-quantity {
+                    color: #A6A6A6;
+                    line-height: 18px;
+                }
+                span.close {
+                    position: fixed;
+                    top: 17px;
+                    right: 12px;
+                    cursor: pointer;
+                    background: url('/static/img/card-close.svg');
+                    width:20px;
+                    height:20px;
+                    text-indent: -99999em;
+                    display: block;
+                }
+            }
+            #events-container {
+                position: absolute;
+                top: 60px;
+                bottom: 0;
+                overflow-y: scroll;
             }
             div.media-dots {
-              margin: 2px 7px;
-              span.media-dot {
-                margin: 2px;
-                cursor: pointer;
-                display: block;
-                float: left;
-                &.selected {
+                margin: 2px 7px;
+                span.media-dot {
+                    margin: 2px;
+                    cursor: pointer;
+                    display: block;
+                    float: left;
+                    &.selected {
 
+                    }
                 }
-              }
-            }
-            span.close {
-              position: fixed;
-              top: 17px;
-              right: 12px;
-              cursor: pointer;
-              background: url('/static/img/card-close.svg');
-              width:20px;
-              height:20px;
-              text-indent: -99999em;
-              display: block;
             }
             img.head {
                 width: 100%;
@@ -569,11 +601,12 @@ body {
             div.content,
             div.event {
                 padding: 25px;
+                padding-top: 10px;
                 a {
-                  text-decoration: none;
-                  border-radius: 5px;
-                  display: inline-block;
-                  padding: 0 3px;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    display: inline-block;
+                    padding: 0 3px;
                 }
                 .project {
                     color: #5D8599;
@@ -647,9 +680,6 @@ body {
                         margin-right: 4px;
                     }
                 }
-            }
-            div.event {
-                padding-top: 10px;
                 span.event-icon {
                     float: left;
                     width: 70px;
@@ -662,8 +692,8 @@ body {
                     }
                 }
                 div.event-data {
-                  float: left;
-                  width: 185px;
+                    float: left;
+                    width: 185px;
                     div.project {
                         font-size: 0.8em;
                         color: #ADBEC7;
@@ -682,6 +712,14 @@ body {
                     padding: 5px;
                 }
             }
+        }
+        div#eventpane {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+        }
+        div#map-container.vshrink ~ div#sidepane {
+            bottom: 366px;
         }
     }
 

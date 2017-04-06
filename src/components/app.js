@@ -60,7 +60,7 @@ class App extends React.Component {
   }
 
   render () {
-    const { dispatch, ...props } = this.props;
+    const { dispatch,  ...props } = this.props;
 
     let events = props.events.items;
     let drawerData = null;
@@ -136,6 +136,9 @@ class App extends React.Component {
       <Sidepane
         app={props.app}
         projects={props.projects}
+        places={props.places}
+        organizations={props.organizations}
+        people={props.people}
         sidepane={props.sidepane}
         params={props.params}
         closeSidepane={() => { dispatch(deselectEvent()) }}

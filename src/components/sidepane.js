@@ -1,5 +1,5 @@
 import moment from 'moment'
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
 import { AudioComponent, getEventStyle } from './utils'
@@ -33,7 +33,7 @@ function _cleanDates (ds, de, circa_date=false) {
     return sd
   }
 
-class SidepaneButton extends React.Component {
+class SidepaneButton extends Component {
   render () {
     return <div id='sidepaneButton' onClick={this.props.openEventsSidepane}>
       list view
@@ -41,7 +41,7 @@ class SidepaneButton extends React.Component {
   }
 }
 
-class EventPane extends React.Component {
+class EventPane extends Component {
 
   constructor (props) {
     super(props)
@@ -155,72 +155,116 @@ class EventPane extends React.Component {
 }
 
 EventPane.contextTypes = {
-  router: React.PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
 };
 
-class EventsPane extends React.Component {
+class EventsPane extends Component {
 
   handleClick = (e) => {
     console.log()
   }
 
   render () {
-    const evs = this.props.app.selected.sort((a,b) => {
+    const { app, params, projects, places, people, organizations, ...props } = this.props;
+    const evs = app.selected.sort((a,b) => {
       if (a.start_date < b.start_date)
         return 1
       if (a.start_date > b.start_date)
         return -1
       return 0
     })
+
+    let sidpaneTitle = null;
+    if (params.projId && projects.items.length) {
+      const project = projects.items.filter(p => p.id == parseInt(params.projId, 10))[0];
+      sidpaneTitle = project.title;
+    }
+    else if (params.placeId && places.items.length) {
+      const place = places.items.filter(p => p.id == parseInt(params.placeId, 10))[0];
+      sidpaneTitle = place.name;
+    }
+    else if (params.orgId && organizations.items.length) {
+      const organization = organizations.items.filter(o => o.id == parseInt(params.orgId, 10))[0];
+      sidpaneTitle = organization.name;
+    }
+    else if (params.personId && people.items.length) {
+      const person = people.items.filter(o => o.id == parseInt(params.personId, 10))[0];
+      sidpaneTitle = `${person.first_name} ${person.last_name}`;
+    }
+
     return <div id='eventspane' className={evs.length > 0 ? 'open' : 'closed'}>
-      <span className='close' onClick={this.props.closeSidepane}>✖</span>
-      {evs.map((e) => <div key={'list-event-' + e.id} className={'event ' + getEventStyle(e)} onClick={() => {
-        this.props.selectEvent([e])
-        let url = 'event/' + e.id
-        if (this.props.params.projId) {
-          url = 'project/' + this.props.params.projId + '/' + url
-        }
-        else if (this.props.params.personId) {
-          url = 'person/' + this.props.params.personId + '/' + url
-        }
-        else if (this.props.params.orgId) {
-          url = 'organization/' + this.props.params.orgId + '/' + url
-        }
-        else if (this.props.params.tagName) {
-          url = 'tag/' + this.props.params.tagName + '/' + url
-        }
-        this.context.router.push(url)
-      }}>
-        <span className="event-icon">
-          <img src={e.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
-        </span>
-        <div className="event-data">
-          <div className='project'>{this.props.projects.items.find((p) => p.id == e.project).title}</div>
-          <div className='title'>{e.title}</div>
-          <div className='date'>{_cleanDates(e.start_date_orig, e.end_date_orig, e.circa_date)}</div>
-        </div>
-        <div className='clear'></div>
-      </div>)}
+      <div className="eventspane-header">
+        <span className="title" title={sidpaneTitle}>{sidpaneTitle}</span>
+        <span className="events-quantity">{`${sidpaneTitle ? ' ● ' : ''}found ${evs.length} events`}</span>
+        <span className='close' onClick={props.closeSidepane}>✖</span>
+      </div>
+      <div div id='events-container'>
+        {evs.map((e) => <div key={'list-event-' + e.id} className={'event ' + getEventStyle(e)} onClick={() => {
+          props.selectEvent([e])
+          let url = 'event/' + e.id
+          if (params.projId) {
+            url = 'project/' + params.projId + '/' + url
+          }
+          else if (params.personId) {
+            url = 'person/' + params.personId + '/' + url
+          }
+          else if (params.orgId) {
+            url = 'organization/' + params.orgId + '/' + url
+          }
+          else if (params.tagName) {
+            url = 'tag/' + params.tagName + '/' + url
+          }
+          this.context.router.push(url)
+        }}>
+          <span className="event-icon">
+            <img src={e.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+          </span>
+          <div className="event-data">
+            <div className='project'>{projects.items.find((p) => p.id == e.project).title}</div>
+            <div className='title'>{e.title}</div>
+            <div className='date'>{_cleanDates(e.start_date_orig, e.end_date_orig, e.circa_date)}</div>
+          </div>
+          <div className='clear'></div>
+        </div>)}
+      </div>
     </div>
   }
 }
 
 EventsPane.contextTypes = {
-  router: React.PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
 };
 
 
-class Sidepane extends React.Component {
+class Sidepane extends Component {
 
   render () {
-    const { app, projects, sidepane, params, ...props } = this.props;
+    const { app, projects, places, organizations, people, sidepane, params, ...props } = this.props;
     const evs = app.selected;
 
     return <div id='sidepane' className={evs.length > 0 ? 'open' : 'closed'}>
       <SidepaneButton openEventsSidepane={props.openEventsSidepane} />
-      {evs.length == 1
-        ? <EventPane  app={app} projects={projects} sidepane={sidepane} params={params} closeSidepane={props.closeSidepane} selectMedia={props.selectMedia} />
-        : <EventsPane app={app} projects={projects} sidepane={sidepane} params={params} closeSidepane={props.closeSidepane} selectEvent={props.selectEvent} />
+      {evs.length == 1 ? <EventPane
+        app={app}
+        projects={projects}
+        places={places}
+        organizations={organizations}
+        people={people}
+        sidepane={sidepane}
+        params={params}
+        closeSidepane={props.closeSidepane}
+        selectMedia={props.selectMedia}
+      /> : <EventsPane
+        app={app}
+        projects={projects}
+        places={places}
+        organizations={organizations}
+        people={people}
+        sidepane={sidepane}
+        params={params}
+        closeSidepane={props.closeSidepane}
+        selectEvent={props.selectEvent}
+      />
       }
     </div>
   }

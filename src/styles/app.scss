@@ -287,71 +287,54 @@ body {
             }
         }
         div#metadata {
-            div.place {
-                height: 200px;
-                background: #d0dce2;
-                box-shadow: 0 0px 3px 0px #5D8599 inset;
-                overflow-y: scroll;
-                div.titles {
-                    width: 20%;
-                    float: left;
-                    padding-top: 10px;
-                    position: absolute;
-                    > * {
-                        margin-left: 10px;
-                        margin-right: 10px;
-                    }
-                    h2 {
-                        font-size: 16px;
-                        font-weight: 800;
-                    }
-                    h3 {
-                        font-size: 1em;
-                        color: #92ADBA;
-                    }
-                    p {
-                        margin-top: 0.5em;
-                    }
-                }
-                div.image {
-                    height: 214px;
-                    width: 40%;
-                    float: left;
-                    text-align: right;
-                    img {
-                        margin: 10px;
-                    }
-                }
+            position: relative;
+            h2 {
+                color: #47525D;
+                font-family: "Merriweather", sans-serif;
+                font-size: 20px;
+                font-weight: 900;
+                line-height: 28px;
             }
-            div.project {
+            div.project, div.place {
                 height: 200px;
-                background: #d0dce2;
-                box-shadow: 0 0px 3px 0px #5D8599 inset;
                 overflow-y: scroll;
                 div.titles {
                     width: 20%;
                     float: left;
-                    padding-top: 10px;
+                    padding: 10px 30px;
                     position: absolute;
                     > * {
                       margin-left: 10px;
                       margin-right: 10px;
                     }
-                    h2 {
-                        font-size: 16px;
-                        font-weight: 800;
-                    }
                     h3 {
                         font-size: 1em;
                         color: #92ADBA;
+                    }
+                    h5 {
+                        color: #A6A6A6;
+                        font-family: "Merriweather Sans", sans-serif;
+                        font-size: 14px;
+                        line-height: 24px;
+                    }
+                    h6 {
+                        color: #A6A6A6;
+                        font-family: "Merriweather Sans", sans-serif;
+                        font-size: 12px;
+                        font-weight: 300;
+                        line-height: 25px;
                     }
                     p {
                       margin-top: 0.5em;
                     }
                 }
                 div.description {
-                    width: 40%;
-                    margin-left: 20%;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 20%;
+                    overflow-y: scroll;
+                    width: 60%;
                     float: left;
                     * {
                       margin: 10px;
@@ -361,19 +344,18 @@ body {
                     }
                 }
                 div.image {
+                    position: absolute;
+                    left: 80%;
                     height: 214px;
-                    width: 40%;
+                    width: 20%;
                     float: left;
                     text-align: right;
-                    img {
-                      margin: 10px;
-                    }
                 }
             }
         }
         div.controls {
             position: absolute;
-            bottom: 40px;
+            bottom: 20px;
             z-index: 10;
             right: 2%;
             ul {

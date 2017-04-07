@@ -48,10 +48,10 @@ function _cleanBirthDates (ds, de) {
     sd = sd.format('YYYY')
   }
   else if (ds.includes('-00')) {
-    sd = sd.format('MMMM YYYY')
+    sd = sd.format('MMM YYYY')
   }
   else {
-    sd = sd.format('MMMM D, YYYY')
+    sd = sd.format('MMM D, YYYY')
   }
 
   let ed = ''
@@ -61,12 +61,14 @@ function _cleanBirthDates (ds, de) {
       ed = ed.format('YYYY')
     }
     else if (de.includes('-00')) {
-      ed = ed.format('MMMM YYYY')
+      ed = ed.format('MMM YYYY')
     }
     else {
-      ed = ed.format('MMMM D, YYYY')
+      ed = ed.format('MMM D, YYYY')
     }
     return sd + ' - ' + ed
+  } else{
+    sd = 'Born ' + sd;
   }
   return sd
 }
@@ -539,10 +541,11 @@ FilterBar.contextTypes = {
 
 class ProjectMetadata extends Component {
   render () {
-    const p = this.props.project
+    const p = this.props.project;
+    const numEventsSelected = this.props.events ? this.props.events.length : 0;
     return <div className='project'>
       <div className='titles'>
-        <h3>Project</h3>
+        <h6>{numEventsSelected} events featuring</h6>
         <h2>{p.title}</h2>
         <h3>{p.subtitle}</h3>
         <p>{p.researchers.join(', ')}</p>
@@ -557,18 +560,23 @@ class ProjectMetadata extends Component {
 
 class PersonMetadata extends Component {
   render () {
-    const p = this.props.person
+    const p = this.props.person;
+    const numEventsSelected = this.props.events ? this.props.events.length : 0;
     const profile = p.profile_image ? p.profile_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
     const bd = _cleanBirthDates(p.birth_date, p.death_date)
     return <div className='project'>
       <div className='titles'>
-        <h3>Person</h3>
+        <h6>{numEventsSelected} events featuring</h6>
         <h2>{p.first_name} {p.middle_name} {p.last_name}</h2>
-        {p.alt_name.length ? <h4>{p.alt_name.join(', ')}</h4> : null}
+        {p.alt_name.length ? <h5>Also: {p.alt_name.join(', ')}</h5> : null}
         <h5>{bd != '0000' ? bd : null}</h5>
         {p.places.length ? <h5>{p.places.join(', ')}</h5> : null}
       </div>
-      <div className='description' dangerouslySetInnerHTML={{__html: p.biography.replace(/a href/g, 'a target="_blank" href')}}></div>
+      <div
+        className='description'
+        dangerouslySetInnerHTML={{__html: p.biography.replace(/a href/g, 'a target="_blank" href')}}
+      >
+      </div>
       <div className='image'>
         {profile && <img src={profile}></img>}
       </div>
@@ -578,17 +586,22 @@ class PersonMetadata extends Component {
 
 class OrganizationMetadata extends Component {
   render () {
-    const p = this.props.organization
+    const p = this.props.organization;
+    const numEventsSelected = this.props.events ? this.props.events.length : 0;
     const cover = p.cover_image ? p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
     const d = _cleanBirthDates(p.start_date, p.end_date)
     return <div className='project'>
       <div className='titles'>
-        <h3>Organization</h3>
+        <h6>{numEventsSelected} events featuring</h6>
         <h2>{p.name}{p.type && ` (${p.type})`}</h2>
         <h5>{d != '0000' ? d : null}</h5>
       {p.places.length ? <h5>{p.places.join(', ')}</h5> : null}
       </div>
-      <div className='description' dangerouslySetInnerHTML={{__html: p.description.replace(/a href/g, 'a target="_blank" href')}}></div>
+      <div
+        className='description'
+        dangerouslySetInnerHTML={{__html: p.description.replace(/a href/g, 'a target="_blank" href')}}
+      >
+      </div>
       <div className='image'>
         {cover && <img src={cover}></img>}
       </div>
@@ -598,12 +611,14 @@ class OrganizationMetadata extends Component {
 
 class PlaceMetadata extends Component {
   render () {
-    const p = this.props.place
+    const p = this.props.place;
+    const numEventsSelected = this.props.events ? this.props.events.length : 0; 
     const cover = p.cover_image ? p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
     return <div className='place'>
       <div className='titles'>
-        <h3>Place</h3>
+        <h6>{numEventsSelected} events featuring</h6>
         <h2>{p.name}</h2>
+        {p.alt_name.length ? <h5>Also: {p.alt_name.join(', ')}</h5> : null}
         <h5>{p.zoomlevel}</h5>
         <h5>{p.position}</h5>
       </div>
@@ -618,19 +633,19 @@ class TimelineMetadata extends Component {
   render () {
     if (this.props.drawerData && this.props.params.projId && this.props.app.drawer)
       return <div id='metadata'>
-        <ProjectMetadata project={this.props.drawerData} />
+        <ProjectMetadata project={this.props.drawerData} events={this.props.events} />
       </div>
     else if (this.props.drawerData && this.props.params.personId && this.props.app.drawer)
       return <div id='metadata'>
-        <PersonMetadata person={this.props.drawerData} />
+        <PersonMetadata person={this.props.drawerData} events={this.props.events} />
       </div>
     else if (this.props.drawerData && this.props.params.orgId && this.props.app.drawer)
       return <div id='metadata'>
-        <OrganizationMetadata organization={this.props.drawerData} />
+        <OrganizationMetadata organization={this.props.drawerData} events={this.props.events} />
       </div>
     else if (this.props.drawerData && this.props.params.placeId && this.props.app.drawer)
       return <div id='metadata'>
-        <PlaceMetadata place={this.props.drawerData} />
+        <PlaceMetadata place={this.props.drawerData} events={this.props.events} />
       </div>
     else
       return <div id='metadata'></div>
@@ -711,7 +726,7 @@ class Timeline extends Component {
   }
 
   render () {
-    const { timeline, params, ...props } = this.props;
+    const { timeline, params, events, ...props } = this.props;
     let { startDate, endDate } = timeline;
     const research = params.projId ? props.drawerData : null
 
@@ -739,11 +754,12 @@ class Timeline extends Component {
         drawerData={props.drawerData}
         app={props.app}
         params={params}
+        events={events}
       />
       <D3Timeline
         width={document.body.offsetWidth}
         height={120}
-        data={props.events}
+        data={events}
         params={params}
         app={props.app}
         timeline={timeline}

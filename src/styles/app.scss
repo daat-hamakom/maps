@@ -162,7 +162,7 @@ body {
         width: 100%;
         background-color: white;
         box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.09);
-        z-index: 10;
+        z-index: 150;
         div#filter {
             padding: 0;
             border-width: 0;
@@ -284,6 +284,59 @@ body {
             }
             .Select-noresults {
                 padding-left: 30px;
+            }
+        }
+        &.show-cards-view {
+            div#filter {
+                .Select-menu-outer {
+                    display: none;
+                }
+            }
+        }
+        div#cards-view {
+            position: absolute;
+            top: 40px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 150;
+            .filters {
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 210px;
+
+                padding: 30px;
+                background-color: #ffffff;
+                .cards-filter {
+                    cursor: pointer;
+                    &.selected {
+                        color: #3A62FF;
+                    }
+                    .cards-filter-image-wrapper{
+                        float: left;
+                        margin-right: 10px;
+                        line-height: 21px;
+                        width: 10px;
+                        img {
+                            opacity: 0.9;
+                        }
+                    }
+                    .cards-filter-label {
+                        line-height: 25px;
+                        font-size: 12px;
+                    }
+                }
+            }
+            .cards {
+                position: absolute;
+                left: 210px;
+                right: 0;
+                top: 0;
+                bottom: 0;
+
+                background-color: #fffff;
             }
         }
         div#metadata {

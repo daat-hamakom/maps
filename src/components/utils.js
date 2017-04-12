@@ -31,3 +31,24 @@ export function getEventStyle (ev) {
   else
     return 'default'
 }
+
+export function getOptionImage(option) {
+  if (option.img) return option.img.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_s.jpg' ;
+
+  switch (option.type) {
+    case 'project':
+      return '/static/img/project-icon.svg';
+    case 'person':
+      return '/static/img/person-icon.svg';
+    case 'organization':
+      return '/static/img/organization-icon.svg';
+    case 'event':
+      return '/static/img/event-icon.svg';
+    case 'place':
+      return '/static/img/place-icon.svg';
+    case 'tag':
+      return '/static/img/tag-icon.svg';
+    default:
+      return null;
+  }
+};

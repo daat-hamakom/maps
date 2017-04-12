@@ -4,8 +4,9 @@ import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import ReactFauxDOM from 'react-faux-dom'
 import Select from 'react-select';
+const enhanceWithClickOutside = require('react-click-outside');
 
-import { getEventStyle } from './utils'
+import { getEventStyle, getOptionImage } from './utils'
 import { zoomTimeline } from '../actions'
 
 import 'react-select/dist/react-select.css';
@@ -255,12 +256,12 @@ class D3Timeline extends Component {
   }
 
   onWheelHandler = (e) => {
-    const direction = e.deltaY != Math.abs(e.deltaY) ? 1 : -1
-    const pos = e.clientX / this.props.width
+    const direction = e.deltaY != Math.abs(e.deltaY) ? 1 : -1;
+    const pos = e.clientX / this.props.width;
 
-    this.doZoom(direction, pos)
+    this.doZoom(direction, pos);
 
-    e.preventDefault()
+    e.preventDefault();
     e.stopPropagation()
   };
 
@@ -366,13 +367,16 @@ class D3Timeline extends Component {
 class FilterBar extends Component {
   constructor (props) {
     super(props);
-    this.state = { filter: "" };
+    this.state = { filter: "", focus: false };
 
     this.handleChange = this.handleChange.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.onValueClick = this.onValueClick.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
     this.optionRenderer = this.optionRenderer.bind(this);
     this.boldHighlight = this.boldHighlight.bind(this);
-    this.getOptionImage = this.getOptionImage.bind(this);
+    this.getOptionImage = getOptionImage.bind(this);
 
     this.valueRenderer = this.valueRenderer.bind(this);
   }
@@ -381,6 +385,17 @@ class FilterBar extends Component {
     this.setState({ filter: value });
   }
 
+  onValueClick () {
+    this.setState({ focus: false, filter: "" });
+  }
+
+  onFocus () {
+    this.setState({ focus: true });
+  }
+
+  onBlur () {
+    this.setState({ focus: false, filter: "" });
+  }
 
   optionRenderer (option, i) {
     const typeCapitalized = option.type.charAt(0).toUpperCase() + option.type.slice(1);
@@ -421,27 +436,6 @@ class FilterBar extends Component {
     return labelParts;
   }
 
-  getOptionImage (option) {
-    if (option.img) return option.img.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_s.jpg' ;
-
-    switch (option.type) {
-      case 'project':
-        return '/static/img/project-icon.svg';
-      case 'person':
-        return '/static/img/person-icon.svg';
-      case 'organization':
-        return '/static/img/organization-icon.svg';
-      case 'event':
-        return '/static/img/event-icon.svg';
-      case 'place':
-        return '/static/img/place-icon.svg';
-      case 'tag':
-        return '/static/img/tag-icon.svg';
-      default:
-        return null;
-    }
-  }
-
 
   valueRenderer (option, i) {
     const typeCapitalized = option.type.charAt(0).toUpperCase() + option.type.slice(1);
@@ -454,6 +448,16 @@ class FilterBar extends Component {
 
   handleChange (val) {
     this.context.router.push(`/${(val ? [val.type, val.id].join('/') : '')}`);
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    const showCardsView = (this.state.filter.length < 3) && this.state.focus;
+    const prevShowCardsView = (prevState.filter.length < 3) && prevState.focus;
+
+    // trigger only when onFocus and stateChanged
+    if (showCardsView != prevShowCardsView && this.state.focus){
+      this.props.showCardsView(showCardsView);
+    }
   }
 
   render () {
@@ -514,7 +518,7 @@ class FilterBar extends Component {
         if (a.label < b.label) return -1;
         return 0
       });
-
+    
     return <div id='filter'>
       <Select
         name="search-bar"
@@ -530,6 +534,9 @@ class FilterBar extends Component {
         optionRenderer={this.optionRenderer}
         valueRenderer={this.valueRenderer}
         onOpen={props.closeEventSidepane}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
+        onValueClick={this.onValueClick}
       />
     </div>
   }
@@ -618,7 +625,7 @@ class PlaceMetadata extends Component {
       <div className='titles'>
         <h6>{numEventsSelected} events featuring</h6>
         <h2>{p.name}</h2>
-        {p.alt_name.length ? <h5>Also: {p.alt_name.join(', ')}</h5> : null}
+        {p.alt_name && p.alt_name.length ? <h5>Also: {p.alt_name.join(', ')}</h5> : null}
         <h5>{p.zoomlevel}</h5>
         <h5>{p.position}</h5>
       </div>
@@ -652,11 +659,138 @@ class TimelineMetadata extends Component {
   }
 }
 
+
+class CardsView extends Component {
+
+  constructor (props) {
+    super(props);
+    this.state = { filter: 'projects' };
+
+    this.getOptionImage = getOptionImage.bind(this);
+    this.changeFilter = this.changeFilter.bind(this);
+  }
+
+  changeFilter (filter) {
+    this.setState({ filter })
+  }
+
+  render () {
+    const { projects, people, organizations, events, places, style,...props } = this.props;
+    let tagsEventsMap = {};
+    let tags = [];
+
+    // generate tags
+    events && events.map((e) => {
+      e.tags && e.tags.map((t) => {
+        if (!(t in tagsEventsMap)) tagsEventsMap[t] = [];
+        tagsEventsMap[t].push(e.id)
+      })
+    });
+
+    for (var key in tagsEventsMap) {
+      if (tagsEventsMap.hasOwnProperty(key)) {
+        tags.push({ type: 'tag', value: `tag-${key}`, id: encodeURIComponent(key), label: key});
+      }
+    }
+
+    // todo - #159
+    // projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title, img: p.cover_image && p.cover_image.file }))
+    //   .concat(people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: `${p.first_name} ${p.last_name}`, img: p.profile_image && p.profile_image.url })))
+    //   .concat(organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name, img: o.cover_image && o.cover_image.file })))
+    //   .concat(events.map((e) => ({ type: 'event', value: `event-${e.id}`, id: e.id, label: e.title, img: e.icon })))
+    //   .concat(places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name , img: null})))
+
+    return <div id='cards-view' style={style}>
+      <div className="filters">
+        <CardsViewFilter
+          name="Researches"
+          count={projects.length}
+          image="/static/img/project-icon.svg"
+          selectedImage="/static/img/project-active.svg"
+          selected={this.state.filter=='projects'}
+          onClick={() => this.changeFilter('projects')}
+        />
+        <CardsViewFilter
+          name="People"
+          count={people.length}
+          image="/static/img/person-icon.svg"
+          selectedImage="/static/img/person-active.svg"
+          selected={this.state.filter=='people'}
+          onClick={() => this.changeFilter('people')}
+        />
+        <CardsViewFilter
+          name="Tags"
+          count={tags.length}
+          image="/static/img/tag-icon.svg"
+          selectedImage="/static/img/tag-active.svg"
+          selected={this.state.filter=='tags'}
+          onClick={() => this.changeFilter('tags')}
+        />
+        <CardsViewFilter
+          name="Location"
+          count={places.length}
+          image="/static/img/place-icon.svg"
+          selectedImage="/static/img/place-active.svg"
+          selected={this.state.filter=='places'}
+          onClick={() => this.changeFilter('places')}
+        />
+        <CardsViewFilter
+          name="Organizations"
+          count={organizations.length}
+          image="/static/img/organization-icon.svg"
+          selectedImage="/static/img/organization-active.svg"
+          selected={this.state.filter=='organizations'}
+          onClick={() => this.changeFilter('organizations')}
+        />
+      </div>
+      <div className="cards">
+        Event cards in here
+      </div>
+    </div>
+  }
+}
+
+
+class CardsViewFilter extends Component {
+  render() {
+    const { name, image, count, selected, selectedImage, onClick } = this.props;
+    return <div className={`cards-filter ${selected ? 'selected' : ''}`} onClick={onClick}>
+      <div className="cards-filter-image-wrapper" >
+        <img className="cards-filter-image" src={selected ? selectedImage : image} />
+      </div>
+       <p className="cards-filter-label">{`${name} (${count})`}</p>
+    </div>;
+  }
+}
+
+// todo - #159
+class ItemCard extends Component {
+
+  constructor(props) {
+    super(props);
+    this.getOptionImage = getOptionImage.bind(this);
+  }
+
+
+}
+
 class Timeline extends Component {
 
   constructor (props) {
-    super(props)
-    this.resized = false
+    super(props);
+    this.state = { showCardsView: false };
+    this.resized = false;
+    this.showCardsView = this.showCardsView.bind(this);
+  }
+
+  showCardsView (value) {
+    if (value != this.state.showCardsView) {
+      this.setState({ showCardsView: value})
+    }
+  }
+
+  handleClickOutside() {
+    this.setState({ showCardsView: false });
   }
 
   zoomTimelineByEvents () {
@@ -735,7 +869,11 @@ class Timeline extends Component {
       height = height + 200;
     }
 
-    return <div id='timeline' style={{height: height}}>
+    if (this.state.showCardsView) {
+      height = height + 110;
+    }
+
+    return <div id='timeline' style={{height: height}} className={this.state.showCardsView ? 'show-cards-view' : ''}>
       <div className='handle-container'>
         <div className='handle' onClick={(e) => { props.toggleDrawer() }}></div>
       </div>
@@ -749,12 +887,21 @@ class Timeline extends Component {
         organizations={props.organizations.items}
         closeEventSidepane={props.closeEventSidepane}
         openEventSidepane={props.openEventSidepane}
+        showCardsView={this.showCardsView}
       />
       <TimelineMetadata
         drawerData={props.drawerData}
         app={props.app}
         params={params}
         events={events}
+      />
+      <CardsView
+        style={{ display: (this.state.showCardsView ? 'block' : 'none') }}
+        projects={props.projects.items}
+        people={props.people.items}
+        events={props.allEvents}
+        places={props.places.items}
+        organizations={props.organizations.items}
       />
       <D3Timeline
         width={document.body.offsetWidth}
@@ -780,4 +927,4 @@ class Timeline extends Component {
   }
 }
 
-export default Timeline
+export default enhanceWithClickOutside(Timeline)

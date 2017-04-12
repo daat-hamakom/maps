@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="12px" viewBox="0 0 8 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>type-icon/placemark-on</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.900000036">
+        <g id="assets" transform="translate(-197.000000, -85.000000)" fill="#3A62FF">
+            <g id="type-icon/place-active" transform="translate(186.000000, 76.000000)">
+                <path d="M13.9403752,19.8089474 C13.9403752,19.8089474 11,15.4886794 11,13.0024504 C11,10.5162214 12.9305929,9 15.0024504,9 C17.0743079,9 19.0049007,10.5162214 19.0049007,13.0024504 C19.0049007,15.4886794 16.0645255,19.8089474 16.0645255,19.8089474 C15.4852394,20.7495605 14.5269431,20.74289 13.9403752,19.8089474 Z M15,14.5 C15.8284271,14.5 16.5,13.8284271 16.5,13 C16.5,12.1715729 15.8284271,11.5 15,11.5 C14.1715729,11.5 13.5,12.1715729 13.5,13 C13.5,13.8284271 14.1715729,14.5 15,14.5 Z" id="Combined-Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

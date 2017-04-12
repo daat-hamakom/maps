@@ -2,6 +2,7 @@ import moment from 'moment'
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
+import { getOptionImage } from './utils'
 import { AudioComponent, getEventStyle } from './utils'
 
 function _cleanDates (ds, de, circa_date=false) {
@@ -45,7 +46,8 @@ class EventPane extends Component {
 
   constructor (props) {
     super(props)
-    this.state = { evid: 0, selected_media: 0 }
+    this.state = { evid: 0, selected_media: 0 };
+    this.getOptionImage = getOptionImage.bind(this);
   }
 
   componentWillReceiveProps (props) {
@@ -87,29 +89,6 @@ class EventPane extends Component {
       &copy; {media.copyrights} (<a target="_blank" title={media.source} href={media.source_url} className="copyright-source">source</a>)
     </div>
   }
-
-  // todo - use utils
-  getOptionImage (option) {
-    if (option.img) return option.img.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_s.jpg' ;
-
-    switch (option.type) {
-      case 'project':
-        return '/static/img/project-icon.svg';
-      case 'person':
-        return '/static/img/person-icon.svg';
-      case 'organization':
-        return '/static/img/organization-icon.svg';
-      case 'event':
-        return '/static/img/event-icon.svg';
-      case 'place':
-        return '/static/img/place-icon.svg';
-      case 'tag':
-        return '/static/img/tag-icon.svg';
-      default:
-        return null;
-    }
-  }
-
 
   render () {
     const evs = this.props.app.selected

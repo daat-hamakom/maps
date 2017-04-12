@@ -337,6 +337,10 @@ body {
                 bottom: 0;
 
                 background-color: #ffffff;
+                .cards-view-item {
+                    float: left;
+
+                }
             }
         }
         div#metadata {
@@ -550,6 +554,7 @@ body {
             display: none;
         }
         &.closed {
+            z-index: 0;
             div#eventpane, div#eventspane {
                 display: none;
             }

@@ -458,6 +458,9 @@ class FilterBar extends Component {
     if (showCardsView != prevShowCardsView && this.state.focus){
       this.props.showCardsView(showCardsView);
     }
+    if (this.state.focus != prevState.focus){
+      this.props.searchFocused(this.state.focus);
+    }
   }
 
   render () {
@@ -693,12 +696,29 @@ class CardsView extends Component {
       }
     }
 
-    // todo - #159
-    // projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title, img: p.cover_image && p.cover_image.file }))
-    //   .concat(people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: `${p.first_name} ${p.last_name}`, img: p.profile_image && p.profile_image.url })))
-    //   .concat(organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name, img: o.cover_image && o.cover_image.file })))
-    //   .concat(events.map((e) => ({ type: 'event', value: `event-${e.id}`, id: e.id, label: e.title, img: e.icon })))
-    //   .concat(places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name , img: null})))
+    let selectedItems = [];
+    switch(this.state.filter) {
+      case 'projects':
+        selectedItems = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title, img: p.cover_image && p.cover_image.file }));
+        break;
+
+      case 'people':
+        selectedItems = people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: `${p.first_name} ${p.last_name}`, img: p.profile_image && p.profile_image.url }));
+        break;
+
+      case 'tags':
+        selectedItems = tags;
+        break;
+
+      case 'places':
+        selectedItems = places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name , img: null}));
+        break;
+
+      case 'organizations':
+        selectedItems = organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name, img: o.cover_image && o.cover_image.file }));
+        break;
+
+    }
 
     return <div id='cards-view' style={style}>
       <div className="filters">
@@ -744,7 +764,10 @@ class CardsView extends Component {
         />
       </div>
       <div className="cards">
-        Event cards in here
+        {selectedItems.map((i) => <ItemCard
+          item={i}
+          key={i.id}
+        />)}
       </div>
     </div>
   }
@@ -771,6 +794,13 @@ class ItemCard extends Component {
     this.getOptionImage = getOptionImage.bind(this);
   }
 
+  render() {
+    const item = this.props.item;
+    return <div className="cards-view-item">
+      {item.label}
+    </div>
+  }
+
 
 }
 
@@ -778,14 +808,21 @@ class Timeline extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { showCardsView: false };
+    this.state = { showCardsView: false, searchFocused: false };
     this.resized = false;
     this.showCardsView = this.showCardsView.bind(this);
+    this.searchFocused = this.searchFocused.bind(this);
   }
 
   showCardsView (value) {
     if (value != this.state.showCardsView) {
       this.setState({ showCardsView: value})
+    }
+  }
+
+  searchFocused (value) {
+    if (value != this.state.searchFocused) {
+      this.setState({ searchFocused: value})
     }
   }
 
@@ -869,7 +906,7 @@ class Timeline extends Component {
       height = height + 200;
     }
 
-    if (this.state.showCardsView) {
+    if (this.state.showCardsView || this.state.searchFocused) {
       height = height + 110;
     }
 
@@ -888,6 +925,7 @@ class Timeline extends Component {
         closeEventSidepane={props.closeEventSidepane}
         openEventSidepane={props.openEventSidepane}
         showCardsView={this.showCardsView}
+        searchFocused={this.searchFocused}
       />
       <TimelineMetadata
         drawerData={props.drawerData}

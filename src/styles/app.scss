@@ -1304,7 +1304,7 @@ body {
         .modal-tab-nav a {
             display: inline-block;
         }
-        .modal-tab-nav + .modal-tab-nav:before {
+        .modal-tab-nav:not(:last-child):after {
             content: "|";
             color: #E8E8E8;
             margin: 0 5px;

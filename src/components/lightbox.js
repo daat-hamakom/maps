@@ -1,4 +1,5 @@
 import React from 'react'
+import { getCopyright } from './utils'
 
 class LightboxImage extends React.Component {
   render () {
@@ -14,6 +15,10 @@ class LightboxYoutubeVideo extends React.Component {
 }
 
 class Lightbox extends React.Component {
+  constructor (props) {
+    super(props);
+    this.getCopyright = getCopyright.bind(this);
+  }
 
   goLeft () {
     --this.props.lightbox.selected;
@@ -32,16 +37,6 @@ class Lightbox extends React.Component {
       this.props.lightbox.selected = 0;
     }
     this.props.selectMedia(this.props.lightbox.ev, this.props.lightbox.selected)
-  }
-
-  getCopyright (media) {
-    if (!media.source_url) return <span>
-        &copy; {media.copyrights} (<span title={media.source} className="copyright-source">source</span>)
-      </span>;
-
-    return <span>
-      &copy; {media.copyrights} (<a target="_blank" title={media.source} href={media.source_url} className="copyright-source">source</a>)
-    </span>
   }
 
   render () {

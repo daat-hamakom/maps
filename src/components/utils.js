@@ -52,3 +52,24 @@ export function getOptionImage(option) {
       return null;
   }
 };
+
+
+export function getCopyright (media) {
+  if (!media.copyrights) {
+    if (!media.source_url) return <span>
+        <span title={media.source} className="copyright-source">source</span>
+      </span>;
+
+    return <span>
+        <a target="_blank" title={media.source} href={media.source_url} className="copyright-source">source</a>
+      </span>
+  }
+
+  if (!media.source_url) return <span>
+        &copy; {media.copyrights} (<span title={media.source} className="copyright-source">source</span>)
+      </span>;
+
+  return <span>
+      &copy; {media.copyrights} (<a target="_blank" title={media.source} href={media.source_url} className="copyright-source">source</a>)
+    </span>
+}

@@ -2,7 +2,7 @@ import moment from 'moment'
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
-import { getOptionImage } from './utils'
+import { getOptionImage, getCopyright } from './utils'
 import { AudioComponent, getEventStyle } from './utils'
 
 function _cleanDates (ds, de, circa_date=false) {
@@ -48,6 +48,7 @@ class EventPane extends Component {
     super(props)
     this.state = { evid: 0, selected_media: 0 };
     this.getOptionImage = getOptionImage.bind(this);
+    this.getCopyright = getCopyright.bind(this);
   }
 
   componentWillReceiveProps (props) {
@@ -77,17 +78,6 @@ class EventPane extends Component {
     }
 
     this.context.router.push(url);
-  }
-
-  // todo - use utils
-  getCopyright (media) {
-    if (!media.source_url) return <div className="audio-copyright">
-        &copy; {media.copyrights} (<span title={media.source} className="copyright-source">source</span>)
-      </div>;
-
-    return <div className="audio-copyright">
-      &copy; {media.copyrights} (<a target="_blank" title={media.source} href={media.source_url} className="copyright-source">source</a>)
-    </div>
   }
 
   render () {
@@ -147,13 +137,13 @@ class EventPane extends Component {
         )}
         <hr/>
         <div className='links'>
-          {ev.people.map((p) => <Link to={`/person/${p.id}`} onClick={() => {this.props.closeSidepane()}} className='person-link'>
+          {ev.people.map((p) => <Link key={p.id} to={`/person/${p.id}`} onClick={() => {this.props.closeSidepane()}} className='person-link'>
             <div className="link-image-wrapper" >
               <img className="link-image" src={this.getOptionImage({ img: p.profile_image && p.profile_image.url, type:'person' })} />
             </div>
             {p.first_name + ' ' + p.last_name}
           </Link>)}
-          {ev.organizations.map((o) => <Link to={`/organization/${o.id}`} onClick={() => {this.props.closeSidepane()}} className='org-link'>
+          {ev.organizations.map((o) => <Link  key={o.id} to={`/organization/${o.id}`} onClick={() => {this.props.closeSidepane()}} className='org-link'>
             <div className="link-image-wrapper" >
               <img className="link-image" src={this.getOptionImage({ img: o.cover_image && o.cover_image.file, type:'organization' })} />
             </div>
@@ -202,6 +192,11 @@ class EventsPane extends Component {
     else if (params.personId && people.items.length) {
       const person = people.items.filter(o => o.id == parseInt(params.personId, 10))[0];
       sidpaneTitle = `${person.first_name} ${person.last_name}`;
+    }
+    else if (evs.length) {
+      const event = evs[0];
+      const place = places.items.filter(p => p.id == parseInt(event.place.id, 10))[0];
+      sidpaneTitle = place.name;
     }
 
     return <div id='eventspane' className={evs.length > 0 ? 'open' : 'closed'}>

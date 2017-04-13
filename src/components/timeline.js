@@ -110,7 +110,7 @@ class YearAxis extends Component {
     yearAxisG.selectAll('.tick text')
         .style('text-anchor', 'start')
         .attr('x', 6)
-        .attr('y', 6)
+        .attr('y', 106)
 
     // yearAxisG.selectAll('line').data(this.props.x.ticks(150), function(d) { return d; })
     //     .enter()
@@ -140,7 +140,7 @@ class MarkerData extends Component {
         const ed = moment(d.end_date)
 
         const x = this.props.x(sd.toDate())
-        const y = 20+(d.id%10)*10
+        const y = 5 +(d.id%10)*10
         const width = Math.max(this.props.x(ed.toDate()) - this.props.x(sd.toDate()), 1);
         const height = 2
         const r = height + 1
@@ -521,7 +521,7 @@ class FilterBar extends Component {
         if (a.label < b.label) return -1;
         return 0
       });
-    
+
     return <div id='filter'>
       <Select
         name="search-bar"
@@ -622,7 +622,7 @@ class OrganizationMetadata extends Component {
 class PlaceMetadata extends Component {
   render () {
     const p = this.props.place;
-    const numEventsSelected = this.props.events ? this.props.events.length : 0; 
+    const numEventsSelected = this.props.events ? this.props.events.length : 0;
     const cover = p.cover_image ? p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
     return <div className='place'>
       <div className='titles'>

@@ -372,7 +372,6 @@ class FilterBar extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
-    this.onValueClick = this.onValueClick.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.optionRenderer = this.optionRenderer.bind(this);
@@ -384,10 +383,6 @@ class FilterBar extends Component {
 
   onInputChange (value) {
     this.setState({ filter: value });
-  }
-
-  onValueClick () {
-    this.setState({ focus: false, filter: "" });
   }
 
   onFocus () {
@@ -449,6 +444,7 @@ class FilterBar extends Component {
 
   handleChange (val) {
     this.context.router.push(`/${(val ? [val.type, val.id].join('/') : '')}`);
+    this.setState({ focus: false, filter: "" });
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -540,7 +536,6 @@ class FilterBar extends Component {
         onOpen={props.closeEventSidepane}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
-        onValueClick={this.onValueClick}
       />
     </div>
   }
@@ -631,7 +626,6 @@ class PlaceMetadata extends Component {
         <h2>{p.name}</h2>
         {p.alt_name && p.alt_name.length ? <h5>Also: {p.alt_name.join(', ')}</h5> : null}
         <h5>{p.zoomlevel}</h5>
-        <h5>{p.position}</h5>
       </div>
       <div className='image'>
         {cover && <img src={cover}></img>}

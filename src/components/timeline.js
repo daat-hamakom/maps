@@ -44,7 +44,7 @@ function _cleanDates (ds, de) {
   return { sd: sd, ed: ed }
 }
 
-function _cleanBirthDates (ds, de) {
+function _cleanBirthDates (ds, de, prefix='Born') {
   let sd = moment(ds.replace('-00', '').replace('-00', ''), 'YYYY-MM-DD')
   if (ds.includes('-00-')) {
     sd = sd.format('YYYY')
@@ -70,7 +70,7 @@ function _cleanBirthDates (ds, de) {
     }
     return sd + ' - ' + ed
   } else{
-    sd = 'Born ' + sd;
+    sd = `${prefix} ${sd}`;
   }
   return sd
 }
@@ -600,7 +600,7 @@ class OrganizationMetadata extends Component {
     const p = this.props.organization;
     const numEventsSelected = this.props.events ? this.props.events.length : 0;
     const cover = p.cover_image ? p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
-    const d = _cleanBirthDates(p.start_date, p.end_date)
+    const d = _cleanBirthDates(p.start_date, p.end_date, 'Founded')
     return <div className='project'>
       <div className='titles'>
         <h6>{numEventsSelected} events featuring</h6>

@@ -171,7 +171,8 @@ body {
             }
             .Select-control{
               border: none;
-              background-color: #fff;
+              background-color: #FAFAFA;
+              box-shadow: inset 0 -1px 0 0 #F2F2F2, inset 0 1px 0 0 #EBEBEB, 0 0 5px 0 rgba(175,176,179,0.02);
               .Select-arrow{
                 background: url("/static/img/menu.svg") 0 0;
                 border: none;
@@ -337,9 +338,51 @@ body {
                 bottom: 0;
 
                 background-color: #ffffff;
+                overflow: auto;
+                white-space: nowrap;
                 .cards-view-item {
-                    float: left;
+                    display: inline-block;
+                    position: relative;
 
+                    height: 214px;
+                    width: 200px;
+
+                    margin: 30px 20px;
+                    border: 1px solid #F2F2F2;
+                    border-radius: 3px;
+                    background-color: #FFFFFF;
+                    box-shadow: 0 1px 5px 0 rgba(0,0,0,0.1);
+                    .cards-view-events-count{
+                        margin: 8px 20px;
+
+                        color: #A6A6A6;
+                        font-family: "Merriweather Sans", sans-serif;
+                        font-size: 12px;
+                        font-weight: 300;
+                        line-height: 25px;
+                    }
+                    .cards-view-title{
+                        height: 45px;
+                        margin: 0 20px;
+                        max-width: 100%;
+                        color: #47525D;
+                        font-family: "Merriweather", sans-serif;
+                        font-size: 16px;
+                        font-weight: 900;
+                        line-height: 22px;
+                        white-space: initial;
+                        overflow: hidden;
+                    }
+                    .cards-view-image {
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        top: 100px;
+                        bottom: 0;
+
+                        width: 100%;
+                        background-size: cover;
+                    }
                 }
             }
         }
@@ -446,7 +489,7 @@ body {
         svg#timeline-slider {
           background: #fff;
           position: absolute;
-          bottom:0;
+          bottom: 6px;
           cursor: move;
           .axis path, .axis line {
               fill: none;
@@ -614,7 +657,9 @@ body {
                 position: absolute;
                 top: 60px;
                 bottom: 0;
+                width: 320px;
                 overflow-y: scroll;
+                z-index: -1;
             }
             div.media-dots {
                 margin: 2px 7px;
@@ -661,21 +706,24 @@ body {
                 }
                 .project {
                     color: #5D8599;
-                    font-size: 14px;
                     font-weight: 400;
+                    font-size: 12px;
+                    line-height: 15px;
                 }
                 .title {
-                    font-size: 1.4em;
-                    font-weight: 800;
-                    line-height: 1em;
+                    font-size: 16px;
+                    font-weight: 900;
+                    line-height: 25px;
+                    overflow: hidden;
                 }
                 div.place {
 
                 }
                 div.date {
-                    font-size: 14px;
-                    color: #5D8599;
-                    font-style: italic;
+                    color: #47525D;
+                    font-family: "Merriweather Sans", sans-serif;
+                    font-size: 12px;
+                    line-height: 15px;
                 }
                 hr {
                     display: block;
@@ -733,8 +781,8 @@ body {
                 }
                 span.event-icon {
                     float: left;
-                    width: 70px;
-                    height: 70px;
+                    width: 60px;
+                    height: 60px;
                     margin: 15px 15px 0 0;
                     img {
                         width: 70px;
@@ -744,7 +792,7 @@ body {
                 }
                 div.event-data {
                     float: left;
-                    width: 185px;
+                    width: 170px;
                     div.project {
                         font-size: 0.8em;
                         color: #ADBEC7;
@@ -911,7 +959,7 @@ body {
     }
     .app.preindustrial div#sidepane div#eventpane,
     div#eventspane .event.preindustrial{
-      background: #eee5dd url(/static/img/preindustrial_tex.svg);
+      background-color: #FFFFFF;
       font-family: 'Vesper Libre';
       // border-color: $preindustrial-primary;
       div.content,
@@ -925,8 +973,7 @@ body {
         div.title{
           color: $preindustrial-secondary;
         }
-        .project,
-        div.date {
+        .project {
           color: $preindustrial-primary !important;
         }
         hr {
@@ -975,7 +1022,7 @@ body {
     }
     .app.nineteenth div#sidepane div#eventpane,
     div#eventspane .event.nineteenth {
-      background: #f4e6d7 url(/static/img/nineteenth_tex.svg);
+      background-color: #FFFFFF;
       div.content,
       div.event-data{
         color: $nineteenth-secondary;
@@ -990,14 +1037,10 @@ body {
           font-family: 'Playfair Display';
           font-weight: 700 !important;
         }
-        .project,
-        div.date {
+        .project {
           color: $nineteenth-primary !important;
           font-weight: 900;
           font-family: 'Playfair Display';
-        }
-        div.date {
-          color: $nineteenth-primary;
         }
         hr {
           border-top: 3px solid $nineteenth-secondary;
@@ -1044,7 +1087,7 @@ body {
     }
     .app.modernism div#sidepane div#eventpane,
     div#eventspane .event.modernism{
-      background: #fff url(/static/img/modernism_tex.svg);
+      background-color: #FFFFFF;
       div.content,
       div.event-data{
         color: $modernism-secondary;
@@ -1058,13 +1101,9 @@ body {
           font-family: 'Rubik One';
           font-weight: 400 !important;
         }
-        .project,
-        div.date {
+        .project{
           color: $modernism-primary !important;
           font-weight: 700;
-        }
-        div.date {
-          color: $modernism-primary;
         }
         hr {
           border-top: 3px solid $modernism-secondary;
@@ -1111,7 +1150,7 @@ body {
     }
     .app.darktimes div#sidepane div#eventpane,
     div#eventspane .event.darktimes{
-      background: #c3bcb3 url('/static/img/postwar_tex.png');
+      background-color: #FFFFFF;
       border-color: $darktimes-secondary;
       div.content,
       div.event-data{
@@ -1127,13 +1166,9 @@ body {
           font-family: 'Pirata One', cursive;
           font-size: 1.8em;
         }
-        .project,
-        div.date {
+        .project{
           color: $darktimes-primary !important;
           font-weight: 400 !important;
-        }
-        div.date {
-          color: $darktimes-secondary;
         }
         hr {
           border-top: 3px solid $darktimes-primary;
@@ -1183,7 +1218,7 @@ body {
     }
     .app.postwar div#sidepane div#eventpane,
     div#eventspane .event.postwar{
-      background: #fcf6ed url('/static/img/postwar_tex.png');
+      background-color: #FFFFFF;
       border-color: $postwar-secondary;
       div.content,
       div.event-data{
@@ -1197,8 +1232,7 @@ body {
           color: $postwar-primary;
           font-weight: 700;
         }
-        .project,
-        div.date {
+        .project {
           color: $postwar-secondary !important;
           font-weight: 400;
         }

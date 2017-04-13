@@ -1,15 +1,16 @@
 import d3 from 'd3'
 import moment from 'moment'
 import React, { Component, PropTypes } from 'react'
-import ReactDOM from 'react-dom'
-import ReactFauxDOM from 'react-faux-dom'
 import Select from 'react-select';
 const enhanceWithClickOutside = require('react-click-outside');
 
 import { getEventStyle, getOptionImage } from './utils'
-import { zoomTimeline } from '../actions'
+import { Link } from 'react-router'
+
 
 import 'react-select/dist/react-select.css';
+import Dotdotdot from 'react-dotdotdot'
+
 
 function _cleanDates (ds, de) {
   // take start date and optional end date, both accept 00 ranges
@@ -678,7 +679,7 @@ class CardsView extends Component {
   }
 
   render () {
-    const { projects, people, organizations, events, places, style,...props } = this.props;
+    const { projects, people, organizations, events, places, style, showCardsView } = this.props;
     let tagsEventsMap = {};
     let tags = [];
 
@@ -766,6 +767,7 @@ class CardsView extends Component {
       <div className="cards">
         {selectedItems.map((i) => <ItemCard
           item={i}
+          onClick={() => showCardsView(false)}
           key={i.id}
         />)}
       </div>
@@ -776,8 +778,8 @@ class CardsView extends Component {
 
 class CardsViewFilter extends Component {
   render() {
-    const { name, image, count, selected, selectedImage, onClick } = this.props;
-    return <div className={`cards-filter ${selected ? 'selected' : ''}`} onClick={onClick}>
+    const { name, image, count, selected, selectedImage } = this.props;
+    return <div className={`cards-filter ${selected ? 'selected' : ''}`}>
       <div className="cards-filter-image-wrapper" >
         <img className="cards-filter-image" src={selected ? selectedImage : image} />
       </div>
@@ -795,10 +797,14 @@ class ItemCard extends Component {
   }
 
   render() {
-    const item = this.props.item;
-    return <div className="cards-view-item">
-      {item.label}
-    </div>
+    const { item, onClick } = this.props;
+    return <Link to={`/${item.type}/${item.id}`} className="cards-view-item"  onClick={onClick}>
+      <p className="cards-view-events-count" onClick={onClick}>38 events in</p>
+      <Dotdotdot clamp={2} >
+        <p className="cards-view-title" title={item.label}>{item.label}</p>
+      </Dotdotdot>
+      <div style={{ backgroundImage: item.img ? `url("${item.img}")` : 'none'}} className="cards-view-image"></div>
+    </Link>
   }
 
 
@@ -907,7 +913,7 @@ class Timeline extends Component {
     }
 
     if (this.state.showCardsView || this.state.searchFocused) {
-      height = height + 110;
+      height = height + 150;
     }
 
     return <div id='timeline' style={{height: height}} className={this.state.showCardsView ? 'show-cards-view' : ''}>
@@ -940,6 +946,7 @@ class Timeline extends Component {
         events={props.allEvents}
         places={props.places.items}
         organizations={props.organizations.items}
+        showCardsView={this.showCardsView}
       />
       <D3Timeline
         width={document.body.offsetWidth}

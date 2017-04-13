@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 
 import { getOptionImage, getCopyright } from './utils'
 import { AudioComponent, getEventStyle } from './utils'
+import Dotdotdot from 'react-dotdotdot'
 
 function _cleanDates (ds, de, circa_date=false) {
     let sd = moment(ds.replace('-00', '').replace('-00', ''), 'YYYY-MM-DD')
@@ -11,10 +12,10 @@ function _cleanDates (ds, de, circa_date=false) {
       sd = sd.format('YYYY')
     }
     else if (ds.includes('-00')) {
-      sd = sd.format('MMMM YYYY')
+      sd = sd.format('MMM YYYY')
     }
     else {
-      sd = sd.format('MMMM D, YYYY')
+      sd = sd.format('MMM D, YYYY')
     }
 
     let ed = ''
@@ -24,10 +25,10 @@ function _cleanDates (ds, de, circa_date=false) {
         ed = ed.format('YYYY')
       }
       else if (de.includes('-00')) {
-        ed = ed.format('MMMM YYYY')
+        ed = ed.format('MMM YYYY')
       }
       else {
-        ed = ed.format('MMMM D, YYYY')
+        ed = ed.format('MMM D, YYYY')
       }
       return circa_date ? sd + ' ~ ' + ed : sd + ' - ' + ed
     }
@@ -228,7 +229,9 @@ class EventsPane extends Component {
           </span>
           <div className="event-data">
             <div className='project'>{projects.items.find((p) => p.id == e.project).title}</div>
-            <div className='title'>{e.title}</div>
+            <Dotdotdot clamp={2} >
+              <p className='title' title={e.title}>{e.title}</p>
+            </Dotdotdot>
             <div className='date'>{_cleanDates(e.start_date_orig, e.end_date_orig, e.circa_date)}</div>
           </div>
           <div className='clear'></div>

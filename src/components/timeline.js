@@ -693,18 +693,18 @@ class CardsView extends Component {
 
     for (var key in tagsEventsMap) {
       if (tagsEventsMap.hasOwnProperty(key)) {
-        tags.push({ type: 'tag', value: `tag-${key}`, id: encodeURIComponent(key), label: key});
+        tags.push({ type: 'tag', value: `tag-${key}`, id: encodeURIComponent(key), label: key, count: tagsEventsMap[key].length });
       }
     }
 
     let selectedItems = [];
     switch(this.state.filter) {
       case 'projects':
-        selectedItems = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title, img: p.cover_image && p.cover_image.file }));
+        selectedItems = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title, img: p.cover_image && p.cover_image.file, count: p.events_count }));
         break;
 
       case 'people':
-        selectedItems = people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: `${p.first_name} ${p.last_name}`, img: p.profile_image && p.profile_image.url }));
+        selectedItems = people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: `${p.first_name} ${p.last_name}`, img: p.profile_image && p.profile_image.url, count: p.events_count }));
         break;
 
       case 'tags':
@@ -712,11 +712,11 @@ class CardsView extends Component {
         break;
 
       case 'places':
-        selectedItems = places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name , img: null}));
+        selectedItems = places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name , img: null, count: p.events_count}));
         break;
 
       case 'organizations':
-        selectedItems = organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name, img: o.cover_image && o.cover_image.file }));
+        selectedItems = organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name, img: o.cover_image && o.cover_image.file, count: o.events_count }));
         break;
 
     }
@@ -778,8 +778,8 @@ class CardsView extends Component {
 
 class CardsViewFilter extends Component {
   render() {
-    const { name, image, count, selected, selectedImage } = this.props;
-    return <div className={`cards-filter ${selected ? 'selected' : ''}`}>
+    const { name, image, count, selected, selectedImage, onClick } = this.props;
+    return <div className={`cards-filter ${selected ? 'selected' : ''}`} onClick={onClick}>
       <div className="cards-filter-image-wrapper" >
         <img className="cards-filter-image" src={selected ? selectedImage : image} />
       </div>
@@ -799,7 +799,7 @@ class ItemCard extends Component {
   render() {
     const { item, onClick } = this.props;
     return <Link to={`/${item.type}/${item.id}`} className="cards-view-item"  onClick={onClick}>
-      <p className="cards-view-events-count" onClick={onClick}>38 events in</p>
+      <p className="cards-view-events-count" onClick={onClick}>{item.count || 0} events in</p>
       <Dotdotdot clamp={2} >
         <p className="cards-view-title" title={item.label}>{item.label}</p>
       </Dotdotdot>

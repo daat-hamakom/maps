@@ -94,25 +94,27 @@ class EventPane extends Component {
     }
 
     return <div id='eventpane' className={evs.length > 0 ? 'open' : 'closed'}>
-      <div className="media-dots">{medias.map((m, i) => {
+
+      <div className="eventpane-header">
+        <span className='close' onClick={() => {this.closePane()}} />
+
+        {medias.length ?
+          m.type == 'image' ?
+            <img className='head magnify' src={m.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
+              onClick={() => { this.props.selectMedia(ev, ev.media.findIndex((e) => { return e.file == m.file })) }}></img>
+            : <div className='youtube-cover' onClick={() => { this.props.selectMedia(ev, ev.media.findIndex((e) => { return e.url == m.url })) }}>
+                <img src={thumburl} className='youtube-thumb'></img>
+                <img className='youtube-play' src='/static/img/play.png'></img>
+              </div>
+          : <img className='head' src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+        }
+        <div className="media-dots">{medias.map((m, i) => {
           return <span className={this.state.selected_media == i ? 'media-dot selected' : 'media-dot'} key={i} onClick={() => {
-            this.setState(Object.assign({}, this.state, { selected_media: i }))
-          }}>{this.state.selected_media == i ? '●' : '○' }</span>
+              this.setState(Object.assign({}, this.state, { selected_media: i }))
+            }}>{this.state.selected_media == i ? '●' : '○' }</span>
         })
-      }</div>
-
-      <span className='close' onClick={() => {this.closePane()}}>✖</span>
-
-      {medias.length ?
-        m.type == 'image' ?
-          <img className='head magnify' src={m.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
-            onClick={() => { this.props.selectMedia(ev, ev.media.findIndex((e) => { return e.file == m.file })) }}></img>
-          : <div className='youtube-cover' onClick={() => { this.props.selectMedia(ev, ev.media.findIndex((e) => { return e.url == m.url })) }}>
-              <img src={thumburl} className='youtube-thumb'></img>
-              <img className='youtube-play' src='/static/img/play.png'></img>
-            </div>
-        : <img className='head' src={ev.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
-      }
+        }</div>
+      </div>
 
       <div className='content'>
       <Link to={`/project/${this.props.projects.items.find((p) => p.id == ev.project).id}`} className='project' onClick={() =>  {this.props.closeSidepane()}}>{this.props.projects.items.find((p) => p.id == ev.project).title}</Link>

@@ -666,10 +666,24 @@ class CardsView extends Component {
 
     this.getOptionImage = getOptionImage.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
+    this.cardsScrollLeft = this.cardsScrollLeft.bind(this);
+    this.cardsScrollRight = this.cardsScrollRight.bind(this);
   }
 
   changeFilter (filter) {
-    this.setState({ filter })
+    this.setState({ filter });
+    let element = document.getElementById("cards-container");
+    element.scrollLeft = 0;
+  }
+
+  cardsScrollLeft () {
+    let element = document.getElementById("cards-container");
+    element.scrollLeft -= 1500;
+  }
+
+  cardsScrollRight () {
+    let element = document.getElementById("cards-container");
+    element.scrollLeft += 1500;
   }
 
   render () {
@@ -702,7 +716,19 @@ class CardsView extends Component {
         break;
 
       case 'tags':
-        selectedItems = tags;
+        var item=[];
+        for (var i=0; i<tags.length; i++){
+          if (i%2 == 0) {
+            item = [tags[i]]
+          } else {
+            item.push(tags[i]);
+            selectedItems.push(item);
+          }
+        }
+        // push the last one in the case of odd
+        if (tags.length % 2 != 0) {
+          selectedItems.push(item);
+        }
         break;
 
       case 'places':
@@ -758,11 +784,19 @@ class CardsView extends Component {
           onClick={() => this.changeFilter('organizations')}
         />
       </div>
-      <div className="cards">
-        {selectedItems.map((i) => <ItemCard
-          item={i}
+      <div className="controllers">
+        <div onClick={this.cardsScrollLeft}>&laquo;</div>
+        <div onClick={this.cardsScrollRight}>&raquo;</div>
+      </div>
+      <div className="cards" id="cards-container">
+        {this.state.filter != 'tags' ? selectedItems.map((item) => <ItemCard
+          item={item}
           onClick={() => showCardsView(false)}
-          key={i.id}
+          key={item.id}
+        />) : selectedItems.map((items, index) => <ItemCards
+          items={items}
+          onClick={() => showCardsView(false)}
+          key={index}
         />)}
       </div>
     </div>
@@ -787,21 +821,62 @@ class ItemCard extends Component {
 
   constructor(props) {
     super(props);
-    this.getOptionImage = getOptionImage.bind(this);
+    this.getOptionImage = this.getOptionImage.bind(this);
+  }
+
+  getOptionImage(option) {
+    if (option.img) return option.img.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' ;
+
+    return null;
+    // switch (option.type) {
+    //   case 'project':
+    //     return '/static/img/project-icon.svg';
+    //   case 'person':
+    //     return '/static/img/person-icon.svg';
+    //   case 'organization':
+    //     return '/static/img/organization-icon.svg';
+    //   case 'event':
+    //     return '/static/img/event-icon.svg';
+    //   case 'place':
+    //     return '/static/img/place-icon.svg';
+    //   case 'tag':
+    //     return '/static/img/tag-icon.svg';
+    //   default:
+    //     return null;
+    // }
   }
 
   render() {
     const { item, onClick } = this.props;
-    return <Link to={`/${item.type}/${item.id}`} className="cards-view-item"  onClick={onClick}>
+    return <Link to={`/${item.type}/${item.id}`} className={`cards-view-item cards-view-${item.type}`}  onClick={onClick}>
       <p className="cards-view-events-count" onClick={onClick}>{item.count || 0} events in</p>
       <Dotdotdot clamp={2} >
         <p className="cards-view-title" title={item.label}>{item.label}</p>
       </Dotdotdot>
-      <div style={{ backgroundImage: item.img ? `url("${item.img}")` : 'none'}} className="cards-view-image"></div>
+      <div style={{ backgroundImage: item.img ? `url("${this.getOptionImage(item)}")` : 'none'}} className="cards-view-image"></div>
     </Link>
   }
+}
 
+class ItemCards extends Component {
+  render() {
+    const { items, onClick } = this.props;
+    const firstItem = items[0];
+    const secondItem = items.length > 1 ? items[1] : null;
 
+    return <div className="cards-view-wrapper">
+      <ItemCard
+        item={firstItem}
+        onClick={onClick}
+        key={firstItem.id}
+      />
+      {secondItem && <ItemCard
+        item={secondItem}
+        onClick={onClick}
+        key={secondItem.id}
+      /> }
+    </div>
+  }
 }
 
 class Timeline extends Component {

@@ -184,11 +184,12 @@ body {
                 box-shadow: none;
             }
             .Select-menu-outer {
-                height: 120px;
+                height: 275px;
+                max-height: 275px;
                 overflow-y: hidden;
             }
             .Select-menu {
-                max-height: 120px;
+                max-height: 275px;
             }
             .Select-placeholder{
                 color: #B6C5CB;
@@ -330,6 +331,22 @@ body {
                     }
                 }
             }
+            .controllers {
+                position: absolute;
+                top: 5px;
+                left: 220px;
+                z-index: 200;
+                div {
+                    margin: 0 7px;
+                    float: left;
+                    color: #A6A6A6;
+                    font-family: "Merriweather Sans", sans-serif;
+                    font-size: 12px;
+                    font-weight: 300;
+                    line-height: 25px;
+                    cursor: pointer;
+                }
+            }
             .cards {
                 position: absolute;
                 left: 210px;
@@ -338,7 +355,7 @@ body {
                 bottom: 0;
 
                 background-color: #ffffff;
-                overflow: auto;
+                overflow-x: scroll;
                 white-space: nowrap;
                 .cards-view-item {
                     display: inline-block;
@@ -347,7 +364,7 @@ body {
                     height: 214px;
                     width: 200px;
 
-                    margin: 30px 20px;
+                    margin: 30px 10px 0;
                     border: 1px solid #F2F2F2;
                     border-radius: 3px;
                     background-color: #FFFFFF;
@@ -383,6 +400,23 @@ body {
                         width: 100%;
                         background-size: cover;
                     }
+                }
+                .cards-view-tag{
+                    display: block;
+                    height: 97px;
+                    margin: 30px 10px 0;
+
+                    .cards-view-image {
+                        display: none;
+                    }
+                    &:nth-child(even) {
+                        margin-top: 20px;
+                    }
+                }
+                .cards-view-wrapper {
+                    display: inline-block;
+                    position: relative;
+                    width: 225px;
                 }
             }
         }
@@ -588,7 +622,7 @@ body {
     div#sidepane {
         position: absolute;
         top: 0;
-        right: 5px;
+        right: 0;
         bottom: 166px;
         width: 320px;
         z-index: 5;
@@ -619,11 +653,13 @@ body {
             &.vshrink {
                 bottom: 266px;
             }
-            .eventspane-header{
+        }
+        div#eventspane {
+            .eventspane-header {
                 height: 60px;
                 line-height: 60px;
                 background-color: #FFFFFF;
-                box-shadow: 0 0 5px 0 rgba(0,0,0,0.25);
+                box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
                 font-family: "Merriweather Sans", sans-serif;
                 font-size: 14px;
                 padding-left: 25px;
@@ -647,8 +683,8 @@ body {
                     right: 12px;
                     cursor: pointer;
                     background: url('/static/img/card-close.svg');
-                    width:20px;
-                    height:20px;
+                    width: 20px;
+                    height: 20px;
                     text-indent: -99999em;
                     display: block;
                 }
@@ -661,26 +697,108 @@ body {
                 overflow-y: scroll;
                 z-index: -1;
             }
-            div.media-dots {
-                margin: 2px 7px;
-                span.media-dot {
-                    margin: 2px;
-                    cursor: pointer;
-                    display: block;
-                    float: left;
-                    &.selected {
+            span.event-icon {
+                float: left;
+                width: 60px;
+                height: 60px;
+                margin: 15px 15px 0 0;
+                img {
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 50%;
+                }
+            }
+            div.event-data {
+                float: left;
+                width: 170px;
+                div.project {
+                    font-size: 0.8em;
+                    color: #ADBEC7;
+                }
+                div.title {
+                    font-size: 1em;
+                }
+                div.date {
+                    font-size: 0.9em;
+                    color: #5D8599;
+                    font-style: italic;
+                }
+            }
 
+            div.event {
+                padding: 25px;
+                padding-top: 10px;
+
+                .project {
+                    color: #5D8599;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 15px;
+                }
+                .title {
+                    font-size: 16px;
+                    font-weight: 900;
+                    line-height: 25px;
+                    overflow: hidden;
+                }
+                div.date {
+                    font-family: "Merriweather Sans", sans-serif;
+                    line-height: 15px;
+                }
+                div.clear {
+                    clear: both;
+                    padding: 5px;
+                }
+            }
+        }
+        div#eventpane {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            .eventpane-header {
+                position: relative;
+                span.close {
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    display: block;
+
+                    width:28px;
+                    height:28px;
+                    opacity: 0.9;
+                    z-index: 10;
+
+                    background: url('/static/img/event-card-close.svg');
+                    border-radius: 0 0 0 2px;
+                    text-indent: -99999em;
+                    cursor: pointer;
+                }
+                div.media-dots {
+                    position: absolute;
+                    bottom: 10px;
+                    right: 0;
+                    left: 0;
+                    text-align: center;
+                    margin: 2px auto;
+                    span.media-dot {
+                        margin: 2px;
+                        cursor: pointer;
+                        display: block;
+                        color: white;
+                        &.selected {
+
+                        }
+                    }
+                }
+                img.head {
+                    width: 100%;
+                    height: 214px;
+                    &.magnify {
+                        cursor: zoom-in;
                     }
                 }
             }
-            img.head {
-                width: 100%;
-                height: 214px;
-                margin-top: 5px;
-                &.magnify {
-                    cursor: zoom-in;
-                }
-            }
+
             div.youtube-cover {
                 cursor: zoom-in;
                 img.youtube-thumb {
@@ -694,36 +812,20 @@ body {
                     height: 214px;
                 }
             }
-            div.content,
-            div.event {
+            div.content {
+                position: absolute;
+                bottom: 0;
+                top: 214px;
                 padding: 25px;
                 padding-top: 10px;
+                height:100%;
+                overflow-y: scroll;
+
                 a {
                     text-decoration: none;
                     border-radius: 5px;
                     display: inline-block;
                     padding: 0 3px;
-                }
-                .project {
-                    color: #5D8599;
-                    font-weight: 400;
-                    font-size: 12px;
-                    line-height: 15px;
-                }
-                .title {
-                    font-size: 16px;
-                    font-weight: 900;
-                    line-height: 25px;
-                    overflow: hidden;
-                }
-                div.place {
-
-                }
-                div.date {
-                    color: #47525D;
-                    font-family: "Merriweather Sans", sans-serif;
-                    font-size: 12px;
-                    line-height: 15px;
                 }
                 hr {
                     display: block;
@@ -732,6 +834,12 @@ body {
                     border-top: 1px solid #5D8599;
                     margin: 0.5em 0;
                     padding: 0;
+                }
+                .title {
+                    margin-top: 5px;
+                }
+                .date {
+                    margin-bottom: 20px;
                 }
                 div.audio-container {
                     margin-bottom: 10px;
@@ -779,44 +887,8 @@ body {
                         margin-right: 4px;
                     }
                 }
-                span.event-icon {
-                    float: left;
-                    width: 60px;
-                    height: 60px;
-                    margin: 15px 15px 0 0;
-                    img {
-                        width: 70px;
-                        height: 70px;
-                        border-radius: 50%;
-                    }
-                }
-                div.event-data {
-                    float: left;
-                    width: 170px;
-                    div.project {
-                        font-size: 0.8em;
-                        color: #ADBEC7;
-                    }
-                    div.title {
-                        font-size: 1em;
-                    }
-                    div.date {
-                        font-size: 0.9em;
-                        color: #5D8599;
-                        font-style: italic;
-                    }
-                }
-                div.clear {
-                    clear: both;
-                    padding: 5px;
-                }
             }
-        }
-        div#eventpane {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            overflow-y: scroll;
+
             .link-image-wrapper {
                 float: left;
                 width: 25px;
@@ -967,7 +1039,9 @@ body {
         color: $preindustrial-secondary;
         a {
           color: $preindustrial-primary;
-          background: fade-out($preindustrial-primary, 0.75);
+          &:not(.project) {
+            background: fade-out($preindustrial-primary, 0.75);
+          }
         }
         h2,
         div.title{
@@ -1028,7 +1102,9 @@ body {
         color: $nineteenth-secondary;
         a {
           color: $nineteenth-primary;
-          background: fade-out($nineteenth-primary, 0.75);
+          &:not(.project) {
+            background: fade-out($nineteenth-primary, 0.75);
+          }
         }
         h2,
         div.title,
@@ -1093,7 +1169,9 @@ body {
         color: $modernism-secondary;
         a {
           color: $modernism-primary;
-          background: fade-out($modernism-primary, 0.75);
+          &:not(.project) {
+            background: fade-out($modernism-primary, 0.75);
+          }
         }
         h2,
         div.title{
@@ -1157,7 +1235,9 @@ body {
         color: $darktimes-secondary;
         a {
           color: $darktimes-primary;
-          background: fade-out($darktimes-primary, 0.75);
+          &:not(.project) {
+              background: fade-out($darktimes-primary, 0.75);
+          }
         }
         h2,
         div.title{
@@ -1225,7 +1305,9 @@ body {
         color: $postwar-primary;
         a {
           color: $postwar-primary;
-          background: fade-out($postwar-primary, 0.75);
+            &:not(.project) {
+                background: fade-out($postwar-primary, 0.75);
+            }
         }
         h2,
         div.title{

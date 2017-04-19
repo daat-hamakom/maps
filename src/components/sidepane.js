@@ -130,7 +130,9 @@ class EventPane extends Component {
               <p>{m.title}</p>
               <AudioComponent src={m.file} type='audio/mpeg' key={'audio-' + m.id} />
             </div>
-            {this.getCopyright(m)}
+            <div className="audio-copyright">
+              {this.getCopyright(m)}
+            </div>
           </div>
         )}
 

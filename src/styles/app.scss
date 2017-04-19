@@ -874,6 +874,7 @@ body {
                         font-size: 12px;
                         line-height: 11px;
                         text-align: right;
+                        font-style: italic;
                     }
                 }
                 div.doc {
@@ -1000,7 +1001,7 @@ body {
         }
         div#lightbox-controls {
             position: fixed;
-            bottom: 0;
+            bottom: 60px;
             width: 100%;
             display: flex;
             justify-content: space-between;

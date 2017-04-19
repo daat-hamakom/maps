@@ -121,6 +121,9 @@ class EventPane extends Component {
         <h2 className='title'>{ev.title}</h2>
         <div className='place'>{ev.place.name}</div>
         <div className='date'>{_cleanDates(ev.start_date_orig, ev.end_date_orig, ev.circa_date)}</div>
+        <div className='tags'>
+          {ev.tags && ev.tags.map((t, index) => <span key={index}>#{t} </span>)}
+        </div>
         <hr/>
         {ev.media.filter((m) => m.type == 'sound').map((m, i) => <div className="audio-container" key={i}>
             <div className="audio-box">
@@ -138,8 +141,9 @@ class EventPane extends Component {
             </div>
           }
         )}
-        <hr/>
+        {ev.description && <hr/>}
         <div className='links'>
+          <p>Associated with this event: </p>
           {ev.people.map((p) => <Link key={p.id} to={`/person/${p.id}`} onClick={() => {this.props.closeSidepane()}} className='person-link'>
             <div className="link-image-wrapper" >
               <img className="link-image" src={this.getOptionImage({ img: p.profile_image && p.profile_image.url, type:'person' })} />

@@ -705,6 +705,14 @@ class CardsView extends Component {
       }
     }
 
+    tags.sort((a,b) => {
+      if (a.label < b.label)
+        return -1;
+      if (a.label > b.label)
+        return 1;
+      return 0
+    });
+
     let selectedItems = [];
     switch(this.state.filter) {
       case 'projects':

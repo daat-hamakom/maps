@@ -57,6 +57,13 @@ body {
             + div#sidepane {
                 bottom: 366px;
             }
+
+            div#map-controls {
+                display: none;
+            }
+            div#map-credit{
+                display: none;
+            }
         }
         &.hshrink {
             right: 327px;
@@ -506,7 +513,7 @@ body {
                 li {
                     width: 30px;
                     height: 30px;
-                    line-height: 30px;
+                    line-height: 26px;
                     margin-bottom: 5px;
 
                     border-radius: 50%;
@@ -517,6 +524,8 @@ body {
                     background-color: #FFFFFF;
                     box-shadow: 0 0 5px 0 rgba(0,0,0,0.04);
                     cursor: pointer;
+
+                    user-select: none;
                 }
             }
         }
@@ -784,7 +793,7 @@ body {
                     span.media-dot {
                         margin: 2px;
                         cursor: pointer;
-                        display: block;
+                        display: inline-block;
                         color: white;
                         &.selected {
 
@@ -1120,7 +1129,7 @@ body {
           font-family: 'Playfair Display';
         }
         hr {
-          border-top: 3px solid $nineteenth-secondary;
+          border-top: 2px solid $nineteenth-secondary;
         }
         .audio-box {
           //background: fade-out($nineteenth-secondary, 0.9);
@@ -1185,7 +1194,7 @@ body {
           font-weight: 700;
         }
         hr {
-          border-top: 3px solid $modernism-secondary;
+          border-top: 2px solid $modernism-secondary;
         }
         .audio-box {
           //background: fade-out($modernism-secondary, 0.9);
@@ -1252,7 +1261,7 @@ body {
           font-weight: 400 !important;
         }
         hr {
-          border-top: 3px solid $darktimes-primary;
+          border-top: 2px solid $darktimes-primary;
         }
         .audio-box {
           //background: fade-out($darktimes-secondary, 0.9);
@@ -1320,7 +1329,7 @@ body {
           font-weight: 400;
         }
         hr {
-          border-top: 3px solid $postwar-primary;
+          border-top: 2px solid $postwar-primary;
         }
         .audio-box {
           //background: fade-out($postwar-secondary, 0.9);

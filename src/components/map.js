@@ -527,7 +527,10 @@ class GLMap extends React.Component {
     const center = [centerLang, centerLat].map(x => +x).reverse();
 
     this.map.resize();
-    this.map.flyTo({ center: center, zoom: zoom })
+
+    if (centerLang && centerLat && zoom) {
+      this.map.flyTo({ center: center, zoom: zoom })
+    }
   }
 
   componentWillReceiveProps (props) {

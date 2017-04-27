@@ -26,7 +26,8 @@ function app(state = { hover: [], selected: [], origin: null, style: 'default', 
     case SET_APP_STYLE:
       return Object.assign({}, state, { style: action.style });
     case TOGGLE_DRAWER:
-      return Object.assign({}, state, { drawer: !state.drawer });
+      if (typeof action.toState === 'undefined' || action.toState === null) return Object.assign({}, state, { drawer: !state.drawer });
+      return Object.assign({}, state, { drawer: action.toState});
     default:
       return state
   }

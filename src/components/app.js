@@ -107,7 +107,7 @@ class App extends React.Component {
         selectEvent={(ev) => { dispatch(selectEvent(ev, 'map')) }}
         deselectEvent={() => { dispatch(deselectEvent()) }}
         setAppStyle={(s) => { dispatch(setAppStyle(s)) }}
-        toggleDrawer={() => { dispatch(toggleDrawer()) }}
+        toggleDrawer={(toState) => { dispatch(toggleDrawer(toState)) }}
       />
 
       <Sidepane
@@ -144,7 +144,7 @@ class App extends React.Component {
         closeEventSidepane={() => { dispatch(deselectEvent()) }}
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'timeline')) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
-        toggleDrawer={() => { dispatch(toggleDrawer()) }}
+        toggleDrawer={(toState) => { dispatch(toggleDrawer(toState)) }}
       />
 
       <Lightbox

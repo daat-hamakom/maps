@@ -186,23 +186,7 @@ class EventsPane extends Component {
     })
 
     let sidpaneTitle = null;
-    if (params.projId && projects.items.length) {
-      const project = projects.items.filter(p => p.id == parseInt(params.projId, 10))[0];
-      sidpaneTitle = project.title;
-    }
-    else if (params.placeId && places.items.length) {
-      const place = places.items.filter(p => p.id == parseInt(params.placeId, 10))[0];
-      sidpaneTitle = place.name;
-    }
-    else if (params.orgId && organizations.items.length) {
-      const organization = organizations.items.filter(o => o.id == parseInt(params.orgId, 10))[0];
-      sidpaneTitle = organization.name;
-    }
-    else if (params.personId && people.items.length) {
-      const person = people.items.filter(o => o.id == parseInt(params.personId, 10))[0];
-      sidpaneTitle = `${person.first_name} ${person.last_name}`;
-    }
-    else if (evs.length) {
+    if (evs.length) {
       const event = evs[0];
       const place = places.items.filter(p => p.id == parseInt(event.place.id, 10))[0];
       sidpaneTitle = place.name;

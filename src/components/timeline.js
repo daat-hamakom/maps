@@ -819,7 +819,7 @@ class CardsViewFilter extends Component {
       <div className="cards-filter-image-wrapper" >
         <img className="cards-filter-image" src={selected ? selectedImage : image} />
       </div>
-       <p className="cards-filter-label">{`${name} (${count})`}</p>
+      <p className="cards-filter-label">{`${name} (${count})`}</p>
     </div>;
   }
 }
@@ -895,22 +895,35 @@ class Timeline extends Component {
     this.resized = false;
     this.showCardsView = this.showCardsView.bind(this);
     this.searchFocused = this.searchFocused.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   showCardsView (value) {
+    this.props.toggleDrawer(false);
     if (value != this.state.showCardsView) {
       this.setState({ showCardsView: value})
     }
   }
 
   searchFocused (value) {
+    if (value && this.props.drawerData) {
+      this.props.toggleDrawer(false);
+    }
     if (value != this.state.searchFocused) {
       this.setState({ searchFocused: value})
     }
   }
 
   handleClickOutside() {
+    if (this.props.drawerData) {
+      this.props.toggleDrawer(false);
+    }
     this.setState({ showCardsView: false });
+  }
+
+  handleClick(e) {
+    this.setState({ searchFocused: false, showCardsView: false});
+    this.props.toggleDrawer()
   }
 
   zoomTimelineByEvents () {
@@ -985,17 +998,17 @@ class Timeline extends Component {
     const research = params.projId ? props.drawerData : null
 
     let height = 46 + 120; // search + timeline
-    if (props.app.drawer && props.drawerData && (params.projId || params.personId || params.orgId || params.placeId)) {
-      height = height + 200;
-    }
-
     if (this.state.showCardsView || this.state.searchFocused) {
       height = height + 150;
+    } else {
+      if (props.app.drawer && props.drawerData && (params.projId || params.personId || params.orgId || params.placeId)) {
+        height = height + 200;
+      }
     }
 
     return <div id='timeline' style={{height: height}} className={this.state.showCardsView ? 'show-cards-view' : ''}>
       <div className='handle-container'>
-        <div className='handle' onClick={(e) => { props.toggleDrawer() }}></div>
+        <div className='handle' onClick={this.handleClick}></div>
       </div>
       <FilterBar
         params={params}

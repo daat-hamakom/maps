@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik+One');
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display:700,900');
 @import url('https://fonts.googleapis.com/css?family=Pirata+One');
-@import url('https://fonts.googleapis.com/css?family=Merriweather');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:400,900');
 @import url('https://fonts.googleapis.com/css?family=Merriweather+Sans');
 
 $frameBorder: #222;
@@ -390,7 +390,7 @@ body {
                         margin: 0 20px;
                         max-width: 100%;
                         color: #47525D;
-                        font-family: "Merriweather", sans-serif;
+                        font-family: "Merriweather", serif;
                         font-size: 16px;
                         font-weight: 900;
                         line-height: 22px;
@@ -431,7 +431,7 @@ body {
             position: relative;
             h2 {
                 color: #47525D;
-                font-family: "Merriweather", sans-serif;
+                font-family: "Merriweather", serif;
                 font-size: 20px;
                 font-weight: 900;
                 line-height: 28px;
@@ -469,6 +469,7 @@ body {
                     }
                     p {
                       margin-top: 0.5em;
+                      color: #47525D;
                     }
                 }
                 div.description {
@@ -711,10 +712,10 @@ body {
                 float: left;
                 width: 60px;
                 height: 60px;
-                margin: 15px 15px 0 0;
+                margin-right: 15px;
                 img {
-                    width: 70px;
-                    height: 70px;
+                    width: 60px;
+                    height: 60px;
                     border-radius: 50%;
                 }
             }
@@ -729,9 +730,10 @@ body {
                     font-size: 1em;
                 }
                 div.date {
-                    font-size: 0.9em;
-                    color: #5D8599;
+                    font-size: 0.75em;
+                    color: #47525D;
                     font-style: italic;
+                    font-family: "Merriweather Sans", sans-serif;
                 }
             }
 
@@ -750,6 +752,7 @@ body {
                     font-weight: 900;
                     line-height: 25px;
                     overflow: hidden;
+                    font-family: "Merriweather", sarif;
                 }
                 div.date {
                     font-family: "Merriweather Sans", sans-serif;
@@ -870,7 +873,6 @@ body {
                     }
                     .audio-copyright {
                         opacity: 0.5;
-                        font-family: "CC Icons";
                         font-size: 12px;
                         line-height: 11px;
                         text-align: right;
@@ -1362,7 +1364,7 @@ body {
       }
     }
     .daat-modal {
-        font-family: "Merriweather", sans-serif;
+        font-family: "Merriweather", serif;
         .modal-dialog {
             margin: 130px auto;
         }
@@ -1386,13 +1388,14 @@ body {
             border-radius: 0 !important;
             p {
                 color: #47525D;
-                font-family: "Merriweather", sans-serif;
+                font-family: "Merriweather Sans", sans-serif;
                 font-size: 14px;
                 line-height: 25px;
             }
         }
         .modal-body {
             padding: 0 80px 15px 80px;
+            font-family: "Merriweather", serif;
         }
         .modal-title {
             padding-bottom: 14px;
@@ -1404,6 +1407,7 @@ body {
         .modal-tab-nav a {
             padding: 0;
             text-decoration: underline;
+            font-family: "Merriweather Sans", sans-serif;
             font-size: 14px;
             line-height: 28px;
             color: #A6A6A6;

@@ -296,6 +296,6 @@ export function setAppStyle(style) {
   return { type: SET_APP_STYLE, style: style }
 }
 
-export function toggleDrawer() {
-  return { type: TOGGLE_DRAWER }
+export function toggleDrawer(toState) {
+  return { type: TOGGLE_DRAWER, toState }
 }

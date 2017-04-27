@@ -605,9 +605,6 @@ class GLMap extends React.Component {
           <li onClick={(e) => { this.map.flyTo({zoom: this.map.getZoom() - 1}) }} className="control-container" >
             &ndash;
           </li>
-          <li onClick={(e) => { this.map.setBearing(0) }}>
-            &#10147;
-          </li>
         </ul>
       </div>
       <div id='map-credit'>

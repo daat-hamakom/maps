@@ -5,7 +5,7 @@ export class ToolbarButtons extends Component {
   render () {
     return <div id='toolbarButtons'>
       <span onClick={this.props.openAboutModal}>About</span>
-      <span style={{ margin: "0 15px" }}>|</span>
+      <span style={{ margin: "0 15px", opacity: 0.25 }}>|</span>
       <span onClick={this.props.openHelpModal}>Help</span>
     </div>
   }

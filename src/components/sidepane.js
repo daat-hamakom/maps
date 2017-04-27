@@ -145,7 +145,7 @@ class EventPane extends Component {
         )}
         {ev.description && <hr/>}
         <div className='links'>
-          <p>Associated with this event: </p>
+          {ev.people.length || ev.organizations.length ? <p>Associated with this event: </p> : null }
           {ev.people.map((p) => <Link key={p.id} to={`/person/${p.id}`} onClick={() => {this.props.closeSidepane()}} className='person-link'>
             <div className="link-image-wrapper" >
               <img className="link-image" src={this.getOptionImage({ img: p.profile_image && p.profile_image.url, type:'person' })} />

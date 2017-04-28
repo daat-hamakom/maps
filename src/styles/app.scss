@@ -409,6 +409,13 @@ body {
                     border-radius: 3px;
                     background-color: #FFFFFF;
                     box-shadow: 0 1px 5px 0 rgba(0,0,0,0.1);
+                    &:hover {
+                        border-color: #D4D4D4;
+                        text-decoration: none;
+                        .cards-view-title {
+                            color: #000;
+                        }
+                    }
                     .cards-view-events-count{
                         margin: 8px 20px;
 

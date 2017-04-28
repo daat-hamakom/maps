@@ -324,6 +324,17 @@ body {
                 }
             }
         }
+        .close-search {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            z-index: 20;
+            cursor: pointer;
+            background: none;
+            box-shadow: none;
+            border: none;
+            outline: none;
+        }
         div#cards-view {
             position: absolute;
             top: 40px;
@@ -870,9 +881,10 @@ body {
                     padding: 0;
                 }
                 .tag {
-                    margin-left: 5px;
-                    &:first-child {
-                        margin-left: 0;
+                    margin-right: 5px;
+                    margin-bottom: 5px;
+                    &:last-child {
+                        margin-right: 0;
                     }
                 }
                 .title {
@@ -926,6 +938,7 @@ body {
                 div.links {
                     a {
                         margin-right: 4px;
+                        margin-bottom: 4px;
                     }
                 }
             }

@@ -55,21 +55,26 @@ export function getOptionImage(option) {
 
 
 export function getCopyright (media) {
-  if (!media.copyrights) {
-    if (!media.source_url) return <span>
-        <span title={media.source} className="copyright-source">source</span>
-      </span>;
+  let copyright = null;
+  let source = null;
 
-    return <span>
-        <a target="_blank" title={media.source} href={media.source_url} className="copyright-source">source</a>
-      </span>
+  if (media.copyrights) {
+    copyright = <span>&copy; {media.copyrights}</span>;
   }
 
-  if (!media.source_url) return <span>
-        &copy; {media.copyrights} (<span title={media.source} className="copyright-source">source</span>)
-      </span>;
+  if (!media.source_url) {
+    if (media.source) source = <span title={media.source} className="copyright-source">source</span>;
+  } else {
+    if (media.source) {
+      source = <a target="_blank" title={media.source} href={media.source_url} className="copyright-source">source</a>;
+    } else {
+      source = <a target="_blank" href={media.source_url} className="copyright-source">source</a>;
+    }
+  }
 
-  return <span>
-      &copy; {media.copyrights} (<a target="_blank" title={media.source} href={media.source_url} className="copyright-source">source</a>)
-    </span>
+  if (copyright) {
+    return <span>{copyright} {source ? <span>({source})</span> : null}</span>;
+  } else {
+    return <span>{source}</span>;
+  }
 }

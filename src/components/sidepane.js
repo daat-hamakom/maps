@@ -221,9 +221,9 @@ class EventsPane extends Component {
           </span>
           <div className="event-data">
             <div className='project'>{projects.items.find((p) => p.id == e.project).title}</div>
-            <Dotdotdot clamp={2} >
+            {e.title && <Dotdotdot clamp={2} >
               <p className='title' title={e.title}>{e.title}</p>
-            </Dotdotdot>
+            </Dotdotdot>}
             <div className='date'>{_cleanDates(e.start_date_orig, e.end_date_orig, e.circa_date)}</div>
           </div>
           <div className='clear'></div>

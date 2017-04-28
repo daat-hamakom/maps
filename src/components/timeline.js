@@ -635,22 +635,32 @@ class PlaceMetadata extends Component {
 }
 
 class TimelineMetadata extends Component {
+  componentWillUpdate(nextProps, nextState) {
+    const { params, toggleDrawer } = this.props;
+
+    if ((JSON.stringify(params) !== JSON.stringify(nextProps.params)) && (JSON.stringify(nextProps.params) != '{}') && !nextProps.params.eventId) {
+      toggleDrawer(true);
+    }
+  }
+
   render () {
-    if (this.props.drawerData && this.props.params.projId && this.props.app.drawer)
+    const { app, params, events, ...props } = this.props;
+
+    if (props.drawerData && params.projId && app.drawer)
       return <div id='metadata'>
-        <ProjectMetadata project={this.props.drawerData} events={this.props.events} />
+        <ProjectMetadata project={props.drawerData} events={events} />
       </div>
-    else if (this.props.drawerData && this.props.params.personId && this.props.app.drawer)
+    else if (props.drawerData && params.personId && app.drawer)
       return <div id='metadata'>
-        <PersonMetadata person={this.props.drawerData} events={this.props.events} />
+        <PersonMetadata person={props.drawerData} events={events} />
       </div>
-    else if (this.props.drawerData && this.props.params.orgId && this.props.app.drawer)
+    else if (props.drawerData && params.orgId && app.drawer)
       return <div id='metadata'>
-        <OrganizationMetadata organization={this.props.drawerData} events={this.props.events} />
+        <OrganizationMetadata organization={props.drawerData} events={events} />
       </div>
-    else if (this.props.drawerData && this.props.params.placeId && this.props.app.drawer)
+    else if (props.drawerData && params.placeId && app.drawer)
       return <div id='metadata'>
-        <PlaceMetadata place={this.props.drawerData} events={this.props.events} />
+        <PlaceMetadata place={props.drawerData} events={events} />
       </div>
     else
       return <div id='metadata'></div>
@@ -714,13 +724,16 @@ class CardsView extends Component {
     });
 
     let selectedItems = [];
+    let label;
     switch(this.state.filter) {
       case 'projects':
         selectedItems = projects.map((p) => ({ type: 'project', value: `proj-${p.id}`, id: p.id, label: p.title, img: p.cover_image && p.cover_image.file, count: p.events_count }));
+        label = "events in";
         break;
 
       case 'people':
         selectedItems = people.map((p) => ({ type: 'person', value: `person-${p.id}`, id: p.id, label: `${p.first_name} ${p.last_name}`, img: p.profile_image && (p.profile_image.url || p.profile_image.file), count: p.events_count }));
+        label = "events with";
         break;
 
       case 'tags':
@@ -741,10 +754,12 @@ class CardsView extends Component {
 
       case 'places':
         selectedItems = places.map((p) => ({ type: 'place', value: `place-${p.id}`, id: p.id, label: p.name , img: null, count: p.events_count}));
+        label = "events in";
         break;
 
       case 'organizations':
         selectedItems = organizations.map((o) => ({ type: 'organization', value: `org-${o.id}`, id: o.id, label: o.name, img: o.cover_image && o.cover_image.file, count: o.events_count }));
+        label = "events with";
         break;
 
     }
@@ -801,6 +816,7 @@ class CardsView extends Component {
           item={item}
           onClick={() => showCardsView(false)}
           key={item.id}
+          label={label}
         />) : selectedItems.map((items, index) => <ItemCards
           items={items}
           onClick={() => showCardsView(false)}
@@ -855,12 +871,12 @@ class ItemCard extends Component {
   }
 
   render() {
-    const { item, onClick } = this.props;
+    const { item, onClick, label } = this.props;
     return <Link to={`/${item.type}/${item.id}`} className={`cards-view-item cards-view-${item.type}`}  onClick={onClick}>
-      <p className="cards-view-events-count" onClick={onClick}>{item.count || 0} events in</p>
-      <Dotdotdot clamp={2} >
+      <p className="cards-view-events-count" onClick={onClick}>{item.count || 0} { label }</p>
+      { item.label && <Dotdotdot clamp={2} >
         <p className="cards-view-title" title={item.label}>{item.label}</p>
-      </Dotdotdot>
+      </Dotdotdot>}
       <div style={{ backgroundImage: item.img ? `url("${this.getOptionImage(item)}")` : 'none'}} className="cards-view-image"></div>
     </Link>
   }
@@ -877,11 +893,13 @@ class ItemCards extends Component {
         item={firstItem}
         onClick={onClick}
         key={firstItem.id}
+        label="events tagged"
       />
       {secondItem && <ItemCard
         item={secondItem}
         onClick={onClick}
         key={secondItem.id}
+        label="events tagged"
       /> }
     </div>
   }
@@ -896,6 +914,7 @@ class Timeline extends Component {
     this.showCardsView = this.showCardsView.bind(this);
     this.searchFocused = this.searchFocused.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
   showCardsView (value) {
@@ -940,6 +959,7 @@ class Timeline extends Component {
       startDate = event[0].start_date;
       endDate = event[0].end_date;
     } else {
+      if (!events.length) return;
       // min start date
       startDate = events.map(e => e.start_date).reduce((prev, cur, curind, ar) => {
         return cur < prev ? cur : prev
@@ -1023,11 +1043,13 @@ class Timeline extends Component {
         showCardsView={this.showCardsView}
         searchFocused={this.searchFocused}
       />
+      <button className="close-search" onClick={this.handleClickOutside}>X</button>
       <TimelineMetadata
         drawerData={props.drawerData}
         app={props.app}
         params={params}
         events={events}
+        toggleDrawer={this.props.toggleDrawer}
       />
       <CardsView
         style={{ display: (this.state.showCardsView ? 'block' : 'none') }}

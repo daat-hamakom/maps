@@ -80,7 +80,7 @@ class Lightbox extends React.Component {
                 {selectedMedia ? selectedMedia.title : ''}
             </span>
           </span>
-          <span className="media-copyrights">
+          <span className="media-copyrights" onClick={(e)=> {debugger;e.stopPropagation();e.nativeEvent.stopImmediatePropagation();}}>
               {selectedMedia ? this.getCopyright(selectedMedia) : ''}
           </span>
         </div>

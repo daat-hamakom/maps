@@ -991,6 +991,7 @@ body {
                 span.media-copyrights {
                     position: absolute;
                     bottom: -25px;
+                    left: -50vw;
                     right: 15px;
 
                     color: #808080;
@@ -1031,7 +1032,7 @@ body {
         }
         div#lightbox-controls {
             position: fixed;
-            bottom: 60px;
+            bottom: 40px;
             width: 100%;
             display: flex;
             justify-content: space-between;

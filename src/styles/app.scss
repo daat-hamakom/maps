@@ -256,15 +256,26 @@ body {
             }
             .Select-input {
                 padding: 0;
+                font-family: "Merriweather Sans", sans-serif;
+            }
+            .Select-input::-webkit-input-placeholder,
+            .Select-input::-ms-input-placeholder,
+            .Select-input::-moz-placeholder {
+                font-family: "Merriweather Sans", sans-serif;
             }
             .Select-option {
-                padding: 10px 0;
+                padding: 0;
+                margin: 10px 0;
                 line-height: 40px;
+                font-family: "Merriweather Sans", sans-serif;
                 &.is-focused,
                 &:hover {
                     background-color: #FAFAFA;
                 }
-            }
+                &:first-child {
+                    margin-top: 0;
+                }
+                }
             .label-select-options {
                 margin-bottom: 0;
                 font-family: "Merriweather Sans", sans-serif;
@@ -294,6 +305,7 @@ body {
                 font-size: 12px;
                 line-height: 25px;
                 color: #CCCCCC;
+                font-weight: normal;
                 font-family: "Merriweather Sans", sans-serif;
             }
             .Select-arrow-zone {
@@ -853,8 +865,15 @@ body {
                     height: 1px;
                     border: 0;
                     border-top: 1px solid #5D8599;
+                    opacity: 0.25;
                     margin: 0.5em 0;
                     padding: 0;
+                }
+                .tag {
+                    margin-left: 5px;
+                    &:first-child {
+                        margin-left: 0;
+                    }
                 }
                 .title {
                     margin-top: 5px;

@@ -122,9 +122,9 @@ class EventPane extends Component {
         <div className='place'>{ev.place.name}</div>
         <div className='date'>{_cleanDates(ev.start_date_orig, ev.end_date_orig, ev.circa_date)}</div>
         <div className='tags'>
-          {ev.tags && ev.tags.map((t, index) => <span key={index}>#{t} </span>)}
+          {ev.tags && ev.tags.map((t, index) => <Link key={index} to={`/tag/${t}`} className="tag">#{t} </Link>)}
         </div>
-        <hr/>
+        {ev.description && <hr/>}
         {ev.media.filter((m) => m.type == 'sound').map((m, i) => <div className="audio-container" key={i}>
             <div className="audio-box">
               <p>{m.title}</p>
@@ -143,7 +143,7 @@ class EventPane extends Component {
             </div>
           }
         )}
-        {ev.description && <hr/>}
+        {(ev.people.length || ev.organizations.length) ? <hr/> : null}
         <div className='links'>
           {ev.people.length || ev.organizations.length ? <p>Associated with this event: </p> : null }
           {ev.people.map((p) => <Link key={p.id} to={`/person/${p.id}`} onClick={() => {this.props.closeSidepane()}} className='person-link'>

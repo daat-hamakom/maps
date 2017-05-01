@@ -522,7 +522,7 @@ class FilterBar extends Component {
     return <div id='filter'>
       <Select
         name="search-bar"
-        placeholder='Filter by project, person or organization'
+        placeholder='Browse or filter events by project, person, tag, place or organization'
         disabled={false}
         value={val}
         options={options}
@@ -909,7 +909,7 @@ class Timeline extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { showCardsView: false, searchFocused: false };
+    this.state = { showCardsView: true, searchFocused: false };
     this.resized = false;
     this.showCardsView = this.showCardsView.bind(this);
     this.searchFocused = this.searchFocused.bind(this);

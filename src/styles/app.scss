@@ -100,6 +100,7 @@ body {
                     text-align: center;
                     font-size: 18px;
                     font-weight: bold;
+                    user-select: none;
                     &:first-child {
                         border-radius: 5px 5px 0 0;
                     }
@@ -415,6 +416,9 @@ body {
                         .cards-view-title {
                             color: #000;
                         }
+                    }
+                    &:focus {
+                        text-decoration: none;
                     }
                     .cards-view-events-count{
                         margin: 8px 20px;
@@ -775,8 +779,12 @@ body {
             }
 
             div.event {
-                padding: 25px;
-                padding-top: 10px;
+                padding: 10px 25px;
+
+                &:hover,
+                &:focus {
+                    background-color: #FAFAFA;
+                }
 
                 .project {
                     color: #5D8599;

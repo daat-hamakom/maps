@@ -688,12 +688,12 @@ class CardsView extends Component {
 
   cardsScrollLeft () {
     let element = document.getElementById("cards-container");
-    element.scrollLeft -= 1500;
+    element.scrollLeft -= 1000;
   }
 
   cardsScrollRight () {
     let element = document.getElementById("cards-container");
-    element.scrollLeft += 1500;
+    element.scrollLeft += 1000;
   }
 
   render () {

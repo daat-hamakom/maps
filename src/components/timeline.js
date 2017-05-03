@@ -1027,9 +1027,6 @@ class Timeline extends Component {
     }
 
     return <div id='timeline' style={{height: height}} className={this.state.showCardsView ? 'show-cards-view' : ''}>
-      <div className='handle-container'>
-        <div className='handle' onClick={this.handleClick}></div>
-      </div>
       <FilterBar
         params={params}
         drawerData={props.drawerData}

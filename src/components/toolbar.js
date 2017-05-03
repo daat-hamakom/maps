@@ -77,15 +77,32 @@ export class AboutModal extends Component {
               </Tab.Pane>
               <Tab.Pane eventKey="about-credits">
                 <h4 className="modal-subtitle">Credits</h4>
-                <p>Director of Da’at Hamakom: Prof. Richard Cohen</p>
-                <p>Steering Committee: Prof. Amnon Raz-Krakotzkin; Prof. Elchanan Reiner, Prof. Menahem Blondheim, Prof. Edwin Seroussi, Prof. Haviva Pedaya </p>
-                <p>Scientific Director: Prof. Edwin Seroussi </p>
-                <p>Project Manager: Dr. Josef Sprinzak</p>
-                <p>Interactive and Graphic Designer: Mushon Zer-Aviv</p>
+                <p>Director of Da’at Hamakom: <a href="http://www.daat-hamakom.com/team/prof-richard-i-cohen/" target="_blank">Prof. Richard Cohen</a></p>
+                <p>
+                  Steering Committee:
+                  <a href="http://www.daat-hamakom.com/team/amnon-raz-krakotzkin-nono/" target="_blank">Prof. Amnon Raz-Krakotzkin</a>;
+                  <a href="http://www.daat-hamakom.com/team/prof-elchanan-reiner/" target="_blank">Prof. Elchanan Reiner</a>,
+                  <a href="http://www.daat-hamakom.com/team/prof-menahem-blondheim/" target="_blank">Prof. Menahem Blondheim</a>,
+                  <a href="http://www.daat-hamakom.com/team/prof-edwin-seroussi/" target="_blank">Prof. Edwin Seroussi</a>,
+                  <a href="http://www.daat-hamakom.com/team/prof-haviva-pedaya/" target="_blank">Prof. Haviva Pedaya</a>
+                </p>
+                <p>Scientific Director: <a href="http://www.daat-hamakom.com/team/prof-edwin-seroussi/" target="_blank">Prof. Edwin Seroussi</a></p>
+                <p>Project Manager: <a href="http://www.daat-hamakom.com/team/dr-josef-sprinzak/" target="_blank">Dr. Josef Sprinzak</a></p>
+                <p>Interactive and Graphic Designer: <a href="http://www.shual.com/" target="_blank">Mushon Zer-Aviv</a></p>
                 <p>Programmers: <a href="http://appandup.co.il" target="_blank">Tal Ben-Basat</a>, Yuval Adam.</p>
-                <p>Administrative Director: Anat Reches</p>
-                <p>Advisory Team: Dr. Amos Noy, Dr. Dani Schrire, Dr. Zef Segal, Dr. Eliezer Baumgarten</p>
-                <p>The project was funded by The Israeli Centers for Research Excellence (I-CORE).</p>
+                <p>Administrative Director: <a href="http://www.daat-hamakom.com/contact/" target="_blank">Anat Reches</a></p>
+                <p>
+                  Advisory Team:
+                  <a href="http://www.daat-hamakom.com/team/dr-amos-noy/" target="_blank">Dr. Amos Noy</a>,
+                  <a href="http://www.daat-hamakom.com/team/dr-dani-schrire/" target="_blank">Dr. Dani Schrire</a>,
+                  <a href="http://www.daat-hamakom.com/team/1141-2/" target="_blank">Dr. Zef Segal</a>,
+                  <a href="http://www.daat-hamakom.com/team/eliezer-baumgarten/" target="_blank">Dr. Eliezer Baumgarten</a>
+                </p>
+                <p>
+                  The project was funded by
+                  <a href="http://www.i-core.org.il/" target="_blank">The Israeli Centers for Research Excellence (I-CORE)</a>.
+                </p>
+                <img src="/static/img/icore-logo.png" alt="icore-logo" />
               </Tab.Pane>
             </Tab.Content>
           </div>

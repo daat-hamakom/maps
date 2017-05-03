@@ -335,6 +335,7 @@ body {
             box-shadow: none;
             border: none;
             outline: none;
+            color: #A6A6A6;
         }
         div#cards-view {
             position: absolute;
@@ -488,11 +489,14 @@ body {
                     float: left;
                     padding: 10px 30px;
                     position: absolute;
-                    overflow-y: scroll;
+                    overflow-y: auto;
                     max-height: 100%;
                     > * {
                       margin-left: 10px;
                       margin-right: 10px;
+                    }
+                    h2 {
+                        margin-top: 0;
                     }
                     h3 {
                         font-size: 1em;
@@ -510,6 +514,7 @@ body {
                         font-size: 12px;
                         font-weight: 300;
                         line-height: 25px;
+                        margin-bottom: 0;
                     }
                     p {
                       margin-top: 0.5em;
@@ -765,7 +770,6 @@ body {
                 width: 170px;
                 div.project {
                     font-size: 0.8em;
-                    color: #ADBEC7;
                 }
                 div.title {
                     font-size: 1em;
@@ -784,10 +788,10 @@ body {
                 &:hover,
                 &:focus {
                     background-color: #FAFAFA;
+                    cursor: pointer;
                 }
 
                 .project {
-                    color: #5D8599;
                     font-weight: 400;
                     font-size: 12px;
                     line-height: 15px;
@@ -797,7 +801,7 @@ body {
                     font-weight: 900;
                     line-height: 25px;
                     overflow: hidden;
-                    font-family: "Merriweather", sarif;
+                    font-family: "Merriweather", serif;
                 }
                 div.date {
                     font-family: "Merriweather Sans", sans-serif;
@@ -876,10 +880,8 @@ body {
                 left: 0;
                 bottom: 0;
                 top: 214px;
-                padding: 25px;
-                padding-top: 10px;
+                padding: 30px;
                 overflow-y: scroll;
-
                 a {
                     text-decoration: none;
                     border-radius: 5px;
@@ -904,10 +906,22 @@ body {
                 }
                 .title {
                     margin-top: 5px;
-                    font-size: 24px;
+                    font-size: 20px;
+                    line-height: 28px;
+                    font-family: "Merriweather", serif;
+                    font-weight: 900;
                 }
                 .date {
                     margin-bottom: 20px;
+                }
+                .description {
+                    p {
+                        font-size: 14px;
+                        line-height: 25px;
+                    }
+                    a {
+                        text-decoration: underline;
+                    }
                 }
                 div.audio-container {
                     margin-bottom: 10px;
@@ -1106,13 +1120,13 @@ body {
     div#eventspane .event.preindustrial{
       background-color: #FFFFFF;
       font-family: 'Vesper Libre';
-      // border-color: $preindustrial-primary;
       div.content,
       div.event-data{
-        color: $preindustrial-secondary;
+        color: darken($preindustrial-primary, 5);
         a {
           color: $preindustrial-primary;
-          &:not(.project) {
+          &.person-link,
+          &.org-link {
             background: fade-out($preindustrial-primary, 0.75);
           }
         }
@@ -1125,9 +1139,6 @@ body {
         }
         hr {
           border-color: $preindustrial-primary;
-        }
-        .audio-box {
-          //background: fade-out($preindustrial-secondary, 0.9);
         }
       }
     }
@@ -1170,26 +1181,30 @@ body {
     .app.nineteenth div#sidepane div#eventpane,
     div#eventspane .event.nineteenth {
       background-color: #FFFFFF;
-      div.content,
-      div.event-data{
-        color: $nineteenth-primary;
-        a {
+      div.event-data {
           color: $nineteenth-primary;
-          &:not(.project) {
-            background: fade-out($nineteenth-primary, 0.75);
+          div.project {
+              color: $nineteenth-primary ;
           }
+      }
+      div.content {
+        color: darken($nineteenth-primary, 25);
+        a {
+            color: darken($nineteenth-primary, 25);
+            &.person-link,
+            &.org-link {
+                background: fade-out($nineteenth-primary, 0.75);
+            }
+        }
+        div.place{
+          color: darken($nineteenth-primary, 25);
         }
         h2,
-        title,
-        div.place{
+        title {
           color: $nineteenth-primary;
-          font-family: "Merriweather Sans", sans-serif;
-          font-weight: 700 !important;
         }
         .project {
           color: $nineteenth-primary !important;
-          font-weight: 900;
-            font-family: "Merriweather Sans", sans-serif;
         }
         hr {
           border-top: 1px solid $nineteenth-primary;
@@ -1239,22 +1254,20 @@ body {
       background-color: #FFFFFF;
       div.content,
       div.event-data{
-        color: $modernism-primary;
+        color:  darken($modernism-primary, 15);
         a {
-          color: $modernism-primary;
-          &:not(.project) {
-            background: fade-out($modernism-primary, 0.75);
+          color: darken($modernism-primary, 15);
+          &.person-link,
+          &.org-link {
+              background: fade-out($modernism-primary, 0.75);
           }
         }
         h2,
-        title{
+        .title{
           color: $modernism-primary;
-          font-family: 'Rubik One';
-          font-weight: 400 !important;
         }
         .project{
           color: $modernism-primary !important;
-          font-weight: 700;
         }
         hr {
           border-top: 1px solid $modernism-primary;
@@ -1308,34 +1321,25 @@ body {
           h2,
           .title{
               color: $darktimes-primary;
-              font-weight: 400;
-              font-family: 'Pirata One', cursive;
               font-size: 1.8em;
           }
           .project{
               color: $darktimes-primary !important;
-              font-weight: 400 !important;
           }
       }
       div.content {
         background-color: $darktimes-secondary;
         color: #FFFFFF;
         a {
-          color: $darktimes-primary;
-          &:not(.project) {
-              background: fade-out($darktimes-primary, 0.75);
-          }
+          color: #FFFFFF;
         }
         h2,
         .title{
           color: $darktimes-primary;
-          font-weight: 400;
-          font-family: 'Pirata One', cursive;
           font-size: 1.8em;
         }
         .project{
           color: $darktimes-primary !important;
-          font-weight: 400 !important;
         }
         hr {
           border-top: 1px solid $darktimes-primary;
@@ -1389,21 +1393,20 @@ body {
       border-color: $postwar-secondary;
       div.content,
       div.event-data{
-        color: $postwar-secondary;
+        color: darken($postwar-secondary, 10);
         a {
-          color: $postwar-primary;
-            &:not(.project) {
-                background: fade-out($postwar-primary, 0.75);
-            }
+          color: darken($postwar-secondary, 10);
+          &.person-link,
+          &.org-link {
+            background: fade-out($postwar-primary, 0.75);
+          }
         }
         h2,
         .title{
           color: $postwar-secondary;
-          font-weight: 700;
         }
         .project {
           color: $postwar-secondary !important;
-          font-weight: 400;
         }
         hr {
           border-top: 1px solid $postwar-secondary;

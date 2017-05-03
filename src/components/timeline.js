@@ -572,7 +572,7 @@ class PersonMetadata extends Component {
     const bd = _cleanBirthDates(p.birth_date, p.death_date)
     return <div className='project'>
       <div className='titles'>
-        <h6>{numEventsSelected} events featuring</h6>
+        <h6>{numEventsSelected} events with</h6>
         <h2>{p.first_name} {p.middle_name} {p.last_name}</h2>
         {p.alt_name.length ? <h5>Also: {p.alt_name.join(', ')}</h5> : null}
         <h5>{bd != '0000' ? bd : null}</h5>
@@ -622,7 +622,7 @@ class PlaceMetadata extends Component {
     const cover = p.cover_image ? p.cover_image.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' : ''
     return <div className='place'>
       <div className='titles'>
-        <h6>{numEventsSelected} events featuring</h6>
+        <h6>{numEventsSelected} events in</h6>
         <h2>{p.name}</h2>
         {p.alt_name && p.alt_name.length ? <h5>Also: {p.alt_name.join(', ')}</h5> : null}
         <h5>{p.zoomlevel}</h5>

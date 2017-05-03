@@ -1029,10 +1029,13 @@ body {
                     text-align: right;
                     .copyright-source,
                     .copyright-source:focus{
-                        border-bottom: 1px dotted #808080;
+                        border-bottom: 1px solid #808080;
                         color: #808080;
                         font-family: "Arial Cyr MT";
                         font-size: 14px;
+                        &.no-link {
+                            border-bottom: 1px dotted #808080;
+                        }
                     }
                     .copyright-source:hover {
                         text-decoration: none;

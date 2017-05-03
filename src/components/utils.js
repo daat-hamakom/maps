@@ -63,7 +63,7 @@ export function getCopyright (media) {
   }
 
   if (!media.source_url) {
-    if (media.source) source = <span title={media.source} className="copyright-source">source</span>;
+    if (media.source) source = <span title={media.source} className="copyright-source no-link">source</span>;
   } else {
     if (media.source) {
       source = <a target="_blank" title={media.source} href={media.source_url} className="copyright-source">source</a>;

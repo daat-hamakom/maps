@@ -823,6 +823,8 @@ body {
             position: absolute;
             top: 0;
             bottom: 0;
+            right: 0;
+            left: 0;
             .eventpane-header {
                 position: relative;
                 span.close {
@@ -952,6 +954,13 @@ body {
                         line-height: 11px;
                         text-align: right;
                         font-style: italic;
+                        .copyright-source {
+                          border-bottom: 1px solid #808080;
+                          &.no-link {
+                            border-bottom: 1px dotted #808080;
+                            cursor: default;
+                          }
+                        }
                     }
                 }
                 div.doc {
@@ -1054,7 +1063,8 @@ body {
                         font-family: "Arial Cyr MT";
                         font-size: 14px;
                         &.no-link {
-                            border-bottom: 1px dotted #808080;
+                          cursor: default;
+                          border-bottom: 1px dotted #808080;
                         }
                     }
                     .copyright-source:hover {

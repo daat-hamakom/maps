@@ -269,6 +269,7 @@ body {
                 margin: 10px 0;
                 line-height: 40px;
                 font-family: "Merriweather Sans", sans-serif;
+                color: #333333;
                 &.is-focused,
                 &:hover {
                     background-color: #FAFAFA;
@@ -276,7 +277,12 @@ body {
                 &:first-child {
                     margin-top: 0;
                 }
+                strong {
+                    font-size: 15px;
+                    font-weight: bolder;
+                    color: #000;
                 }
+            }
             .label-select-options {
                 margin-bottom: 0;
                 font-family: "Merriweather Sans", sans-serif;

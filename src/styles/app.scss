@@ -563,8 +563,8 @@ body {
         }
         div.controls {
             position: absolute;
-            bottom: 20px;
-            z-index: 10;
+            bottom: 35px;
+            z-index: 35;
             right: 2%;
             ul {
                 list-style: none;
@@ -684,6 +684,16 @@ body {
                 &::after {
                   top:11px;
                 }
+            }
+        }
+        .toggle-metadata {
+            padding-bottom: 2px;
+        }
+        &.metadata-open {
+            .toggle-metadata {
+                transform: rotate(180deg);
+                padding-bottom: 0;
+                padding-top: 2px;
             }
         }
     }

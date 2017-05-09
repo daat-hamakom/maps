@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="29px" height="29px" viewBox="0 0 29 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/double-arrow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="icon/double-arrow" stroke="#A6A6A6">
+            <g id="icon/arrows" transform="translate(12.000000, 10.000000)">
+                <path d="M0,2.5 L2.5,0 L5,2.5 M0,6.5 L2.5,4 L5,6.5" id="Combined-Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

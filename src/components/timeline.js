@@ -339,6 +339,9 @@ class D3Timeline extends Component {
     return <div ref='timeline'>
       <div className='controls'>
         <ul>
+          <li onClick={this.props.toggleMetadata} >
+            <img src="/static/img/double-arrow.svg" alt="Toggle Metadata" className="toggle-metadata" />
+          </li>
           <li onClick={(e) => { this.doZoom(1, 0.5) }} >
             +
           </li>
@@ -674,7 +677,6 @@ class CardsView extends Component {
     super(props);
     this.state = { filter: 'projects' };
 
-    this.getOptionImage = getOptionImage.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
     this.cardsScrollLeft = this.cardsScrollLeft.bind(this);
     this.cardsScrollRight = this.cardsScrollRight.bind(this);
@@ -852,22 +854,6 @@ class ItemCard extends Component {
     if (option.img) return option.img.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg' ;
 
     return null;
-    // switch (option.type) {
-    //   case 'project':
-    //     return '/static/img/project-icon.svg';
-    //   case 'person':
-    //     return '/static/img/person-icon.svg';
-    //   case 'organization':
-    //     return '/static/img/organization-icon.svg';
-    //   case 'event':
-    //     return '/static/img/event-icon.svg';
-    //   case 'place':
-    //     return '/static/img/place-icon.svg';
-    //   case 'tag':
-    //     return '/static/img/tag-icon.svg';
-    //   default:
-    //     return null;
-    // }
   }
 
   render() {
@@ -1018,15 +1004,22 @@ class Timeline extends Component {
     const research = params.projId ? props.drawerData : null
 
     let height = 46 + 120; // search + timeline
+    let className;
     if (this.state.showCardsView || this.state.searchFocused) {
       height = height + 150;
+      className = 'show-cards-view';
     } else {
       if (props.app.drawer && props.drawerData && (params.projId || params.personId || params.orgId || params.placeId)) {
         height = height + 200;
+        className = 'metadata-open';
       }
     }
 
-    return <div id='timeline' style={{height: height}} className={this.state.showCardsView ? 'show-cards-view' : ''}>
+    return <div
+      id='timeline'
+      style={{height: height}}
+      className={className}
+    >
       <FilterBar
         params={params}
         drawerData={props.drawerData}
@@ -1076,6 +1069,7 @@ class Timeline extends Component {
         openEventSidepane={props.openEventSidepane}
         hoverEnterEvent={props.hoverEnterEvent}
         hoverExitEvent={props.hoverExitEvent}
+        toggleMetadata={this.handleClick}
       />
     </div>
   }

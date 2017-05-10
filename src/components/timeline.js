@@ -766,7 +766,7 @@ class CardsView extends Component {
 
     }
 
-    return <div id='cards-view' style={style}>
+    return <div id='cards-view'>
       <div className="filters">
         <CardsViewFilter
           name="Researches"
@@ -1042,7 +1042,6 @@ class Timeline extends Component {
         toggleDrawer={this.props.toggleDrawer}
       />
       <CardsView
-        style={{ display: (this.state.showCardsView ? 'block' : 'none') }}
         projects={props.projects.items}
         people={props.people.items}
         events={props.allEvents}

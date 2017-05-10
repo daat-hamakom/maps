@@ -1033,7 +1033,9 @@ class Timeline extends Component {
         showCardsView={this.showCardsView}
         searchFocused={this.searchFocused}
       />
-      <button className="close-search" onClick={this.handleClickOutside}>X</button>
+      <button className="close-search" onClick={this.handleClickOutside}>
+        <img className="image-select-options" src='/static/img/close-group.svg' />
+      </button>
       <TimelineMetadata
         drawerData={props.drawerData}
         app={props.app}

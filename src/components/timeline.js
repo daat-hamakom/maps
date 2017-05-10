@@ -1007,7 +1007,7 @@ class Timeline extends Component {
     let className;
     if (this.state.showCardsView || this.state.searchFocused) {
       height = height + 150;
-      className = 'show-cards-view';
+      className = this.state.showCardsView ? 'show-cards-view' : '';
     } else {
       if (props.app.drawer && props.drawerData && (params.projId || params.personId || params.orgId || params.placeId)) {
         height = height + 200;

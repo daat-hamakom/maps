@@ -895,7 +895,7 @@ class Timeline extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { showCardsView: true, searchFocused: false };
+    this.state = { showCardsView: false, searchFocused: false };
     this.resized = false;
     this.showCardsView = this.showCardsView.bind(this);
     this.searchFocused = this.searchFocused.bind(this);

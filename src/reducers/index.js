@@ -13,7 +13,7 @@ import { REQUEST_EVENTS, REQUEST_EVENTS_FAIL, REQUEST_EVENTS_SUCCESS,
   HOVER_ENTER_EVENT, HOVER_EXIT_EVENT, SELECT_EVENT, DESELECT_EVENT, SET_APP_STYLE, TOGGLE_DRAWER,
   OPEN_LIGHTBOX, CLOSE_LIGHTBOX, OPEN_HELP_MODAL, CLOSE_HELP_MODAL, OPEN_ABOUT_MODAL, CLOSE_ABOUT_MODAL } from '../actions'
 
-function app(state = { hover: [], selected: [], origin: null, style: 'default', drawer: true }, action) {
+function app(state = { hover: [], selected: [], origin: null, style: 'default', drawer: false }, action) {
   switch (action.type) {
     case HOVER_ENTER_EVENT:
       return Object.assign({}, state, { hover: action.ev, origin: action.origin });

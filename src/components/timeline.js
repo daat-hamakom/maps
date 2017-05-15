@@ -895,12 +895,20 @@ class Timeline extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { showCardsView: false, searchFocused: false };
+    this.state = { showCardsView: true, searchFocused: false };
     this.resized = false;
     this.showCardsView = this.showCardsView.bind(this);
     this.searchFocused = this.searchFocused.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+
+  componentWillMount () {
+    const { app, params, drawerData, ...props } = this.props;
+    if (params.projId || params.personId || params.orgId || params.placeId) {
+      this.props.toggleDrawer(true);
+      this.setState({ showCardsView: false });
+    }
   }
 
   showCardsView (value) {

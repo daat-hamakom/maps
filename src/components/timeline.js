@@ -863,7 +863,7 @@ class ItemCard extends Component {
       { item.label && <Dotdotdot clamp={2} >
         <p className="cards-view-title" title={item.label}>{item.label}</p>
       </Dotdotdot>}
-      <div style={{ background: item.img ? `url("${this.getOptionImage(item)}")` : '#F3F3F3'}} className="cards-view-image"></div>
+      <div style={{ backgroundImage: item.img ? `url("${this.getOptionImage(item)}")` : '#F3F3F3'}} className="cards-view-image"></div>
     </Link>
   }
 }

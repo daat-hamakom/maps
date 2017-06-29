@@ -93,6 +93,13 @@ class EventPane extends Component {
       thumburl = 'http://img.youtube.com/vi/' + ytid + '/0.jpg'
     }
 
+    // todo - get people
+    const people_ids = ev.people.map((ep) => ep.id);
+    let people = this.props.people.items.filter(p => people_ids.indexOf(p.id) > -1);
+
+    const organizations_ids = ev.organizations.map((eo) => eo.id);
+    let organizations = this.props.organizations.items.filter(o => organizations_ids.indexOf(o.id) > -1);
+
     return <div id='eventpane' className={evs.length > 0 ? 'open' : 'closed'}>
 
       <div className="eventpane-header">
@@ -145,14 +152,14 @@ class EventPane extends Component {
         )}
         {(ev.people.length || ev.organizations.length) ? <hr/> : null}
         <div className='links'>
-          {ev.people.length || ev.organizations.length ? <p>Associated with this event: </p> : null }
-          {ev.people.map((p) => <Link key={p.id} to={`/person/${p.id}`} onClick={() => {this.props.closeSidepane()}} className='person-link'>
+          {people.length || organizations.length ? <p>Associated with this event: </p> : null }
+          {people.map((p) => <Link key={p.id} to={`/person/${p.id}`} onClick={() => {this.props.closeSidepane()}} className='person-link'>
             <div className="link-image-wrapper" >
-              <img className="link-image" src={this.getOptionImage({ img: p.profile_image && p.profile_image.url, type:'person' })} />
+              <img className="link-image" src={this.getOptionImage({ img: p.profile_image && (p.profile_image.url || p.profile_image.file), type:'person' })} />
             </div>
             {p.first_name + ' ' + p.last_name}
           </Link>)}
-          {ev.organizations.map((o) => <Link  key={o.id} to={`/organization/${o.id}`} onClick={() => {this.props.closeSidepane()}} className='org-link'>
+          {organizations.map((o) => <Link  key={o.id} to={`/organization/${o.id}`} onClick={() => {this.props.closeSidepane()}} className='org-link'>
             <div className="link-image-wrapper" >
               <img className="link-image" src={this.getOptionImage({ img: o.cover_image && o.cover_image.file, type:'organization' })} />
             </div>
@@ -203,16 +210,16 @@ class EventsPane extends Component {
           props.selectEvent([e])
           let url = '/event/' + e.id
           if (params.projId) {
-            url = '/project/' + params.projId + '/' + url
+            url = '/project/' + params.projId + url
           }
           else if (params.personId) {
-            url = '/person/' + params.personId + '/' + url
+            url = '/person/' + params.personId + url
           }
           else if (params.orgId) {
-            url = '/organization/' + params.orgId + '/' + url
+            url = '/organization/' + params.orgId + url
           }
           else if (params.tagName) {
-            url = '/tag/' + params.tagName + '/' + url
+            url = '/tag/' + params.tagName + url
           }
           this.context.router.push(url)
         }}>

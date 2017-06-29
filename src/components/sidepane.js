@@ -201,18 +201,18 @@ class EventsPane extends Component {
       <div div id='events-container'>
         {evs.map((e) => <div key={'list-event-' + e.id} className={'event ' + getEventStyle(e)} onClick={() => {
           props.selectEvent([e])
-          let url = 'event/' + e.id
+          let url = '/event/' + e.id
           if (params.projId) {
-            url = 'project/' + params.projId + '/' + url
+            url = '/project/' + params.projId + '/' + url
           }
           else if (params.personId) {
-            url = 'person/' + params.personId + '/' + url
+            url = '/person/' + params.personId + '/' + url
           }
           else if (params.orgId) {
-            url = 'organization/' + params.orgId + '/' + url
+            url = '/organization/' + params.orgId + '/' + url
           }
           else if (params.tagName) {
-            url = 'tag/' + params.tagName + '/' + url
+            url = '/tag/' + params.tagName + '/' + url
           }
           this.context.router.push(url)
         }}>

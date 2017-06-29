@@ -156,21 +156,21 @@ class MarkerData extends Component {
 
         return <g className={evstyle} ref={'marker-' + d.id} key={d.id} onClick={(e) => {
           this.props.openEventSidepane([d])
-          let url = 'event/' + d.id
+          let url = '/event/' + d.id
           if (this.props.params.projId) {
-            url = 'project/' + this.props.params.projId + '/' + url
+            url = '/project/' + this.props.params.projId + '/' + url
           }
           else if (this.props.params.personId) {
-            url = 'person/' + this.props.params.personId + '/' + url
+            url = '/person/' + this.props.params.personId + '/' + url
           }
           else if (this.props.params.orgId) {
-            url = 'organization/' + this.props.params.orgId + '/' + url
+            url = '/organization/' + this.props.params.orgId + '/' + url
           }
           else if (this.props.params.tagName) {
-            url = 'tag/' + encodeURIComponent(this.props.params.tagName) + '/' + url
+            url = '/tag/' + encodeURIComponent(this.props.params.tagName) + '/' + url
           }
           else if (this.props.params.placeId) {
-            url = 'place/' + encodeURIComponent(this.props.params.placeId) + '/' + url
+            url = '/place/' + encodeURIComponent(this.props.params.placeId) + '/' + url
           }
           this.context.router.push(url)
           this.props.hoverExitEvent()

@@ -18,11 +18,11 @@ function app(state = { hover: [], selected: [], origin: null, style: 'default', 
     case HOVER_ENTER_EVENT:
       return Object.assign({}, state, { hover: action.ev, origin: action.origin });
     case HOVER_EXIT_EVENT:
-      return Object.assign({}, state, { hover: [], origin: null });
+      return Object.assign({}, state, { hover: [] });
     case SELECT_EVENT:
       return Object.assign({}, state, { selected: action.ev, origin: action.origin });
     case DESELECT_EVENT:
-      return Object.assign({}, state, { selected: [], origin: null });
+      return Object.assign({}, state, { selected: [] });
     case SET_APP_STYLE:
       return Object.assign({}, state, { style: action.style });
     case TOGGLE_DRAWER:

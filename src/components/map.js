@@ -328,7 +328,7 @@ class GLMap extends React.Component {
             (ev) => featureIds.includes(ev.id)
           ))
           if (featureIds.length == 1) {
-            let url = 'event/' + featureIds[0]
+            let url = '/event/' + featureIds[0]
             if (this.props.params.projId) {
               url = 'project/' + this.props.params.projId + '/' + url
             }

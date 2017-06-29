@@ -647,16 +647,17 @@ body {
         }
         div.annotation {
             position: absolute;
-            bottom: 119px;
-            line-height: 20px;
+            bottom: 133px;
+            line-height: 25px;
             z-index: 100;
             span.text {
                 color: #ffffff;
-                padding: 1px 5px;
-                font-size: 0.8em;
+                padding: 5px;
+                font-size: 0.9em;
                 margin-left: -50%;
                 background-color: #2dc6e0;
                 white-space: nowrap;
+                border-radius: 3px;
             }
             &.inactive {
                 display: none;
@@ -913,7 +914,7 @@ body {
                 overflow-y: scroll;
                 a {
                     text-decoration: none;
-                    border-radius: 5px;
+                    border-radius: 50px 5px 5px 50px;
                     display: inline-block;
                     padding: 0 3px;
                 }
@@ -1430,12 +1431,12 @@ body {
       border-color: $postwar-secondary;
       div.content,
       div.event-data{
-        color: darken($postwar-secondary, 10);
+        color: darken($postwar-secondary, 15);
         a {
-          color: darken($postwar-secondary, 10);
+          color: darken($postwar-secondary, 15);
           &.person-link,
           &.org-link {
-            background: fade-out($postwar-primary, 0.75);
+            background: fade-out(darken($postwar-secondary, 10), 0.75);
           }
         }
         h2,
@@ -1508,7 +1509,7 @@ body {
             }
         }
         .modal-body {
-            padding: 0 80px 15px 80px;
+            padding: 0 80px 80px 80px;
             font-family: "Merriweather", serif;
         }
         .modal-title {

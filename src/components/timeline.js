@@ -860,9 +860,11 @@ class ItemCard extends Component {
     const { item, onClick, label } = this.props;
     return <Link to={`/${item.type}/${item.id}`} className={`cards-view-item cards-view-${item.type}`}  onClick={onClick}>
       <p className="cards-view-events-count" onClick={onClick}>{item.count || 0} { label }</p>
-      { item.label && <Dotdotdot clamp={2} >
-        <p className="cards-view-title" title={item.label}>{item.label}</p>
-      </Dotdotdot>}
+      { item.label && <div title={item.label}>
+        <Dotdotdot clamp={2} className="cards-view-title">
+          {item.label}
+        </Dotdotdot>
+      </div>}
       <div style={{ backgroundImage: item.img ? `url("${this.getOptionImage(item)}")` : '#F3F3F3'}} className="cards-view-image"></div>
     </Link>
   }

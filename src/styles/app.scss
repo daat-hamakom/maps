@@ -727,6 +727,7 @@ body {
         }
         &.closed {
             z-index: 0;
+            display: none;
             div#eventpane, div#eventspane {
                 display: none;
             }

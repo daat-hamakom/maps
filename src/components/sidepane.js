@@ -57,6 +57,9 @@ class EventPane extends Component {
     if (evs && evs.length > 0) {
       if (evs[0].id != this.state.evid) {
         this.setState({ evid: evs[0].id, selected_media: 0})
+      //  content
+        let content = document.querySelector('#eventpane .content');
+        content.scrollTop = 0;
       }
     }
   }

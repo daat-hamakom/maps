@@ -224,7 +224,7 @@ class EventsPane extends Component {
           this.context.router.push(url)
         }}>
           <span className="event-icon">
-            <img src={e.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}></img>
+            <div className="event-img" style={{ backgroundImage: `url(${e.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'})` }}></div>
           </span>
           <div className="event-data">
             <div className='project'>{projects.items.find((p) => p.id == e.project).title}</div>

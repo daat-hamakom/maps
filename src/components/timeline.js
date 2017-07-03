@@ -337,11 +337,8 @@ class D3Timeline extends Component {
 
   render () {
     return <div ref='timeline'>
-      <div className='controls'>
+      <div className='controls timeline'>
         <ul>
-          <li onClick={this.props.toggleMetadata} >
-            <img src="/static/img/double-arrow.svg" alt="Toggle Metadata" className="toggle-metadata" />
-          </li>
           <li onClick={(e) => { this.doZoom(1, 0.5) }} >
             +
           </li>
@@ -540,6 +537,13 @@ class FilterBar extends Component {
         onFocus={this.onFocus}
         onBlur={this.onBlur}
       />
+      <div className='controls filter'>
+        <ul>
+          <li onClick={this.props.toggleMetadata} >
+            <img src="/static/img/double-arrow.svg" alt="Toggle Metadata" className="toggle-metadata" />
+          </li>
+        </ul>
+      </div>
     </div>
   }
 }
@@ -1043,6 +1047,7 @@ class Timeline extends Component {
         openEventSidepane={props.openEventSidepane}
         showCardsView={this.showCardsView}
         searchFocused={this.searchFocused}
+        toggleMetadata={this.handleClick}
       />
       <button className="close-search" onClick={this.handleClickOutside}>
         <img className="image-select-options" src='/static/img/close-group.svg' />
@@ -1081,7 +1086,6 @@ class Timeline extends Component {
         openEventSidepane={props.openEventSidepane}
         hoverEnterEvent={props.hoverEnterEvent}
         hoverExitEvent={props.hoverExitEvent}
-        toggleMetadata={this.handleClick}
       />
     </div>
   }

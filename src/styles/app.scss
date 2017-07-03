@@ -607,9 +607,31 @@ body {
         }
         div.controls {
             position: absolute;
-            bottom: 35px;
             z-index: 35;
             right: 2%;
+            &.timeline{
+                bottom: 35px;
+            }
+            &.filter{
+                top: 18px;
+                li {
+                    img {
+                        position: relative;
+                        top: -35px;
+                    }
+                    &:before {
+                        content: '';
+                        display: inline-block;
+                        border-top: solid 1px #EBEBEB;
+                        border-right: solid 1px #EBEBEB;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                        transform: rotate(-45deg);
+                        color: transparent;
+                    }
+                }
+            }
             ul {
                 list-style: none;
                 margin: 5px;
@@ -665,7 +687,7 @@ body {
               }
           }
           rect.marker {
-            opacity: 0.2;
+            opacity: 0;
             height: 3px;
             stroke-width: 2px;
             stroke: transparent;

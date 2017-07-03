@@ -28,17 +28,53 @@ body {
       height: 100%;
       width: 100%;
     }
-    div#toolbarButtons {
+    div#toolbar-buttons {
         position: absolute;
         top: 30px;
         right: 30px;
         cursor: pointer;
-        overflow: hidden;
-        height: 24px;
         font-family: "Merriweather Sans", sans-serif;
         font-size: 14px;
         line-height: 24px;
         color: #47525D;
+        .help-button {
+            display: inline-block;
+            position: relative;
+            .help-flicker {
+                position: absolute;
+                top: 30px;
+                right: 0;
+                padding: 20px;
+                color: #FFFFFF;
+                height: 257px;
+                width: 315px;
+                border-radius: 3px;
+                background-color: #3A62FF;
+                opacity: 1;
+                -webkit-transition: opacity 2s;
+                transition: opacity 2s;
+                &.fade-out{
+                    opacity: 0;
+                }
+                &::before{
+                    content:"";
+                    width: 15px;
+                    height: 15px;
+                    background: #3A62FF;
+                    transform:rotate(45deg);
+                    border-radius: 3px;
+                    position: absolute;
+                    top: -5px;
+                    right: 18px;
+                }
+                .flicker-video {
+                    outline: none;
+                    border: none;
+                    margin-top: 7px;
+                    pointer-events: none;
+                }
+            }
+        }
     }
     div#map-container {
         position: absolute;

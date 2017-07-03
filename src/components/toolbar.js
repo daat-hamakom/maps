@@ -1,12 +1,28 @@
 import React, { Component } from 'react'
 import { Modal, Tab, Nav, NavItem } from 'react-bootstrap';
+import cookie from 'react-cookie';
+
 
 export class ToolbarButtons extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {hideFlicker: false};
+  }
+
+  componentDidMount () {
+    setTimeout( () => this.setState({hideFlicker: true}), 5000)
+  }
+
   render () {
-    return <div id='toolbarButtons'>
+    const hideFlicker = cookie.load('hideFlicker');
+
+    return <div id='toolbar-buttons'>
       <span onClick={this.props.openAboutModal}>About</span>
       <span style={{ margin: "0 15px", opacity: 0.25 }}>|</span>
-      <span onClick={this.props.openHelpModal}>Help</span>
+      <div className="help-button">
+        <span onClick={this.props.openHelpModal} >Help</span>
+        { !hideFlicker && <HelpFlicker onClick={this.props.openHelpModal} className={this.state.hideFlicker ? 'fade-out' : ''} /> }
+      </div>
     </div>
   }
 }
@@ -153,5 +169,29 @@ export class HelpModal extends Component {
         </Tab.Container>
       </Modal.Body>
     </Modal>
+  }
+}
+
+
+export class HelpFlicker extends Component {
+  constructor (props) {
+    super(props);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(e) {
+    this.props.onClick(e);
+    cookie.save('hideFlicker', true)
+  }
+
+  render () {
+    return <div className={`help-flicker ${this.props.className}`}>
+      Watch a short intro:
+      <div onClick={this.onClick}>
+        <iframe width="275" height="192" src="https://www.youtube.com/embed/ydkxP7QMLPA"
+                className="flicker-video">
+        </iframe>
+      </div>
+    </div>
   }
 }

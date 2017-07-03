@@ -990,12 +990,13 @@ class Timeline extends Component {
   }
 
   componentDidUpdate (prevProps, _prevState) {
-    const { params, events, drawerData } = this.props;
+    const { params, events, drawerData, app } = this.props;
     const prevParams = prevProps.params;
+    const { origin } = app;
 
     // todo - understand why this is here
     if (!this.resized && events.length) {
-      if (params.projId && drawerData) {
+      if (params.projId && drawerData && origin != 'timeline') {
         this.zoomTimelineByEvents(events)
       }
       else {
@@ -1004,7 +1005,7 @@ class Timeline extends Component {
     }
 
     let zoomCondition = (JSON.stringify(params) !== JSON.stringify(prevParams) );
-    if ( zoomCondition ) this.zoomTimelineByEvents(events);
+    if ( zoomCondition && origin != 'timeline') this.zoomTimelineByEvents(events);
 
   }
 

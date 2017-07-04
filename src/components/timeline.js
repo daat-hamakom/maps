@@ -443,6 +443,7 @@ class FilterBar extends Component {
   }
 
   handleChange (val) {
+    this.props.closeEventSidepane()
     this.context.router.push(`/${(val ? [val.type, val.id].join('/') : '')}`);
     this.setState({ focus: false, filter: "" });
   }
@@ -533,7 +534,6 @@ class FilterBar extends Component {
         onChange={(v) => {this.handleChange(v)}}
         optionRenderer={this.optionRenderer}
         valueRenderer={this.valueRenderer}
-        onOpen={props.closeEventSidepane}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
       />

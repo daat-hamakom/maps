@@ -127,7 +127,7 @@ class EventPane extends Component {
       </div>
 
       <div className='content'>
-      <Link to={`/project/${this.props.projects.items.find((p) => p.id == ev.project).id}`} className='project' onClick={() =>  {this.props.closeSidepane()}}>{this.props.projects.items.find((p) => p.id == ev.project).title}</Link>
+      <Link to={`/project/${this.props.projects.items.find((p) => p.id == ev.project).id}`} className='project'>{this.props.projects.items.find((p) => p.id == ev.project).title}</Link>
         <h2 className='title'>{ev.title}</h2>
         <div className='place'>{ev.place.name}</div>
         <div className='date'>{_cleanDates(ev.start_date_orig, ev.end_date_orig, ev.circa_date)}</div>
@@ -156,13 +156,13 @@ class EventPane extends Component {
         {(ev.people.length || ev.organizations.length) ? <hr/> : null}
         <div className='links'>
           {people.length || organizations.length ? <p>Associated with this event: </p> : null }
-          {people.map((p) => <Link key={p.id} to={`/person/${p.id}`} onClick={() => {this.props.closeSidepane()}} className='person-link'>
+          {people.map((p) => <Link key={p.id} to={`/person/${p.id}`} className='person-link'>
             <div className="link-image-wrapper" >
               <img className="link-image" src={this.getOptionImage({ img: p.profile_image && (p.profile_image.url || p.profile_image.file), type:'person' })} />
             </div>
             {p.first_name + ' ' + p.last_name}
           </Link>)}
-          {organizations.map((o) => <Link  key={o.id} to={`/organization/${o.id}`} onClick={() => {this.props.closeSidepane()}} className='org-link'>
+          {organizations.map((o) => <Link  key={o.id} to={`/organization/${o.id}`} className='org-link'>
             <div className="link-image-wrapper" >
               <img className="link-image" src={this.getOptionImage({ img: o.cover_image && o.cover_image.file, type:'organization' })} />
             </div>

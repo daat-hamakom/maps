@@ -66,7 +66,7 @@ export function requestEventsSuccess(items) {
 export function fetchEvents(projId) {
   return dispatch => {
     dispatch(requestEvents())
-    let url = `https://daat-hamakom-data-staging.herokuapp.com/api/events/?dataset=${window.location.hostname}`
+    let url = `https://daat-hamakom-data.herokuapp.com/api/events/?dataset=${window.location.hostname}`
     if (projId) {
       url = url + '?project=' + projId
     }
@@ -98,7 +98,7 @@ export function requestProjectsSuccess(items) {
 export function fetchProjects() {
   return dispatch => {
     dispatch(requestProjects())
-    return fetch(`https://daat-hamakom-data-staging.herokuapp.com/api/projects/?dataset=${window.location.hostname}`)
+    return fetch(`https://daat-hamakom-data.herokuapp.com/api/projects/?dataset=${window.location.hostname}`)
       .then(response =>
         response.json()
       )
@@ -126,7 +126,7 @@ export function requestAnnotationsSuccess(items) {
 export function fetchAnnotations() {
   return dispatch => {
     dispatch(requestAnnotations())
-    return fetch(`https://daat-hamakom-data-staging.herokuapp.com/api/annotations/?dataset=${window.location.hostname}`)
+    return fetch(`https://daat-hamakom-data.herokuapp.com/api/annotations/?dataset=${window.location.hostname}`)
       .then(response =>
         response.json()
       )
@@ -154,7 +154,7 @@ export function requestPlacesSuccess(items) {
 export function fetchPlaces() {
   return dispatch => {
     dispatch(requestPlaces())
-    return fetch(`https://daat-hamakom-data-staging.herokuapp.com/api/places/?dataset=${window.location.hostname}`)
+    return fetch(`https://daat-hamakom-data.herokuapp.com/api/places/?dataset=${window.location.hostname}`)
       .then(response =>
         response.json()
       )
@@ -182,7 +182,7 @@ export function requestPeopleSuccess(items) {
 export function fetchPeople() {
   return dispatch => {
     dispatch(requestPlaces())
-    return fetch(`https://daat-hamakom-data-staging.herokuapp.com/api/people/?dataset=${window.location.hostname}`)
+    return fetch(`https://daat-hamakom-data.herokuapp.com/api/people/?dataset=${window.location.hostname}`)
       .then(response =>
         response.json()
       )
@@ -210,7 +210,7 @@ export function requestOrganizationsSuccess(items) {
 export function fetchOrganizations() {
   return dispatch => {
     dispatch(requestPlaces())
-    return fetch(`https://daat-hamakom-data-staging.herokuapp.com/api/organizations/?dataset=${window.location.hostname}`)
+    return fetch(`https://daat-hamakom-data.herokuapp.com/api/organizations/?dataset=${window.location.hostname}`)
       .then(response =>
         response.json()
       )

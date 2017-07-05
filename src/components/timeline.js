@@ -305,6 +305,7 @@ class D3Timeline extends Component {
   }
 
   handleSelected(t, origin) {
+    return
     if (t == 'select' && origin != 'timeline') {
       let ev = this.props.app.selected[0]
       this.centerEvent(ev)
@@ -986,8 +987,13 @@ class Timeline extends Component {
       }
     }
 
-    ns.subtract(padding);
-    ne.add(padding);
+    if (ne > moment('1750', 'YYYY')) {
+      ne = moment('2050', 'YYYY')
+      ns = moment('1650', 'YYYY')
+    } else {
+      ns.subtract(padding);
+      ne.add(padding);
+    }
 
     this.resized = true;
     props.shiftTimeline(ns, ne);

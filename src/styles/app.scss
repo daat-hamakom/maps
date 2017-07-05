@@ -67,11 +67,20 @@ body {
                     top: -5px;
                     right: 18px;
                 }
+                span {
+                    font-size: 13px;
+                    line-height: 17px;
+                }
                 .flicker-video {
                     outline: none;
                     border: none;
                     margin-top: 7px;
                     pointer-events: none;
+                }
+                .flicker-close {
+                    height: 11px;
+                    width: 11px;
+                    margin: 6px 6px 0 0;
                 }
             }
         }

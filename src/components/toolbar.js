@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, Tab, Nav, NavItem } from 'react-bootstrap';
 import cookie from 'react-cookie';
+const enhanceWithClickOutside = require('react-click-outside');
 
 
 export class ToolbarButtons extends Component {
@@ -10,7 +11,7 @@ export class ToolbarButtons extends Component {
   }
 
   componentDidMount () {
-    setTimeout( () => this.setState({hideFlicker: true}), 5000)
+    setTimeout( () => this.setState({hideFlicker: true}), 15000)
   }
 
   render () {
@@ -173,10 +174,12 @@ export class HelpModal extends Component {
 }
 
 
-export class HelpFlicker extends Component {
+class HelpFlicker extends Component {
   constructor (props) {
     super(props);
     this.onClick = this.onClick.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.state = {hideFlicker: false};
   }
 
   onClick(e) {
@@ -184,9 +187,14 @@ export class HelpFlicker extends Component {
     cookie.save('hideFlicker', true)
   }
 
+  handleClickOutside() {
+    this.setState({ hideFlicker: true });
+  }
+
   render () {
-    return <div className={`help-flicker ${this.props.className}`}>
+    return <div className={`help-flicker ${this.props.className} ${this.state.hideFlicker ? 'fade-out' : ''}`}>
       Watch a short intro:
+      <img className="flicker-close pull-right" src='/static/img/close-flicker.svg' onClick={this.handleClickOutside} />
       <div onClick={this.onClick}>
         <iframe width="275" height="192" src="https://www.youtube.com/embed/ydkxP7QMLPA"
                 className="flicker-video">
@@ -195,3 +203,4 @@ export class HelpFlicker extends Component {
     </div>
   }
 }
+HelpFlicker = enhanceWithClickOutside(HelpFlicker)

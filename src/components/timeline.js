@@ -987,7 +987,7 @@ class Timeline extends Component {
       }
     }
 
-    if (ne > moment('1750', 'YYYY')) {
+    if (params.eventId && ne > moment('1750', 'YYYY')) {
       ne = moment('2050', 'YYYY')
       ns = moment('1650', 'YYYY')
     } else {

@@ -130,6 +130,13 @@ export class AboutModal extends Component {
 }
 
 export class HelpModal extends Component {
+  componentDidUpdate () {
+    if (this.props.show) {
+      let element = document.getElementsByClassName("help-modal");
+      element[0].scrollTop += 1000;
+    }
+  }
+
   render () {
     return <Modal show={this.props.show} onHide={this.props.onHide}  className="daat-modal help-modal">
       <Modal.Header>
@@ -156,13 +163,13 @@ export class HelpModal extends Component {
               <Tab.Pane eventKey="help-timeline">
                 <h4 className="modal-subtitle">The map and the timeline</h4>
                 Use the pad or the mouse wheel to scroll and zoom in the map or the timeline. Hovering on an event on the map or the timeline opens the event thumbnail on the map and the event title appears above the hovered event on the timeline. The colour of the marker is according to the time epoch of the event.
-                <iframe width="540" height="310" src="https://www.youtube.com/embed/ydkxP7QMLPA" className="modal-video">
+                <iframe width="540" height="310" src="https://www.youtube.com/embed/ydkxP7QMLPA?autoplay=1" className="modal-video" allowFullScreen>
                 </iframe>
               </Tab.Pane>
               <Tab.Pane eventKey="help-event">
                 <h4 className="modal-subtitle">Looking into an event</h4>
                 Click on an event marker on the map or the timeline. The info card of the event will open on the right side of the map. If the location contains more than one event, select one event from the list of all the event of the location. In the event cards you can browse the images and video clips on the top of the card or open an enlarged view by clicking on the image. Events containing sound will have a sound player. At the bottom of the event cards are related people and organizations. Hotspots on project name, people and organizations will open a filtered view of the map.
-                <iframe width="540" height="310" src="https://www.youtube.com/embed/ydkxP7QMLPA" className="modal-video">
+                <iframe width="540" height="310" src="https://www.youtube.com/embed/ydkxP7QMLPA" className="modal-video" allowFullScreen>
                 </iframe>
               </Tab.Pane>
             </Tab.Content>

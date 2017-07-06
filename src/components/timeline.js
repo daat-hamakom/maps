@@ -988,12 +988,11 @@ class Timeline extends Component {
     }
 
     if (params.eventId && ne > moment('1750', 'YYYY')) {
-      ne = moment('2050', 'YYYY')
-      ns = moment('1650', 'YYYY')
-    } else {
-      ns.subtract(padding);
-      ne.add(padding);
+      let today = moment().add(moment.duration(5, 'years').asMilliseconds());
+      padding = today.diff(ne);
     }
+    ns.subtract(padding);
+    ne.add(padding);
 
     this.resized = true;
     props.shiftTimeline(ns, ne);

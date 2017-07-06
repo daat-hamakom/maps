@@ -56,7 +56,8 @@ class EventPane extends Component {
     const evs = this.props.app.selected
     if (evs && evs.length > 0) {
       if (evs[0].id != this.state.evid) {
-        this.setState({ evid: evs[0].id, selected_media: 0})
+        const ev = evs[0]
+        this.setState({ evid: evs[0].id, selected_media: ev.media.findIndex((e) => { return e.file == ev.icon })})
       //  content
         let content = document.querySelector('#eventpane .content');
         content.scrollTop = 0;

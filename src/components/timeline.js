@@ -538,13 +538,13 @@ class FilterBar extends Component {
         onFocus={this.onFocus}
         onBlur={this.onBlur}
       />
-      <div className='controls filter'>
+      { !this.state.focus && <div className='controls filter'>
         <ul>
           <li onClick={this.props.toggleMetadata} >
             <img src="/static/img/double-arrow.svg" alt="Toggle Metadata" className="toggle-metadata" />
           </li>
         </ul>
-      </div>
+      </div> }
     </div>
   }
 }

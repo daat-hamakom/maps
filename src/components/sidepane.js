@@ -110,7 +110,7 @@ class EventPane extends Component {
         <span className='close' onClick={() => {this.closePane()}} />
 
         {medias.length ?
-          m.type == 'image' ?
+          m && m.type == 'image' ?
             <img className='head magnify' src={m.file.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}
               onClick={() => { this.props.selectMedia(ev, ev.media.findIndex((e) => { return e.file == m.file })) }}></img>
             : <div className='youtube-cover' onClick={() => { this.props.selectMedia(ev, ev.media.findIndex((e) => { return e.url == m.url })) }}>

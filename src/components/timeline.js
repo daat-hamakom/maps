@@ -146,8 +146,8 @@ class MarkerData extends Component {
         const height = 2
         const r = height + 1
         const evstyle = getEventStyle(d)
-        let className = (this.props.app.hover[0] && this.props.app.hover[0].id == d.id) || (
-          this.props.app.selected[0] && this.props.app.selected[0].id == d.id) ? 'marker active' : 'marker inactive'
+        // (this.props.app.hover[0] && this.props.app.hover[0].id == d.id) ||
+        let className = (this.props.app.selected[0] && this.props.app.selected[0].id == d.id) ? 'marker active' : 'marker inactive'
         className = className + ' ' + evstyle
 
         const rectProps = { x: x, width: width, y: y, height: height, rx: 2, ry: 2, className: className }
@@ -821,12 +821,12 @@ class CardsView extends Component {
       <div className="cards" id="cards-container">
         {this.state.filter != 'tags' ? selectedItems.map((item) => <ItemCard
           item={item}
-          onClick={() => showCardsView(false)}
+          onClick={() => { showCardsView(false); this.props.closeEventSidepane(); } }
           key={item.id}
           label={label}
         />) : selectedItems.map((items, index) => <ItemCards
           items={items}
-          onClick={() => showCardsView(false)}
+          onClick={() => {showCardsView(false); this.props.closeEventSidepane();}}
           key={index}
         />)}
       </div>
@@ -1071,6 +1071,7 @@ class Timeline extends Component {
         places={props.places.items}
         organizations={props.organizations.items}
         showCardsView={this.showCardsView}
+        closeEventSidepane={props.closeEventSidepane}
       />
       <D3Timeline
         width={document.body.offsetWidth}

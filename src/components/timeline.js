@@ -146,8 +146,8 @@ class MarkerData extends Component {
         const height = 2
         const r = height + 1
         const evstyle = getEventStyle(d)
-        // (this.props.app.hover[0] && this.props.app.hover[0].id == d.id) ||
-        let className = (this.props.app.selected[0] && this.props.app.selected[0].id == d.id) ? 'marker active' : 'marker inactive'
+        let className = (this.props.app.hover[0] && this.props.app.hover[0].id == d.id) ||
+        (this.props.app.selected[0] && this.props.app.selected[0].id == d.id) ? 'marker active' : 'marker inactive'
         className = className + ' ' + evstyle
 
         const rectProps = { x: x, width: width, y: y, height: height, rx: 2, ry: 2, className: className }
@@ -174,13 +174,14 @@ class MarkerData extends Component {
           }
           this.context.router.push(url)
           this.props.hoverExitEvent()
-        }} onMouseEnter={(e) => {
-          this.props.hoverEnterEvent([d])
-        }} onMouseLeave={(e) => {
-          this.props.hoverExitEvent()
-        }}>
-          <circle {...circleProps}></circle>
-          <rect {...rectProps}></rect>
+        }}
+        >
+          <circle {...circleProps}
+            onMouseEnter={(e) => {this.props.hoverEnterEvent([d])}}
+            ></circle>
+          <rect {...rectProps}
+            onMouseLeave={(e) => {this.props.hoverExitEvent()}}
+          ></rect>
           <line {...lineProps}></line>
         </g>
       })}

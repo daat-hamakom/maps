@@ -369,7 +369,7 @@ class D3Timeline extends Component {
 class FilterBar extends Component {
   constructor (props) {
     super(props);
-    this.state = { filter: "", focus: false };
+    this.state = { filter: "", focus: false, initialized: false };
 
     this.handleChange = this.handleChange.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
@@ -380,6 +380,20 @@ class FilterBar extends Component {
     this.getOptionImage = getOptionImage.bind(this);
 
     this.valueRenderer = this.valueRenderer.bind(this);
+  }
+
+
+  componentWillMount () {
+    const { params } = this.props;
+    if (params.projId || params.personId || params.orgId || params.placeId ) {
+      this.setState({ initialized: true });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if ((JSON.stringify(this.props.params) !== JSON.stringify(nextProps.params))) {
+      this.setState({ initialized: true });
+    }
   }
 
   onInputChange (value) {
@@ -446,7 +460,7 @@ class FilterBar extends Component {
   handleChange (val) {
     this.props.closeEventSidepane()
     this.context.router.push(`/${(val ? [val.type, val.id].join('/') : '')}`);
-    this.setState({ focus: false, filter: "" });
+    this.setState({ focus: false, filter: "", initialized: true });
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -538,7 +552,7 @@ class FilterBar extends Component {
         onFocus={this.onFocus}
         onBlur={this.onBlur}
       />
-      { !this.state.focus && <div className='controls filter'>
+      { !(this.state.focus) && this.state.initialized && <div className='controls filter'>
         <ul>
           <li onClick={this.props.toggleMetadata} >
             <img src="/static/img/double-arrow.svg" alt="Toggle Metadata" className="toggle-metadata" />

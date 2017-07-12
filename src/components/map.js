@@ -426,7 +426,7 @@ class GLMap extends React.Component {
   handleDeselected (t) {
     if (t == 'select') {
       this.select_popup.remove()
-      this.switchLayers('default')
+      this.switchLayers('default', true)
       this.removeAnnotations()
       this.map.resize()
     }

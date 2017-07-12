@@ -57,7 +57,8 @@ class EventPane extends Component {
     if (evs && evs.length > 0) {
       if (evs[0].id != this.state.evid) {
         const ev = evs[0]
-        let selected_media = ev.media.findIndex((e) => { return e.file == ev.icon });
+        const medias = ev.media.filter((m) => m.type == 'image' || (m.type == 'link' && m.url.indexOf('youtube') !== -1))
+        let selected_media = medias.findIndex((e) => { return e.file == ev.icon });
         selected_media = selected_media == -1 ? 0 : selected_media;
         this.setState({ evid: evs[0].id, selected_media: selected_media})
       //  content

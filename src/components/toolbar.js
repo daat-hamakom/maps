@@ -11,7 +11,7 @@ export class ToolbarButtons extends Component {
   }
 
   componentDidMount () {
-    setTimeout( () => this.setState({hideFlicker: true}), 15000)
+    setTimeout( () => this.setState({hideFlicker: true}), 30000)
   }
 
   render () {

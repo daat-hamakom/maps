@@ -57,6 +57,8 @@ class GLMap extends React.Component {
       }
 
     })
+    // bugfix for change layers bug
+    this.map.flyTo({ zoom: this.map.getZoom() });
     this.currentStyle = layerPrefix
   }
 
@@ -420,16 +422,19 @@ class GLMap extends React.Component {
       if (ev.map_context) {
         zoom = zoomMap[ev.map_context] ;
 
+        this.map.stop();
         this.map.resize();
         this.map.flyTo({ center: coords, zoom: zoom });
       }
       else if (ev.place && ev.place.zoomlevel){
         zoom = zoomMap[ev.place.zoomlevel] ;
 
+        this.map.stop();
         this.map.resize();
         this.map.flyTo({ center: coords, zoom: zoom });
       }
       else {
+        this.map.stop();
         this.map.flyTo({ center: coords })
       }
       this.addAnnotations(ev.id, getEventStyle(ev))
@@ -481,6 +486,7 @@ class GLMap extends React.Component {
       if (!events.length) return;
     } else {
       if (events.length > 500) {
+        this.map.stop();
         this.map.flyTo({ zoom: 2 });
         return;
       }
@@ -542,6 +548,7 @@ class GLMap extends React.Component {
     this.map.resize();
 
     if (centerLang && centerLat && zoom) {
+      this.map.stop();
       this.map.flyTo({ center: center, zoom: zoom })
     }
   }
@@ -554,14 +561,21 @@ class GLMap extends React.Component {
     if (app.selected.length > 0) {
       hshrink = 'hshrink'
     }
+    // trigger only on change state
+    if (this.state.hshrink != hshrink) {
+      this.triggerResize = true
+    }
     this.setState(Object.assign({}, this.state, { hshrink: hshrink }))
 
     let vshrink = 'novshrink'
     if ((params.projId || params.personId || params.orgId  || params.placeId ) && app.drawer) {
       vshrink = 'vshrink'
     }
+    if (this.state.vshrink != vshrink) {
+      this.triggerResize = true
+    }
+    // trigger only on change state
     this.setState(Object.assign({}, this.state, { vshrink: vshrink }))
-    this.triggerResize = true
   }
 
   componentDidUpdate (prevProps, _prevState) {

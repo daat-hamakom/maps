@@ -145,6 +145,7 @@ class App extends React.Component {
         hoverEnterEvent={(ev) => { dispatch(hoverEnterEvent(ev, 'timeline')) }}
         hoverExitEvent={() => { dispatch(hoverExitEvent()) }}
         toggleDrawer={(toState) => { dispatch(toggleDrawer(toState)) }}
+        deselectEvent={() => { dispatch(deselectEvent()) }}
       />
 
       <Lightbox

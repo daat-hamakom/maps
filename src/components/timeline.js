@@ -699,6 +699,7 @@ class CardsView extends Component {
     this.changeFilter = this.changeFilter.bind(this);
     this.cardsScrollLeft = this.cardsScrollLeft.bind(this);
     this.cardsScrollRight = this.cardsScrollRight.bind(this);
+    this.onClickCard = this.onClickCard.bind(this);
   }
 
   changeFilter (filter) {
@@ -717,8 +718,14 @@ class CardsView extends Component {
     element.scrollLeft += 1000;
   }
 
+  onClickCard () {
+    this.props.deselectEvent();
+    this.props.showCardsView(false);
+    this.props.closeEventSidepane();
+  }
+
   render () {
-    const { projects, people, organizations, events, places, style, showCardsView } = this.props;
+    const { projects, people, organizations, events, places, style } = this.props;
     let tagsEventsMap = {};
     let tags = [];
 
@@ -835,12 +842,12 @@ class CardsView extends Component {
       <div className="cards" id="cards-container">
         {this.state.filter != 'tags' ? selectedItems.map((item) => <ItemCard
           item={item}
-          onClick={() => { showCardsView(false); this.props.closeEventSidepane(); } }
+          onClick={this.onClickCard}
           key={item.id}
           label={label}
         />) : selectedItems.map((items, index) => <ItemCards
           items={items}
-          onClick={() => {showCardsView(false); this.props.closeEventSidepane();}}
+          onClick={this.onClickCard}
           key={index}
         />)}
       </div>
@@ -1086,6 +1093,7 @@ class Timeline extends Component {
         organizations={props.organizations.items}
         showCardsView={this.showCardsView}
         closeEventSidepane={props.closeEventSidepane}
+        deselectEvent={props.deselectEvent}
       />
       <D3Timeline
         width={document.body.offsetWidth}

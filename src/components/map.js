@@ -67,8 +67,14 @@ class GLMap extends React.Component {
       if (a.events[0] != a.origin)
         evs = evs.reverse()
 
-      const evcoords = evs.map(e => allevs.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
-      const placecoords = a.places.map(p => this.props.places.items.find(pl => pl.id == p).position.split(',').map(x => +x).reverse())
+      const evsobjects = evs.map(e => allevs.find(ev => ev.id == e))
+      if (evsobjects.indexOf(undefined) > -1) return
+
+      const evcoords = evsobjects.map(e => e.place.position.split(',').map(x => +x).reverse())
+      const placeobjects = a.places.map(p => this.props.places.items.find(pl => pl.id == p))
+      if (placeobjects.indexOf(undefined) > -1) return
+
+      const placecoords = placeobjects.map(p => p.position.split(',').map(x => +x).reverse());
 
       return {
         'type': 'Feature',
@@ -80,7 +86,9 @@ class GLMap extends React.Component {
           'coordinates': evcoords.concat(placecoords)
         }
       }
-    })
+    }).filter(a => !a)
+
+    if (!anns.length) return;
 
     const annotationData = {
       'type': 'FeatureCollection',
@@ -110,7 +118,10 @@ class GLMap extends React.Component {
   addSingleMarkerLayer(annotations, evid, name, icon) {
     const allevs = this.props.events
     const anns = annotations.filter(a => a.type == name).map(a => {
-      const evcoords = a.events.map(e => allevs.find(ev => ev.id == e).place.position.split(',').map(x => +x).reverse())
+      const evsobjects = a.events.map(e => allevs.find(ev => ev.id == e));
+      if (evsobjects.indexOf(undefined) > -1) return
+
+      const evcoords = evsobjects.map(e => e.place.position.split(',').map(x => +x).reverse())
 
       return evcoords.map(c => { return {
         'type': 'Feature',
@@ -124,7 +135,9 @@ class GLMap extends React.Component {
         }
       }})
 
-    })
+    }).filter(a => !a)
+
+    if (!anns.length) return;
 
     const annotationData = {
       'type': 'FeatureCollection',
@@ -292,9 +305,9 @@ class GLMap extends React.Component {
       const features = this.map.queryRenderedFeatures(e.point, { layers: ['markers']})
       if (!features.length) {
         if (this.hovering) {
+          this.hovering = false
           this.hover_popup.remove()
           this.props.hoverExitEvent()
-          this.hovering = false
         }
         return
       }

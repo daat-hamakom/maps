@@ -184,9 +184,30 @@ EventPane.contextTypes = {
 };
 
 class EventsPane extends Component {
+  constructor (props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this);
+  }
 
   handleClick = (e) => {
-    console.log()
+    const { params, ...props } = this.props;
+
+
+    props.selectEvent([e])
+    let url = '/event/' + e.id
+    if (params.projId) {
+      url = '/project/' + params.projId + url
+    }
+    else if (params.personId) {
+      url = '/person/' + params.personId + url
+    }
+    else if (params.orgId) {
+      url = '/organization/' + params.orgId + url
+    }
+    else if (params.tagName) {
+      url = '/tag/' + params.tagName + url
+    }
+    this.context.router.push(url)
   }
 
   render () {
@@ -213,23 +234,7 @@ class EventsPane extends Component {
         <span className='close' onClick={props.closeSidepane}>✖</span>
       </div>
       <div div id='events-container'>
-        {evs.map((e) => <div key={'list-event-' + e.id} className={'event ' + getEventStyle(e)} onClick={() => {
-          props.selectEvent([e])
-          let url = '/event/' + e.id
-          if (params.projId) {
-            url = '/project/' + params.projId + url
-          }
-          else if (params.personId) {
-            url = '/person/' + params.personId + url
-          }
-          else if (params.orgId) {
-            url = '/organization/' + params.orgId + url
-          }
-          else if (params.tagName) {
-            url = '/tag/' + params.tagName + url
-          }
-          this.context.router.push(url)
-        }}>
+        {evs.map((e) => <div key={'list-event-' + e.id} className={'event ' + getEventStyle(e)} onClick={() => this.handleClick(e)}>
           <span className="event-icon">
             <div className="event-img" style={{ backgroundImage: `url("${e.icon.replace('/media/', '/media_thumbs/').replace(/\+/g, '%2B') + '_m.jpg'}")` }}></div>
           </span>

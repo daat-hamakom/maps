@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, Tab, Nav, NavItem } from 'react-bootstrap';
 import cookie from 'react-cookie';
-const enhanceWithClickOutside = require('react-click-outside');
-
+import onClickOutside from 'react-onclickoutside' 
 
 export class ToolbarButtons extends Component {
   constructor (props) {
@@ -22,7 +21,7 @@ export class ToolbarButtons extends Component {
       <span style={{ margin: "0 15px", opacity: 0.25 }}>|</span>
       <div className="help-button">
         <span onClick={this.props.openHelpModal} >Help</span>
-        { !hideFlicker && <HelpFlicker onClick={this.props.openHelpModal} className={this.state.hideFlicker ? 'fade-out' : ''} /> }
+        <WrappedHelpFlicker onClick={this.props.openHelpModal} className={this.state.hideFlicker || hideFlicker ? 'fade-out' : ''} />
       </div>
     </div>
   }
@@ -210,4 +209,4 @@ class HelpFlicker extends Component {
     </div>
   }
 }
-HelpFlicker = enhanceWithClickOutside(HelpFlicker)
+const WrappedHelpFlicker = onClickOutside(HelpFlicker)

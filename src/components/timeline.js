@@ -378,6 +378,7 @@ class FilterBar extends Component {
     this.optionRenderer = this.optionRenderer.bind(this);
     this.boldHighlight = this.boldHighlight.bind(this);
     this.getOptionImage = getOptionImage.bind(this);
+    this.onInputKeyDown = this.onInputKeyDown.bind(this);
 
     this.valueRenderer = this.valueRenderer.bind(this);
   }
@@ -398,6 +399,14 @@ class FilterBar extends Component {
 
   onInputChange (value) {
     this.setState({ filter: value });
+  }
+
+  onInputKeyDown (event) {
+    switch (event.keyCode) {
+      case 27:   // TAB
+        this.onBlur()
+        break;
+    }
   }
 
   onFocus () {
@@ -551,6 +560,7 @@ class FilterBar extends Component {
         valueRenderer={this.valueRenderer}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
+        onInputKeyDown={this.onInputKeyDown}
       />
       { !(this.state.focus) && this.state.initialized && <div className='controls filter'>
         <ul>

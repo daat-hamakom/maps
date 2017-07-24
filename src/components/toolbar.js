@@ -14,14 +14,15 @@ export class ToolbarButtons extends Component {
   }
 
   render () {
-    const hideFlicker = cookie.load('hideFlicker');
+    const hideFlickerCookie = cookie.load('hideFlicker');
+    const hideFlicker = this.state.hideFlicker || hideFlickerCookie;
 
     return <div id='toolbar-buttons'>
       <span onClick={this.props.openAboutModal}>About</span>
       <span style={{ margin: "0 15px", opacity: 0.25 }}>|</span>
       <div className="help-button">
         <span onClick={this.props.openHelpModal} >Help</span>
-        <WrappedHelpFlicker onClick={this.props.openHelpModal} className={this.state.hideFlicker || hideFlicker ? 'fade-out' : ''} />
+        { !hideFlickerCookie ? <WrappedHelpFlicker onClick={this.props.openHelpModal} className={hideFlicker ? 'fade-out' : ''} /> : null}
       </div>
     </div>
   }
@@ -129,12 +130,12 @@ export class AboutModal extends Component {
 }
 
 export class HelpModal extends Component {
-  componentDidUpdate () {
-    if (this.props.show) {
-      let element = document.getElementsByClassName("help-modal");
-      element[0].scrollTop += 1000;
-    }
-  }
+  // componentDidUpdate () {
+  //   if (this.props.show) {
+  //     let element = document.getElementsByClassName("help-modal");
+  //     element[0].scrollTop += 1000;
+  //   }
+  // }
 
   render () {
     return <Modal show={this.props.show} onHide={this.props.onHide}  className="daat-modal help-modal">
@@ -162,7 +163,7 @@ export class HelpModal extends Component {
               <Tab.Pane eventKey="help-timeline">
                 <h4 className="modal-subtitle">The map and the timeline</h4>
                 Use the pad or the mouse wheel to scroll and zoom in the map or the timeline. Hovering on an event on the map or the timeline opens the event thumbnail on the map and the event title appears above the hovered event on the timeline. The colour of the marker is according to the time epoch of the event.
-                <iframe width="540" height="310" src="https://www.youtube.com/embed/ydkxP7QMLPA?autoplay=1" className="modal-video" allowFullScreen>
+                <iframe width="540" height="310" src="https://www.youtube.com/embed/ydkxP7QMLPA" className="modal-video" allowFullScreen>
                 </iframe>
               </Tab.Pane>
               <Tab.Pane eventKey="help-event">

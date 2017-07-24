@@ -69,14 +69,15 @@ class GLMap extends React.Component {
       if (a.events[0] != a.origin)
         evs = evs.reverse()
 
-      const evsobjects = evs.map(e => allevs.find(ev => ev.id == e))
-      if (evsobjects.indexOf(undefined) > -1) return
+      // protection for annotation without an event
+      const evsobjects = evs.map(e => allevs.find(ev => ev.id == e)).filter(e => e);
+      const evcoords = evsobjects.map(e => e.place.position.split(',').map(x => +x).reverse());
 
-      const evcoords = evsobjects.map(e => e.place.position.split(',').map(x => +x).reverse())
-      const placeobjects = a.places.map(p => this.props.places.items.find(pl => pl.id == p))
-      if (placeobjects.indexOf(undefined) > -1) return
-
+      // protection for event without a place
+      const placeobjects = a.places.map(p => this.props.places.items.find(pl => pl.id == p)).filter(p => p);
       const placecoords = placeobjects.map(p => p.position.split(',').map(x => +x).reverse());
+
+      if ((placecoords.length + evcoords.length) == 0) return;
 
       return {
         'type': 'Feature',
@@ -88,7 +89,7 @@ class GLMap extends React.Component {
           'coordinates': evcoords.concat(placecoords)
         }
       }
-    }).filter(a => !a)
+    }).filter(a => a)
 
     if (!anns.length) return;
 
@@ -120,8 +121,8 @@ class GLMap extends React.Component {
   addSingleMarkerLayer(annotations, evid, name, icon) {
     const allevs = this.props.events
     const anns = annotations.filter(a => a.type == name).map(a => {
-      const evsobjects = a.events.map(e => allevs.find(ev => ev.id == e));
-      if (evsobjects.indexOf(undefined) > -1) return
+      const evsobjects = a.events.map(e => allevs.find(ev => ev.id == e)).filter(e => e);
+      if (evsobjects.length == 0) return;
 
       const evcoords = evsobjects.map(e => e.place.position.split(',').map(x => +x).reverse())
 
@@ -137,7 +138,7 @@ class GLMap extends React.Component {
         }
       }})
 
-    }).filter(a => !a)
+    }).filter(a => a);
 
     if (!anns.length) return;
 

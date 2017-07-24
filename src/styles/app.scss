@@ -1184,13 +1184,13 @@ body {
         }
         div#lightbox-controls {
             position: fixed;
-            bottom: 40px;
+            bottom: 60px;
             width: 100%;
             display: flex;
             justify-content: space-between;
 
             div.center {
-                margin: 20px auto;
+                margin: auto;
                 text-align: center;
                 div.title {
                     color: white

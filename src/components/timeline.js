@@ -172,15 +172,12 @@ class MarkerData extends Component {
             url = '/place/' + encodeURIComponent(this.props.params.placeId) + url
           }
           this.context.router.push(url)
-          this.props.hoverExitEvent()
         }}
+        onMouseEnter={(e) => {this.props.hoverEnterEvent([d])}}
+        onMouseLeave={(e) => {this.props.hoverExitEvent()}}
         >
-          <circle {...circleProps}
-            onMouseEnter={(e) => {this.props.hoverEnterEvent([d])}}
-            ></circle>
-          <rect {...rectProps}
-            onMouseLeave={(e) => {this.props.hoverExitEvent()}}
-          ></rect>
+          <circle {...circleProps}></circle>
+          <rect {...rectProps}></rect>
           <line {...lineProps}></line>
         </g>
       })}
@@ -805,7 +802,7 @@ class CardsView extends Component {
     return <div id='cards-view'>
       <div className="filters">
         <CardsViewFilter
-          name="Researches"
+          name="Projects"
           count={projects.length}
           image="/static/img/project-icon.svg"
           selectedImage="/static/img/project-active.svg"

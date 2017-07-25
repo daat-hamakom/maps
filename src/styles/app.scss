@@ -1449,6 +1449,9 @@ body {
           border-top: 1px solid $darktimes-primary;
         }
         .audio-box {
+          p {
+              color: $darktimes-primary;
+          }
           //background: fade-out($darktimes-secondary, 0.9);
         }
       }

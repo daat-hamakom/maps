@@ -44,8 +44,9 @@ class Lightbox extends React.Component {
     let media = null;
 
     if (this.props.lightbox.ev) {
+      // m.type != 'document'
       media = this.props.lightbox.ev.media.filter((m) => m.type != 'sound' );
-      const m = media[this.props.lightbox.selected];
+      const m = this.props.lightbox.ev.media[this.props.lightbox.selected];
       switch (m.type) {
         case 'image':
           active = <LightboxImage src={m.file}/>;

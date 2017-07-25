@@ -376,6 +376,7 @@ class FilterBar extends Component {
     this.boldHighlight = this.boldHighlight.bind(this);
     this.getOptionImage = getOptionImage.bind(this);
     this.onInputKeyDown = this.onInputKeyDown.bind(this);
+    this.onOpen = this.onOpen.bind(this);
 
     this.valueRenderer = this.valueRenderer.bind(this);
   }
@@ -396,6 +397,10 @@ class FilterBar extends Component {
 
   onInputChange (value) {
     this.setState({ filter: value });
+  }
+
+  onOpen () {
+    this.setState({ focus: true });
   }
 
   onInputKeyDown (event) {
@@ -466,7 +471,7 @@ class FilterBar extends Component {
   handleChange (val) {
     this.props.closeEventSidepane()
     this.context.router.push(`/${(val ? [val.type, val.id].join('/') : '')}`);
-    this.setState({ focus: false, filter: "", initialized: true });
+    this.setState({ focus: !val, filter: "", initialized: true });
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -555,6 +560,7 @@ class FilterBar extends Component {
         onChange={(v) => {this.handleChange(v)}}
         optionRenderer={this.optionRenderer}
         valueRenderer={this.valueRenderer}
+        onOpen={this.onOpen}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
         onInputKeyDown={this.onInputKeyDown}
@@ -1082,9 +1088,9 @@ class Timeline extends Component {
         searchFocused={this.searchFocused}
         toggleMetadata={this.handleClick}
       />
-      <button className="close-search" onClick={this.handleClickOutside}>
+      { this.state.searchFocused ? <button className="close-search" onClick={this.handleClickOutside}>
         <img className="image-select-options" src='/static/img/close-group.svg' />
-      </button>
+      </button> : null }
       <TimelineMetadata
         drawerData={props.drawerData}
         app={props.app}

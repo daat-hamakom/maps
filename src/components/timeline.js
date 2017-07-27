@@ -900,9 +900,9 @@ class ItemCard extends Component {
     return <Link to={`/${item.type}/${item.id}`} className={`cards-view-item cards-view-${item.type}`}  onClick={onClick}>
       <p className="cards-view-events-count" onClick={onClick}>{item.count || 0} { label }</p>
       { item.label ? <div title={item.label}>
-        <Dotdotdot clamp={2} className="cards-view-title">
+        <p clamp={2} className="cards-view-title">
           {item.label}
-        </Dotdotdot>
+        </p>
       </div> : null}
       <div style={{ backgroundImage: item.img ? `url("${this.getOptionImage(item)}")` : '#F3F3F3'}} className="cards-view-image"></div>
     </Link>

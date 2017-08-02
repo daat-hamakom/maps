@@ -47,6 +47,7 @@
     "redux": "^3.0.5",
     "redux-logger": "^2.3.2",
     "redux-thunk": "^1.0.3",
+    "respinner": "^2.2.1",
     "sass-loader": "^3.1.2",
     "script-loader": "^0.6.1",
     "style-loader": "^0.13.0",

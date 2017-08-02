@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
+import { DashLoading } from 'respinner'
 
 import Lightbox from './lightbox'
 import Map from './map'
@@ -94,7 +95,9 @@ class App extends React.Component {
     }
 
     return <div className={classes}>
-
+      <div className={`spinners ${this.finishedLoading() ? 'fade-out' : ''}`}>
+        <DashLoading size={40} stroke="#4197ff" duration={1.6} />
+      </div>
       <Map
         app={props.app}
         events={events}

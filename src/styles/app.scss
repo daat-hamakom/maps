@@ -30,7 +30,7 @@ body {
     }
     .spinners {
         position: absolute;
-        top: 300px;
+        top: calc((100% - 316px)/2);
         left: 49%;
         z-index: 99;
         opacity: 1;

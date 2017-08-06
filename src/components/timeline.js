@@ -856,7 +856,7 @@ class CardsView extends Component {
         {this.state.filter != 'tags' ? selectedItems.map((item) => <ItemCard
           item={item}
           onClick={this.onClickCard}
-          key={item.id}
+          key={`${item.type} ${item.id}`}
           label={label}
         />) : selectedItems.map((items, index) => <ItemCards
           items={items}

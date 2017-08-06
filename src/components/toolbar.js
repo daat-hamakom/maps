@@ -48,7 +48,7 @@ export class AboutModal extends Component {
                 About Jewish Cultures Mapped
               </NavItem>
               <NavItem eventKey="about-daat" className="modal-tab-nav">
-                About Da'at-Hamakom
+                About Da'at Hamakom
               </NavItem>
               <NavItem eventKey="about-data" className="modal-tab-nav">
                 About the Data
@@ -87,24 +87,24 @@ export class AboutModal extends Component {
                 </p>
               </Tab.Pane>
               <Tab.Pane eventKey="about-daat">
-                <h4 className="modal-subtitle">About Da'at-Hamakom</h4>
+                <h4 className="modal-subtitle">About Da'at Hamakom</h4>
                 <p>
                   By assembling a forum of eleven senior scholars from four Israeli universities devoted to a variety
                   of disciplines and regional specializations, “Da’at Hamakom”: The Center for the Study of Cultures
                   of Place in Jewish Modernity aims to establish a new benchmark in Jewish cultural inquiry. Our
-                  scholars are world-renowned experts in musicology, history, literature, cultural studies, communica-
-                  tion studies, Jewish law (halakha), Jewish thought, theology, art history, material and popular cul-
-                  ture; specialized foci on francophone, Hispanic, English, German, Hebrew, Yiddish, and Arabic cul-
-                  tures; and a comparative approach to cultures considered to be “Western” and “Eastern.”
+                  scholars are world-renowned experts in musicology, history, literature, cultural studies, communication
+                  studies, Jewish law (halakha), Jewish thought, theology, art history, material and popular culture;
+                  specialized foci on francophone, Hispanic, English, German, Hebrew, Yiddish, and Arabic cultures;
+                  and a comparative approach to cultures considered to be “Western” and “Eastern.”
                 </p>
                 <p>
                   Daat Hamakom approaches modern Jewish culture via the spatial dimension in its full range of
                   significations. We view the geography of culture as a means of “mapping” where and how certain
                   modes of creativity and their traditions emerged, and – in many cases – when and how they were
-                  translocated and transformed. The turn to spatial and geographic concerns in the study of the Hu-
-                  manities can be fruitfully and imaginatively applied to the Jewish case, the probing of which, in
-                  turn, can enrich Humanistic discourse. The idea of “place” anchors our project in a feasible, struc-
-                  tured research agenda, relating to the overall question: How do realia of particular places influence
+                  translocated and transformed. The turn to spatial and geographic concerns in the study of the Humanities
+                  can be fruitfully and imaginatively applied to the Jewish case, the probing of which, in
+                  turn, can enrich Humanistic discourse. The idea of “place” anchors our project in a feasible, structured
+                  research agenda, relating to the overall question: How do realia of particular places influence
                   behavior, consciousness, beliefs, and creativity?
                 </p>
               </Tab.Pane>
@@ -114,14 +114,14 @@ export class AboutModal extends Component {
                   The contents of the map are produced and uploaded by researchers of Da’at Hamakom as well as
                   drawn from archives of institutions collaborating with this initiative. The data is arranged as units of
                   information and media called “events”, which are accessible through the map and the timeline.
-                  Each event is found within a “project,” and the creators of the data of each project are listed on the
+                  Each event is found within a “project”, and the creators of the data of each project are listed on the
                   project cards. The source and copyrights owner of the media items within the events is specified
                   within the item display. Additional meta data contain information about historical figures and organizations.
                 </p>
                 <p>
                   Contributing Institutions: <a href="http://web.nli.org.il/sites/NLI/english/Pages/default.aspx" target="_blank">The National Library of Israel</a>,
-                  <a href="http://folklore.huji.ac.il/book/%D7%9E%D7%A8%D7%9B%D7%96%D7%99-%D7%9E%D7%97%D7%A7%D7%A8" target="_blank">The Hoffmann Judaica Postcard Collection</a>
-                  at the Center for Jewish Folklore, The Hebrew University of Jerusalem
+                  <a href="http://folklore.huji.ac.il/book/%D7%9E%D7%A8%D7%9B%D7%96%D7%99-%D7%9E%D7%97%D7%A7%D7%A8" target="_blank">The Hoffmann Judaica Postcard Collectionat</a>&nbsp;
+                  the Center for Jewish Folklore, The Hebrew University of Jerusalem
                 </p>
               </Tab.Pane>
               <Tab.Pane eventKey="about-copyrights">
@@ -171,28 +171,28 @@ export class AboutModal extends Component {
                 <h4 className="modal-subtitle">Credits</h4>
                 <p>Director of Da’at Hamakom: <a href="http://www.daat-hamakom.com/team/prof-richard-i-cohen/" target="_blank">Prof. Richard Cohen</a></p>
                 <p>
-                  Steering Committee:
-                  <a href="http://www.daat-hamakom.com/team/amnon-raz-krakotzkin-nono/" target="_blank">Prof. Amnon Raz-Krakotzkin</a>;
-                  <a href="http://www.daat-hamakom.com/team/prof-elchanan-reiner/" target="_blank">Prof. Elchanan Reiner</a>,
-                  <a href="http://www.daat-hamakom.com/team/prof-menahem-blondheim/" target="_blank">Prof. Menahem Blondheim</a>,
-                  <a href="http://www.daat-hamakom.com/team/prof-edwin-seroussi/" target="_blank">Prof. Edwin Seroussi</a>,
+                  Steering Committee:&nbsp;
+                  <a href="http://www.daat-hamakom.com/team/amnon-raz-krakotzkin-nono/" target="_blank">Prof. Amnon Raz-Krakotzkin</a>,&nbsp;
+                  <a href="http://www.daat-hamakom.com/team/prof-elchanan-reiner/" target="_blank">Prof. Elchanan Reiner</a>,&nbsp;
+                  <a href="http://www.daat-hamakom.com/team/prof-menahem-blondheim/" target="_blank">Prof. Menahem Blondheim</a>,&nbsp;
+                  <a href="http://www.daat-hamakom.com/team/prof-edwin-seroussi/" target="_blank">Prof. Edwin Seroussi</a>,&nbsp;
                   <a href="http://www.daat-hamakom.com/team/prof-haviva-pedaya/" target="_blank">Prof. Haviva Pedaya</a>
                 </p>
                 <p>Scientific Director: <a href="http://www.daat-hamakom.com/team/prof-edwin-seroussi/" target="_blank">Prof. Edwin Seroussi</a></p>
                 <p>Project Manager: <a href="http://www.daat-hamakom.com/team/dr-josef-sprinzak/" target="_blank">Dr. Josef Sprinzak</a></p>
                 <p>Interactive and Graphic Designer: <a href="http://www.shual.com/" target="_blank">Mushon Zer-Aviv</a></p>
-                <p>Programmers: <a href="http://appandup.co.il" target="_blank">Tal Ben-Basat</a>, Yuval Adam.</p>
+                <p>Programmers: <a href="http://appandup.co.il" target="_blank">Tal Ben-Basat</a>, Yuval Adam</p>
                 <p>Administrative Director: <a href="http://www.daat-hamakom.com/contact/" target="_blank">Anat Reches</a></p>
                 <p>Research Assistant and Video Tutorials: Guy Assal</p>
                 <p>
-                  Advisory Team:
-                  <a href="http://www.daat-hamakom.com/team/dr-amos-noy/" target="_blank">Dr. Amos Noy</a>,
-                  <a href="http://www.daat-hamakom.com/team/dr-dani-schrire/" target="_blank">Dr. Dani Schrire</a>,
-                  <a href="http://www.daat-hamakom.com/team/1141-2/" target="_blank">Dr. Zef Segal</a>,
+                  Advisory Team:&nbsp;
+                  <a href="http://www.daat-hamakom.com/team/dr-amos-noy/" target="_blank">Dr. Amos Noy</a>,&nbsp;
+                  <a href="http://www.daat-hamakom.com/team/dr-dani-schrire/" target="_blank">Dr. Dani Schrire</a>,&nbsp;
+                  <a href="http://www.daat-hamakom.com/team/1141-2/" target="_blank">Dr. Zef Segal</a>,&nbsp;
                   <a href="http://www.daat-hamakom.com/team/eliezer-baumgarten/" target="_blank">Dr. Eliezer Baumgarten</a>
                 </p>
                 <p>
-                  The project was funded by
+                  The project was funded by&nbsp;
                   <a href="http://www.i-core.org.il/" target="_blank">The Israeli Centers for Research Excellence (I-CORE)</a>.
                 </p>
                 <img src="/static/img/icore-logo.png" alt="icore-logo" />

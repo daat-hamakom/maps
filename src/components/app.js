@@ -94,8 +94,12 @@ class App extends React.Component {
       classes = classes + ' card place'
     }
 
+    if (this.finishedLoading()) {
+      classes += ' ready'
+    }
+
     return <div className={classes}>
-      <div className={`spinners ${this.finishedLoading() ? 'fade-out' : ''}`}>
+      <div className="spinners">
         <DashLoading size={40} stroke="#4197ff" duration={1.6} />
       </div>
       <Map
@@ -157,7 +161,10 @@ class App extends React.Component {
         selectMedia={(t, m) => { dispatch(openLightbox(t, m)) }}
       />
 
-      <ToolbarButtons openAboutModal={props.openAboutModal} openHelpModal={props.openHelpModal} />
+      <ToolbarButtons
+        openAboutModal={props.openAboutModal}
+        openHelpModal={props.openHelpModal}
+      />
       <AboutModal onHide={props.closeAboutModal} show={props.toolbar.showAbout} />
       <HelpModal onHide={props.closeHelpModal} show={props.toolbar.showHelp} />
     </div>

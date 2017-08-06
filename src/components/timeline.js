@@ -832,7 +832,7 @@ class CardsView extends Component {
           onClick={() => this.changeFilter('tags')}
         />
         <CardsViewFilter
-          name="Location"
+          name="Places"
           count={places.length}
           image="/static/img/place-icon.svg"
           selectedImage="/static/img/place-active.svg"

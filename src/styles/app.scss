@@ -27,6 +27,16 @@ body {
       position: absolute;
       height: 100%;
       width: 100%;
+      &.ready{
+          .spinners {
+              opacity: 0;
+          }
+      }
+      &:not(.ready){
+        .help-flicker {
+            opacity: 0 !important;
+        }
+      }
     }
     .spinners {
         position: absolute;
@@ -36,9 +46,6 @@ body {
         opacity: 1;
         -webkit-transition: opacity 0.5s;
         transition: opacity 0.5s;
-        &.fade-out{
-            opacity: 0;
-        }
     }
     div#toolbar-buttons {
         position: absolute;

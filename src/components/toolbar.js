@@ -119,9 +119,9 @@ export class AboutModal extends Component {
                   within the item display. Additional meta data contain information about historical figures and organizations.
                 </p>
                 <p>
-                  Contributing Institutions: <a href="http://web.nli.org.il/sites/NLI/english/Pages/default.aspx" target="_blank">The National Library of Israel</a>,
-                  <a href="http://folklore.huji.ac.il/book/%D7%9E%D7%A8%D7%9B%D7%96%D7%99-%D7%9E%D7%97%D7%A7%D7%A8" target="_blank">The Hoffmann Judaica Postcard Collectionat</a>&nbsp;
-                  the Center for Jewish Folklore, The Hebrew University of Jerusalem
+                  Contributing Institutions: <a href="http://web.nli.org.il/sites/NLI/english/Pages/default.aspx" target="_blank">The National Library of Israel</a>,&nbsp;
+                  <a href="http://folklore.huji.ac.il/book/%D7%9E%D7%A8%D7%9B%D7%96%D7%99-%D7%9E%D7%97%D7%A7%D7%A8" target="_blank">The Hoffmann Judaica Postcard Collection</a>&nbsp;
+                  at the Center for Jewish Folklore, The Hebrew University of Jerusalem
                 </p>
               </Tab.Pane>
               <Tab.Pane eventKey="about-copyrights">

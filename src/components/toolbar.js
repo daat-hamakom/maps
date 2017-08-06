@@ -41,7 +41,7 @@ export class AboutModal extends Component {
       </Modal.Header>
       <Modal.Body>
         <h4 className="modal-title">About</h4>
-        <Tab.Container id="left-tabs-example" defaultActiveKey="about-map">
+        <Tab.Container id="about-tabs" defaultActiveKey="about-map">
           <div>
             <Nav>
               <NavItem eventKey="about-map" className="modal-tab-nav">
@@ -225,7 +225,7 @@ export class HelpModal extends Component {
       </Modal.Header>
       <Modal.Body>
         <h4 className="modal-title">Help</h4>
-        <Tab.Container id="left-tabs-example" defaultActiveKey="help-introductory">
+        <Tab.Container id="help-tabs" defaultActiveKey="help-introductory">
           <div>
             <Nav style={{display: 'none'}}>
               <NavItem eventKey="help-introductory" className="modal-tab-nav">

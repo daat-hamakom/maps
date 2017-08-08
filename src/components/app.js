@@ -39,10 +39,10 @@ class App extends React.Component {
     const props = this.props;
     const { events, projects, annotations, places } = props;
 
-    return (!events.fetching && events.items.length > 0) &&
-      (!projects.fetching && projects.items.length > 0) &&
-      (!annotations.fetching && annotations.items.length > 0) &&
-      (!places.fetching && places.items.length > 0)
+    return (!events.fetching && events.items) &&
+      (!projects.fetching && projects.items) &&
+      (!annotations.fetching && annotations.items) &&
+      (!places.fetching && places.items)
   }
 
   componentDidUpdate (prevProps) {

@@ -226,7 +226,7 @@ export class HelpModal extends Component {
         <h4 className="modal-title">Help</h4>
         <Tab.Container id="help-tabs" defaultActiveKey="help-introductory">
           <div>
-            <Nav style={{display: 'none'}}>
+            <Nav>
               <NavItem eventKey="help-introductory" className="modal-tab-nav">
                 Quick Introductory Tutorial
               </NavItem>
@@ -236,24 +236,89 @@ export class HelpModal extends Component {
               <NavItem eventKey="help-event" className="modal-tab-nav">
                 Looking into an event
               </NavItem>
+              <NavItem eventKey="help-projects" className="modal-tab-nav">
+                Filtered map view by projects
+              </NavItem>
+              <NavItem eventKey="help-people" className="modal-tab-nav">
+                Filtered map view by people, tags, locations and organizations
+              </NavItem>
+              <NavItem eventKey="help-event-card" className="modal-tab-nav">
+                Filtered map view from event card
+              </NavItem>
+              <NavItem eventKey="help-search" className="modal-tab-nav">
+                Using the text search bar
+              </NavItem>
+              <NavItem eventKey="help-requirements" className="modal-tab-nav">
+                System Requirements
+              </NavItem>
             </Nav>
             <Tab.Content animation>
               <Tab.Pane eventKey="help-introductory">
                 <h4 className="modal-subtitle">Quick Introductory Tutorial</h4>
-                <iframe width="540" height="310" src="https://www.youtube.com/embed/zafjsYLvQWg" className="modal-video" allowFullScreen>
+                <iframe width="540" height="310" src="https://player.vimeo.com/video/229876793" className="modal-video" allowFullScreen>
                 </iframe>
               </Tab.Pane>
               <Tab.Pane eventKey="help-timeline">
                 <h4 className="modal-subtitle">The map and the timeline</h4>
-                Use the pad or the mouse wheel to scroll and zoom in the map or the timeline. Hovering on an event on the map or the timeline opens the event thumbnail on the map and the event title appears above the hovered event on the timeline. The colour of the marker is according to the time epoch of the event.
-                <iframe width="540" height="310" src="https://www.youtube.com/embed/ydkxP7QMLPA" className="modal-video" allowFullScreen>
+                Click on the geographical map to view the timeline. Drag and zoom operations on the timeline are the same as those on the map: use the zoom controls, the pad or the mouse wheel. Hovering over an event marker on the map or on the timeline opens a thumbnail above the location of the event on the map. The title of the event title appears above the highlighted event on the timeline. The colour of each marker corresponds to the time period of the event. Selecting an event on the map or the timeline opens an event information card and also modifies the visual appearance of the map to match the time period of the event.
+                <iframe width="540" height="310" src="https://player.vimeo.com/video/229882494" className="modal-video" allowFullScreen>
                 </iframe>
               </Tab.Pane>
               <Tab.Pane eventKey="help-event">
                 <h4 className="modal-subtitle">Looking into an event</h4>
-                Click on an event marker on the map or the timeline. The info card of the event will open on the right side of the map. If the location contains more than one event, select one event from the list of all the event of the location. In the event cards you can browse the images and video clips on the top of the card or open an enlarged view by clicking on the image. Events containing sound will have a sound player. At the bottom of the event cards are related people and organizations. Hotspots on project name, people and organizations will open a filtered view of the map.
-                <iframe width="540" height="310" src="https://www.youtube.com/embed/ydkxP7QMLPA" className="modal-video" allowFullScreen>
+                <p>Click on an event marker on the map or on the timeline. The information card of the event will open on the right side of the map. If the location contains more than one event, select an event from the list of all the events for that location.</p>
+                <p>In the event card, you can browse the images and video clips on the top of the card or open an enlarged view of an image by clicking on the image. The source hotspot at the bottom right side of the enlarged view of the image is a link to the URL of the image source. Use the sound player to listen to sound clips or click on the document thumbnail to view attached documents.
+                  To close the event card, select the “close” (x) control in the top right corner.</p>
+                <iframe width="540" height="310" src="https://player.vimeo.com/video/229883764" className="modal-video" allowFullScreen>
                 </iframe>
+              </Tab.Pane>
+              <Tab.Pane eventKey="help-projects">
+                <h4 className="modal-subtitle">Filtered map view by projects</h4>
+                <p>Selecting the search bar displays a row of cards representing all the research projects of the map. To scroll through the cards, use the “«»” control above the cards or use the scroll bar under the cards. To restore the timeline, click on the map or on the “close” (x) control on the right side of the search bar. Selecting one of the cards creates a view of the map containing only events included in the selected project. It also opens an information strip about the project.</p>
+                <p>To diminish the information strip, click on the map or on the contraction button on the right side of the search bar. The close (x) button on the left side of the project annotation restores the map to the non-filtered view of all the events.</p>
+                <iframe width="540" height="310" src="https://player.vimeo.com/video/229888944" className="modal-video" allowFullScreen>
+                </iframe>
+              </Tab.Pane>
+              <Tab.Pane eventKey="help-people">
+                <h4 className="modal-subtitle">Filtered map view by people, tags, locations and organizations</h4>
+                While in the cards view of the map, select from the left side one of the other categories - people, tags, locations or organizations. The card display on the row changes according to the selected category. Use the “«»” control above the cards, or use the scroll bar under the cards to scroll through the cards. Selecting one of the cards creates a view of the map filtered according to the selected entity. Selecting a person or an organization opens an information strip about the entity.
+                <iframe width="540" height="310" src="https://player.vimeo.com/video/229885037" className="modal-video" allowFullScreen>
+                </iframe>
+              </Tab.Pane>
+              <Tab.Pane eventKey="help-event-card">
+                <h4 className="modal-subtitle">Filtered map view from event card</h4>
+                It is also possible to create a filtered view of the map from an event card:
+                <ul>
+                  <li>Selecting the project name of the event, located above the event title, creates a filtered view of the map with the events included in the project. </li>
+                  <li>Selecting a tag, located under the title, creates a filtered view of the map with the events linked to the selected tag. </li>
+                  <li>Selecting a link to a person or organization, located at the bottom of the event card, creates a filtered view of the map with the events related to the selected person or organization.</li>
+                </ul>
+                <iframe width="540" height="310" src="https://player.vimeo.com/video/229885204" className="modal-video" allowFullScreen>
+                </iframe>
+              </Tab.Pane>
+              <Tab.Pane eventKey="help-search">
+                <h4 className="modal-subtitle">Using the text search bar</h4>
+                Selecting the search bar and typing at least three characters opens a dropdown list of all the meta-data entities containing the typed characters. Selecting one of the lines in the dropdown opens a view of the map filtered by the selected entity. The close (x) button on the left side of the filter label restores the map to the original, non-filtered view of all the events.
+                <iframe width="540" height="310" src="https://player.vimeo.com/video/229885922" className="modal-video" allowFullScreen>
+                </iframe>
+              </Tab.Pane>
+              <Tab.Pane eventKey="help-requirements">
+                <h4 className="modal-subtitle">System Requirements</h4>
+                <u>Internet Connection</u>
+                <p>Broadband connection speed of at least 10Mbps.</p>
+                <br />
+                <u>Supported browsers</u>
+                <p>Recommended browsers: Google Chrome and Opera.</p>
+                <p>Supported browsers: Google Chrome, Safari (after 9.0), Firefox, Opera and Edge*.</p>
+                <p>WebGL must be enabled in browser: <a href="https://get.webgl.org/" target="_blank">Instructions for enabling WebGL for all browsers</a></p>
+                <br />
+                <u>Recommended screen dimensions</u>
+                <p>Lowest: 1024x768</p>
+                <p>Highest: 1920x1080</p>
+                <br />
+                <p>For support and assistance, please contact josefspr@hotmail.com.</p>
+                <br />
+                <p>*Internet Explorer is not supported.</p>
               </Tab.Pane>
             </Tab.Content>
           </div>
@@ -286,7 +351,7 @@ class HelpFlicker extends Component {
       Watch a short intro:
       <img className="flicker-close pull-right" src='/static/img/close-flicker.svg' onClick={this.handleClickOutside} />
       <div onClick={this.onClick}>
-        <iframe width="275" height="192" src="https://www.youtube.com/embed/ydkxP7QMLPA"
+        <iframe width="275" height="192" src="https://player.vimeo.com/video/229876793"
                 className="flicker-video">
         </iframe>
       </div>

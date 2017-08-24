@@ -293,7 +293,7 @@ export class HelpModal extends Component {
               <Tab.Pane eventKey="help-event-card">
                 <h4 className="modal-subtitle">Filtered Map from Event Card</h4>
                 <p>It is also possible to create a filtered view of the map from an event card:</p>
-                <ul>
+                <ul className="modal-content-bullets">
                   <li>Selecting the project name of the event, located above the event title, creates a filtered view of the map with the events included in the project. </li>
                   <li>Selecting a tag, located under the title, creates a filtered view of the map with the events linked to the selected tag. </li>
                   <li>Selecting a link to a person or organization, located at the bottom of the event card, creates a filtered view of the map with the events related to the selected person or organization.</li>

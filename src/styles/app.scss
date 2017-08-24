@@ -1594,7 +1594,7 @@ body {
         }
         .modal-content {
             border-radius: 0 !important;
-            p, u {
+            p, u, ul, li {
                 color: #47525D;
                 font-family: "Merriweather Sans", sans-serif;
                 font-size: 14px;
@@ -1635,11 +1635,6 @@ body {
         .modal-video {
             margin-top: 10px;
         }
-        p {
-            text-align: justify;
-        }
-    }
-    .about-modal{
         .modal-tab-nav {
             display: inline-block;
         }

@@ -240,7 +240,7 @@ export class HelpModal extends Component {
                 Filtered Map by Project
               </NavItem>
               <NavItem eventKey="help-people" className="modal-tab-nav">
-                Filtered Map by Category (people, tags, places and organizations)
+                Filtered Map by Category
               </NavItem>
               <NavItem eventKey="help-event-card" className="modal-tab-nav">
                 Filtered Map from Event Card
@@ -261,7 +261,7 @@ export class HelpModal extends Component {
               </Tab.Pane>
               <Tab.Pane eventKey="help-timeline">
                 <h4 className="modal-subtitle">The Map and the Timeline </h4>
-                Click on the geographical map to view the timeline. Drag and zoom operations on the timeline are the same as those on the map: use the zoom controls, the pad or the mouse wheel. Hovering over an event marker on the map or on the timeline opens a thumbnail above the location of the event on the map. The title of the event title appears above the highlighted event on the timeline. The colour of each marker corresponds to the time period of the event. Selecting an event on the map or the timeline opens an event information card and also modifies the visual appearance of the map to match the time period of the event.
+                <p>Click on the geographical map to view the timeline. Drag and zoom operations on the timeline are the same as those on the map: use the zoom controls, the pad or the mouse wheel. Hovering over an event marker on the map or on the timeline opens a thumbnail above the location of the event on the map. The title of the event title appears above the highlighted event on the timeline. The colour of each marker corresponds to the time period of the event. Selecting an event on the map or the timeline opens an event information card and also modifies the visual appearance of the map to match the time period of the event.</p>
                 <br />
                 <iframe width="540" height="310" src="https://player.vimeo.com/video/229882494" className="modal-video" allowFullScreen>
                 </iframe>
@@ -285,14 +285,14 @@ export class HelpModal extends Component {
               </Tab.Pane>
               <Tab.Pane eventKey="help-people">
                 <h4 className="modal-subtitle">Filtered Map by Category (people, tags, places and organizations) </h4>
-                While in the cards view of the map, select from the left side one of the other categories - people, tags, places or organizations. The card display on the row changes according to the selected category. Use the “«»” control above the cards, or use the scroll bar under the cards to scroll through the cards. Selecting one of the cards creates a view of the map filtered according to the selected entity. Selecting a person or an organization opens an information strip about the entity.
+                <p>While in the cards view of the map, select from the left side one of the other categories - people, tags, places or organizations. The card display on the row changes according to the selected category. Use the “«»” control above the cards, or use the scroll bar under the cards to scroll through the cards. Selecting one of the cards creates a view of the map filtered according to the selected entity. Selecting a person or an organization opens an information strip about the entity.</p>
                 <br />
                 <iframe width="540" height="310" src="https://player.vimeo.com/video/229885037" className="modal-video" allowFullScreen>
                 </iframe>
               </Tab.Pane>
               <Tab.Pane eventKey="help-event-card">
                 <h4 className="modal-subtitle">Filtered Map from Event Card</h4>
-                It is also possible to create a filtered view of the map from an event card:
+                <p>It is also possible to create a filtered view of the map from an event card:</p>
                 <ul>
                   <li>Selecting the project name of the event, located above the event title, creates a filtered view of the map with the events included in the project. </li>
                   <li>Selecting a tag, located under the title, creates a filtered view of the map with the events linked to the selected tag. </li>
@@ -304,7 +304,7 @@ export class HelpModal extends Component {
               </Tab.Pane>
               <Tab.Pane eventKey="help-search">
                 <h4 className="modal-subtitle">Using the Text Search Bar</h4>
-                Selecting the search bar and typing at least three characters opens a dropdown list of all the meta-data entities containing the typed characters. Selecting one of the lines in the dropdown opens a view of the map filtered by the selected entity. The close (x) button on the left side of the filter label restores the map to the original, non-filtered view of all the events.
+                <p>Selecting the search bar and typing at least three characters opens a dropdown list of all the meta-data entities containing the typed characters. Selecting one of the lines in the dropdown opens a view of the map filtered by the selected entity. The close (x) button on the left side of the filter label restores the map to the original, non-filtered view of all the events.</p>
                 <br />
                 <iframe width="540" height="310" src="https://player.vimeo.com/video/229885922" className="modal-video" allowFullScreen>
                 </iframe>
